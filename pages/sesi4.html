@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesi 4: Fuzzy Sets, Function, Number Theory — Matematika Diskrit</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script src="../js/theme.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="../index.html" class="navbar__brand">
+      <span class="navbar__brand-icon">∑</span>
+      <span>MatDiskrit</span>
+    </a>
+    <div class="navbar__actions">
+      <button class="navbar__menu-btn" aria-label="Menu">☰</button>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-toggle__knob">🌙</span>
+      </button>
+    </div>
+  </nav>
+  <div class="sidebar-overlay"></div>
+  
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar__section-title">Navigasi</div>
+      <a href="../index.html" class="sidebar__link"><span class="sidebar__link-icon">🏠</span> Beranda</a>
+      <a href="sesi1.html" class="sidebar__link"><span class="sidebar__link-icon">1</span> Logic</a>
+      <a href="sesi2.html" class="sidebar__link"><span class="sidebar__link-icon">2</span> Quantifier</a>
+      <a href="sesi3.html" class="sidebar__link"><span class="sidebar__link-icon">3</span> Method of Proof</a>
+      <a href="sesi4.html" class="sidebar__link active"><span class="sidebar__link-icon">4</span> Fuzzy Sets & Function</a>
+      
+      <!-- Sublinks for Scroll Spy TOC -->
+      <div class="sidebar__sublinks">
+        <a href="#sets-operation" class="sidebar__sublink">1. Sets Operation</a>
+        <a href="#fuzzy-set-diskrit" class="sidebar__sublink">2. Fuzzy Set Diskrit</a>
+        <a href="#fuzzy-set-kontinu" class="sidebar__sublink">3. Fuzzy Set Kontinu</a>
+        <a href="#functions" class="sidebar__sublink">4. Functions</a>
+        <a href="#number-theory" class="sidebar__sublink">5. Number Theory</a>
+      </div>
+      
+      <a href="sesi5.html" class="sidebar__link"><span class="sidebar__link-icon">5</span> Binomial & Kombinasi</a>
+      <a href="sesi6.html" class="sidebar__link"><span class="sidebar__link-icon">6</span> Relation</a>
+      <a href="sesi7.html" class="sidebar__link"><span class="sidebar__link-icon">7</span> POSET & Hasse</a>
+      <a href="sesi8.html" class="sidebar__link"><span class="sidebar__link-icon">8</span> Min/Max & Lattice</a>
+      <a href="sesi9.html" class="sidebar__link"><span class="sidebar__link-icon">9</span> MST, Coloring & FSA</a>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="content-wrapper">
+        
+        <!-- Section Header -->
+        <header class="section-header">
+          <span class="section-header__badge">Sesi 4 (UTS)</span>
+          <h1 class="hero__title" style="margin-left: 0; text-align: left; font-size: 2.5rem;">Fuzzy Sets, Function & Number Theory</h1>
+          <p class="section-header__desc">
+            Sesi ini membahas operasi himpunan klasik, pengenalan himpunan samar (Fuzzy Sets) baik bertipe diskrit maupun kontinu, klasifikasi dan operasi fungsi (injeksi, surjeksi, bijeksi, komposisi, serta invers), dan teori bilangan dasar dengan Algoritma Euclidean untuk mencari GCD, koefisien Bezout, dan LCM.
+          </p>
+        </header>
+
+        <!-- 1. Sets Operation -->
+        <section id="sets-operation" class="scroll-section">
+          <h2>1. Sets Operation (Operasi Himpunan)</h2>
+          <p>
+            Sebelum masuk ke <em>Fuzzy Sets</em>, mari kita ingat kembali beberapa operasi dasar pada himpunan klasik (<em>crisp sets</em>):
+          </p>
+          <ul>
+            <li><strong>Gabungan (Union — \(A \cup B\))</strong>: Himpunan yang berisi semua elemen yang merupakan anggota \(A\) ATAU anggota \(B\). \[A \cup B = \{x \mid x \in A \lor x \in B\}\]</li>
+            <li><strong>Irisan (Intersection — \(A \cap B\))</strong>: Himpunan yang berisi semua elemen yang merupakan anggota \(A\) DAN anggota \(B\). \[A \cap B = \{x \mid x \in A \land x \in B\}\]</li>
+            <li><strong>Selisih (Difference — \(A \setminus B\) atau \(A - B\))</strong>: Himpunan yang berisi elemen-elemen yang merupakan anggota \(A\) tetapi BUKAN anggota \(B\). \[A \setminus B = \{x \mid x \in A \land x \notin B\}\]</li>
+            <li><strong>Komplemen (Complement — \(A'\) atau \(A^c\))</strong>: Himpunan yang berisi semua elemen dalam semesta pembicaraan \(U\) yang tidak termasuk dalam himpunan \(A\). \[A' = \{x \in U \mid x \notin A\}\]</li>
+          </ul>
+
+          <!-- Soal 1: Sets Operation -->
+          <div class="exercise" id="soal-set1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Operasi Himpunan Dasar (Gabungan, Irisan, Komplemen)</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Perhatikan gambar di bawah ini dan carilah hasil dari operasi himpunan klasik yang ditunjukkan:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page86_img1.png" alt="Soal 1 Operasi Himpunan">
+                <figcaption>Gambar Soal Operasi Himpunan</figcaption>
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Berikut adalah jawaban dan penyelesaian untuk soal operasi himpunan tersebut:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page86_img2.png" alt="Jawaban Soal 1 Operasi Himpunan">
+                      <figcaption>Hasil Jawaban Operasi Himpunan</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2: Sets Operation Difference -->
+          <div class="exercise" id="soal-set2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Selisih Himpunan (Difference / Relative Complement)</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Carilah hasil operasi selisih himpunan \(A \setminus B\).
+              </p>
+              <div class="callout callout--info">
+                <div class="callout__icon">💡</div>
+                <div class="callout__content">
+                  <strong>Catatan Penting</strong>: Penulisan selisih himpunan \(A \setminus B\) memiliki arti yang sama persis dengan \(A - B\). Ini mewakili elemen yang berada di \(A\) tetapi dibuang elemen-elemen yang juga berada di \(B\).
+                </div>
+              </div>
+              <div class="img-container">
+                <img src="../pdf_images/page87_img1.png" alt="Soal 2 Operasi Selisih Himpunan">
+                <figcaption>Gambar Soal Selisih Himpunan</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Hasil dari selisih himpunan \(A \setminus B\) adalah:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page87_img2.png" alt="Jawaban Soal 2 Operasi Selisih Himpunan">
+                      <figcaption>Hasil Jawaban Selisih Himpunan</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr>
+
+        <!-- 2. Fuzzy Set Diskrit -->
+        <section id="fuzzy-set-diskrit" class="scroll-section">
+          <h2>2. Fuzzy Set Diskrit (Himpunan Samar Diskrit)</h2>
+          <div class="concept-box">
+            <div class="concept-box__title">🔍 Konsep Dasar Fuzzy Set</div>
+            <p>
+              Pada himpunan klasik (<em>crisp set</em>), keanggotaan suatu elemen bersifat tegas/biner: ia bisa berupa anggota (derajat keanggotaan = 1) atau bukan anggota (derajat keanggotaan = 0).
+            </p>
+            <p>
+              Pada <strong>Fuzzy Set (Himpunan Samar)</strong>, derajat keanggotaan (<em>membership degree</em>) dinotasikan dengan \(\mu_A(x)\) dan memiliki nilai kontinu pada rentang <strong>\([0, 1]\)</strong>. Nilai 0 berarti tidak menjadi anggota sama sekali, sedangkan nilai 1 berarti menjadi anggota penuh, dan nilai di antaranya menunjukkan keanggotaan parsial.
+            </p>
+          </div>
+          
+          <h3>Operasi pada Fuzzy Set Diskrit</h3>
+          <p>Diberikan dua buah fuzzy set \(A\) dan \(B\) pada semesta \(U\), operasi dasarnya didefinisikan sebagai berikut:</p>
+          <ol>
+            <li>
+              <strong>Kardinalitas (\(|A|\))</strong>: Jumlah total dari semua derajat keanggotaan elemen-elemen di dalam himpunan samar \(A\).
+              \[|A| = \sum_{x \in U} \mu_A(x)\]
+            </li>
+            <li>
+              <strong>Komplemen (\(A'\))</strong>: Mengurangi derajat keanggotaan elemen dari nilai maksimal 1.
+              \[\mu_{A'}(x) = 1 - \mu_A(x)\]
+            </li>
+            <li>
+              <strong>Gabungan (Union — \(A \cup B\))</strong>: Mengambil nilai keanggotaan maksimum antara \(A\) dan \(B\) untuk setiap elemen.
+              \[\mu_{A \cup B}(x) = \max(\mu_A(x), \mu_B(x))\]
+            </li>
+            <li>
+              <strong>Irisan (Intersection — \(A \cap B\))</strong>: Mengambil nilai keanggotaan minimum antara \(A\) dan \(B\) untuk setiap elemen.
+              \[\mu_{A \cap B}(x) = \min(\mu_A(x), \mu_B(x))\]
+            </li>
+          </ol>
+
+          <!-- Soal 1: Fuzzy Set Diskrit -->
+          <div class="exercise" id="soal-fuzzy-diskrit1">
+            <div class="exercise__header">
+              <span class="exercise__number">3</span>
+              <span class="exercise__title">Operasi Fuzzy Set Diskrit</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Diberikan dua himpunan samar diskrit \(A\) dan \(B\). Cari dan tentukanlah nilai dari:
+                <br>a. Kardinalitas \(|A|\)
+                <br>b. Kardinalitas \(|B|\)
+                <br>c. Komplemen \(A'\)
+                <br>d. Gabungan \(A \cup B\)
+                <br>e. Irisan \(A \cap B\)
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page87_img3.png" alt="Soal 1 Fuzzy Set Diskrit">
+                <figcaption>Soal Fuzzy Set Diskrit</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Hasil perhitungan lengkap untuk kardinalitas, komplemen, gabungan, dan irisan adalah:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page88_img1.png" alt="Jawaban Soal 1 Fuzzy Set Diskrit">
+                      <figcaption>Hasil Perhitungan Fuzzy Set Diskrit</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr>
+
+        <!-- 3. Fuzzy Set Kontinu -->
+        <section id="fuzzy-set-kontinu" class="scroll-section">
+          <h2>3. Fuzzy Set Kontinu (Himpunan Samar Kontinu)</h2>
+          <p>
+            Fuzzy Set Kontinu didefinisikan dengan fungsi keanggotaan kontinu \(\mu_A(x)\) pada suatu rentang bilangan real (domain kontinu). Operasi union (\(\max\)), irisan (\(\min\)), dan komplemen (\(1 - \mu\)) diterapkan di sepanjang rentang fungsi tersebut secara grafis.
+          </p>
+          
+          <div class="concept-box">
+            <div class="concept-box__title">📐 Definisi Formal Subset pada Fuzzy Set</div>
+            <p>
+              Fuzzy set \(B\) dikatakan merupakan subset (himpunan bagian) dari fuzzy set \(A\) (ditulis \(B \subseteq A\)) jika dan hanya jika untuk seluruh elemen di domain, derajat keanggotaan elemen di \(B\) tidak pernah melebihi derajat keanggotaannya di \(A\):
+            </p>
+            \[B \subseteq A \iff \forall x, \mu_B(x) \le \mu_A(x)\]
+            <p>
+              Secara grafis, kurva fungsi keanggotaan \(B\) harus selalu berada di bawah atau bersentuhan langsung dengan kurva fungsi keanggotaan \(A\).
+            </p>
+          </div>
+
+          <!-- Soal 1: Fuzzy Set Kontinu -->
+          <div class="exercise" id="soal-fuzzy-kontinu1">
+            <div class="exercise__header">
+              <span class="exercise__number">4</span>
+              <span class="exercise__title">Operasi & Cek Subset Fuzzy Set Kontinu</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Perhatikan fungsi keanggotaan kontinu dari himpunan samar \(A\) dan \(B\) pada gambar di bawah ini. Selesaikan operasi grafis untuk mencari komplemen, union, irisan, dan selidiki apakah \(B \subseteq A\).
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page89_img1.png" alt="Soal 1 Fuzzy Set Kontinu">
+                <figcaption>Kurva Grafik Soal Fuzzy Set Kontinu</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Berikut adalah hasil penggambaran operasi komplemen, gabungan, dan irisan kontinu:</p>
+                    
+                    <div class="img-container">
+                      <img src="../pdf_images/page90_img1.png" alt="Jawaban Soal 1 Fuzzy Set Kontinu Bagian 1">
+                      <figcaption>Jawaban Grafis Operasi Kontinu</figcaption>
+                    </div>
+                    
+                    <p>Penyelesaian untuk pertanyaan <strong>(d) Apakah fuzzy set B adalah subset dari fuzzy set A?</strong>:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page91_img1.png" alt="Jawaban Soal 1 Fuzzy Set Kontinu Bagian 2">
+                      <figcaption>Hasil Analisis Subset</figcaption>
+                    </div>
+                    
+                    <p>
+                      <strong>Analisis</strong>: 
+                      Ya, Fuzzy set \(B\) adalah subset dari fuzzy set \(A\) (\(B \subseteq A\)). Karena secara grafis, kurva fuzzy set \(B\) selalu berada di bawah kurva fuzzy set \(A\), yang secara matematis memenuhi kondisi \(\forall x, \mu_B(x) \le \mu_A(x)\).
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2: Fuzzy Set Kontinu Lebih Kompleks -->
+          <div class="exercise" id="soal-fuzzy-kontinu2">
+            <div class="exercise__header">
+              <span class="exercise__number">5</span>
+              <span class="exercise__title">Latihan Operasi Fuzzy Set Kontinu Kompleks</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Diberikan permasalahan fuzzy set kontinu tambahan (Soal a, b, dan c). Selesaikan operasi gabungan, irisan, dan komplemen untuk masing-masing kasus tersebut.
+              </p>
+
+              <!-- Sub-Soal a -->
+              <h4 style="margin-top: 1.5em; border-bottom: 1px dashed var(--border-color); padding-bottom: 5px;">a. Latihan Kasus A</h4>
+              <div class="img-container">
+                <img src="../pdf_images/page92_img1.png" alt="Soal 2a Fuzzy Set Kontinu">
+                <figcaption>Soal Kasus A</figcaption>
+              </div>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban Kasus A <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban A</div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page92_img2.png" alt="Jawaban Soal 2a Fuzzy Set Kontinu">
+                      <figcaption>Grafik Penyelesaian Kasus A</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Sub-Soal b -->
+              <h4 style="margin-top: 2em; border-bottom: 1px dashed var(--border-color); padding-bottom: 5px;">b. Latihan Kasus B</h4>
+              <div class="img-container">
+                <img src="../pdf_images/page93_img1.png" alt="Soal 2b Fuzzy Set Kontinu">
+                <figcaption>Soal & Jawaban Kasus B</figcaption>
+              </div>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban Kasus B <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban B</div>
+                    <p>
+                      Pada kasus B ini, grafik operasi irisan (\(A \cap B\)) dan gabungan (\(A \cup B\)) dibentuk dengan mencari daerah batas bawah minimum dan batas atas maksimum dari kedua fungsi keanggotaan. Detail kurva hasil operasi dapat dilihat pada penjelasan di gambar di atas.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Sub-Soal c -->
+              <h4 style="margin-top: 2em; border-bottom: 1px dashed var(--border-color); padding-bottom: 5px;">c. Latihan Kasus C</h4>
+              <div class="img-container">
+                <img src="../pdf_images/page94_img1.png" alt="Soal 2c Fuzzy Set Kontinu">
+                <figcaption>Soal Kasus C</figcaption>
+              </div>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban Kasus C <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban C</div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page94_img2.png" alt="Jawaban Soal 2c Fuzzy Set Kontinu">
+                      <figcaption>Grafik Penyelesaian Kasus C</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <hr>
+
+        <!-- 4. Functions -->
+        <section id="functions" class="scroll-section">
+          <h2>4. Functions (Fungsi)</h2>
+          <p>
+            Dalam matematika diskrit, penting untuk memahami sifat-sifat pemetaan dari suatu fungsi \(f: A \to B\).
+          </p>
+          
+          <div class="concept-box">
+            <div class="concept-box__title">📌 Sifat-Sifat Utama Fungsi</div>
+            <ul>
+              <li>
+                <strong>Injektif (Satu-ke-Satu / One-to-One)</strong>: 
+                Setiap elemen di kodomain dihubungkan ke paling banyak satu elemen di domain.
+                \[f(a) = f(b) \implies a = b\]
+              </li>
+              <li>
+                <strong>Surjektif (Onto)</strong>: 
+                Setiap elemen di kodomain memiliki setidaknya satu pasangan di domain (seluruh kodomain habis terpakai sebagai range).
+                \[\forall y \in B, \exists x \in A \text{ sehingga } f(x) = y\]
+              </li>
+              <li>
+                <strong>Bijektif (Korespondensi Satu-ke-Satu)</strong>: 
+                Fungsi yang sekaligus bersifat Injektif dan Surjektif.
+              </li>
+              <li>
+                <strong>Invertible (Dapat Dibalik)</strong>: 
+                Fungsi \(f\) memiliki fungsi invers (\(f^{-1}\)) jika dan hanya jika \(f\) bersifat <strong>Bijektif</strong>.
+              </li>
+            </ul>
+          </div>
+
+          <!-- Soal 1: Klasifikasi Fungsi -->
+          <div class="exercise" id="soal-fun1">
+            <div class="exercise__header">
+              <span class="exercise__number">6</span>
+              <span class="exercise__title">Mengklasifikasi Sifat Fungsi</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Tentukan apakah pemetaan-pemetaan fungsi di bawah ini termasuk injektif, surjektif, bijektif, atau bukan ketiganya:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page95_img1.png" alt="Soal 1 Jenis Fungsi">
+                <figcaption>Soal Pemetaan Fungsi</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page95_img2.png" alt="Jawaban Soal 1 Jenis Fungsi">
+                      <figcaption>Hasil Jawaban Klasifikasi Sifat Fungsi</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2: Invertibilitas Fungsi Kuadrat -->
+          <div class="exercise" id="soal-fun2">
+            <div class="exercise__header">
+              <span class="exercise__number">7</span>
+              <span class="exercise__title">Invertibilitas Fungsi Kuadrat</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Diberikan fungsi \(f(x) = x^2\) yang terdefinisi pada domain bilangan real \(\mathbb{R}\). Apakah fungsi tersebut bersifat <em>invertible</em>? Jelaskan alasanmu!
+              </p>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Jawabannya: TIDAK INVERTIBLE.</strong></p>
+                    <p>
+                      <strong>Penjelasan</strong>: 
+                      Agar suatu fungsi memiliki invers (invertible), fungsi tersebut harus bersifat bijektif (injektif sekaligus surjektif).
+                    </p>
+                    <p>
+                      Fungsi \(f(x) = x^2\) pada domain bilangan real \(\mathbb{R}\) bukan fungsi injektif (one-to-one). Kita dapat membuktikannya dengan memberikan <em>counterexample</em>:
+                      \[f(-2) = (-2)^2 = 4\]
+                      \[f(2) = 2^2 = 4\]
+                      Karena ada input berbeda (\(x = -2\) dan \(x = 2\)) yang menghasilkan output yang sama (\(4\)), maka fungsi ini tidak satu-ke-satu. Oleh karena itu, fungsi \(f(x) = x^2\) tidak bersifat invertible.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 3: Komposisi dan Invers I -->
+          <div class="exercise" id="soal-fun3">
+            <div class="exercise__header">
+              <span class="exercise__number">8</span>
+              <span class="exercise__title">Komposisi & Invers Fungsi I</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Selesaikan perhitungan fungsi komposisi dan invers berdasarkan soal dari buku/sumber yang tertera di bawah ini:
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page96_img1.png" alt="Soal 3 Komposisi dan Invers">
+                <figcaption>Soal Komposisi & Invers</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Berikut adalah langkah penyelesaian dan kunci jawaban lengkapnya:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page96_img2.png" alt="Jawaban Soal 3 Bagian 1">
+                      <figcaption>Solusi Komposisi & Invers Bagian 1</figcaption>
+                    </div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page97_img1.png" alt="Jawaban Soal 3 Bagian 2">
+                      <figcaption>Solusi Komposisi & Invers Bagian 2</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 4: Komposisi dan Invers II -->
+          <div class="exercise" id="soal-fun4">
+            <div class="exercise__header">
+              <span class="exercise__number">9</span>
+              <span class="exercise__title">Komposisi & Invers Fungsi II</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Selesaikan persoalan invers fungsi pecahan linear dan komposisi fungsi lanjutan di bawah ini:
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page97_img2.png" alt="Soal 4 Komposisi dan Invers">
+                <figcaption>Soal Komposisi & Invers Lanjutan</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Penyelesaian detail untuk soal tersebut dapat dilihat di gambar di atas (yang menyajikan penyelesaian lengkap dari Mathcyber1997).
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 5: Mencari f(x) dari f^-1(3x-2) -->
+          <div class="exercise" id="soal-fun5">
+            <div class="exercise__header">
+              <span class="exercise__number">10</span>
+              <span class="exercise__title">Mencari \(f(x)\) jika diketahui \(f^{-1}(3x - 2) = 7x + 1\)</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Diketahui suatu fungsi invers memiliki relasi:
+                \[f^{-1}(3x - 2) = 7x + 1\]
+                Tentukanlah rumus fungsi \(f(x)\)!
+              </p>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Berikut langkah-langkah aljabar yang sistematis untuk menyelesaikan soal ini:</p>
+                    
+                    <p><strong>Langkah 1: Menentukan rumus fungsi \(f^{-1}(y)\)</strong></p>
+                    <p>
+                      Misalkan kita lakukan permisalan variabel baru untuk bagian dalam kurung:
+                      \[y = 3x - 2\]
+                    </p>
+                    <p>
+                      Sekarang, nyatakan \(x\) ke dalam bentuk \(y\):
+                      \[y + 2 = 3x \implies x = \frac{y + 2}{3}\]
+                    </p>
+                    <p>
+                      Substitusikan bentuk \(x\) ini ke dalam persamaan asal \(f^{-1}(3x - 2) = 7x + 1\):
+                      \[f^{-1}(y) = 7\left(\frac{y + 2}{3}\right) + 1\]
+                      \[f^{-1}(y) = \frac{7y + 14}{3} + \frac{3}{3}\]
+                      \[f^{-1}(y) = \frac{7y + 17}{3}\]
+                    </p>
+                    <p>
+                      Sehingga kita dapatkan rumus fungsi inversnya adalah:
+                      \[f^{-1}(x) = \frac{7x + 17}{3}\]
+                    </p>
+
+                    <p><strong>Langkah 2: Menemukan \(f(x)\) dengan menginverskan kembali \(f^{-1}(x)\)</strong></p>
+                    <p>
+                      Ingat sifat invers fungsi: \((f^{-1})^{-1}(x) = f(x)\). Mari kita cari invers dari \(\frac{7x + 17}{3}\).
+                      <br>Misalkan:
+                      \[z = \frac{7x + 17}{3}\]
+                      \[3z = 7x + 17\]
+                      \[7x = 3z - 17 \implies x = \frac{3z - 17}{7}\]
+                    </p>
+                    <p>
+                      Dengan mengembalikan variabel \(z\) menjadi \(x\), kita memperoleh rumus akhir untuk \(f(x)\):
+                      \[f(x) = \frac{3x - 17}{7}\]
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 6: Mencari f(x) dari f^-1(2x+1) -->
+          <div class="exercise" id="soal-fun6">
+            <div class="exercise__header">
+              <span class="exercise__number">11</span>
+              <span class="exercise__title">Mencari \(f(x)\) jika diketahui \(f^{-1}(2x + 1) = 5x + 3\)</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Diketahui suatu fungsi invers memiliki relasi:
+                \[f^{-1}(2x + 1) = 5x + 3\]
+                Tentukanlah rumus fungsi \(f(x)\)!
+              </p>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Langkah pengerjaannya serupa dengan Soal 5:</p>
+                    
+                    <p><strong>Langkah 1: Menentukan rumus fungsi \(f^{-1}(y)\)</strong></p>
+                    <p>
+                      Misalkan:
+                      \[y = 2x + 1\]
+                      Nyatakan \(x\) dalam \(y\):
+                      \[y - 1 = 2x \implies x = \frac{y - 1}{2}\]
+                    </p>
+                    <p>
+                      Substitusikan \(x\) ke persamaan asal:
+                      \[f^{-1}(y) = 5\left(\frac{y - 1}{2}\right) + 3\]
+                      \[f^{-1}(y) = \frac{5y - 5}{2} + \frac{6}{2}\]
+                      \[f^{-1}(y) = \frac{5y + 1}{2}\]
+                    </p>
+                    <p>
+                      Maka rumus inversnya:
+                      \[f^{-1}(x) = \frac{5x + 1}{2}\]
+                    </p>
+
+                    <p><strong>Langkah 2: Menemukan \(f(x)\) dengan menginverskan kembali</strong></p>
+                    <p>
+                      Misalkan:
+                      \[z = \frac{5x + 1}{2}\]
+                      \[2z = 5x + 1\]
+                      \[5x = 2z - 1 \implies x = \frac{2z - 1}{5}\]
+                    </p>
+                    <p>
+                      Sehingga kita dapatkan rumus fungsi asli \(f(x)\):
+                      \[f(x) = \frac{2x - 1}{5}\]
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floor & Ceiling Function -->
+          <div class="concept-box">
+            <div class="concept-box__title">📊 Floor & Ceiling Function</div>
+            <p>
+              Kedua fungsi ini memetakan bilangan real ke bilangan bulat terdekat:
+            </p>
+            <ul>
+              <li>
+                <strong>Floor Function (\(\lfloor x \rfloor\))</strong>: 
+                Membulatkan ke bawah ke bilangan bulat terbesar yang kurang dari atau sama dengan \(x\).
+                <br><em>Contoh</em>: \(\lfloor 3.8 \rfloor = 3\), \(\lfloor -3.2 \rfloor = -4\), \(\lfloor 7 \rfloor = 7\).
+              </li>
+              <li>
+                <strong>Ceiling Function (\(\lceil x \rceil\))</strong>: 
+                Membulatkan ke atas ke bilangan bulat terkecil yang lebih besar dari atau sama dengan \(x\).
+                <br><em>Contoh</em>: \(\lceil 3.2 \rceil = 4\), \(\lceil -3.8 \rceil = -3\), \(\lceil 7 \rceil = 7\).
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <hr>
+
+        <!-- 5. Number Theory -->
+        <section id="number-theory" class="scroll-section">
+          <h2>5. Number Theory (Teori Bilangan)</h2>
+          <p>
+            Teori bilangan pada sesi ini berfokus pada cara mencari FPB/GCD menggunakan <strong>Algoritma Euclidean</strong>, menentukan koefisien kombinasi linear lewat <strong>Identitas Bezout</strong>, dan mencari KPK/LCM.
+          </p>
+
+          <div class="concept-box">
+            <div class="concept-box__title">🧮 Rumus & Teorema Kunci</div>
+            <ol>
+              <li>
+                <strong>Algoritma Euclidean (Mencari GCD)</strong>:
+                Jika kita membagi \(a\) dengan \(b\) (\(a > b\)), kita peroleh hasil bagi \(q\) dan sisa \(r\):
+                \[a = q \cdot b + r \quad (0 \le r < b)\]
+                Maka, \(\text{GCD}(a, b) = \text{GCD}(b, r)\). Lakukan proses pembagian berulang ini sampai sisanya bernilai \(0\). Sisa tidak nol terakhir adalah nilai GCD.
+              </li>
+              <li>
+                <strong>Identitas Bezout</strong>:
+                Jika \(d = \text{GCD}(a, b)\), maka terdapat bilangan bulat \(s\) dan \(t\) sedemikian sehingga:
+                \[d = s \cdot a + t \cdot b\]
+                Di mana \(s\) and \(t\) adalah koefisien Bezout yang dapat dicari dengan melacak balik langkah pembagian algoritma Euclidean secara mundur (<em>back-substitution</em>).
+              </li>
+              <li>
+                <strong>Hubungan GCD dan LCM</strong>:
+                Kelipatan Persekutuan Terkecil (LCM) dari dua bilangan \(a\) dan \(b\) dapat langsung dihitung jika GCD-nya telah diketahui:
+                \[\text{LCM}(a, b) = \frac{a \cdot b}{\text{GCD}(a, b)}\]
+              </li>
+            </ol>
+          </div>
+
+          <!-- Soal 1: GCD (310, 710) -->
+          <div class="exercise" id="soal-nt1">
+            <div class="exercise__header">
+              <span class="exercise__number">12</span>
+              <span class="exercise__title">Euclidean, Bezout, & LCM dari (310, 710)</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Carilah \(\text{GCD}(310, 710)\), tentukan koefisien identitas Bezoutnya, dan carilah \(\text{LCM}(310, 710)\) dengan menggunakan metode <em>Euclidean Algorithm</em>!
+              </p>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    
+                    <p><strong>Langkah 1: Menghitung GCD dengan Algoritma Euclidean</strong></p>
+                    <p>Lakukan pembagian berturut-turut dari angka terbesar:</p>
+                    <p>
+                      (1) \(710 = 2 \times 310 + 90\) &emsp;(sisa = \(90\))
+                      <br>(2) \(310 = 3 \times 90 + 40\) &emsp;(sisa = \(40\))
+                      <br>(3) \(90 = 2 \times 40 + 10\) &emsp;(sisa = \(10\))
+                      <br>(4) \(40 = 4 \times 10 + 0\) &emsp;(sisa = \(0\), pembagian selesai)
+                    </p>
+                    <p>Sisa tidak nol terakhir adalah \(10\). Jadi, <strong>\(\text{GCD}(710, 310) = 10\)</strong>.</p>
+
+                    <p><strong>Langkah 2: Menemukan Koefisien Bezout (Substitusi Mundur)</strong></p>
+                    <p>Kita nyatakan sisa-sisa di atas ke dalam bentuk persamaan:</p>
+                    <ul>
+                      <li>Dari baris (3): \(10 = 90 - 2 \times 40\)</li>
+                      <li>Dari baris (2): \(40 = 310 - 3 \times 90\). Substitusikan nilai \(40\) ini:
+                        \[10 = 90 - 2 \times (310 - 3 \times 90)\]
+                        \[10 = 90 - 2(310) + 6(90)\]
+                        \[10 = 7 \times 90 - 2 \times 310\]
+                      </li>
+                      <li>Dari baris (1): \(90 = 710 - 2 \times 310\). Substitusikan nilai \(90\) ini:
+                        \[10 = 7 \times (710 - 2 \times 310) - 2 \times 310\]
+                        \[10 = 7(710) - 14(310) - 2(310)\]
+                        \[10 = 7(710) - 16(310)\]
+                      </li>
+                    </ul>
+                    <p>
+                      Dengan demikian, Identitas Bezout-nya adalah:
+                      \[10 = 7(710) + (-16)(310)\]
+                      Maka koefisien Bezout adalah <strong>\(s = 7\)</strong> dan <strong>\(t = -16\)</strong>.
+                    </p>
+
+                    <p><strong>Langkah 3: Menghitung LCM (KPK)</strong></p>
+                    \[\text{LCM}(310, 710) = \frac{310 \times 710}{\text{GCD}(310, 710)} = \frac{220100}{10} = 22010\]
+                    
+                    <p>Berikut adalah catatan penyelesaian tulis tangan dari responsi:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page99_img1.png" alt="Lembar Jawaban GCD 310 dan 710">
+                      <figcaption>Lembar Jawaban GCD (310, 710)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2: GCD (237, 13) -->
+          <div class="exercise" id="soal-nt2">
+            <div class="exercise__header">
+              <span class="exercise__number">13</span>
+              <span class="exercise__title">Euclidean, Bezout, & LCM dari (237, 13)</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Carilah \(\text{GCD}(237, 13)\), tentukan koefisien identitas Bezoutnya, dan carilah \(\text{LCM}(237, 13)\) dengan menggunakan metode <em>Euclidean Algorithm</em>!
+              </p>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    
+                    <p><strong>Langkah 1: Menghitung GCD dengan Algoritma Euclidean</strong></p>
+                    <p>Lakukan pembagian berturut-turut:</p>
+                    <p>
+                      (1) \(237 = 18 \times 13 + 3\) &emsp;(sisa = \(3\))
+                      <br>(2) \(13 = 4 \times 3 + 1\) &emsp;(sisa = \(1\))
+                      <br>(3) \(3 = 3 \times 1 + 0\) &emsp;(sisa = \(0\), pembagian selesai)
+                    </p>
+                    <p>Sisa tidak nol terakhir adalah \(1\). Jadi, <strong>\(\text{GCD}(237, 13) = 1\)</strong> (relatif prima).</p>
+
+                    <p><strong>Langkah 2: Menemukan Koefisien Bezout (Substitusi Mundur)</strong></p>
+                    <ul>
+                      <li>Dari baris (2): \(1 = 13 - 4 \times 3\)</li>
+                      <li>Dari baris (1): \(3 = 237 - 18 \times 13\). Substitusikan nilai \(3\) ini:
+                        \[1 = 13 - 4 \times (237 - 18 \times 13)\]
+                        \[1 = 13 - 4(237) + 72(13)\]
+                        \[1 = 73(13) - 4(237)\]
+                      </li>
+                    </ul>
+                    <p>
+                      Dengan demikian, Identitas Bezout-nya adalah:
+                      \[1 = (-4)(237) + 73(13)\]
+                      Maka koefisien Bezout adalah <strong>\(s = -4\)</strong> and <strong>\(t = 73\)</strong>.
+                    </p>
+
+                    <p><strong>Langkah 3: Menghitung LCM (KPK)</strong></p>
+                    \[\text{LCM}(237, 13) = \frac{237 \times 13}{\text{GCD}(237, 13)} = \frac{3081}{1} = 3081\]
+                    
+                    <p>Berikut adalah catatan penyelesaian tulis tangan dari responsi:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page100_img1.png" alt="Lembar Jawaban GCD 237 dan 13">
+                      <figcaption>Lembar Jawaban GCD (237, 13)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page Navigation -->
+        <div class="page-nav">
+          <a href="sesi3.html" class="page-nav__link">
+            <span class="page-nav__label">← Sebelumnya</span>
+            <span class="page-nav__title">Sesi 3: Method of Proof</span>
+          </a>
+          <a href="sesi5.html" class="page-nav__link page-nav__link--next">
+            <span class="page-nav__label">Selanjutnya →</span>
+            <span class="page-nav__title">Sesi 5: Binomial, Permutasi, Kombinasi</span>
+          </a>
+        </div>
+
+      </div>
+    </main>
+  </div>
+  
+  <button class="back-to-top" aria-label="Kembali ke atas">↑</button>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left: '$$', right: '$$', display: true},
+          {left: '$', right: '$', display: false},
+          {left: '\\(', right: '\\)', display: false},
+          {left: '\\[', right: '\\]', display: true}
+        ],
+        throwOnError : false
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Panduan belajar Matematika Diskrit lengkap dengan penjelasan, latihan soal, dan solusi. Mencakup Logika, Quantifier, Proof, Himpunan, Relasi, POSET, Graph, dan lainnya.">
+  <title>Matematika Diskrit — Panduan Belajar Lengkap</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme.js"></script>
+</head>
+<body class="landing-page">
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html" class="navbar__brand">
+      <span class="navbar__brand-icon">∑</span>
+      <span>MatDiskrit</span>
+    </a>
+    <div class="navbar__actions">
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-toggle__knob">🌙</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero__content">
+        <span class="hero__badge">📘 Panduan Belajar Lengkap</span>
+        <h1 class="hero__title">Matematika Diskrit</h1>
+        <p class="hero__subtitle">
+          Pelajari konsep-konsep fundamental matematika diskrit dari logika dasar hingga graph theory.
+          Dilengkapi penjelasan detail, contoh soal, dan solusi lengkap.
+        </p>
+        <div class="hero__actions">
+          <a href="pages/sesi1.html" class="btn btn--primary">
+            🚀 Mulai Belajar
+          </a>
+          <a href="#sessions" class="btn btn--secondary">
+            📋 Lihat Semua Materi
+          </a>
+        </div>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-number">10</span>
+            <span class="hero__stat-label">Sesi Materi</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-number">120+</span>
+            <span class="hero__stat-label">Latihan Soal</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-number">218</span>
+            <span class="hero__stat-label">Halaman Konten</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sessions Grid -->
+    <section id="sessions" class="sessions-section">
+      <h2 class="sessions-section__title">Daftar Materi</h2>
+      <p class="sessions-section__desc">
+        Klik pada kartu untuk mempelajari setiap topik. Setiap sesi berisi penjelasan teori, contoh soal, dan solusi lengkap.
+      </p>
+
+      <div class="sessions-grid">
+
+        <!-- Sesi 1-2: Logic -->
+        <a href="pages/sesi1.html" class="session-card animate-on-scroll">
+          <div class="session-card__top">
+            <span class="session-card__number">1</span>
+            <span class="session-card__tag">UTS</span>
+          </div>
+          <h3 class="session-card__title">Logic — Logika Dasar</h3>
+          <p class="session-card__desc">
+            Proposisi, AND, OR, XOR, Negasi, Implikasi, Biimplikasi, Truth Table, Ekuivalensi Logika, 
+            Rules of Inference, Boolean, Gerbang Logika, dan Karnaugh Map.
+          </p>
+          <div class="session-card__footer">
+            <span>📝 ~25 Soal</span>
+            <div class="session-card__topics">
+              <span class="session-card__topic">Sesi 1 & 2</span>
+              <span class="session-card__topic">K-Map</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Sesi 3: Quantifier -->
+        <a href="pages/sesi2.html" class="session-card animate-on-scroll">
+          <div class="session-card__top">
+            <span class="session-card__number">2</span>
+            <span class="session-card__tag">UTS</span>
+          </div>
+          <h3 class="session-card__title">Quantifier — Kuantor</h3>
+          <p class="session-card__desc">
+            Predicates, Universal Quantifier ∀, Existential Quantifier ∃, Restricted Domain, 
+            Negating Quantifier, Single & Double (Nested) Quantifier.
+          </p>
+          <div class="session-card__footer">
+            <span>📝 ~15 Soal</span>
+            <div class="session-card__topics">
+              <span class="session-card__topic">Sesi 3</span>
+              <span class="session-card__topic">∀ ∃</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Sesi 4: Method of Proof -->
+        <a href="pages/sesi3.html" class="session-card animate-on-scroll">
+          <div class="session-card__top">
+            <span class="session-card__number">3</span>
+            <span class="session-card__tag">UTS</span>
+          </div>
+          <h3 class="session-card__title">Method of Proof — Metode Pembuktian</h3>
+          <p class="session-card__desc">
+            Direct Proof, Proof by Contraposition, Proof by Contradiction, 
+            Counterexample, dan Mathematical Induction (Induksi Matematika).
+          </p>
+          <div class="session-card__footer">
+            <span>📝 ~20 Soal</span>
+            <div class="session-card__topics">
+              <span class="session-card__topic">Sesi 4</span>
+              <span class="session-card__topic">Induksi</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Sesi 5: Fuzzy Sets, Function, Number Theory -->
+        <a href="pages/sesi4.html" class="session-card animate-on-scroll">
+          <div class="session-card__top">
+            <span class="session-card__number">4</span>
+            <span class="session-card__tag">UTS</span>
+          </div>
+          <h3 class="session-card__title">Fuzzy Sets, Function, Number Theory</h3>
+          <p class="session-card__desc">
+            Operasi Himpunan, Fuzzy Set (Diskrit & Kontinu), Fungsi (Injektif, Surjektif, Invertible), 
+            dan Teori Bilangan (Euclidean Algorithm, GCD/FPB).
+          </p>
+          <div class="session-card__footer">
+            <span>📝 ~10 Soal</span>
+            <div class="session-card__topics">
+              <span class="session-card__topic">Sesi 5</span>
+              <span class="session-card__topic">GCD</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Sesi 6: Binomial, Permutasi, Kombinasi -->
+        <a href="pages/sesi5.html" class="session-card animate-on-scroll">
+          <div class="session-card__top">
+            <span class="session-card__number">5</span>
+            <span class="session-card__tag">UTS</span>
+          </div>
+          <h3 class="session-card__title">Binomial, Permutasi, Kombinasi</h3>
+          <p class="session-card__desc">
+            Faktorial, Teorema Binomial (4 tipe soal), Permutasi, 
+            dan Kombinasi. Dilengkapi berbagai variasi soal.
+          </p>
+          <div class="session-card__footer">
+            <span>📝 ~11 Soal</span>
+            <div class="session-card__topics">
+              <span class="session-card__topic">Sesi 6</span>
+              <span class="session-card__topic">Binomial</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Sesi 7: Relation -->
+        <a href="pages/sesi6.html" class="session-card animate-on-scroll">
+          <div class="session-card__top">
+            <span class="session-card__number">6</span>
+            <span class="session-card__tag">UAS</span>
+          </div>
+          <h3 class="session-card__title">Relation — Relasi Ekuivalen</h3>
+          <p class="session-card__desc">
+            Dasar-dasar Relasi, Sifat Relasi (Refleksif, Simetris, Antisimetris, Transitif), 
+            dan Relasi Ekuivalen beserta kelas ekuivalensi.
+          </p>
+          <div class="session-card__footer">
+            <span>📝 ~10 Soal</span>
+            <div class="session-card__topics">
+              <span class="session-card__topic">Sesi 7</span>
+              <span class="session-card__topic">Equivalence</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Sesi 8: POSET & Hasse -->
+        <a href="pages/sesi7.html" class="session-card animate-on-scroll">
+          <div class="session-card__top">
+            <span class="session-card__number">7</span>
+            <span class="session-card__tag">UAS</span>
+          </div>
+          <h3 class="session-card__title">POSET & Hasse Diagram</h3>
+          <p class="session-card__desc">
+            Partial Order, POSET, Comparable & Incomparable, Totally Ordered Set, 
+            dan cara menggambar Hasse Diagram langkah per langkah.
+          </p>
+          <div class="session-card__footer">
+            <span>📝 ~6 Soal</span>
+            <div class="session-card__topics">
+              <span class="session-card__topic">Sesi 8</span>
+              <span class="session-card__topic">Hasse</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Sesi 9: Min/Max, Bounds, Lattice -->
+        <a href="pages/sesi8.html" class="session-card animate-on-scroll">
+          <div class="session-card__top">
+            <span class="session-card__number">8</span>
+            <span class="session-card__tag">UAS</span>
+          </div>
+          <h3 class="session-card__title">Min/Max, Bounds & Lattice</h3>
+          <p class="session-card__desc">
+            Minimal & Maximal Element, Least & Greatest Element, Lower & Upper Bound, 
+            LUB (Supremum), GLB (Infimum), dan Lattice.
+          </p>
+          <div class="session-card__footer">
+            <span>📝 ~10 Soal</span>
+            <div class="session-card__topics">
+              <span class="session-card__topic">Sesi 9</span>
+              <span class="session-card__topic">Lattice</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Sesi 10: MST, Graph Coloring, FSA -->
+        <a href="pages/sesi9.html" class="session-card animate-on-scroll">
+          <div class="session-card__top">
+            <span class="session-card__number">9</span>
+            <span class="session-card__tag">UAS</span>
+          </div>
+          <h3 class="session-card__title">MST, Graph Coloring & FSA</h3>
+          <p class="session-card__desc">
+            Minimum Spanning Tree (Prim & Kruskal), Graph Coloring, Chromatic Number & Polynomial, 
+            Finite State Automata (DFA), dan Graph Isomorphisms.
+          </p>
+          <div class="session-card__footer">
+            <span>📝 ~10 Soal</span>
+            <div class="session-card__topics">
+              <span class="session-card__topic">Sesi 10</span>
+              <span class="session-card__topic">DFA</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p class="footer__text">
+        Matematika Diskrit — Panduan Belajar Lengkap &copy; 2026<br>
+        <small>Materi disusun berdasarkan catatan tutoring oleh Fauzan Aditya Harsya</small>
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" aria-label="Kembali ke atas">↑</button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

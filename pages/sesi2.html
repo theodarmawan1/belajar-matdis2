@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesi 2: Kuantifikator (Quantifiers) — Matematika Diskrit</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script src="../js/theme.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="../index.html" class="navbar__brand">
+      <span class="navbar__brand-icon">∑</span>
+      <span>MatDiskrit</span>
+    </a>
+    <div class="navbar__actions">
+      <button class="navbar__menu-btn" aria-label="Menu">☰</button>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-toggle__knob">🌙</span>
+      </button>
+    </div>
+  </nav>
+  <div class="sidebar-overlay"></div>
+  
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar__section-title">Navigasi</div>
+      <a href="../index.html" class="sidebar__link"><span class="sidebar__link-icon">🏠</span> Beranda</a>
+      <a href="sesi1.html" class="sidebar__link"><span class="sidebar__link-icon">1</span> Logic</a>
+      <a href="sesi2.html" class="sidebar__link"><span class="sidebar__link-icon">2</span> Quantifier</a>
+      <a href="sesi3.html" class="sidebar__link"><span class="sidebar__link-icon">3</span> Method of Proof</a>
+      <a href="sesi4.html" class="sidebar__link"><span class="sidebar__link-icon">4</span> Fuzzy Sets & Function</a>
+      <a href="sesi5.html" class="sidebar__link"><span class="sidebar__link-icon">5</span> Binomial & Kombinasi</a>
+      <a href="sesi6.html" class="sidebar__link"><span class="sidebar__link-icon">6</span> Relation</a>
+      <a href="sesi7.html" class="sidebar__link"><span class="sidebar__link-icon">7</span> POSET & Hasse</a>
+      <a href="sesi8.html" class="sidebar__link"><span class="sidebar__link-icon">8</span> Min/Max & Lattice</a>
+      <a href="sesi9.html" class="sidebar__link"><span class="sidebar__link-icon">9</span> MST, Coloring & FSA</a>
+      
+      <div class="sidebar__section-title">Daftar Isi</div>
+      <div class="sidebar__sublinks">
+        <a href="#intro" class="sidebar__sublink">Pengenalan Kuantor</a>
+        <a href="#predicates" class="sidebar__sublink">1. Predicates & Prop. Function</a>
+        <a href="#universal" class="sidebar__sublink">2. Universal Quantifier (∀)</a>
+        <a href="#existential" class="sidebar__sublink">3. Existential Quantifier (∃)</a>
+        <a href="#restricted" class="sidebar__sublink">4. Restricted Domain</a>
+        <a href="#negation" class="sidebar__sublink">5. Negating Quantifiers</a>
+        <a href="#single-exercises" class="sidebar__sublink">6. Latihan Single Quantifier</a>
+        <a href="#nested-exercises" class="sidebar__sublink">7. Double Quantifier (Nested)</a>
+      </div>
+    </aside>
+    
+    <main class="main-content">
+      <div class="content-wrapper">
+        
+        <!-- Section Header -->
+        <div class="section-header" id="intro">
+          <span class="section-header__badge">Sesi 2</span>
+          <h1 class="section-header__title">Kuantifikator (Quantifiers)</h1>
+          <p class="section-header__desc">Memahami konsep logika predikat, kuantifikasi universal, kuantifikasi eksistensial, domain yang dibatasi, negasi kuantor, serta kuantor tunggal dan bersarang (double quantifier).</p>
+        </div>
+
+        <!-- Pengenalan / Introduction -->
+        <section class="content-section">
+          <h2>Kenapa Butuh Kuantifikator?</h2>
+          <p>
+            Pada materi logika dasar (Sesi 1), kita telah mempelajari operator logika seperti <code>DAN (AND)</code>, <code>ATAU (OR)</code>, <code>JIKA-MAKA (Implikasi)</code>, dan <code>Biimplikasi</code>. Namun, logika proposisional dasar tersebut tidak cukup untuk merumuskan atau menggambarkan semua pernyataan yang ada di dunia nyata secara matematis.
+          </p>
+          <p>
+            Sebagai contoh, mari kita perhatikan argumen logika berikut:
+          </p>
+          
+          <div class="concept-box">
+            <div class="concept-box__title">📌 Contoh 1: Raja yang Tamak</div>
+            <p><strong>Premis 1 (P1):</strong> "Ada raja yang tamak (serakah/rakus)."</p>
+            <p><strong>Premis 2 (P2):</strong> "Semua yang tamak akan mati."</p>
+            <p>Apa kesimpulan yang tepat dari premis-premis di atas?</p>
+            <ul>
+              <li><strong>(a)</strong> Ada raja yang akan mati.</li>
+              <li><strong>(b)</strong> Semua raja akan mati.</li>
+            </ul>
+            <p>
+              Dengan nalar logika biasa, kesimpulan yang tepat adalah <strong>(a) Ada raja yang akan mati</strong>. Kita tidak bisa menyimpulkan bahwa semua raja akan mati, karena premis pertama hanya menyebutkan "ada" (setidaknya satu) raja yang tamak, bukan "semua" raja. 
+            </p>
+            <p>
+              Pernyataan "ada" dan "semua" inilah yang tidak bisa dinyatakan secara akurat menggunakan logika proposisional biasa. Kita membutuhkan <strong>Kuantifikator (Quantifier)</strong> untuk menyelesaikannya.
+            </p>
+          </div>
+
+          <div class="img-container">
+            <img src="../pdf_images/page28_img1.png" alt="Ilustrasi Kuantor Raja Tamak">
+            <figcaption>Ilustrasi logika kuantor tentang raja tamak dari materi kuliah.</figcaption>
+          </div>
+
+          <div class="concept-box">
+            <div class="concept-box__title">📌 Contoh 2: Membeli Rumah</div>
+            <p><strong>Premis:</strong> "Hanya orang kaya yang beli rumah."</p>
+            <p>Apa kesimpulan yang tepat dari premis tersebut?</p>
+            <ul>
+              <li><strong>(a)</strong> Semua orang kaya membeli rumah.</li>
+              <li><strong>(b)</strong> Semua orang yang membeli rumah adalah orang kaya.</li>
+            </ul>
+            <p>
+              Jawabannya adalah <strong>(b) Semua orang yang membeli rumah adalah orang kaya</strong>. Kalimat "Hanya orang kaya yang beli rumah" menetapkan syarat bahwa jika seseorang membeli rumah, maka dia pasti merupakan orang kaya. Ini tidak berarti setiap orang kaya pasti membeli rumah (bisa saja ada orang kaya yang menyewa atau tidak mau beli rumah).
+            </p>
+          </div>
+
+          <div class="img-container">
+            <img src="../pdf_images/page30_img1.png" alt="Ilustrasi Premis Beli Rumah">
+            <img src="../pdf_images/page30_img2.png" alt="Ilustrasi Kesimpulan Beli Rumah">
+            <figcaption>Ilustrasi pemahaman premis "Hanya orang kaya yang beli rumah".</figcaption>
+          </div>
+        </section>
+
+        <!-- 1. Predicates & Propositional Function -->
+        <section class="content-section" id="predicates">
+          <h2>1. Logika Predikat & Fungsi Proposisional</h2>
+          <p>
+            Mari perhatikan pernyataan matematika berikut:
+            $$x > 3$$
+            Pernyataan ini memiliki dua komponen utama:
+          </p>
+          <ol>
+            <li><strong>Subjek:</strong> Variabel $x$ yang merupakan objek pembicaraan.</li>
+            <li><strong>Predikat:</strong> Bagian "$> 3$" yang menyatakan sifat atau kriteria yang dimiliki subjek.</li>
+          </ol>
+          <p>
+            Kita dapat menyatakan pernyataan tersebut menggunakan fungsi proposisi $P(x)$, di mana predikat $P$ menerangkan properti "lebih dari 3". 
+            Fungsi $P(x)$ dinamakan <strong>Fungsi Proposisional (Propositional Function)</strong> atau kalimat terbuka. Fungsi ini <em>belum memiliki nilai kebenaran</em> sampai kita menyubstitusikan variabel $x$ dengan nilai tertentu dari suatu domain.
+          </p>
+
+          <!-- Contoh 1.1 -->
+          <div class="exercise" id="predicate-ex1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Contoh 1: Fungsi Proposisional $x > 3$</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Misalkan $P(x)$ menyatakan pernyataan "$x > 3$". Tentukan nilai kebenaran dari proposisi $P(4)$ dan $P(2)$!
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Kita memperoleh nilai kebenaran proposisi dengan menetapkan nilai $x$ pada predikat "$x > 3$":
+                    </p>
+                    <ul>
+                      <li>Untuk $P(4)$, substitusi $x = 4$ menghasilkan pernyataan "$4 > 3$", yang bernilai <strong>True (Benar)</strong>.</li>
+                      <li>Untuk $P(2)$, substitusi $x = 2$ menghasilkan pernyataan "$2 > 3$", yang bernilai <strong>False (Salah)</strong>.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contoh 1.2 -->
+          <div class="exercise" id="predicate-ex2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Contoh 2: Predikat Keamanan Jaringan</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Misalkan $A(x)$ menyatakan pernyataan: <em>"Komputer $x$ sedang diserang oleh penyusup."</em> 
+                Jika dari semua komputer yang ada di kampus, hanya komputer <code>CS2</code> dan <code>MATH1</code> yang sedang diserang, tentukan nilai kebenaran dari $A(\text{CS1})$, $A(\text{CS2})$, dan $A(\text{MATH1})$!
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <ul>
+                      <li><strong>$A(\text{CS1})$: False</strong>. CS1 tidak ada dalam daftar komputer yang diserang.</li>
+                      <li><strong>$A(\text{CS2})$: True</strong>. CS2 sedang diserang penyusup sesuai premis.</li>
+                      <li><strong>$A(\text{MATH1})$: True</strong>. MATH1 sedang diserang penyusup sesuai premis.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contoh 1.3 -->
+          <div class="exercise" id="predicate-ex3">
+            <div class="exercise__header">
+              <span class="exercise__number">3</span>
+              <span class="exercise__title">Contoh 3: Predikat dengan Dua Variabel</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Predikat juga dapat menampung lebih dari satu variabel (n-place predicate). 
+                Misalkan $Q(x, y)$ menyatakan pernyataan "$x = y + 3$". Apa nilai kebenaran dari proposisi $Q(1, 2)$ dan $Q(3, 0)$?
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <ul>
+                      <li>Untuk $Q(1, 2)$, substitusikan $x = 1$ dan $y = 2$ ke dalam persamaan:
+                        $$1 = 2 + 3 \implies 1 = 5 \quad (\text{Salah / \bf{False}})$$
+                      </li>
+                      <li>Untuk $Q(3, 0)$, substitusikan $x = 3$ dan $y = 0$ ke dalam persamaan:
+                        $$3 = 0 + 3 \implies 3 = 3 \quad (\text{Benar / \bf{True}})$$
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Universal Quantifier -->
+        <section class="content-section" id="universal">
+          <h2>2. Kuantor Universal (Universal Quantifier) — $\forall$</h2>
+          <div class="callout callout--definition">
+            <div class="callout__icon">💡</div>
+            <div>
+              <strong>Definisi:</strong> Kuantifikasi universal dari $P(x)$ menyatakan bahwa pernyataan $P(x)$ bernilai <strong>benar untuk semua nilai $x$ dalam domain yang ditentukan</strong>. Notasi $\forall x P(x)$ dibaca sebagai <em>"untuk setiap $x$, $P(x)$"</em> atau <em>"untuk semua $x$, $P(x)$"</em>. Di sini, simbol $\forall$ adalah kuantor universal.
+            </div>
+          </div>
+          
+          <h3>Mengenal Simbol-Simbol Domain</h3>
+          <p>Sebelum masuk lebih jauh, berikut adalah simbol domain bilangan yang sering digunakan dalam matematika diskrit:</p>
+          <ul>
+            <li>$\mathbb{R}$ &rarr; <strong>Bilangan Riil (Real Numbers):</strong> Seluruh nilai dari $-\infty$ sampai $+\infty$ (termasuk pecahan dan desimal).</li>
+            <li>$\mathbb{Z}$ &rarr; <strong>Bilangan Bulat (Integers):</strong> $\{\dots, -2, -1, 0, 1, 2, \dots\}$.</li>
+            <li>$\mathbb{N}$ &rarr; <strong>Bilangan Asli (Natural Numbers):</strong> Bilangan bulat positif dimulai dari 1 yaitu $\{1, 2, 3, \dots\}$.</li>
+            <li>$\mathbb{W}$ &rarr; <strong>Bilangan Cacah (Whole Numbers):</strong> Bilangan asli yang menyertakan angka 0 yaitu $\{0, 1, 2, 3, \dots\}$.</li>
+          </ul>
+
+          <h3>Konsep Counterexample (Contoh Penyangkal)</h3>
+          <p>
+            Jika terdapat <strong>setidaknya satu</strong> elemen $x$ dalam domain yang membuat $P(x)$ salah, maka pernyataan universal $\forall x P(x)$ otomatis bernilai <strong>salah (False)</strong>. Elemen penyangkal tersebut dinamakan <strong>counterexample</strong>.
+          </p>
+
+          <div class="img-container">
+            <img src="../pdf_images/page33_img1.png" alt="Konsep Kuantor Universal">
+            <figcaption>Definisi formal dan konsep kebenaran Kuantor Universal.</figcaption>
+          </div>
+
+          <!-- Summary Table -->
+          <h3>Tabel Kebenaran Kuantifikator</h3>
+          <p>Kondisi nilai kebenaran untuk kuantor universal ($\forall$) dan kuantor eksistensial ($\exists$):</p>
+          <table class="truth-table">
+            <thead>
+              <tr>
+                <th>Pernyataan (Statement)</th>
+                <th>Kapan Benar?</th>
+                <th>Kapan Salah?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>$\forall x P(x)$</td>
+                <td class="val-true">P(x) benar untuk SETIAP nilai x dalam domain</td>
+                <td class="val-false">Setidaknya ada SATU nilai x yang membuat P(x) salah (Counterexample)</td>
+              </tr>
+              <tr>
+                <td>$\exists x P(x)$</td>
+                <td class="val-true">Setidaknya ada SATU nilai x yang membuat P(x) benar</td>
+                <td class="val-false">P(x) salah untuk SETIAP nilai x dalam domain</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout callout--warning">
+            <div class="callout__icon">⚠️</div>
+            <div>
+              <strong>Catatan Domain Kosong:</strong> Kita mengasumsikan bahwa domain kuantifikasi tidak kosong. Jika domainnya kosong, maka $\forall x P(x)$ secara hampa selalu bernilai <strong>True</strong>, karena tidak ada elemen $x$ di domain yang dapat membuktikan bahwa $P(x)$ salah.
+            </div>
+          </div>
+
+          <h3>Contoh Soal Kuantor Universal</h3>
+          
+          <!-- Universal Contoh 1 -->
+          <div class="exercise" id="universal-ex1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Pernyataan $\forall x (x + 1 > x)$</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Misalkan $P(x) = "x + 1 > x"$. Tentukan nilai kebenaran dari kuantifikasi $\forall x P(x)$ jika domainnya adalah semua bilangan riil ($\mathbb{R}$)!
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Pernyataan ini bernilai <strong>True (Benar)</strong>. Untuk setiap bilangan riil $x$ yang kita masukkan, nilai $x + 1$ pasti selalu lebih besar dari $x$ itu sendiri. Tidak ada satu pun angka riil yang bisa menyangkal hal ini.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Universal Contoh 2 -->
+          <div class="exercise" id="universal-ex2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Pernyataan $\forall x (x < 2)$</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Misalkan $Q(x) = "x < 2"$. Tentukan nilai kebenaran dari kuantifikasi $\forall x Q(x)$ jika domainnya terdiri dari semua bilangan riil ($\mathbb{R}$)!
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Pernyataan ini bernilai <strong>False (Salah)</strong>.
+                    </p>
+                    <p>
+                      <strong>Penjelasan:</strong> Kita bisa menemukan <em>counterexample</em> (contoh penyangkal), yaitu dengan memilih $x = 3$. Ketika $x = 3$, pernyataan menjadi $Q(3) \equiv 3 < 2$, yang bernilai salah. Karena ada minimal satu elemen yang salah, maka kuantifikasi universalnya salah.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Universal Contoh 3 -->
+          <div class="exercise" id="universal-ex3">
+            <div class="exercise__header">
+              <span class="exercise__number">3</span>
+              <span class="exercise__title">Aplikasi Kontekstual Jaringan Komputer</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Apa arti pernyataan $\forall x N(x)$ jika $N(x)$ adalah <em>"Komputer $x$ terhubung ke jaringan"</em> dan domainnya terdiri dari semua komputer di kampus?
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Pernyataan $\forall x N(x)$ berarti bahwa untuk setiap komputer $x$ di kampus, komputer $x$ tersebut terhubung ke jaringan. 
+                      Dalam bahasa Indonesia sehari-hari, pernyataan ini dapat diterjemahkan sebagai: 
+                      <strong>"Setiap komputer di kampus terhubung ke jaringan."</strong>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Universal Contoh 4 -->
+          <div class="exercise" id="universal-ex4">
+            <div class="exercise__header">
+              <span class="exercise__number">4</span>
+              <span class="exercise__title">Pengaruh Domain pada Pernyataan $\forall x (x^2 \geq x)$</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Tentukan nilai kebenaran dari $\forall x (x^2 \geq x)$ jika:
+                <br>a) Domain terdiri dari semua bilangan riil ($\mathbb{R}$).
+                <br>b) Domain terdiri dari semua bilangan bulat ($\mathbb{Z}$).
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      <strong>a) Untuk Domain Bilangan Riil ($\mathbb{R}$): False</strong>
+                      <br>
+                      Kita dapat mencari counterexample pada bilangan pecahan di antara 0 dan 1. Misalkan kita pilih $x = 0.5$. 
+                      Maka:
+                      $$(0.5)^2 \geq 0.5 \implies 0.25 \geq 0.5 \quad (\text{\bf{Salah}})$$
+                      Oleh karena itu, pernyataan bernilai salah pada domain $\mathbb{R}$.
+                    </p>
+                    <p>
+                      <strong>b) Untuk Domain Bilangan Bulat ($\mathbb{Z}$): True</strong>
+                      <br>
+                      Tidak ada bilangan bulat $x$ yang memenuhi $0 < x < 1$ (di mana pertidaksamaan tersebut tidak berlaku). Untuk semua bilangan bulat negatif, nol, dan bilangan bulat positif $\geq 1$, nilai $x^2 \geq x$ selalu terpenuhi. Maka kuantifikasinya bernilai benar.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="img-container">
+            <img src="../pdf_images/page35_img1.png" alt="Aplikasi Jaringan">
+            <img src="../pdf_images/page35_img2.png" alt="Analisis Pertidaksamaan Kuadrat">
+            <figcaption>Visualisasi logika jaringan dan pembuktian pertidaksamaan kuadrat.</figcaption>
+          </div>
+        </section>
+
+        <!-- 3. Existential Quantifier -->
+        <section class="content-section" id="existential">
+          <h2>3. Kuantor Eksistensial (Existential Quantifier) — $\exists$</h2>
+          <div class="callout callout--definition">
+            <div class="callout__icon">💡</div>
+            <div>
+              <strong>Definisi:</strong> Kuantifikasi eksistensial dari $P(x)$ menyatakan bahwa <strong>ada setidaknya satu nilai $x$ dalam domain sehingga $P(x)$ bernilai benar</strong>. Notasi $\exists x P(x)$ dibaca sebagai <em>"Ada $x$ sedemikian rupa sehingga $P(x)$"</em> atau <em>"Terdapat minimal satu $x$ sehingga $P(x)$"</em>. Di sini, simbol $\exists$ adalah kuantor eksistensial.
+            </div>
+          </div>
+
+          <div class="callout callout--info">
+            <div class="callout__icon">ℹ️</div>
+            <div>
+              Kuantifikasi eksistensial dapat diekspresikan dengan kata-kata lain seperti "untuk beberapa (for some)", "ada (there exists)", "setidaknya satu (at least one)", atau "terdapat (there is)".
+            </div>
+          </div>
+
+          <!-- Existential Soal 1 -->
+          <div class="exercise" id="exist-ex1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Pernyataan $\exists x (x > 3)$</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Misalkan $P(x) = "x > 3"$. Tentukan nilai kebenaran dari kuantifikasi $\exists x P(x)$ jika domainnya terdiri dari semua bilangan riil ($\mathbb{R}$)!
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Pernyataan ini bernilai <strong>True (Benar)</strong>. 
+                      <br>
+                      Karena kita dapat menemukan setidaknya satu bilangan riil yang lebih besar dari 3, misalnya $x = 4$. Karena $P(4)$ bernilai benar, maka $\exists x P(x)$ bernilai benar.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Existential Soal 2 -->
+          <div class="exercise" id="exist-ex2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Pernyataan $\exists x (x = x + 1)$</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Misalkan $Q(x) = "x = x + 1"$. Tentukan nilai kebenaran dari kuantifikasi $\exists x Q(x)$ jika domainnya terdiri dari semua bilangan riil ($\mathbb{R}$)!
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Pernyataan ini bernilai <strong>False (Salah)</strong>.
+                    </p>
+                    <p>
+                      <strong>Penjelasan:</strong> Tidak ada satu pun bilangan riil yang nilainya sama dengan dirinya sendiri ditambah 1 ($x \neq x + 1$). Karena pernyataan $Q(x)$ bernilai salah untuk semua elemen dalam domain riil, maka kuantifikasi eksistensialnya salah.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Quantifier with Restricted Domain -->
+        <section class="content-section" id="restricted">
+          <h2>4. Kuantor dengan Domain Dibatasi (Restricted Domain)</h2>
+          <p>
+            Pada bagian sebelumnya, domain yang digunakan adalah himpunan keseluruhan tanpa pembatasan (seperti semua bilangan riil atau bulat). Pada subtopik ini, domain didefinisikan dengan <strong>kondisi pembatasan tambahan</strong> secara eksplisit langsung setelah kuantor.
+          </p>
+          <ul>
+            <li>
+              Pernyataan $\forall x < 0 \, (P(x))$ dibaca: <em>"Untuk setiap $x$ yang kurang dari 0, $P(x)$ benar."</em> 
+              Ini ekuivalen dengan pernyataan:
+              $$\forall x (x < 0 \rightarrow P(x))$$
+            </li>
+            <li>
+              Pernyataan $\exists x > 0 \, (P(x))$ dibaca: <em>"Ada setidaknya satu $x$ yang lebih besar dari 0 sehingga $P(x)$ benar."</em>
+              Ini ekuivalen dengan pernyataan:
+              $$\exists x (x > 0 \land P(x))$$
+            </li>
+          </ul>
+
+          <!-- Restricted Soal 1 -->
+          <div class="exercise" id="restricted-ex1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Arti & Nilai Kebenaran Domain Terbatas</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Tentukan arti dan nilai kebenaran dari masing-masing pernyataan berikut jika domainnya terdiri dari semua bilangan riil ($\mathbb{R}$):
+                <br>a) $\forall x < 0 \, (x^2 > 0)$
+                <br>b) $\forall y \neq 0 \, (y^3 \neq 0)$
+                <br>c) $\exists z > 0 \, (z^2 = 2)$
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      <strong>a) $\forall x < 0 \, (x^2 > 0)$</strong>
+                      <br>
+                      * <strong>Arti:</strong> "Untuk semua bilangan riil $x$ yang bernilai negatif (kurang dari 0), nilai kuadratnya lebih besar dari 0."
+                      <br>
+                      * <strong>Nilai Kebenaran: True</strong>, karena kuadrat dari bilangan negatif apa pun selalu menghasilkan bilangan positif ($> 0$).
+                    </p>
+                    <p>
+                      <strong>b) $\forall y \neq 0 \, (y^3 \neq 0)$</strong>
+                      <br>
+                      * <strong>Arti:</strong> "Untuk semua bilangan riil $y$ yang tidak sama dengan 0, nilai pangkat tiganya tidak sama dengan 0."
+                      <br>
+                      * <strong>Nilai Kebenaran: True</strong>, karena satu-satunya bilangan riil yang jika dipangkatkan tiga menghasilkan 0 adalah 0 itu sendiri.
+                    </p>
+                    <p>
+                      <strong>c) $\exists z > 0 \, (z^2 = 2)$</strong>
+                      <br>
+                      * <strong>Arti:</strong> "Ada bilangan real positif $z$ (lebih besar dari 0) sedemikian rupa sehingga $z^2 = 2$."
+                      <br>
+                      * <strong>Nilai Kebenaran: True</strong>, karena kita dapat memilih $z = \sqrt{2} \approx 1.414$, di mana $\sqrt{2} > 0$ dan $(\sqrt{2})^2 = 2$.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="img-container">
+            <img src="../pdf_images/page38_img1.png" alt="Domain Dibatasi">
+            <figcaption>Catatan analisis kuantor dengan restricted domain dari kuliah.</figcaption>
+          </div>
+        </section>
+
+        <!-- 5. Negating Quantifier -->
+        <section class="content-section" id="negation">
+          <h2>5. Menegasikan Kuantor (Negating Quantifier)</h2>
+          <p>
+            Menegasikan pernyataan berkuantor pada dasarnya adalah membuat pernyataan awal yang tadinya benar menjadi salah, atau yang salah menjadi benar. Aturan ini mengikuti versi kuantor dari <strong>Hukum De Morgan</strong>:
+          </p>
+
+          <h3>A. Menegasikan Kuantor Universal (Semua &rarr; Ada)</h3>
+          <p>
+            Misalkan kita memiliki pernyataan awal:
+            <br>
+            <strong>Pernyataan:</strong> "Semua cowok itu setia" &rarr; $\forall x P(x)$
+            <br>
+            Di mana domain $x$ adalah cowok, dan $P(x)$ artinya "$x$ setia".
+          </p>
+          <p>
+            Apa negasinya? Syarat apa yang membuat pernyataan "Semua cowok setia" menjadi salah? 
+            Pernyataan tersebut salah jika <strong>ada setidaknya satu cowok yang tidak setia</strong>. 
+            Maka:
+            $$\neg \forall x P(x) \equiv \exists x \neg P(x)$$
+          </p>
+
+          <h3>B. Menegasikan Kuantor Eksistensial (Ada &rarr; Semua Tidak)</h3>
+          <p>
+            Misalkan kita memiliki pernyataan awal:
+            <br>
+            <strong>Pernyataan:</strong> "Ada orang yang suka nonton drama Korea" &rarr; $\exists x P(x)$
+            <br>
+            Di mana domain $x$ adalah orang, dan $P(x)$ artinya "$x$ suka drakor".
+          </p>
+          <p>
+            Pernyataan ini akan ternegasikan (salah) apabila <strong>semua orang tidak suka nonton drama Korea</strong> (atau tidak ada satu pun orang yang menyukainya).
+            Maka:
+            $$\neg \exists x P(x) \equiv \forall x \neg P(x)$$
+          </p>
+
+          <h3>Tabel Hukum De Morgan untuk Kuantor</h3>
+          <table class="truth-table">
+            <thead>
+              <tr>
+                <th>Negasi</th>
+                <th>Pernyataan Ekuivalen</th>
+                <th>Kapan Negasi Benar?</th>
+                <th>Kapan Negasi Salah?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>$\neg \exists x P(x)$</td>
+                <td>$\forall x \neg P(x)$</td>
+                <td class="val-true">Semua nilai x membuat P(x) salah</td>
+                <td class="val-false">Ada setidaknya satu x yang membuat P(x) benar</td>
+              </tr>
+              <tr>
+                <td>$\neg \forall x P(x)$</td>
+                <td>$\exists x \neg P(x)$</td>
+                <td class="val-true">Ada setidaknya satu x yang membuat P(x) salah</td>
+                <td class="val-false">P(x) benar untuk semua nilai x</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 6. Single Quantifier Soal-soal -->
+        <section class="content-section" id="single-exercises">
+          <h2>6. Latihan Soal Kuantor Tunggal (Single Quantifier)</h2>
+          <p>
+            Kuantor tunggal hanya memiliki satu simbol kuantor ($\forall$ atau $\exists$) pada setiap pernyataannya. Kerjakan latihan soal di bawah ini untuk menguji pemahaman Anda:
+          </p>
+
+          <!-- Single Soal 1 -->
+          <div class="exercise" id="single-soal-1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Himpunan Kebenaran (Truth Set) pada Himpunan $\mathbb{N}$</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Temukan himpunan kebenaran (truth set) untuk setiap fungsi proposisional $P(x)$ berikut yang didefinisikan pada himpunan $\mathbb{N}$ (bilangan bulat positif):
+                <br>a) $P(x) = "x + 2 > 7"$
+                <br>b) $P(x) = "x + 5 < 3"$
+                <br>c) $P(x) = "x + 5 > 1"$
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Domain $\mathbb{N} = \{1, 2, 3, 4, 5, 6, 7, 8, \dots\}$.
+                    </p>
+                    <p>
+                      <strong>a) $x + 2 > 7 \implies x > 5$</strong>
+                      <br>
+                      Himpunan kebenarannya adalah <strong>$\{6, 7, 8, \dots\}$</strong>, yaitu semua bilangan bulat positif yang lebih besar dari 5.
+                    </p>
+                    <p>
+                      <strong>b) $x + 5 < 3 \implies x < -2$</strong>
+                      <br>
+                      Karena domain adalah bilangan bulat positif ($\geq 1$), tidak ada nilai $x$ yang memenuhi $x < -2$. 
+                      <br>
+                      Himpunan kebenarannya adalah <strong>himpunan kosong $\emptyset$</strong>.
+                    </p>
+                    <p>
+                      <strong>c) $x + 5 > 1 \implies x > -4$</strong>
+                      <br>
+                      Semua anggota $\mathbb{N}$ bernilai $\geq 1$, sehingga pasti selalu lebih besar dari $-4$.
+                      <br>
+                      Himpunan kebenarannya adalah <strong>$\mathbb{N}$ (seluruh himpunan bilangan bulat positif)</strong>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Single Soal 2 -->
+          <div class="exercise" id="single-soal-2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Nilai Kebenaran Kuantor Universal pada $\mathbb{N}$</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Tentukan nilai kebenaran dari proposisi berikut jika domainnya adalah $\mathbb{N}$:
+                <br>a) $(\forall n \in \mathbb{N})(n + 4 > 3)$
+                <br>b) $(\forall n \in \mathbb{N})(n + 2 > 8)$
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      <strong>a) $(\forall n \in \mathbb{N})(n + 4 > 3)$ &rarr; Benar (True)</strong>
+                      <br>
+                      Pernyataan $n + 4 > 3$ ekuivalen dengan $n > -1$. Karena himpunan $\{n \mid n > -1\} = \{1, 2, 3, \dots\} = \mathbb{N}$, maka pernyataan ini benar untuk setiap elemen di $\mathbb{N}$.
+                    </p>
+                    <p>
+                      <strong>b) $(\forall n \in \mathbb{N})(n + 2 > 8)$ &rarr; Salah (False)</strong>
+                      <br>
+                      Pernyataan $n + 2 > 8$ ekuivalen dengan $n > 6$. Himpunan kebenarannya adalah $\{7, 8, 9, \dots\} \neq \mathbb{N}$. Kita memiliki counterexample, seperti $n = 1$, di mana $1 + 2 = 3 \not> 8$.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Single Soal 3 -->
+          <div class="exercise" id="single-soal-3">
+            <div class="exercise__header">
+              <span class="exercise__number">3</span>
+              <span class="exercise__title">Nilai Kebenaran Kuantor Eksistensial pada $\mathbb{N}$</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Tentukan nilai kebenaran dari proposisi berikut jika domainnya adalah $\mathbb{N}$:
+                <br>a) $(\exists n \in \mathbb{N})(n + 4 < 7)$
+                <br>b) $(\exists n \in \mathbb{N})(n + 6 < 4)$
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      <strong>a) $(\exists n \in \mathbb{N})(n + 4 < 7)$ &rarr; Benar (True)</strong>
+                      <br>
+                      Pernyataan $n + 4 < 7 \implies n < 3$. Anggota $\mathbb{N}$ yang memenuhi adalah $n = 1$ dan $n = 2$. Karena himpunan kebenarannya $\{1, 2\} \neq \emptyset$, maka pernyataan eksistensial bernilai benar.
+                    </p>
+                    <p>
+                      <strong>b) $(\exists n \in \mathbb{N})(n + 6 < 4)$ &rarr; Salah (False)</strong>
+                      <br>
+                      Pernyataan $n + 6 < 4 \implies n < -2$. Tidak ada bilangan asli $\mathbb{N}$ yang kurang dari $-2$. Karena himpunan kebrnahan $=\emptyset$, maka pernyataan bernilai salah.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Single Soal 4 -->
+          <div class="exercise" id="single-soal-4">
+            <div class="exercise__header">
+              <span class="exercise__number">4</span>
+              <span class="exercise__title">Evaluasi Kuantor pada Himpunan Terbatas $A$</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Misalkan $A = \{1, 2, 3, 4, 5\}$. Tentukan nilai kebenaran dari setiap pernyataan berikut:
+                <br>(a) $(\exists x \in A)(x + 3 = 10)$
+                <br>(b) $(\forall x \in A)(x + 3 < 10)$
+                <br>(c) $(\exists x \in A)(x + 3 < 5)$
+                <br>(d) $(\forall x \in A)(x + 3 \leq 7)$
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      <strong>(a) Salah (False)</strong>. Solusi dari $x + 3 = 10$ adalah $x = 7$. Karena $7 \notin A$, tidak ada elemen di $A$ yang memenuhi persamaan tersebut.
+                    </p>
+                    <p>
+                      <strong>(b) Benar (True)</strong>. Uji untuk semua nilai $x \in A$:
+                      <br>Jika $x = 5$ (nilai terbesar), $5 + 3 = 8 < 10$ (Benar). Maka otomatis berlaku untuk semua $x$ lainnya.
+                    </p>
+                    <p>
+                      <strong>(c) Benar (True)</strong>. Kita cukup mencari minimal satu nilai. Pilih $x = 1$, maka $1 + 3 = 4 < 5$ (Benar).
+                    </p>
+                    <p>
+                      <strong>(d) Salah (False)</strong>. Kita uji dengan $x = 5 \in A$. 
+                      <br>Maka $5 + 3 = 8 \not\leq 7$. Anggota $x = 5$ merupakan counterexample yang merusak pernyataan universal.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Single Soal 5 -->
+          <div class="exercise" id="single-soal-5">
+            <div class="exercise__header">
+              <span class="exercise__number">5</span>
+              <span class="exercise__title">Pernyataan $P(x) = "x = x^2"$ pada Bilangan Bulat</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Misalkan $P(x)$ adalah pernyataan "$x = x^2$". Jika domainnya terdiri dari semua bilangan bulat ($\mathbb{Z}$), tentukan nilai kebenaran dari proposisi berikut:
+                <br>a) $P(0)$
+                <br>b) $P(1)$
+                <br>c) $P(2)$
+                <br>d) $P(-1)$
+                <br>e) $\exists x P(x)$
+                <br>f) $\forall x P(x)$
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <ul>
+                      <li><strong>a) $P(0)$ &rarr; True (Benar)</strong>, karena $0 = 0^2 \equiv 0$.</li>
+                      <li><strong>b) $P(1)$ &rarr; True (Benar)</strong>, karena $1 = 1^2 \equiv 1$.</li>
+                      <li><strong>c) $P(2)$ &rarr; False (Salah)</strong>, karena $2 \neq 2^2 \equiv 4$.</li>
+                      <li><strong>d) $P(-1)$ &rarr; False (Salah)</strong>, karena $-1 \neq (-1)^2 \equiv 1$.</li>
+                      <li><strong>e) $\exists x P(x)$ &rarr; True (Benar)</strong>, karena terdapat $x = 0$ dan $x = 1$ di domain yang membuat pernyataan benar.</li>
+                      <li><strong>f) $\forall x P(x)$ &rarr; False (Salah)</strong>, karena ada bilangan bulat yang tidak memenuhinya (contoh counterexample: $x = 2$).</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Single Soal 6 -->
+          <div class="exercise" id="single-soal-6">
+            <div class="exercise__header">
+              <span class="exercise__number">6</span>
+              <span class="exercise__title">Evaluasi Berbagai Kuantor Tunggal pada Bilangan Bulat</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Tentukan nilai kebenaran dari setiap pernyataan berikut jika domain terdiri dari semua bilangan bulat ($\mathbb{Z}$):
+                <br>a) $\forall n (n + 1 > n)$
+                <br>b) $\exists n (2n = 3n)$
+                <br>c) $\exists n (n = -n)$
+                <br>d) $\forall n (3n \leq 4n)$
+              </p>
+              
+              <div class="img-container">
+                <img src="../pdf_images/page45_img1.png" alt="Latihan Soal 6 Kuantor Tunggal">
+                <figcaption>Gambar soal 6 dari catatan asli.</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      <strong>a) $\forall n (n + 1 > n)$ &rarr; True (Benar)</strong>
+                      <br>
+                      Berapa pun nilai bilangan bulat $n$, jika ditambahkan 1, hasilnya pasti lebih besar dari bilangan itu sendiri.
+                    </p>
+                    <p>
+                      <strong>b) $\exists n (2n = 3n)$ &rarr; True (Benar)</strong>
+                      <br>
+                      Kita memiliki setidaknya satu nilai yang memenuhi, yaitu $n = 0$, karena $2(0) = 3(0) \equiv 0$.
+                    </p>
+                    <p>
+                      <strong>c) $\exists n (n = -n)$ &rarr; True (Benar)</strong>
+                      <br>
+                      Terdapat nilai $n = 0$ yang memenuhi, karena $0 = -0$.
+                    </p>
+                    <p>
+                      <strong>d) $\forall n (3n \leq 4n)$ &rarr; False (Salah)</strong>
+                      <br>
+                      Pernyataan ini salah ketika kita memilih bilangan bulat negatif. 
+                      <br>
+                      <strong>Counterexample:</strong> Misalkan $n = -1$.
+                      $$3(-1) \leq 4(-1) \implies -3 \leq -4 \quad (\text{\bf{Salah}}, \text{ karena } -3 > -4)$$
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Single Soal 7 -->
+          <div class="exercise" id="single-soal-7">
+            <div class="exercise__header">
+              <span class="exercise__number">7</span>
+              <span class="exercise__title">Evaluasi Kuantor Eksponensial pada $\mathbb{Z}$</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Tentukan nilai kebenaran dari setiap pernyataan berikut jika domain untuk semua variabel terdiri dari semua bilangan bulat ($\mathbb{Z}$):
+                <br>a) $\forall n (n^2 \geq n)$
+                <br>b) $\exists n (n^2 = 2)$
+                <br>c) $\exists n (n^2 > n)$
+                <br>d) $\forall n (n^2 > n)$
+              </p>
+
+              <div class="img-container">
+                <img src="../pdf_images/page47_img1.png" alt="Latihan Soal 7 Kuantor Tunggal Bagian 1">
+                <img src="../pdf_images/page48_img1.png" alt="Latihan Soal 7 Kuantor Tunggal Bagian 2">
+                <figcaption>Kumpulan soal nomor 7 dalam format visual dari catatan tutoring.</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      <strong>a) $\forall n (n^2 \geq n)$ &rarr; True (Benar)</strong>
+                      <br>
+                      Mari uji kelompok bilangan bulat:
+                      <ul>
+                        <li>Bilangan negatif ($n < 0$): $n^2$ selalu positif, sedangkan $n$ negatif. Maka $positif > negatif$ (Benar).</li>
+                        <li>$n = 0$: $0^2 \geq 0 \implies 0 \geq 0$ (Benar).</li>
+                        <li>$n = 1$: $1^2 \geq 1 \implies 1 \geq 1$ (Benar).</li>
+                        <li>Bilangan bulat positif besar ($n \geq 2$): $n^2 > n$ selalu benar (contoh $2^2 = 4 > 2$).</li>
+                      </ul>
+                      Maka pernyataan ini benar untuk seluruh bilangan bulat.
+                    </p>
+                    <p>
+                      <strong>b) $\exists n (n^2 = 2)$ &rarr; False (Salah)</strong>
+                      <br>
+                      Persamaan $n^2 = 2$ menghasilkan $n = \pm\sqrt{2}$. Karena $\sqrt{2}$ bukan merupakan bilangan bulat ($\mathbb{Z}$), maka tidak ada satu pun elemen domain yang memenuhi pernyataan ini.
+                    </p>
+                    <p>
+                      <strong>c) $\exists n (n^2 > n)$ &rarr; True (Benar)</strong>
+                      <br>
+                      Kita cukup menunjukkan satu nilai. Pilih $n = 2$, maka $2^2 > 2 \implies 4 > 2$ (Benar).
+                    </p>
+                    <p>
+                      <strong>d) $\forall n (n^2 > n)$ &rarr; False (Salah)</strong>
+                      <br>
+                      Kita cari counterexample. Jika kita pilih $n = 1$, maka $1^2 > 1 \implies 1 > 1$ (Salah). 
+                      Pernyataan juga salah untuk $n = 0$. Karena ada counterexample, pernyataan universal ini bernilai salah.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. Double Quantifier -->
+        <section class="content-section" id="nested-exercises">
+          <h2>7. Kuantor Ganda / Bersarang (Double / Nested Quantifier)</h2>
+          <div class="callout callout--warning">
+            <div class="callout__icon">💡</div>
+            <div>
+              <strong>ATURAN EMAS:</strong> Pada kuantor bersarang yang melibatkan dua variabel atau lebih, <strong>urutan penulisan kuantor sangat penting dan dapat mengubah arti kebenaran pernyataan!</strong>
+              <ul>
+                <li>$\forall x \exists y P(x, y)$ &rarr; "Untuk setiap $x$, terdapat suatu nilai $y$." (Nilai $y$ yang dipilih bisa berbeda-beda tergantung nilai $x$).</li>
+                <li>$\exists y \forall x P(x, y)$ &rarr; "Ada suatu nilai $y$ konstan yang berlaku untuk semua $x$." (Kita harus mencari satu nilai $y$ yang sama yang dapat dipasangkan dengan semua $x$).</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Nested Contoh 1 -->
+          <div class="exercise" id="nested-ex1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Contoh Soal 1: Persamaan $x + y = 10$</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Misalkan $B = \{1, 2, 3, \dots, 9\}$ dan $P(x, y)$ menyatakan predikat "$x + y = 10$". Tentukan nilai kebenaran dari:
+                <br>a) $\forall x \exists y P(x, y)$
+                <br>b) $\exists y \forall x P(x, y)$
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      <strong>a) $\forall x \exists y P(x, y)$ &rarr; True (Benar)</strong>
+                      <br>
+                      * <strong>Arti:</strong> "Untuk setiap $x$ dalam $B$, ada suatu nilai $y$ dalam $B$ sedemikian rupa sehingga $x + y = 10$."
+                      <br>
+                      * <strong>Analisis:</strong> Untuk setiap $x$ yang kita ambil, kita selalu bisa menemukan pasangan $y$ yang unik agar jumlahnya 10.
+                      <br>Jika $x = 1 \implies y = 9$ (keduanya anggota $B$).
+                      <br>Jika $x = 2 \implies y = 8$.
+                      <br>Jika $x = 9 \implies y = 1$.
+                      <br>Karena untuk setiap pilihan $x$, kita selalu bisa mencocokkan nilai $y$ yang ada di $B$, pernyataan ini bernilai benar.
+                    </p>
+                    <p>
+                      <strong>b) $\exists y \forall x P(x, y)$ &rarr; False (Salah)</strong>
+                      <br>
+                      * <strong>Arti:</strong> "Ada suatu nilai $y$ dalam $B$ yang jika dipasangkan dengan nilai $x$ mana pun dalam $B$, hasil penjumlahannya selalu 10."
+                      <br>
+                      * <strong>Analisis:</strong> Kita harus memilih satu nilai $y$ yang berlaku secara universal untuk semua $x$. Misalkan kita pilih $y = 9$. Persamaan hanya benar jika $x = 1$ ($1 + 9 = 10$), namun salah untuk $x = 2$ ($2 + 9 = 11 \neq 10$). Karena tidak ada satu pun $y$ konstan yang memenuhi semua $x$, pernyataan ini bernilai salah.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nested Soal 2 -->
+          <div class="exercise" id="nested-soal-2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Analisis Nilai Kebenaran pada Himpunan Semesta Terbatas</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Tentukan nilai kebenaran dari setiap pernyataan berikut di mana $U = \{1, 2, 3\}$ adalah himpunan universal (semesta):
+                <br>a) $\exists x \forall y \, (x < y + 1)$
+                <br>b) $\forall x \exists y \, (x^2 + y^2 < 12)$
+                <br>c) $\forall x \forall y \, (x^2 + y^2 < 12)$
+              </p>
+
+              <div class="img-container">
+                <img src="../pdf_images/page49_img1.png" alt="Latihan Soal 2 Kuantor Ganda">
+                <figcaption>Visualisasi pengerjaan soal dengan semesta terbatas.</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      <strong>a) $\exists x \forall y \, (x < y + 1)$ &rarr; Benar (True)</strong>
+                      <br>
+                      Kita coba pilih $x = 1$. Sekarang kita periksa apakah $1 < y + 1$ bernilai benar untuk semua $y \in \{1, 2, 3\}$:
+                      <ul>
+                        <li>Untuk $y = 1$: $1 < 1 + 1 \implies 1 < 2$ (Benar)</li>
+                        <li>Untuk $y = 2$: $1 < 2 + 1 \implies 1 < 3$ (Benar)</li>
+                        <li>Untuk $y = 3$: $1 < 3 + 1 \implies 1 < 4$ (Benar)</li>
+                      </ul>
+                      Karena ada $x = 1$ yang membuat pernyataan benar untuk seluruh nilai $y$, maka pernyataan ini bernilai benar.
+                    </p>
+                    <p>
+                      <strong>b) $\forall x \exists y \, (x^2 + y^2 < 12)$ &rarr; Benar (True)</strong>
+                      <br>
+                      Untuk setiap pilihan $x \in \{1, 2, 3\}$, kita cari apakah ada $y \in \{1, 2, 3\}$ yang memenuhi. Kita dapat membuktikannya dengan selalu memilih $y = 1$:
+                      <ul>
+                        <li>Uji $x = 1$: $1^2 + 1^2 = 2 < 12$ (Benar)</li>
+                        <li>Uji $x = 2$: $2^2 + 1^2 = 5 < 12$ (Benar)</li>
+                        <li>Uji $x = 3$: $3^2 + 1^2 = 10 < 12$ (Benar)</li>
+                      </ul>
+                      Clean dan tepat. Karena untuk setiap nilai $x$ kita selalu bisa menemukan pasangan $y$ yang memenuhi, pernyataan ini benar.
+                    </p>
+                    <p>
+                      <strong>c) $\forall x \forall y \, (x^2 + y^2 < 12)$ &rarr; Salah (False)</strong>
+                      <br>
+                      Pernyataan ini menuntut seluruh kombinasi pasangan $(x, y)$ memenuhi kriteria.
+                      <br>
+                      <strong>Counterexample:</strong> Pilih $x = 2$ dan $y = 3$.
+                      $$2^2 + 3^2 = 4 + 9 = 13 \not< 12$$
+                      Karena ada minimal satu pasangan yang tidak memenuhi, pernyataan universal ganda ini bernilai salah.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nested Soal 3 -->
+          <div class="exercise" id="nested-soal-3">
+            <div class="exercise__header">
+              <span class="exercise__number">3</span>
+              <span class="exercise__title">Membedakan Pernyataan dan Fungsi Proposisional</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Misalkan $A = \{1, 2, \dots, 9, 10\}$. Perhatikan setiap kalimat berikut. Jika kalimat tersebut merupakan pernyataan, tentukan nilai kebenarannya. Jika kalimat tersebut merupakan fungsi proposisional, tentukan himpunan kebenarannya.
+                <br>(a) $(\forall x \in A)(\exists y \in A)(x + y < 14)$
+                <br>(b) $(\forall y \in A)(x + y < 14)$
+                <br>(c) $(\forall x \in A)(\forall y \in A)(x + y < 14)$
+                <br>(d) $(\exists y \in A)(x + y < 14)$
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      <strong>(a) Kalimat ini adalah pernyataan (statement)</strong>, karena seluruh variabel ($x$ dan $y$) diikat oleh kuantor.
+                      <br>
+                      <strong>Nilai Kebenaran: Benar (True)</strong>. Untuk setiap $x \in A$, kita bisa selalu memilih $y = 1 \in A$ sebagai pasangannya. Nilai maksimum $x + y$ adalah ketika $x = 10$, dan $10 + 1 = 11 < 14$ (Benar).
+                    </p>
+                    <p>
+                      <strong>(b) Kalimat ini adalah fungsi proposisional</strong> dari variabel bebas $x$, karena variabel $x$ tidak memiliki kuantor di depannya.
+                      <br>
+                      <strong>Himpunan Kebenaran: $\{1, 2, 3\}$</strong>. Supaya kalimat bernilai benar untuk semua $y \in A$, nilai $x$ harus aman dipasangkan dengan nilai $y$ terbesar ($y = 10$).
+                      $$x + 10 < 14 \implies x < 4$$
+                      Nilai bilangan asli di $A$ yang kurang dari 4 adalah $\{1, 2, 3\}$.
+                    </p>
+                    <p>
+                      <strong>(c) Kalimat ini adalah pernyataan</strong>, karena variabel $x$ dan $y$ telah dikuantifikasi.
+                      <br>
+                      <strong>Nilai Kebenaran: Salah (False)</strong>. Kita cari penyangkalnya (counterexample). Jika kita memilih $x = 8$ dan $y = 9$ (keduanya di $A$), maka $8 + 9 = 17 \not< 14$.
+                    </p>
+                    <p>
+                      <strong>(d) Kalimat ini adalah fungsi proposisional</strong> dari variabel bebas $x$.
+                      <br>
+                      <strong>Himpunan Kebenaran: Himpunan $A$ itu sendiri $\{1, 2, \dots, 10\}$</strong>. Untuk setiap $x \in A$, kita selalu bisa memilih $y = 1 \in A$ agar $x + y < 14$. Bahkan jika kita mengambil $x$ terbesar ($x = 10$), $10 + 1 = 11 < 14$ tetap bernilai benar. Maka seluruh anggota di $A$ memenuhi kriteria $x$.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nested Soal 4 -->
+          <div class="exercise" id="nested-soal-4">
+            <div class="exercise__header">
+              <span class="exercise__number">4</span>
+              <span class="exercise__title">Evaluasi Kuantor Bersarang pada Bilangan Bulat $\mathbb{Z}$</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Tentukan nilai kebenaran dari setiap pernyataan berikut jika domain untuk semua variabel terdiri dari semua bilangan bulat ($\mathbb{Z}$):
+                <br>a) $\forall n \exists m \, (n^2 < m)$
+                <br>b) $\exists n \forall m \, (n < m^2)$
+                <br>c) $\forall n \exists m \, (n + m = 0)$
+                <br>d) $\exists n \forall m \, (nm = m)$
+                <br>e) $\exists n \exists m \, (n^2 + m^2 = 5)$
+                <br>f) $\exists n \exists m \, (n^2 + m^2 = 6)$
+                <br>g) $\exists n \exists m \, (n + m = 4 \land n - m = 1)$
+                <br>h) $\exists n \exists m \, (n + m = 4 \land n - m = 2)$
+                <br>i) $\forall n \forall m \exists p \, (p = (m + n)/2)$
+              </p>
+
+              <div class="img-container">
+                <img src="../pdf_images/page51_img1.png" alt="Latihan Soal 4 Kuantor Ganda Bagian 1">
+                <img src="../pdf_images/page51_img2.png" alt="Latihan Soal 4 Kuantor Ganda Bagian 2">
+                <figcaption>Latihan soal nomor 4 kuantor bersarang pada bilangan bulat.</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      <strong>a) $\forall n \exists m \, (n^2 < m)$ &rarr; True (Benar)</strong>
+                      <br>Untuk bilangan bulat $n$ apa saja, kita bisa selalu memilih $m = n^2 + 1$. Jelas bahwa $n^2 < n^2 + 1$ selalu benar.
+                    </p>
+                    <p>
+                      <strong>b) $\exists n \forall m \, (n < m^2)$ &rarr; True (Benar)</strong>
+                      <br>Kita cari satu bilangan bulat konstan $n$ agar selalu kurang dari kuadrat bilangan bulat $m^2$. Karena kuadrat bilangan bulat $m^2$ paling kecil adalah 0 (ketika $m=0$), kita dapat memilih bilangan negatif, misalnya $n = -1$. Pernyataan $-1 < m^2$ selalu bernilai benar untuk semua bilangan bulat $m$.
+                    </p>
+                    <p>
+                      <strong>c) $\forall n \exists m \, (n + m = 0)$ &rarr; True (Benar)</strong>
+                      <br>Untuk bilangan bulat $n$ apa saja, kita bisa memilih inversnya $m = -n$ yang merupakan sesama bilangan bulat. Maka $n + (-n) = 0$ selalu bernilai benar.
+                    </p>
+                    <p>
+                      <strong>d) $\exists n \forall m \, (nm = m)$ &rarr; True (Benar)</strong>
+                      <br>Kita cari nilai $n$ konstan sebagai identitas perkalian. Pilih $n = 1$. Maka $1 \cdot m = m$ benar untuk seluruh bilangan bulat $m$.
+                    </p>
+                    <p>
+                      <strong>e) $\exists n \exists m \, (n^2 + m^2 = 5)$ &rarr; True (Benar)</strong>
+                      <br>Kita cari apakah ada solusi pasangan bulat yang jumlah kuadratnya 5. Kita dapat memilih $n = 1$ dan $m = 2$, di mana $1^2 + 2^2 = 1 + 4 = 5$.
+                    </p>
+                    <p>
+                      <strong>f) $\exists n \exists m \, (n^2 + m^2 = 6)$ &rarr; False (Salah)</strong>
+                      <br>Nilai kuadrat dari bilangan bulat yang mungkin adalah $\{0, 1, 4, 9, \dots\}$. Kombinasi jumlah dari dua nilai kuadrat di atas yang lebih kecil dari 6 hanyalah:
+                      <ul>
+                        <li>$0 + 0 = 0$</li>
+                        <li>$0 + 1 = 1$</li>
+                        <li>$1 + 1 = 2$</li>
+                        <li>$0 + 4 = 4$</li>
+                        <li>$1 + 4 = 5$</li>
+                      </ul>
+                      Tidak ada kombinasi yang menghasilkan nilai 6. Maka pernyataan ini bernilai salah.
+                    </p>
+                    <p>
+                      <strong>g) $\exists n \exists m \, (n + m = 4 \land n - m = 1)$ &rarr; False (Salah)</strong>
+                      <br>Jika kita menyelesaikan sistem persamaan linear:
+                      $$(n + m) + (n - m) = 4 + 1 \implies 2n = 5 \implies n = 2.5$$
+                      Maka $m = 1.5$. Karena $2.5$ dan $1.5$ bukan merupakan bilangan bulat ($\mathbb{Z}$), maka tidak ada solusi bulat yang memenuhi persamaan tersebut.
+                    </p>
+                    <p>
+                      <strong>h) $\exists n \exists m \, (n + m = 4 \land n - m = 2)$ &rarr; True (Benar)</strong>
+                      <br>Selesaikan sistem persamaan linear:
+                      $$(n + m) + (n - m) = 4 + 2 \implies 2n = 6 \implies n = 3$$
+                      Maka $m = 1$. Karena $n=3$ dan $m=1$ merupakan bilangan bulat, solusi ini valid.
+                    </p>
+                    <p>
+                      <strong>i) $\forall n \forall m \exists p \, (p = (m + n)/2)$ &rarr; False (Salah)</strong>
+                      <br>Rata-rata dari dua bilangan bulat tidak selalu berupa bilangan bulat.
+                      <br><strong>Counterexample:</strong> Pilih $n = 1$ and $m = 2$.
+                      <br>Maka $p = (1 + 2)/2 = 1.5$. Karena $1.5 \notin \mathbb{Z}$, tidak ada elemen bulat $p$ yang memenuhi.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nested Soal 5 -->
+          <div class="exercise" id="nested-soal-5">
+            <div class="exercise__header">
+              <span class="exercise__number">5</span>
+              <span class="exercise__title">Mencari Counterexample Pernyataan Kuantor Ganda</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Carilah counterexample (contoh penyangkal yang membuat pernyataan salah) untuk pernyataan-pernyataan di mana domain terdiri dari semua bilangan bulat ($\mathbb{Z}$):
+                <br>a) $\forall x \forall y \, (x^2 = y^2 \rightarrow x = y)$
+                <br>b) $\forall x \exists y \, (y^2 = x)$
+                <br>c) $\forall x \forall y \, (xy \geq x)$
+              </p>
+
+              <div class="img-container">
+                <img src="../pdf_images/page52_img1.png" alt="Latihan Soal 5 Counterexample 1">
+                <img src="../pdf_images/page52_img2.png" alt="Latihan Soal 5 Counterexample 2">
+                <figcaption>Menentukan counterexample dari persoalan universal ganda.</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      <strong>a) $\forall x \forall y \, (x^2 = y^2 \rightarrow x = y)$</strong>
+                      <br>
+                      * <strong>Penyangkal (Counterexample):</strong> Pilih $x = 2$ dan $y = -2$.
+                      <br>
+                      * <strong>Pembuktian:</strong> $2^2 = (-2)^2 \equiv 4$ (Bagian hipotesis bernilai benar), namun $2 \neq -2$ (Bagian konklusi salah). Implikasi $T \rightarrow F$ bernilai salah.
+                    </p>
+                    <p>
+                      <strong>b) $\forall x \exists y \, (y^2 = x)$</strong>
+                      <br>
+                      * <strong>Penyangkal (Counterexample):</strong> Pilih $x = -4$ (atau bilangan negatif lainnya).
+                      <br>
+                      * <strong>Pembuktian:</strong> Tidak ada bilangan bulat $y$ yang memenuhi $y^2 = -4$, karena kuadrat dari bilangan bulat apa pun tidak pernah bernilai negatif.
+                    </p>
+                    <p>
+                      <strong>c) $\forall x \forall y \, (xy \geq x)$</strong>
+                      <br>
+                      * <strong>Penyangkal (Counterexample):</strong> Pilih $x = 17$ dan $y = -1$.
+                      <br>
+                      * <strong>Pembuktian:</strong> $17 \times (-1) = -17$. Nilai $-17$ tidak lebih besar dari atau sama dengan $17$ (Pernyataan salah).
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nested Soal 6 -->
+          <div class="exercise" id="nested-soal-6">
+            <div class="exercise__header">
+              <span class="exercise__number">6</span>
+              <span class="exercise__title">Evaluasi Kebenaran Pernyataan $\forall x \exists y (xy = 1)$</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Tentukan nilai kebenaran dari pernyataan $\forall x \exists y \, (xy = 1)$ jika domainnya terdiri dari:
+                <br>a) Bilangan riil bukan nol (non-zero real numbers).
+                <br>b) Bilangan bulat bukan nol (non-zero integers).
+                <br>c) Bilangan riil positif (positive real numbers).
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      <strong>a) Bilangan riil bukan nol &rarr; Benar (True)</strong>
+                      <br>
+                      Untuk setiap bilangan riil $x \neq 0$, kita selalu bisa memilih invers perkaliannya $y = 1/x$. Karena $x \neq 0$, maka $y$ juga merupakan bilangan riil bukan nol, dan $x \cdot (1/x) = 1$.
+                    </p>
+                    <p>
+                      <strong>b) Bilangan bulat bukan nol &rarr; Salah (False)</strong>
+                      <br>
+                      Jika kita pilih $x = 2$, satu-satunya nilai $y$ agar $2y = 1$ adalah $y = 1/2 = 0.5$. Karena $0.5$ bukan merupakan bilangan bulat, maka pernyataan ini bernilai salah pada domain integer.
+                    </p>
+                    <p>
+                      <strong>c) Bilangan riil positif &rarr; Benar (True)</strong>
+                      <br>
+                      Untuk setiap bilangan riil positif $x > 0$, pilih $y = 1/x$. Karena $x$ bernilai positif, maka $y = 1/x$ juga bernilai positif, dan hasil perkaliannya adalah 1.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nested Soal 7 -->
+          <div class="exercise" id="nested-soal-7">
+            <div class="exercise__header">
+              <span class="exercise__number">7</span>
+              <span class="exercise__title">Predikat Pembagian Habis $P(m, n) = \text{"m membagi habis n"}$</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Misalkan $P(m, n)$ adalah pernyataan <em>"m membagi habis n"</em> (dapat ditulis $m \mid n$), di mana domain untuk m dan n terdiri dari semua bilangan bulat positif ($\mathbb{Z}^+$). Tentukan nilai kebenaran dari masing-masing pernyataan ini:
+                <br>a) $P(4, 5)$
+                <br>b) $P(2, 4)$
+                <br>c) $\forall m \forall n P(m, n)$
+                <br>d) $\exists m \forall n P(m, n)$
+                <br>e) $\exists n \forall m P(m, n)$
+                <br>f) $\forall n P(1, n)$
+              </p>
+
+              <div class="img-container">
+                <img src="../pdf_images/page54_img1.png" alt="Latihan Soal 7 Kuantor Ganda Bagian 1">
+                <img src="../pdf_images/page54_img2.png" alt="Latihan Soal 7 Kuantor Ganda Bagian 2">
+                <figcaption>Visualisasi pengerjaan soal pembagian habis dengan kuantor ganda.</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      <strong>a) $P(4, 5)$ &rarr; Salah (False)</strong>, karena 4 tidak membagi habis 5 ($5 / 4 = 1.25$, bukan bilangan bulat).
+                    </p>
+                    <p>
+                      <strong>b) $P(2, 4)$ &rarr; Benar (True)</strong>, karena 2 membagi habis 4 ($4 = 2 \times 2$).
+                    </p>
+                    <p>
+                      <strong>c) $\forall m \forall n P(m, n)$ &rarr; Salah (False)</strong>, karena tidak semua bilangan bulat positif membagi habis bilangan bulat positif lainnya (contoh counterexample: $P(4, 5)$ salah).
+                    </p>
+                    <p>
+                      <strong>d) $\exists m \forall n P(m, n)$ &rarr; Benar (True)</strong>
+                      <br>
+                      * <strong>Arti:</strong> "Ada suatu bilangan bulat positif $m$ yang membagi habis semua bilangan bulat positif $n$."
+                      <br>
+                      * <strong>Pembuktian:</strong> Kita dapat memilih $m = 1$. Angka 1 selalu membagi habis semua bilangan bulat positif $n$ ($n = n \times 1$).
+                    </p>
+                    <p>
+                      <strong>e) $\exists n \forall m P(m, n)$ &rarr; Salah (False)</strong>
+                      <br>
+                      * <strong>Arti:</strong> "Ada suatu bilangan bulat positif $n$ yang habis dibagi oleh semua bilangan bulat positif $m$."
+                      <br>
+                      * <strong>Pembuktian:</strong> Uji bilangan bulat positif $n$ apa saja. Kita selalu dapat menemukan nilai $m = n + 1$. Angka $n + 1$ tidak akan pernah bisa membagi habis $n$ (karena nilainya lebih besar dari $n$).
+                    </p>
+                    <p>
+                      <strong>f) $\forall n P(1, n)$ &rarr; Benar (True)</strong>, karena angka 1 membagi habis semua bilangan bulat positif $n$.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Responsi Callout -->
+          <div class="callout callout--info">
+            <div class="callout__icon">🎥</div>
+            <div>
+              <strong>Video Pembahasan Responsi UTS:</strong> Anda dapat menonton penjelasan video untuk soal-soal Double Quantifier dari HIMTI RESPONSI tahun lalu di link YouTube berikut: 
+              <br>
+              <a href="https://youtu.be/NGs_X2MnYqo?si=SX0KrZQm468aQDVE&t=2279" target="_blank" rel="noopener noreferrer">Tonton di YouTube (Mulai menit 37:59)</a>.
+            </div>
+          </div>
+        </section>
+
+        <!-- Page Navigation -->
+        <div class="page-nav">
+          <a href="sesi1.html" class="page-nav__link">
+            <span class="page-nav__label">← Sebelumnya</span>
+            <span class="page-nav__title">Logic — Logika Dasar</span>
+          </a>
+          <a href="sesi3.html" class="page-nav__link page-nav__link--next">
+            <span class="page-nav__label">Selanjutnya →</span>
+            <span class="page-nav__title">Method of Proof — Metode Pembuktian</span>
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <button class="back-to-top" aria-label="Kembali ke atas">↑</button>
+  <script src="../js/main.js"></script>
+</body>
+</html>

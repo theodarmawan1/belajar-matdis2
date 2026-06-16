@@ -1,0 +1,3375 @@
+=== PAGE 1 ===
+Sesi 1 & Sesi 2: Logic
+ 
+Outline
+1. Logika dasar (AND, OR, XOR, negasi, Jika maka, Biimplikasi) 
+​
+2. Cara membuat tabel kebenaran (truth table) untuk logika kompleks 
+ 
+​
+3. Ekuivalensi Logika (Hukum-hukum), membuktikan bahwa logika ini dan itu sama 
+​
+4. Rules Of Inference 
+​
+5. Boolean (Singkat) 
+ 
+​
+6. Bit Operation (Singkat) 
+​
+7. Gerbang Logika 
+ 
+​
+8. Karnaugh Map 2,3,4 Variabel 
+ 
+​
+ 
+ : Keluar di UTS Tahun lalu
+ : Kisi-kisi UTS Tahun ini
+ 
+Logika Dasar
+ 
+Proposisi 
+Disebut juga pernyataan. Proposisi adalah sesuatu kalimat yang 
+ 
+atau 
+dapat dinilai betul
+salah.
+ 
+Contoh:
+1. Jakarta terletak di Indonesia
+Jawaban
+Proposisi. Karena dapat dinilai benar atau salah. Proposisi ini nilainya benar
+2. Bekasi terletak di planet lain (bukan bumi)
+Jawaban
+Tetap preposisi. Karena dapat dinilai benar atau salahnya. Proposisi ini nilainya 
+salah, karena Bekasi terletak di Bumi. Jadi benar kalimat ini 
+, tapi nilai 
+proposisinya salah.
+Proposisi
+3. Apakah dia jahat?
+Jawaban
+Ini bukan sebuah Proposisi, karena tidak dapat dinilai benar atau salah. Ini sebuah 
+ bukan 
+Kecuali misalnya begini 
+Nah, ini baru 
+proposisi karena dapat dinilai kebenarannya. (Dia jahat atau tidak)
+pertanyaan
+pernyataan. 
+, 
+Dia Jahat. 
+4. Jurusan CSSE belajar apa aja?
+
+=== PAGE 2 ===
+Jawaban
+Jelas ini bukan proposisi/pernyataan, ini jelas banget sebuah pertanyaan
+5. 5a + 10 = 40
+Jawaban
+Ini proposisi, tapi jenisnya pernyataannya terbuka, harus dibuktiin dulu 
+kebenarannya. Sedangkan kalimat nomor 1 & 2 kita bisa langsung ngenilai itu 
+bener atau salah
+ 
+6. Jarak Jakarta-Bekasi dekat.
+Jawaban
+Bukan pernyataan. Siapa yang kejebak?? Ini bukan pernyataan karena dekat atau 
+jauh itu relatif (subjektif), setiap orang bisa punya anggapan yang berbeda.
+ 
+Logika DAN (AND) simbolnya bisa  ^ atau x (kali)
+Kedua pernyataan harus bernilai benar supaya dapat dinilai benar. Maksudnya gimana 
+ya? Oke pake contoh supaya langsung Paham
+ 
+Budi sudah belajar dan makan.
+ 
+Misalnya ibunya bilang, untuk boleh main, Budi harus belajar dan Makan. Nah, 
+misalnya di sini Budi sudah belajar, tapi belum makan. Dia boleh main atau gak?
+Jawaban
+Jawabannya gak. Karena DAN itu syaratnya kedua-duanya harus terpenuhi. Budi 
+harus udah makan. Budi juga harus udah belajar. Gak boleh salah satu aja. Kalo 
+udah belajar, udah makan juga nah baru boleh main.
+Jadi, logika DAN itu kedua syarat harus terpenuhi.
+ 
+Kalo kita liat dalam bentuk tabel logika, kaya gini
+p
+q
+p∧q
+True
+True
+True
+True
+False
+False
+False
+True
+False
+False
+False
+False
+Penjelasan:
+•
+hanya akan 
+ jika 
+. Jika salah satu atau keduanya 
+, 
+hasilnya 
+.
+p∧q 
+True
+keduanya True
+False
+False
+ 
+
+=== PAGE 3 ===
+Kalimat contoh tadi, bisa kita ubah ke bentuk p dan q. Misalkan sudah belajar itu P, 
+sudah makan itu Q.
+ 
+Logika ATAU (OR) simbolnya bisa v atau + (tambah)
+kalo tadi di DAN, kedua pernyataan nilainya harus benar dulu, baru bisa disebut benar. 
+Nah, di ATAU cukup salah satu pernyataan 
+ 
+Contoh
+Bekasi atau Banjarmasin adalah kota yang terletak di Pulau Jawa.
+pernyataan di atas bernilai benar atau salah? (balik lagi dikit ke proposisi)
+Jawaban
+Pernyataan/proposisi di atas nilainya benar ya. pernyataan Bekasi terletak di Pulau 
+Jawa itu BENAR. lalu pernyataan Banjarmasin terletak di Pulau Jawa itu SALAH. 
+Ingatt, ATAU itu cukup satu aja yang benar. Karena pernyataan Bekasi terletak di 
+Pulau Jawa itu Benar, maka kalimat 
+secara keseluruhan benar.
+Bekasi atau Banjarmasin adalah kota yang 
+terletak di Pulau Jawa. 
+ 
+Hmm, masih kurang mudeng ya? oke pake contoh lain deh
+Contoh
+Untuk bisa membuka rekening bank, harus berusia 18 tahun atau memiliki surat 
+persetujuan dari orang tua.
+Misalkan budi sudah memiliki surat persetujuan dari orang tua, tapi belum berusia 18 
+tahun. Apakah budi bisa membuka rekening bank?
+Jawaban
+BISA. karena logika ATAU itu cukup salah satu aja yang benar. Di sini Budi sudah 
+memiliki surat persetujuan dari orang tua, maka salah satu syarat udah terpenuhi.
+ 
+Bentuk tabel kebenerannya begini
+p
+q
+p∨q
+True
+True
+True
+True
+False
+True
+False
+True
+True
+False
+False
+False
+Penjelasan:
+•
+ hanya akan 
+ jika 
+. Jika salah satu atau keduanya 
+, 
+hasilnya 
+.
+p∨q
+False
+keduanya False
+True
+True
+ 
+
+=== PAGE 4 ===
+CONTOH SOAL DAN (AND) & ATAU (OR)
+Mana pernyataan yang bernilai benar?
+Jawaban
+hanya pernyataan i yang benar.
+ 
+Mana pernyataan yang bernilai benar?
+Jawaban
+Hanya pernyataan terakhir (iv) yang salah. Semua pernyataan lainnya benar 
+karena setidaknya satu dari keseluruhan pernyataannya benar.
+ 
+ 
+ 
+LOGIKA XOR ⊕
+Salah satu dari pernyataan harus benar, tapi tidak boleh keduanya benar.
+ 
+Contoh
+Untuk memenangkan hadiah, Anda harus memilih hadiah A 
+ hadiah B, 
+tetapi tidak keduanya.
+atau
+ 
+Misalkan putri memilih hadiah A dan Hadiah B, apakah dia memenangkan hadiah?
+Jawaban
+Tidak, karena harus pilih salah satu aja.
+ 
+p
+q
+p⊕q
+True
+True
+False
+True
+False
+True
+False
+True
+True
+False
+False
+False
+Penjelasan:
+
+=== PAGE 5 ===
+•
+ akan 
+ jika 
+ dari p atau q bernilai 
+. Jika 
+ atau 
+, hasilnya 
+.
+p⊕q
+True
+salah satu
+True
+keduanya True
+keduanya False
+False
+ 
+NEGASI ( ¬ )
+Negasi membuat suatu pernyataan yang tadinya benar menjadi salah, dan sebaliknya 
+yang tadinya bernilai salah menjadi benar.
+ 
+Contoh
+•
+ "Hari ini cuacanya cerah."
+Pernyataan:
+◦
+ "Hari ini cuacanya tidak cerah."
+Negasi:
+•
+ "Dia suka makan buah."
+Pernyataan:
+◦
+ "Dia tidak suka makan buah."
+Negasi:
+•
+ "Semua siswa lulus ujian."
+Pernyataan:
+◦
+ "Tidak semua siswa lulus ujian."
+Negasi:
+•
+ "Kucing itu sedang tidur."
+Pernyataan:
+◦
+ "Kucing itu tidak sedang tidur."
+Negasi:
+ 
+JIKA MAKA (Pernyataan Kondisional/Implikasi)
+pernyataan kondisional merupakan sebuah syarat. Ingat ya syarat. Kalo hal A terjadi, 
+maka hal B akan terjadi.
+ 
+Contoh
+Jika hujan, maka jalanan basah
+hujan bisa kita nyatakan sebagai P. Jalanan basah kita nyatakan sebagai Q.
+Jika P → Q
+ 
+1. Jika hari ini hujan, maka yang terjadi?
+Jawaban
+Jalanan Basah. Karena kalo P terjadi maka Q wajib kudu mesti terjadi.
+2. Misalkan jalanan basah, apakah penyebabnya hujan?
+Jawaban
+belum tentu. Bisa aja ada faktor-faktor lain. Misalnya aja ada orang yang nyiram 
+jalanan atau ada mobil pemadam kebakaran nyemprotin air. Jadi syaratnya cuma 
+berlaku satu arah. Jika P → Q. Gak bisa tuh jika Q → P.
+3. Misalkan jalanan basah, tapi gak hujan. apakah pernyataanya jadi bernilai salah?
+Jawaban
+Pernyataannya tetap benar ya. Walaupun jalanan basah tapi gak hujan, 
+pernyataan tetep bener. Kenapa? karena syarat ini fokusnya di P (Hujan). Pokoknya 
+kalo hujan ya jalanan harus basah. udah cuma gitu syaratnya.
+
+=== PAGE 6 ===
+4. Misalkan terjadi hujan, tapi ternyata jalanannya gak basah. Apakah pernyataanya 
+jadi bernilai salah?
+Jawaban
+Jelas pernyataanya jadi bernilai salah. Ini tuh kaya ibarat sebuah janji, harus 
+ditepati. Janjinya bilang kalo hujan, jalanan basah. Ehh tapi ternyata pas hujan, 
+jalanan malah gak basah. Berarti dia bisa dibilang bohong/melanggar janji dong.
+ 
+Tabel kebenaran
+p
+q
+p→q
+True
+True
+True
+True
+False
+False
+False
+True
+True
+False
+False
+True
+Penjelasan:
+•
+ hanya akan 
+ jika  adalah 
+ dan  adalah 
+. Dalam semua situasi 
+lainnya, hasilnya adalah 
+.
+p→q
+False
+p
+True
+q
+False
+True
+ 
+JIKA DAN HANYA JIKA  (Biimplikasi/ Biconditional) ⟺
+Pernyataan akan bernilai benar, jika keduanya salah atau keduanya benar.
+ 
+Contoh
+Putra akan lulus ujian 
+ putra belajar dengan baik.
+jika dan hanya jika
+ 
+Dari kalimat di atas, kondisi untuk lulus ujian hanya terpenuhi jika putra belajar dengan 
+baik, dan jika putra belajar dengan baik, putra juga akan lulus ujian. Lalu, jika putra 
+tidak belajar dengan baik maka otomatis putra tidak akan lulus ujian.
+ 
+Jadi pernyataan hanya akan bernilai benar pada 2 kondisi
+1. Putra belajar dengan baik maka putra lulus ujian
+2. Putra tidak belajar dengan baik maka putra tidak lulus ujian
+ 
+Pernyataan yang bernilai salah
+1. putra belajar dengan baik, tapi tidak lulus ujian
+2. putra tidak belajar dengan baik, tapi lulus ujian
+ 
+Tabel kebenaran
+
+=== PAGE 7 ===
+p
+q
+p↔q
+True
+True
+True
+True
+False
+False
+False
+True
+False
+False
+False
+True
+Penjelasan:
+•
+ hanya akan 
+ jika kedua pernyataan memiliki nilai yang sama (baik 
+keduanya True atau keduanya False). Jika satu True dan yang lainnya False, hasilnya 
+adalah 
+.
+p↔q
+True
+False
+ 
+Tautologi dan Kontradiksi
+ 
+Tautologi : Pernyataan yang selalu benar
+Contoh : Saya akan pergi ke pesta atau saya tidak akan pergi ke pesta.
+ 
+Kontradiksi : Pernyataan yang selalu salah
+Saya sedang tidur dan saya tidak sedang tidur.
+ 
+Membuat tabel kebenaran untuk logika yang kompleks 
+(compound proposition)
+ 
+untuk ini langsung praktek ke contoh soal ya
+ 
+Soal 1
+Buatlah truth table/tabel kebenaran untuk ¬(p∧¬q)
+
+=== PAGE 8 ===
+Jawaban
+cara 1
+cara 2
+ 
+Soal 2
+Buatlah truth table/tabel kebenaran untuk (p∨¬q) → (p∧q)
+Jawaban
+ 
+Soal 3
+Buatlah truth table/tabel kebenaran untuk 
+“If p implies q and q implies r, then p implies r”
+“Jika p menyiratkan q dan q menyiratkan r, maka p menyiratkan r”
+ 
+
+=== PAGE 9 ===
+Jawaban
+[(p→q) ^ (q→r)] → (p → r )
+ 
+ 
+ 
+ 
+Ekuivalensi Logika (Hukum-hukum), membuktikan 
+pernyataan ini dan itu sama
+​
+Tutoring - Fauzan Aditya Harsya Argumentasi menentukan valid atau tidak valid 
+menggunakan hu…
+untuk bisa membuktikan atau mengubah sebuah pernyataan ke bentuk lain, kita harus 
+paham terlebih dahulu sifat-sifat  dasar ini
+ 
+ 
+ 
+Cara make sifat-sifat atau hukum di atas gimana? langsung praktekin ke soal aja ya
+Soal 1
+Buktikan bahwa ¬ ( p → q ) dan p ∧ ¬ q ekuivalen secara logika.
+Jawaban
+
+=== PAGE 10 ===
+​
+Tutoring - Fauzan Aditya Harsya Soal 1
+ 
+Soal 2
+Buktikan bahwa ¬( p ∨ ( ¬ p ∧ q ) ) dan ¬ p ∧ ¬ q ekuivalen secara logis dengan 
+mengembangkan serangkaian ekuivalensi logis.
+Jawaban
+​
+Tutoring - Fauzan Aditya Harsya Soal 2
+ 
+Soal 3 (Hard)
+Buktikan bahwa ¬ ( p ∨ q ) ∨ (¬p ∧ q) ≡ ¬p
+Jawaban
+​
+Tutoring - Fauzan Aditya Harsya Soal 3 Hard
+ 
+Aturan Inferensi / Rules of Inference
+Sama seperti ekuivalensi logika/ logical equivalence, ada beberapa sifat atau hukum-
+hukum yang wajib kita pahami 
+ 
+
+=== PAGE 11 ===
+Cara make hukum-hukum di atas gimana? langsung praktekin ke soal aja ya
+ 
+Soal 1
+Nyatakan aturan inferensi mana yang digunakan dalam argumen:
+Jika hari ini hujan, maka kita tidak akan mengadakan pesta barbekyu hari ini. Jika kita 
+tidak mengadakan pesta barbekyu hari ini, maka kita akan mengadakan pesta 
+barbekyu besok. Oleh karena itu, jika hari ini hujan, maka kita akan mengadakan pesta 
+barbekyu besok.
+Jawaban
+ 
+Soal 2
+Buktikan bahwa premis "Cuaca tidak cerah sore ini dan lebih dingin dari kemarin," "Kita 
+akan berenang hanya jika cuaca cerah," "Jika kita tidak berenang, maka kita akan naik 
+kano," dan "Jika kita naik kano, maka kita akan sampai rumah saat matahari terbenam" 
+mengarah pada kesimpulan "Kita akan sampai rumah saat matahari terbenam."
+Notes: Kano = kayak = perahu
+
+=== PAGE 12 ===
+Jawaban
+ 
+Soal 3
+Buktikan bahwa premis "Jika Anda mengirimi saya pesan email, maka saya akan 
+menyelesaikan coding," "Jika Anda tidak mengirimi saya pesan email, maka saya akan 
+tidur lebih awal," dan "Jika saya tidur lebih awal, maka saya akan bangun dengan 
+perasaan segar" mengarah pada kesimpulan "Jika saya tidak menyelesaikan coding, 
+maka saya akan bangun dengan perasaan segar.”
+
+=== PAGE 13 ===
+Jawaban
+ 
+Soal 4
+Gunakan resolusi untuk menunjukkan bahwa hipotesis "Jasmine sedang bermain ski 
+atau tidak turun salju" dan "Sedang turun salju atau Bart sedang bermain hoki" 
+menyiratkan bahwa "Jasmine sedang bermain ski atau Bart sedang bermain hoki.”
+Jawaban
+ 
+Boolean
+Boolean ini sama aja kaya logika di atas. Sama persis. Yang ngebedain adalah
+1. True  = 1
+2. False = 0
+3. AND = dikali (x)
+
+=== PAGE 14 ===
+4. OR = ditambah (+)
+ 
+ 
+Langsung ke contoh soal aja yang ngebuktiin kalo ini tuh sama aja kaya logika 
+sebelumnya, bedanya sekarang pake 1 0 x + (pake angka)
+ 
+Jawaban
+ 
+Sum of product Expansion
+ini sebenernya sama persis sih kaya truth table. Langsung ke contoh soal aja ya buat 
+ngebuktiin kalo ini sama persis kaya truth table. 
+ 
+Soal 1
+Ekspansi Jumlah Produk / Bentuk Normal Disjungtif
+
+=== PAGE 15 ===
+Temukan ekspresi Boolean yang mewakili fungsi F(x, y, z) dan G(x, y, z), yang diberikan 
+dalam Tabel di bawah ini
+Jawaban
+ 
+ 
+Soal 2
+Ekspansi Jumlah Produk / Bentuk Normal Disjungtif
+Temukan perluasan jumlah produk (sum-of-product) untuk fungsi 
+Jawaban
+ 
+Gerbang Logika
+Ada 3 tipe untuk gerbang logika, yaitu Inverter (sama kaya negasi), OR, AND
+gambarnya kaya gini
+ 
+Gimana cara ngebuatnya? langsung ke contoh soal aja supaya paham
+ 
+Soal 1
+
+=== PAGE 16 ===
+Buatlah gerbang logika untuk 
+Jawaban
+ 
+Soal 2
+Buatlah gerbang logika untuk
+Jawaban
+ 
+Soal 3
+Tentukan output dari setiap sirkuit ini
+Jawaban
+ 
+Karnaugh Map (K-Map) 2,3,4 Variabel
+Ini soal kemungkinan untuk keluarnya besar banget. Jadi wajib banget paham ngerjain 
+2,3,4 variabel. Ada banyak variasi soal, pastiin semua variasinya bisa
+ 
+Prinsip dasarnya
+1. semua area harus tercover. 
+
+=== PAGE 17 ===
+2. Cover area seluas mungkin. 
+3. Luas area yang dicover harus dalam bentuk 2^n
+4. area yang sudah tercover, boleh dipake lagi buat mengcover blok lain
+5. Hafalin polanya untuk setiap variabel
+ 
+ 
+Gimana cara ngerjainnya? langsung ke contoh soal aja ya, karena ini harus banyak 
+latihan dan variasi soalnya banyak (ada yg rumit juga)
+ 
+2 Variabel
+Perhatikan gimana setiap area itu bisa ngecancel/ngehilangin satu sama lain
+ 
+ 
+Soal 2
+Carilah minimal sum-of-product dari setiap complete sum-of-product ekspresi boolean 
+di bawah ini
+
+=== PAGE 18 ===
+Jawaban
+(a) Periksa kotak-kotak yang sesuai dengan xy dan xy' seperti pada Gambar 15-
+17(a). Perhatikan bahwa E₁ terdiri dari satu implikan prima, dua kotak yang 
+berdekatan yang ditunjuk oleh loop pada Gambar 15-17(a). Pasangan kotak yang 
+berdekatan ini merepresentasikan variabel x, jadi x adalah (satu-satunya) implikan 
+prima dari E₁. Akibatnya, E₁ = x adalah minimumnya
+jumlah.
+ 
+(b) Periksa kotak-kotak yang bersesuaian dengan xy, x'y, dan x'y' seperti pada 
+Gambar 15-17(b). Perhatikan bahwa E2 berisi dua pasang kotak yang berdekatan 
+(ditandai dengan dua loop) yang mencakup semua kotak E2. Pasangan vertikal 
+mewakili y dan pasangan horizontal mewakili x'; maka y dan x' adalah implikan 
+prima dari E2. Jadi E2 = x' + y adalah jumlah minimumnya.
+ 
+(c) Periksa kotak-kotak yang sesuai dengan xy dan x'y' seperti pada Gambar 15-
+17(c). Perhatikan bahwa E3 terdiri dari dua kotak terpisah yang mewakili xy dan 
+x'y'; maka xy dan x'y' adalah implikan prima dari E3 dan E3 = xy + x'y' adalah 
+jumlah minimalnya.
+ 
+ 
+ 
+3 Variabel
+untuk 3 variabel, bayangin ini kaya kertas yang bisa dilipet secara horizontal 
+(kesamping)
+Perhatikan gimana setiap area itu bisa ngecancel/ngehilangin satu sama lain. 
+Misal di gambar a, y’ ngehilangin y. z’ ngehilangin z. sisanya cuma x doang. Makanya di 
+gambarnya tertulis x shaded.
+
+=== PAGE 19 ===
+ 
+Soal 1
+Tentukan hasil (fundamental product) P dari daerah arsiran yang dipresentasikan 
+dengan persegi panjang pada karnaught maps di bawah ini
+Jawaban
+ 
+Soal 2
+Carilah minimal sum-of-product dari setiap complete sum-of-product ekspresi boolean 
+di bawah ini
+
+=== PAGE 20 ===
+Jawaban
+(a) Periksa kotak-kotak yang sesuai dengan empat penjumlahan seperti pada 
+Gambar 15-20(a). Amati bahwa E₁ memiliki tiga implikan prima (persegi panjang 
+dasar maksimal), yang dilingkari; yaitu xy, yz', dan x'y'z. Ketiganya diperlukan 
+untuk mencakup E₁; maka penjumlahan minimal untuk E₁ adalah
+E₁ = xy + yz' + x'y'z
+ 
+(b) Periksa kotak-kotak yang sesuai dengan lima penjumlahan seperti pada 
+Gambar 15-20(b). Perhatikan bahwa E2 memiliki dua implikan prima, yang 
+dilingkari. Satu adalah dua kotak yang berdekatan yang mewakili xy, dan yang 
+lainnya adalah kotak dua-kali-dua (yang mencakup tepi yang diidentifikasi) yang 
+mewakili z. Keduanya diperlukan untuk mencakup E2, jadi jumlah minimum untuk 
+E2 adalah
+E2 = xy + z
+ 
+(c) Periksa kotak yang sesuai dengan lima penjumlahan seperti pada Gambar 15-
+20(c). Seperti yang ditunjukkan oleh loop, E3 memiliki empat implikan prima, xy, 
+yz', x'z', dan x'y'. Namun, hanya satu dari dua yang putus-putus, yaitu, salah satu 
+dari yz' atau x'z', yang diperlukan dalam penutup minimal E3. Jadi, E3 memiliki dua 
+penjumlahan minimal:
+E3 = xy + y'z' + x'y' = xy + x'z' + x'y'
+ 
+Soal 3
+Carilah minimal sum-of-product dari setiap complete sum-of-product ekspresi boolean 
+di bawah ini
+Jawaban
+ 
+Soal 4
+
+=== PAGE 21 ===
+Carilah minimal sum-of-product dari setiap complete sum-of-product ekspresi boolean 
+di bawah ini
+Jawaban
+ 
+4 Variabel
+ 
+Beda halnya dengan 3 variabel yang cuma bisa dilipat ke samping, 4 variabel itu bisa 
+dilipat ke samping dan ke atas. Visualisasinya kaya gini
+ 
+Soal 1
+Tentukan hasil (fundamental product) P dari daerah arsiran yang dipresentasikan 
+dengan persegi panjang pada karnaught maps di bawah ini
+
+=== PAGE 22 ===
+Jawaban
+ 
+Soal 2
+Gunakan Karnaugh Map untuk menemukan minimal sum-of-product dari ekspresi 
+boolean di bawah ini. Setelah menemukan sum-of-productnya, buatlah gambar 
+gerbang logikanya
+Jawaban
+ 
+ 
+Soal 3
+Tentukan hasil (fundamental product) P dari daerah arsiran yang dipresentasikan 
+dengan persegi panjang pada karnaugh maps di bawah ini
+
+=== PAGE 23 ===
+Jawaban
+ 
+Soal 4
+Misalkan E adalah ekspresi Boolean yang diberikan dalam pemetaan Karnaugh pada 
+Gambar 15-33.
+(a) Tulis E dalam bentuk jumlah produk lengkapnya (sum-of-product). (b) Temukan 
+bentuk minimal untuk E. (minimal form)
+Jawaban
+ 
+Soal 5
+Perhatikan ekspresi Boolean E₁ dan E2 dalam variabel x, y, z, t yang diberikan oleh 
+pemetaan Karnaugh pada Gambar 15-34. Carilah jumlah minimum (minimal-sum) 
+untuk (a) E₁; (b) E2.
+
+=== PAGE 24 ===
+Jawaban
+(a) Hanya y' yang muncul di semua delapan kotak persegi panjang dasar maksimal 
+dua-kali-empat, dan pasangan kotak berdekatan yang ditunjuk mewakili xzt'. 
+Karena kedua persegi panjang diperlukan untuk penutup minimal,
+ 
+(b) Keempat kotak sudut membentuk persegi panjang dasar maksimal dua-kali-
+dua yang mewakili yt, karena hanya y dan t yang muncul di keempat kotak. 
+Persegi panjang dasar maksimal empat-kali-satu mewakili x'y', dan dua kotak yang 
+berdekatan mewakili y'zt'. Karena ketiga persegi panjang diperlukan untuk 
+penutup minimal,
+ 
+Soal 6
+Perhatikan ekspresi Boolean E₁ dan E2 dalam variabel x, y, z, t yang diberikan oleh 
+pemetaan Karnaugh pada Gambar 15-35. Carilah jumlah minimum (minimal-sum) 
+untuk (a) E1; (b) E2.
+Jawaban
+(a) Ada lima implikan prima, yang ditunjuk oleh empat loop dan lingkaran putus-
+putus. Akan tetapi, lingkaran putus-putus tidak diperlukan untuk menutupi semua 
+kotak, sedangkan empat loop diperlukan. Jadi, keempat loop memberikan jumlah 
+minimum untuk E₁; yaitu,
+ 
+ 
+(b) Ada lima implikan prima, yang ditunjuk oleh lima loop yang dua di antaranya 
+putus-putus. Hanya satu dari dua loop putus-putus yang diperlukan untuk 
+menutupi kuadrat x'y'z't'. Jadi ada dua jumlah minimal untuk E₂ sebagai berikut:
+ 
+
+=== PAGE 25 ===
+Soal 7
+Gunakan karnaught map untuk mencari minimal sum
+
+=== PAGE 26 ===
+Jawaban
+
+=== PAGE 27 ===
+Sesi 3 : Quantifier (1)
+Outline
+1. Predicates & Propotional Function✅
+2. Universal Quantifier ✅
+3. Existential Quantifier ✅
+4. Quantifier With Restricted Domain ✅
+5. Logical Equivalence involving Quantifier
+6. Negating Single Quantifier ✅
+7. Single Quantifier (Soal-soal) ⭐ ✅
+8. Double Quantifier (Nested Quantifier) (Soal-soal) ⭐  ✅
+9. Negating Double Quantifier 
+⭐ : Keluar di UTS Tahun lalu. UPDATE : ADA DI UTS TAHUN INI (Menurut Kisi-
+kisi)
+Introduction
+Kenapa mesti ada Quantifier kaya “semua”, “ada” ??
+Jawaban
+karena dari sesi 1 & 2 kemarin yang kita belajar logika dasar kaya DAN ATAU
+JIKA-MAKA dan sebagainya itu ga cukup untuk
+merumuskan/menggambarkan semua pernyataan di dunia nyata. ga
+kebayang? oke langsung lanjut ke contoh
+Contohnya:
+P1 : “Ada raja yang tamak”
+P2 : “Semua yang tamak akan mati”
+Sesi 3 : Quantifier (1)
+1
+
+=== PAGE 28 ===
+notes: tamak = serakah = rakus
+Kesimpulannya apa?
+a. Ada raja yang akan mati
+b. semua raja akan mati?
+Bisa pake logika yang kemaren gk ya? yg DAN ATAU Jika-maka?
+Jawaban
+Gak bisa. Ini harus pake Kuantor Semua dan Ada yang akan kita pelajarin
+hari ini.
+Jawaban yang tepat itu A. ada raja yang akan mati
+Source : Zenius
+Sesi 3 : Quantifier (1)
+2
+
+=== PAGE 29 ===
+Sesi 3 : Quantifier (1)
+3
+
+=== PAGE 30 ===
+1 Contoh lagi deh
+Premis : “Hanya orang kaya yang beli rumah”
+Kesimpulannya apa?
+a. Semua orang kaya beli rumah
+b. semua yang beli rumah orang kaya
+Jawaban
+Sesi 3 : Quantifier (1)
+4
+
+=== PAGE 31 ===
+Predicates/ Predikat & Propotional
+Function
+Misalkan ada pernyataan kaya gini
+x > 3
+x itu subjeknya. > 3 itu predikatnya
+jadi predikat itu semacam sifat yang berkaitan sama subjeknya (di contoh ini si
+X)
+Kita bisa menyatakan statement x > 3 menggunakan P (x), yang mana P(x) itu
+menyatakan predikat “lebih dari 3”. Ini disebut propotional Function
+Supaya lebih paham, langsung lanjut ke contoh
+Contoh 1
+Misalkan P(x) menyatakan pernyataan “x > 3.” Apa nilai kebenaran dari P(4)
+dan P(2)?
+Jawaban
+Kita memperoleh pernyataan P(4) dengan menetapkan x = 4 pada
+pernyataan "x > 3." Oleh karena itu, P(4), yang merupakan pernyataan "4 >
+3," adalah benar. Namun, P(2), yang merupakan pernyataan "2 > 3," adalah
+salah.
+Contoh 2
+Misalkan A(x) menyatakan pernyataan "Komputer x sedang diserang oleh
+penyusup." Misalkan dari komputer-komputer di kampus, hanya CS2 dan
+MATH1 yang sedang diserang oleh penyusup. Apa nilai kebenaran dari A(CS1),
+A(CS2), dan A(MATH1)?
+Jawaban
+Sesi 3 : Quantifier (1)
+5
+
+=== PAGE 32 ===
+Kita memperoleh pernyataan A(CS1) dengan menetapkan x = CS1 dalam
+pernyataan "Komputer x sedang diserang oleh penyusup." Karena CS1 tidak
+ada dalam daftar komputer yang sedang diserang, kita simpulkan bahwa
+A(CS1) salah. Demikian pula, karena CS2 dan MATH1 ada dalam daftar
+komputer yang sedang diserang, kita tahu bahwa A(CS2) dan A(MATH1)
+benar.
+Nah, selain 1 variabel. Predikat juga bisa menampung lebih dari 1 variabel.
+Langsung ke contohnya
+Contoh 3
+Misalkan Q(x, y) menyatakan pernyataan “x = y + 3.” Apa nilai kebenaran dari
+proposisi Q(1, 2) dan Q(3, 0)?
+Jawaban
+Untuk memperoleh Q(1, 2), tetapkan x = 1 dan y = 2 dalam pernyataan Q(x,
+y). Oleh karena itu, Q(1, 2) adalah pernyataan "1 = 2 + 3," yang salah.
+Pernyataan Q(3,0) adalah proposisi "3 = 0 +3," yang benar.
+Universal Quantifier / Semua ∀ →
+Berkaitan dengan DAN
+Domain
+Sebelum masuk ke universal quantifier. Kalian harus tau dulu beberapa simbol
+Domain yang sering dipake
+1. R → Real number / Bilangan riil = { - ∞ sampai + ∞}
+Sesi 3 : Quantifier (1)
+6
+
+=== PAGE 33 ===
+2. Z → Bilangan bulat = { …., -2, -1, 0, 1, 2, …}
+3. N → Natural = { 1, 2, 3, ….}
+4. W → Semua bilangan natural, tapi juga menyertakan 0, domainnya dimulai
+dari 0 = {0, 1, 2, …}
+Definisi
+Kuantor Universal dari P(x) adalah pernyataan bahwa 
+💡 P(x) benar untuk semua nilai x dalam domain.
+Artinya, P(x) selalu bernilai benar untuk setiap x yang kita masukkan dari
+domain yang telah ditentukan.
+Notasi ∀x P(x) menunjukkan kuantifikasi universal dari P(x). Di sini, ∀ disebut
+sebagai kuantifier universal. Notasi ini dibaca sebagai "untuk semua x, P(x)"
+atau "untuk setiap x, P(x)."
+Jika ada elemen di domain di mana P(x) bernilai salah, elemen tersebut disebut
+sebagai contoh pengecualian (counterexample) untuk pernyataan ∀x P(x).
+Statement
+Kapan benar?
+Kapan salah?
+∀xP(x)
+P(x) benar untuk setiap nilai x
+Setidaknya ada 1 nilai (x) yang
+Sesi 3 : Quantifier (1)
+7
+
+=== PAGE 34 ===
+yang kita masukkan
+membuat P(x) salah
+∃xP(x)
+Setidaknya ada 1 nilai (x) yang
+membuat P(x) benar
+P(x) salah untuk setiap nilai x
+yang kita masukkan
+Mungkin defisininya terlalu ribet, langsung ke contoh soal aja supaya paham
+Contoh soal
+Contoh 1
+Misalkan P(x) adalah pernyataan “x + 1 > x.” Apa nilai kebenaran dari
+kuantifikasi ∀xP(x), yang domainnya terdiri dari semua bilangan riil?
+Jawaban
+Apa Karena P(x) benar untuk semua bilangan real x, maka kuantifikasinya
+∀xP(x)
+adalah benar.
+Catatan: Secara umum, kita mengasumsikan bahwa domain untuk
+kuantifier tidak kosong. Jika domain kosong, ∀xP(x) selalu bernilai benar,
+karena tidak ada elemen x dalam domain yang dapat membuat P(x) bernilai
+salah
+Contoh 2
+Misalkan Q(x) adalah pernyataan "x < 2". Apa nilai kebenaran dari kuantifikasi
+∀xQ(x), yang domainnya terdiri dari semua bilangan riil?
+Jawaban
+Q(x) tidak berlaku untuk setiap bilangan riil x, karena, misalnya, Q(3) salah.
+Artinya, x = 3 adalah contoh yang berlawanan dengan pernyataan ∀xQ(x).
+Jadi,
+∀xQ(x)
+Sesi 3 : Quantifier (1)
+8
+
+=== PAGE 35 ===
+adalah salah.
+Contoh 3
+Apa arti pernyataan ∀xN(x) jika N(x) adalah "Komputer x terhubung ke
+jaringan" dan domainnya terdiri dari semua komputer di kampus?
+Jawaban
+Pernyataan ∀xN(x) berarti bahwa untuk setiap komputer x di kampus,
+komputer x tersebut terhubung ke jaringan. Pernyataan ini dapat dinyatakan
+dalam bahasa Indonesia sebagai “Setiap komputer di kampus terhubung ke
+jaringan.”
+Contoh 4
+Apa nilai kebenaran dari ∀x(x² ≥ x) jika domainnya terdiri dari semua bilangan
+riil? Apa nilai kebenaran dari pernyataan ini jika domainnya terdiri dari semua
+bilangan bulat?
+Jawaban
+Kuantifikasi universal ∀x(x² ≥ x), yang domainnya terdiri dari semua
+bilangan riil, adalah salah. Misalnya, 
+.Perhatikan bahwa x² > x jika dan hanya jika 
+. Akibatnya, x² ≥ x jika dan hanya jika x < 0 atau x > 1. Oleh karena itu,
+∀x(x² ≥ x) adalah salah jika domainnya terdiri dari semua bilangan riil
+(karena ketidaksetaraan itu salah untuk semua bilangan riil x dengan 0 < x <
+1). Namun, jika domainnya terdiri dari bilangan bulat, ∀x(x² ≥ x) adalah
+benar, karena tidak ada bilangan bulat x pada 0 < x < 1.
+Sesi 3 : Quantifier (1)
+9
+
+=== PAGE 36 ===
+Existential Quantifier / Ada ∃ → Berkaitan
+dengan ATAU
+Kuantor Eksistensial dari P(x) adalah pernyataan bahwa 
+💡 P(x) benar jika ada setidaknya satu nilai x di dalam domain yang
+memenuhi P(x).
+Kuantor eksistensial dari P(x) adalah proposisi yang menyatakan:
+"Ada elemen x dalam domain sehingga P(x) benar."
+Notasi yang digunakan adalah ∃x P(x), di mana ∃ disebut sebagai kuantifier
+eksistensial. Notasi ini dibaca sebagai:
+"Ada x sedemikian rupa sehingga P(x)," atau
+"Setidaknya ada satu x sehingga P(x)."
+Catatan penting:
+Domain harus selalu ditentukan saat menggunakan pernyataan ∃x P(x).
+Tanpa domain yang jelas, pernyataan ini tidak bermakna karena makna ∃x
+P(x) bisa berubah tergantung pada domainnya.
+Selain kata "ada," kuantifikasi eksistensial juga bisa diekspresikan dengan
+frasa lain seperti "untuk beberapa," "setidaknya satu," atau "terdapat."
+Statement
+Kapan benar?
+Kapan salah?
+∀xP(x)
+P(x) benar untuk setiap nilai x
+yang kita masukkan
+Setidaknya ada 1 nilai (x) yang
+membuat P(x) salah
+∃xP(x)
+Setidaknya ada 1 nilai (x) yang
+membuat P(x) benar
+P(x) salah untuk setiap nilai x
+yang kita masukkan
+Sesi 3 : Quantifier (1)
+10
+
+=== PAGE 37 ===
+Contoh soal
+Soal 1
+Misalkan P(x) menyatakan pernyataan "x > 3". Apa nilai kebenaran dari
+kuantifikasi ∃xP(x), yang domainnya terdiri dari semua bilangan riil?
+Jawaban
+Karena “x > 3” terkadang benar misalnya, ketika x = 4 kuantifikasi
+eksistensial P(x), yaitu ∃xP(x), adalah benar.
+Perhatikan bahwa pernyataan ∃xP(x) salah jika dan hanya jika tidak ada
+elemen x dalam domain yang P(x)-nya benar. Artinya, ∃xP(x) salah jika dan
+hanya jika P(x) salah untuk setiap elemen domain. Saya mengilustrasikan ini
+dalam Contoh Soal 2.
+Soal 2
+Misalkan Q(x) menyatakan pernyataan "x = x + 1". Apa nilai kebenaran dari
+kuantifikasi ∃xQ(x), yang domainnya terdiri dari semua bilangan riil?
+Jawaban
+Karena Q(x) salah untuk semua bilangan riil (tidak ada bilangan yang sama
+dengan dirinya ditambah 1), maka kuantifikasi eksistensial ∃x Q(x) juga
+bernilai salah.
+Catatan: Secara umum, kita mengasumsikan bahwa domain untuk
+kuantifier tidak kosong. Jika domain kosong, ∃x Q(x) selalu bernilai salah,
+karena tidak ada elemen dalam domain yang dapat membuat Q(x) bernilai
+benar.
+Quantifier with Restricted Domain /
+Kuantifier dengan domain yang dibatasi
+Sesi 3 : Quantifier (1)
+11
+
+=== PAGE 38 ===
+Kalo pada subtopik sebelumnya (Semua, Ada) itu domainnya tak terhingga /
+tidak dibatasin. Pada Quantifier with restricted domain ini tuh domainnya
+dibatasin. Biar kebayang bedanya di mana, langsung ke contoh soalnya
+Soal 1
+Apa arti pernyataan ∀x < 0 (x² > 0), ∀y ≠ 0 (y³ ≠ 0), dan ∃z > 0 (z² = 2), yang
+domain dalam setiap kasus terdiri dari bilangan real?
+Jawaban
+Negating Quantifier
+Sesi 3 : Quantifier (1)
+12
+
+=== PAGE 39 ===
+Menegasikan Kuantifier tuh mudahnya kaya mengubah sebuah Pernyataan P(x)
+yang tadinya benar jadi salah. Dan sebaliknya, yang tadinya salah jadi benar.
+Menegasikan SEMUA
+Contoh:
+Pernyataan : 
+Semua cowok itu setia.
+kalo dirumusin dalam bentuk matematikanya 
+∀xP(x). 
+Di mana:
+∀x berarti "untuk semua cowok."
+P(x) berarti "x setia."
+Nah negasinya kaya gimana? berarti kita harus ngebuat pernyataan itu jadi
+salah/ tidak benar
+Jawaban
+Pernyataannya kan : Semua cowok itu setia.
+Nah itu ibaratkan sebuah janji. Semua cowok itu setia. Kalo dia cowok maka
+dia setia.
+Kira-kira apa yang ngebuat pernyataan itu jadi salah/tidak benar?
+Ada cowok yang tidak setia
+iya dong, itu ngebuat pernyataanya jadi salah (jadi negasi). Kan dia awalnya
+bilang “Semua cowok itu setia.” Nah ternyata ada cowok yang tidak setia.
+Ada di sini maksudnya setidaknya ada 1 ya. Berarti setidaknya ada 1 cowok
+yang tidak setia. 
+Sesi 3 : Quantifier (1)
+13
+
+=== PAGE 40 ===
+Pernyataan “Ada cowok yang tidak setia” kalo diubah ke dalam bentuk
+matematika 
+∃x ¬P(x)
+Artinya:
+∃x berarti "ada setidaknya satu cowok."
+¬P(x) berarti "x tidak setia."
+Jadi, negasi dari "Semua cowok itu setia" adalah: "Ada setidaknya satu
+cowok yang tidak setia." / “Ada cowok yang tidak setia”
+Kesimpulan:
+Pernyataan awal: ∀x P(x) (Semua cowok itu setia).
+Negasi: ∃x ¬P(x) (Ada cowok yang tidak setia).
+Menegasikan ADA
+Kalo tadi di atas kita udah berhasil menegasikan SEMUA. Sekarang kita akan
+coba menegasikan ADA
+Langsung pake contoh aja biar gampang paham
+Contoh
+Pernyataan : 
+Ada orang yang suka nonton drama korea
+Dalam bentuk logika matematika 
+∃xP(x)
+Di mana:
+∃x berarti "Ada setidaknya satu orang."
+Sesi 3 : Quantifier (1)
+14
+
+=== PAGE 41 ===
+P(x) berarti "x suka nonton drama Korea."
+Pernyataan apa yang ngebuat pernyataan “Ada orang yang suka nonton
+drama korea” jadi salah (jadi ternegasikan) ?
+Jawaban
+Semua orang tidak suka nonton drama korea
+Pernyataan di atas bisa diubah ke dalam logika matematika sebagai berikut
+∀x¬P(x).
+Artinya:
+∀x berarti "Untuk semua orang."
+¬P(x) berarti "x tidak suka nonton drama Korea."
+Kesimpulan:
+Pernyataan awal: "Ada orang yang suka drama Korea" → ∃x P(x).
+Negasinya: "Tidak ada orang yang suka drama Korea" → ∀x ¬P(x).
+Kesimpulan
+dari contoh-contoh di atas. Kesimpulannya dapat dirumuskan dalam tabel ini
+Negasi
+Statement yang
+equivalen
+Kapan negasinya
+benar?
+kapan negasinya salah?
+¬∃xP(x)
+∀x¬P(x)
+Semua nilai x membuat
+P(x) salah
+Ada setidaknya satu x
+yang membuat P(x)
+benar
+¬∀xP(x)
+∃x¬P(x)
+Ada setidaknya satu x
+yang membuat P(x)
+salah
+P(x) benar untuk semua
+nilai x
+Sesi 3 : Quantifier (1)
+15
+
+=== PAGE 42 ===
+tabel hukum de morgan untuk quantifier
+Contoh soal
+Single Quantifier (Soal-soal)
+Single Quantifier adalah kuantifier tunggal seperti yang udah kita pelajarin di
+atas. Contohnya 
+∀xP(x) dan ∃xP(x)
+∀ dan ∃ hanya ada 1 pada setiap pernyataan. Nanti setelah ini akan ada
+double quantifier. Contoh double quantifier itu  ∀x∃y,p(x,y). 
+Oke langsung ke soal-soal aja supaya makin jago dan siap buat ngerjain UTS
+nanti
+Soal 1
+Temukan himpunan kebenaran (Truth set) untuk setiap fungsi proposisional
+p(x) yang didefinisikan pada himpunan N bilangan bulat positif.
+a. Misalkan p(x) adalah “x +2 > 7.”
+Jawaban
+Himpunan kebenarannya adalah {6, 7, 8, . . .} yang terdiri dari semua
+bilangan bulat lebih besar dari 5.
+b. Misalkan p(x) adalah “x + 5 < 3.”
+Jawaban
+Himpunan kebenarannya adalah himpunan kosong Ø. Artinya, p(x) tidak
+berlaku untuk bilangan bulat apa pun di N.
+Sesi 3 : Quantifier (1)
+16
+
+=== PAGE 43 ===
+c. Misalkan p(x) adalah "x + 5 > 1.”
+Jawaban
+Himpunan kebenarannya adalah N. Artinya, p(x) benar untuk setiap
+elemen di N.
+Soal 2
+a. Tentukan nilai kebenaran dari Proposisi (∀n ∈ N)(n + 4 > 3) [nilainya benar
+atau salah?]
+Jawaban
+benar karena {n | n + 4 > 3} = {1, 2, 3, ...} = N.
+b. Tentukan nilai kebenaran dari Proposisi (∀n∈ N)(n + 2 > 8)
+Jawaban
+salah karena {n | n + 2 > 8} = {7, 8, ...} ≠ N.
+Soal 3
+a. Tentukan nilai kebenaran dari Proposisi  (∃n ∈ N)(n + 4 < 7)
+Jawaban
+benar karena {n | n + 4 < 7} = {1, 2} ≠ Ø.
+b. Tentukan nilai kebenaran dari Proposisi   (∃n ∈ N)(n + 6 < 4)
+Jawaban
+salah karena {n | n + 6 < 4} = Ø.
+- Soal tambahan - 
+Soal 4
+Misalkan A = {1, 2, 3, 4, 5}. Tentukan nilai kebenaran dari setiap pernyataan
+berikut:
+Sesi 3 : Quantifier (1)
+17
+
+=== PAGE 44 ===
+(a) (∃x ∈ A)(x +3 = 10) 
+(b) (∀x ∈ A)(x +3 < 10)
+(c) (∃x ∈ A)(x +3 < 5)
+(d) (∀x ∈ A)(x +3 ≤ 7)
+Jawaban
+(a) Salah. Karena tidak ada bilangan di A yang merupakan solusi untuk x + 3
+= 10.
+(b) Benar. Untuk setiap angka di A yang memenuhi x + 3 < 10.
+(c) Benar. Karena jika x0 = 1, maka xo + 3 < 5, artinya 1 adalah solusinya.
+(d) Salah. Karena jika x0 = 5, maka x0 + 3 tidak kurang dari atau sama
+dengan 7. Dengan kata lain, 5 bukanlah solusi untuk kondisi yang diberikan.
+……
+Soal 5
+Misalkan P(x) adalah pernyataan "x = x²". Jika domainnya terdiri dari bilangan
+bulat, apa nilai kebenarannya?
+a) P(0)
+b) P(1)
+c) P(2)
+d) P(−1)
+e) ∃xP(x)
+f) ∀xP(x)
+Jawaban
+a)T 
+b)T 
+c)F
+d)F 
+e)T 
+f)F
+Sesi 3 : Quantifier (1)
+18
+
+=== PAGE 45 ===
+Soal 6
+Sesi 3 : Quantifier (1)
+19
+
+=== PAGE 46 ===
+Tentukan nilai kebenaran dari setiap pernyataan berikut jika domainnya terdiri
+dari semua bilangan bulat.
+a) ∀n(n +1 > n)
+b) ∃n(2n = 3n)
+c) ∃n(n =−n)
+d) ∀n(3n ≤ 4n)
+Jawaban
+a)T 
+b)T 
+c)T
+d) F
+Sesi 3 : Quantifier (1)
+20
+
+=== PAGE 47 ===
+Sesi 3 : Quantifier (1)
+21
+
+=== PAGE 48 ===
+Soal 7
+Tentukan nilai kebenaran dari setiap pernyataan berikut jika domain untuk
+semua variabel terdiri dari semua bilangan bulat.
+Jawaban
+a)T 
+b)F
+c)T 
+d)F
+Double Quantifier (Nested Quantifier)
+Ini secara garis besar sama aja kaya single quantifier yang ngebedain adalah di
+sini urutan sangat penting. Langsung ke contoh aja supaya paham
+Contoh soal 1
+Misalkan B = {1, 2, 3, . . ., 9} dan misalkan p(x, y) menyatakan “x + y = 10.”
+Maka p(x, y) 
+a. Tentukan nilai kebenaran untuk  ∀x∃y,p(x,y)
+Jawaban
+Maksud dari pernyataan di atas adalah
+“Untuk setiap x, ada y sehingga x + y = 10”
+Ini benar karena untuk setiap nilai x (misalnya, jika x = 1, kamu bisa
+memilih y = 9; jika x = 2, kamu bisa memilih y = 8, dan seterusnya). Jadi
+selalu ada nilai y yang bisa kamu pilih agar jumlah x + y = 10.
+Sesi 3 : Quantifier (1)
+22
+
+=== PAGE 49 ===
+b. Tentukan nilai kebenaran untuk  ∃y∀x,p(x,y)
+Jawaban
+maksud dari pernyataan di atas adalah
+“Ada y sehingga, untuk setiap x, kita memiliki x + y = 10”
+Ini salah, karena tidak ada satu pun nilai y yang bisa memenuhi
+persamaan x + y = 10 untuk semua nilai x secara bersamaan. Misalnya,
+jika kamu pilih y = 9, ini hanya benar untuk x = 1, tetapi tidak benar untuk
+nilai x yang lain.
+Kesimpulan contoh soal 1
+Perbedaan utama:
+Di pernyataan (a), untuk setiap nilai x, kamu bebas memilih y yang
+berbeda untuk memenuhi persamaan.
+Di pernyataan (b), kamu harus menemukan satu y yang sama untuk
+semua x, yang tidak mungkin karena persamaan tidak bisa terpenuhi
+untuk semua nilai x dengan satu y.
+Jadi, intinya adalah urutan kuantifier sangat penting dan dapat mengubah
+makna dan kebenaran suatu pernyataan.
+Soal 2
+Tentukan nilai kebenaran dari setiap pernyataan berikut di mana U = {1, 2, 3}
+adalah himpunan universal:
+Jawaban
+(a) Benar. ada x = 1, maka y yaitu 1,2, dan 3 adalah semua solusi dari 1 < y +
+1
+Sesi 3 : Quantifier (1)
+23
+
+=== PAGE 50 ===
+(b) Benar. Untuk setiap X, ada Y yaitu 1. Sehingga x^2 + 1 < 12
+(c) Salah. Untuk x = 2 dan y = 3, maka x^2 + y^2 < 12 itu bukan pernyataan
+yang benar
+Soal 3
+Misalkan A = {1, 2,..., 9, 10}. Perhatikan setiap kalimat berikut. Jika kalimat
+tersebut merupakan pernyataan, tentukan nilai kebenarannya. Jika kalimat
+tersebut merupakan fungsi proposisional, tentukan himpunan kebenarannya.
+(a) (∀x ∈ A)(∃y ∈ A)(x +y<14) 
+(b) (∀y ∈ A)(x +y<14)
+(c)(∀x ∈ A)(∀y ∈ A)(x +y<14)
+(d) (∃y ∈ A)(x +y<14)
+Jawaban
+(a) Kalimat terbuka dalam dua variabel didahului oleh
+dua kuantifier; maka itu adalah pernyataan. Selain itu,
+pernyataan itu benar.
+(b) Kalimat terbuka didahului oleh satu kuantifier; maka itu adalah fungsi
+proposisional dari variabel lain.
+Perhatikan bahwa untuk setiap y ∈ A, x0 + y<14 jika
+dan hanya jika x0 = 1,2, atau 3. Maka himpunan kebenarannya adalah
+{1, 2,3}.
+(c) Itu adalah pernyataan dan itu salah: jika x0 = 8 dan dy0 = 9, maka x0 +
+y0 < 14 tidak benar.
+(d) Itu adalah kalimat terbuka dalam x. Himpunan kebenarannya adalah A itu
+sendiri.
+……
+Soal 4
+Tentukan nilai kebenaran dari setiap pernyataan berikut jika domain untuk
+semua variabel terdiri dari semua bilangan bulat.
+Sesi 3 : Quantifier (1)
+24
+
+=== PAGE 51 ===
+Jawaban
+a) True 
+b) True
+c) True 
+d) True
+e) True 
+f) False 
+g) False 
+h) True 
+i) False
+Sesi 3 : Quantifier (1)
+25
+
+=== PAGE 52 ===
+Soal 5
+Carilah Counterexample (contoh yang membuat pernyataan salah), jika
+memungkinkan, untuk pernyataan-pernyataan yang dikuantifikasi secara
+universal ini, di mana domain untuk semua variabel terdiri dari semua bilangan
+bulat.
+Sesi 3 : Quantifier (1)
+26
+
+=== PAGE 53 ===
+Jawaban
+a) x = 2, y = −2 
+b)x = −4
+c) x = 17,y = −1
+Soal 6
+Tentukan nilai kebenaran dari pernyataan ∀x∃y(xy = 1)
+jika domain variabelnya terdiri dari
+a) bilangan riil bukan nol.
+b) bilangan bulat bukan nol.
+c) bilangan riil positif.
+Jawaban
+a)True 
+b)False 
+c)True
+Soal 7
+Misalkan P(m,n) adalah pernyataan “m bisa membagi habis n,” di mana domain
+untuk kedua variabel terdiri dari semua bilangan bulat positif. (Yang kami
+maksud dengan “m membagi n” adalah n = km untuk suatu bilangan bulat k.)
+Tentukan nilai kebenaran dari masing-masing pernyataan ini.
+a) P(4,5)
+b) P(2,4)
+c) ∀m∀nP(m,n)
+d) ∃m∀nP(m,n)
+e) ∃n∀mP(m,n)
+f) ∀nP(1,n)
+Jawaban
+a) F 
+Sesi 3 : Quantifier (1)
+27
+
+=== PAGE 54 ===
+b)T 
+c)F 
+d)T 
+e)F 
+f)T
+Soal Double Quantifier dari HIMTI RESPONSI tahun
+lalu
+Jawaban dan Pembahasan Soal
+https://youtu.be/NGs_X2MnYqo?si=SX0KrZQm468aQDVE&t=2279
+Sesi 3 : Quantifier (1)
+28
+
+=== PAGE 55 ===
+Sesi 4 : Method Of Proof (1)
+Outline
+1. Direct Proof 
+2. Indirect Proof
+a. proof by contraposition
+b. proof by contradiction 
+3. Counterexample 
+4. Mathematical Induction ⭐ 
+a. Membuktikan rumus penjumlahan 🚨
+b. membuktikan jumlah deret geometri 🚨
+c. membuktikan pertidaksamaan
+d. membuktikan habis membagi 🚨
+⭐:  keluar di UTS tahun lalu, UPDATE : ADA DI UTS TAHUN INI (Menurut kisi-kisi)
+🚨 : prioritas, karena ada di PPT Binusmaya + Ada di kisi-kisi UTS Tahun lalu
+Direct Proof
+Apa itu direct proof?
+Misal kita punya suatu pernyataan Jika P maka Q. Atau sering dirumuskan dalam 
+bentuk matematika P → Q. Nah, kita harus ngebuktiin P→Q itu benar/valid. Cara 
+ngebuktiinya
+1. Asumsiin dulu P benar.
+Sesi 4 : Method Of Proof (1)
+1
+
+=== PAGE 56 ===
+2. Pake definisi yang disediaiin di soal
+3. Kita tunjukin kalo Q itu juga benar.
+Kalo Q udah terbukti benar, yaudh kita berhasil ngebuktiin pernyataannya 
+(implikasi/janji) benar.
+Cara direct proof itu straight forward, cuma butuh pengetahuan dasar matematika 
+dan ketelitian. Direct proof juga cukup tricky.
+Biar paham langsung ke contoh soal.
+ 💡  Definisi 1.
+Bilangan bulat n disebut genap apabila ada bilangan bulat k sehingga n = 2k, dan 
+n disebut bilangan ganjil apabila ada bilangan bulat k sehingga n = 2k + 1. Perlu 
+diingat bahwa k disini boleh bilangan bulat ganjil maupun bilangan bulat genap 
+ya. 
+Soal 1.
+Berikan bukti langsung (direct proof) dari teorema "Jika n adalah bilangan bulat 
+ganjil, maka n² ganjil.”
+Jawaban
+Kalo diubah dalam bentuk matematika, teorema di atas jadi ∀nP((n) → Q(n)), di 
+mana P(n) adalah "n adalah bilangan bulat ganjil" dan Q(n) adalah "n² adalah 
+bilangan ganjil." Di sini, kita tidak secara eksplisit menyebutkan untuk semua n 
+(pake kuantor universal), jadi ∀ bisa dihilangkan.
+Langsung mulai ke pembuktian
+1. Asumsiin dulu hipotesis awal (P) itu benar. Jadi kita asumsiin “n adalah 
+bilangan bulat ganjil” adalah benar.
+Sesi 4 : Method Of Proof (1)
+2
+
+=== PAGE 57 ===
+2. Pake definisinya. Kalo genap, n = 2k. Kalo ganjil n = 2k + 1.
+3. Kita mau ngebuktiin Q juga benar. Berarti kita mau buktiin kalo n² adalah 
+bilangan bulat ganjil itu benar. 
+Berdasarkan definisi bilangan bulat ganjil, kita dapat menyimpulkan bahwa n² 
+adalah bilangan bulat ganjil. Akibatnya, kita telah membuktikan bahwa jika n 
+adalah bilangan bulat ganjil, maka n² adalah bilangan bulat ganjil.
+Soal 2. 
+Berikan bukti langsung bahwa jika m dan n keduanya merupakan bilangan kuadrat 
+sempurna, maka nm juga merupakan bilangan kuadrat sempurna. 
+Definisi : (Bilangan bulat a merupakan bilangan kuadrat sempurna jika ada bilangan 
+bulat b sehingga a = b².)
+Jawaban
+Langkah-langkahnya sama seperti soal no 1.
+1. Asumsikan dulu P benar. Berarti kita asumsikan m itu bilangan kuadrat 
+sempurna dan n juga bilangan kuadrat sempurna itu benar.
+2. Gunakan definisi yang disediakan.
+definisi:
+Sesi 4 : Method Of Proof (1)
+3
+
+=== PAGE 58 ===
+Bilangan bulat a merupakan bilangan kuadrat sempurna jika ada bilangan 
+bulat b sehingga a = b²
+maka untuk m = s² dan n = t². dimana s dan t itu adalah sebuah bilangan 
+bulat (integer)
+3. kita ingin membuktikan Q benar. Berarti kita ingin membuktikan bahwa nm 
+(n dikali m) itu hasilnya bilangan kuadrat sempurna.
+Berdasarkan definisi kuadrat sempurna, dapat disimpulkan bahwa mn juga 
+merupakan kuadrat sempurna, karena merupakan kuadrat dari st, yang 
+merupakan bilangan bulat. Telah dibuktikan bahwa jika m dan n keduanya 
+merupakan kuadrat sempurna, maka mn juga merupakan kuadrat sempurna.
+Indirect Proof
+Berbeda dengan direct proof, indirect proof itu pembuktian tidak langsung (sesuai 
+namanya ya).
+Kenapa butuh indirect proof? karena ada kalanya saat kita membuktikan dengan 
+direct proof (pembuktian langsung), kita menemukan jalan buntu.
+Ada 2 cara indirect proof yaitu proof by contraposition dan proof by 
+contradiction
+Proof by Contraposition
+Ini adalah metode pembuktian dengan cara kontraposisi
+Sesi 4 : Method Of Proof (1)
+4
+
+=== PAGE 59 ===
+Misalnya pernyataannya P→Q, kita bisa membuktikannya dengan kebalikannya 
+yaitu ¬Q → ¬P.
+Kenapa bisa begitu? karena P→Q nilainya setara dengan ¬Q → ¬P
+Pembuktian kalo  P→Q sama aja kaya ¬Q → ¬P
+Misalkan P = Hujan, Q = Jalanan Basah.
+Jika P → Q. Berarti jika hujan maka jalanan basah
+Lalu  ¬Q → ¬P berarti artinya Jika jalanan tidak basah, maka tidak hujan.
+Ini benar dong. Karena kan janjinya bilang kalo hujan, maka jalanan basah. Terus
+misal kenyataanya jalanan tidak basah (kering) nih, maka itu udah pasti ga hujan 
+dong. 
+Langkah-langkah pembuktian dengan metode proof by contraposition
+1. Ubah pernyataan awalnya ke bentuk kontraposisinya dulu. dari P→Q diubah ke 
+¬Q → ¬P
+2. Mirip seperti direct proof. Asumsikan dulu ¬Q itu benar.
+3. Gunakan definisi yang disediakan atau yang kalian tau
+4. Buktikan kalau ¬P itu benar.
+Kalo ¬P terbukti benar, maka kita berhasil membuktikan secara proof by 
+contraposition.
+Langsung lanjut ke contohnya aja supaya paham maksudnya apa.
+Soal 1.
+Buktikan bahwa jika n bilangan bulat dan 3n + 2 ganjil, maka n ganjil.
+Jawaban
+Sesi 4 : Method Of Proof (1)
+5
+
+=== PAGE 60 ===
+Kita coba make direct proof dulu ya.
+definisi ganjil:
+sebuah bilangan n disebut ganjil apabila n = 2k + 1. Di mana k adalah 
+sembarang angka bilangan bulat.
+3n + 2 = 2k + 1
+3n + 1 = 2k
+nah dari 3n + 1 = 2k kita bisa nyimpulin kalo n itu bilangan ganjil gak? gak bisa 
+kan? nah makanya kita di sini buntu, dan butuh metode indirect proof.
+Langsung mulai pake metode indirect proof
+1. Ubah dulu persamaanya
+P : 3n + 2 ganjil
+Q : n ganjil
+P → Q
+ubah jadi ¬Q → ¬P
+¬Q : ¬ (n ganjil) = n genap
+¬P : ¬ (3n + 2 ganjil) = 3n + 2 genap
+2. Asumsikan ¬Q benar. Berarti asumsikan n itu genap benar. Ingat definisi 
+genap. n = 2k di mana k adalah sembarang bilangan bulat. maka n = 2k
+3. Gunakan definisi
+bilangan n disebut genap apabila n = 2k. Di mana k adalah sembarang 
+angka bilangan bulat
+4. Buktikan bahwa ¬P itu benar
+Sesi 4 : Method Of Proof (1)
+6
+
+=== PAGE 61 ===
+Terbukti bahwa ¬P itu benar yaitu P genap. 
+Soal 2.
+Buktikan bahwa jika n = ab, di mana a dan b adalah bilangan bulat positif, maka a ≤ 
+√n atau b ≤ √n.
+Jawaban
+Sesi 4 : Method Of Proof (1)
+7
+
+=== PAGE 62 ===
+Soal 3.
+Buktikan bahwa proposisi P(0) benar, dimana P(n) adalah “Jika n > 1, maka n² > n” 
+dan domainnya terdiri dari semua bilangan bulat.
+Jawaban
+Solusi: Perhatikan bahwa P(0) adalah "Jika 0 > 1, maka 0 > 0²." Kita dapat 
+menunjukkan P(0) menggunakan pembuktian kosong. Memang, hipotesis 0 > 1 
+salah. Ini memberi tahu kita bahwa P(0) otomatis benar. Ingat tabel kebenaran 
+Jika-maka (Implikasi)
+Sesi 4 : Method Of Proof (1)
+8
+
+=== PAGE 63 ===
+Tabel kebenaran
+p
+q
+p→q
+True
+True
+True
+True
+False
+False
+False
+True
+True
+False
+False
+True
+Catatan: Fakta bahwa kesimpulan dari pernyataan kondisional ini, 0² > 0, adalah 
+salah tidak relevan dengan nilai kebenaran pernyataan kondisional, karena 
+pernyataan kondisional dengan P salah dijamin benar.
+Soal 4.
+Buktikan bahwa jika n adalah bilangan bulat dengan 10 ≤ n ≤ 15 yang merupakan 
+kuadrat sempurna, maka n juga merupakan kubik (pangkat 3) sempurna.
+Jawaban
+Solusi: Perhatikan bahwa tidak ada bilangan kuadrat sempurna n dengan 10 ≤ n 
+≤ 15, karena 3² = 9 dan 4² = 16. Oleh karena itu, pernyataan bahwa n adalah 
+bilangan bulat dengan 10 ≤ n ≤ 15 yang merupakan bilangan kuadrat sempurna 
+adalah salah untuk semua bilangan bulat n. Akibatnya, pernyataan yang akan 
+dibuktikan adalah benar untuk semua bilangan bulat n. Balik lagii, inget table 
+kebenaran untuk implikasi. Kalo P nya salah, maka tidak peduli Qnya apa, 
+otomatis keseluruhan pernyataan benar.
+Soal 5
+Misalkan P(n) adalah "Jika a dan b adalah bilangan bulat positif dengan a > b, maka 
+a^n ≥ b^n"," di mana domainnya terdiri dari semua bilangan bulat nonnegatif. 
+Buktikan bahwa P(0) benar.
+Jawaban
+Sesi 4 : Method Of Proof (1)
+9
+
+=== PAGE 64 ===
+Proposisi P(0) adalah “Jika a > b, maka aº > bº.” Karena aº = bº = 1, kesimpulan 
+dari pernyataan kondisional “Jika a > b, maka aº > bº” adalah benar. Oleh karena 
+itu, pernyataan kondisional ini, yaitu P(0), adalah benar. Ini adalah contoh 
+pembuktian yang trivial (mudah). Perhatikan bahwa hipotesis, yaitu pernyataan 
+“a ≥ b,” tidak diperlukan dalam pembuktian ini. Periksa lagi tabel kebenaran 
+implikasi. Jika di bagian Q benar, tidak peduli Pnya True or False, sudah pasti 
+keseluruhan pernyataan itu benar.
+Tabel kebenaran
+p
+q
+p→q
+True
+True
+True
+True
+False
+False
+False
+True
+True
+False
+False
+True
+Proof by Contradiction
+Kita mau membuktikan Pernyataan P itu benar. Gimana caranya?
+1. Kita cari lawan dari P yaitu ¬p (negasinya)
+Berarti harus tau dulu negasi-negasi dari setiap bentuk
+2. dari bentuk negasi, kita coba buktiin bentuk negasinya itu benar
+3. kalo bentuk negasinya itu ternyata salah (kontradiksi), maka otomatis bentuk 
+aslinya (yang bukan negasinya) benar.
+Sesi 4 : Method Of Proof (1)
+10
+
+=== PAGE 65 ===
+Cara nyari kontradiksi gimana? cari pernyataan yang bentuknya ¬r ∧ r ( misalnya n 
+bilangan genap dan n juga bilangan ganjil, jelas ini kontradiksi, gimana bisa suatu 
+angka sifatnya ganjil dan genap secara bersamaan)
+Kalo kontradiksi berhasil ditemukan, yaudah ¬p nilainya false dan p sendiri nilainya 
+jadi benar.
+Penjelasan dari chatgpt yang mungkin kalian bisa lebih pahami
+intinya gini nih, Misal ada orang bilang “Kalo hujan, maka jalanan basah”. Kita 
+mau buktiin perkataan orang tersebut tapi pake cara kebalikannya. Kita mau 
+buktiin dengan cara “kalo hujan tapi jalanan gak basah”. Nah pas kita coba 
+buktiin dengan cara kebalikannya, ternyata salah nih. Karena kebalikannya 
+salah, berarti yang pernyataan aslinya “jika hujan, maka jalanan basah” otomatis 
+benar dong?
+Contoh lainnya gini deh, misal ibu kalian ngomong “kalo hujan, jangan main 
+ujan-ujanan nanti sakit”. Tapi karena kalian anaknya bandel dan suka 
+menantang diri ga percaya sama perkataan ortu yaudah deh kalian mau 
+ngebuktiin kebalikan dari perkataan ibu kalian yaitu “kalo hujan, main ujan-
+ujanan tetep sehat (gak sakit)”. Nah pas kalian coba buktiin dengan harapan 
+kebalikannya itu benar (tetep sehat) ternyata hasilnya salah (kontradiksi, tetep 
+Sesi 4 : Method Of Proof (1)
+11
+
+=== PAGE 66 ===
+sakit) berarti jelas dong pernyataan awal dari ibu kalian “kalo hujan, jangan 
+main ujan-ujanan nanti sakit” jadi bernilai benar?
+contoh lain deh kalo masih gak paham (kalo ini yang buatin contohnya chatgpt, 
+yg di atas aku buat sendiri)
+Contoh 1: "Jika kue ini manis, maka kue ini enak."
+1. Pernyataan asli (p → q): "Jika kue ini manis (p), maka kue ini enak (q)."
+2. Untuk membuktikan ini dengan kontradiksi, kita akan mencoba 
+kebalikannya:
+Misalnya, kita asumsi bahwa "kue ini manis" (p benar), tetapi "kue ini 
+tidak enak" (q salah).
+3. Setelah mencoba makan kue tersebut, kita merasa bahwa kue yang manis ini 
+memang enak, bukan tidak enak. Jadi, pernyataan bahwa kue ini tidak 
+enak menyebabkan kontradiksi.
+4. Karena kebalikannya salah (kontradiksi), kita simpulkan bahwa 
+pernyataan asli benar: "Jika kue ini manis, maka kue ini enak."
+Contoh 2: "Jika belajar dengan rajin, maka kamu lulus ujian."
+1. Pernyataan asli (p → q): "Jika kamu belajar dengan rajin (p), maka kamu 
+lulus ujian (q)."
+2. Untuk membuktikannya dengan kontradiksi, kita akan mencoba 
+kebalikannya:
+Asumsi bahwa kamu belajar dengan rajin (p benar), tetapi tidak lulus 
+ujian (q salah).
+3. Namun, setelah hasil ujian keluar, ternyata kamu lulus karena rajin belajar. 
+Ini menciptakan kontradiksi dengan asumsi bahwa kamu tidak lulus.
+4. Karena asumsi ini salah (kontradiksi), maka kita simpulkan pernyataan 
+asli benar: "Jika belajar dengan rajin, maka kamu lulus ujian."
+Kenapa Bukti Ini Berhasil?
+Ketika kita berusaha membuktikan kebalikan dari pernyataan (misalnya, kita 
+coba buktikan bahwa kue manis tidak enak), tapi hasilnya bertentangan (kue 
+manis ternyata enak), ini menunjukkan bahwa asumsi kita salah.
+Sesi 4 : Method Of Proof (1)
+12
+
+=== PAGE 67 ===
+Karena kebalikannya salah, maka pernyataan asli harus benar.
+Contoh
+Soal 1
+Berikan bukti dengan kontradiksi dari teorema “Jika 3n + 2 ganjil, maka n ganjil.”
+Jawaban
+ 💡  Definisi 2
+Sesi 4 : Method Of Proof (1)
+13
+
+=== PAGE 68 ===
+Bilangan r disebut rational apabila ada integer p dan q, q ≠ 0. sehingga r = p/q . p 
+dan q tidak memiliki faktor yang sama (faktor : angka yang bisa membagi habis 
+suatu bilangan, misal faktor dari 12 itu 1, 2, 4, 6, 12. faktor 1 bisa kita abaikan 
+karena setiap bilangan itu punya faktor 1). Karena tidak memiliki faktor yang 
+sama, maka pecahan p/q itu merupakan bentuk yang paling sederhana. (contoh 
+9/3 itu bukan pecahan paling sederhana karena 9 dan 3 sama-sama memiliki 
+faktor 3 sehingga 9/3 masih bisa disederhanakan menjadi 3).
+Soal 2
+Buktikan bahwa √2 irasional dengan memberikan pembuktian melalui kontradiksi.
+Jawaban
+Sesi 4 : Method Of Proof (1)
+14
+
+=== PAGE 69 ===
+Proof by Counterexamples
+Ini konsepnya sama persis kaya negating quantifier di sesi kemarin.
+review di sini :  
+Sesi 4 : Method Of Proof (1)
+15
+
+=== PAGE 70 ===
+Contoh soal
+Buktikan bahwa pernyataan “Setiap bilangan bulat positif adalah jumlah kuadrat 
+dua bilangan bulat” adalah salah.
+Jawaban
+Solusi: Untuk menunjukkan bahwa pernyataan ini salah, kita mencari 
+counterexamples, yaitu bilangan bulat tertentu yang bukan merupakan jumlah 
+kuadrat dua bilangan bulat. Tidak butuh waktu lama untuk menemukan 
+counterxample, karena 3 tidak dapat ditulis sebagai jumlah kuadrat dua bilangan 
+bulat. Untuk menunjukkan hal ini, perhatikan bahwa satu-satunya kuadrat 
+sempurna yang tidak melebihi 3 adalah 02 = 0 dan 12 = 1. Lebih jauh, tidak ada 
+cara untuk memperoleh 3 sebagai jumlah dua suku yang masing-masing adalah 
+0 atau 1. Akibatnya, kita telah menunjukkan bahwa "Setiap bilangan bulat positif 
+adalah jumlah kuadrat dua bilangan bulat" adalah salah.
+Mathematical Induction (Induksi 
+Matematika)
+Channel youtube untuk belajar induksi matematika:
+1. PatrickJMT 
+2. Kimberly Brehm
+3. The Math Sorcerer
+4. The Organic Chemistry
+Induksi matematika ini keluar di soal UTS Tahun lalu. Karena keluar di soal UTS 
+tahun lalu, maka kita akan banyak latihan soal di induksi matematika.
+Kalo tdi ada cara pembuktian secara direct dan inderect, sekarang ada induksi 
+matematika. Induksi matematika ini kegunaannya banyak banget. 
+Langkah-langkah
+Sesi 4 : Method Of Proof (1)
+16
+
+=== PAGE 71 ===
+1. Basis step; masukkan/subtitusi untuk n = angka awal (biasanya 0 atau 1, LIAT 
+DOMAINNYA)
+2. Induction step
+a. Asumsikan benar untuk n = k
+b. subtitusi n = k ke persamaan
+c. Tunjukkan benar untuk n = k + 1
+Kita langsung terjun ke contoh-contoh soal aja ya
+Membuktikan rumus penjumlahan (deret)
+Soal 1
+Buktikan bahwa jika n adalah bilangan bulat positif, maka
+Jawaban
+Sesi 4 : Method Of Proof (1)
+17
+
+=== PAGE 72 ===
+Soal 2
+Gunakan induksi matematika untuk menunjukkan bahwa
+Sesi 4 : Method Of Proof (1)
+18
+
+=== PAGE 73 ===
+untuk semua bilangan bulat nonnegatif n.
+Jawaban
+Membuktikan Jumlah Deret Geometri 
+Soal 3
+Sesi 4 : Method Of Proof (1)
+19
+
+=== PAGE 74 ===
+Gunakan induksi matematika untuk membuktikan rumus ini untuk jumlah suku-
+suku berhingga dari suatu deret geometri dengan suku awal a dan rasio r:
+dimana r  ≠ 1. di mana n adalah bilangan bulat nonnegatif.
+Jawaban
+Sesi 4 : Method Of Proof (1)
+20
+
+=== PAGE 75 ===
+Sesi 4 : Method Of Proof (1)
+21
+
+=== PAGE 76 ===
+Membuktikan Pertidaksamaan
+Soal 4
+Gunakan induksi matematika untuk membuktikan Pertidaksamaan
+untuk semua bilangan bulat positif n.
+Jawaban
+Sesi 4 : Method Of Proof (1)
+22
+
+=== PAGE 77 ===
+Soal 5
+Gunakan induksi matematika untuk membuktikan bahwa 2ⁿ < n! untuk setiap 
+bilangan bulat n dengan n ≥ 4.
+Jawaban
+Sesi 4 : Method Of Proof (1)
+23
+
+=== PAGE 78 ===
+Soal 6 (Hard)
+Definisi Harmonic Numbers
+Sesi 4 : Method Of Proof (1)
+24
+
+=== PAGE 79 ===
+Buktikan menggunakan induksi matematika
+di mana n adalah non-negatif integer.
+Jawaban
+Sesi 4 : Method Of Proof (1)
+25
+
+=== PAGE 80 ===
+Membuktikan habis membagi
+Sesi 4 : Method Of Proof (1)
+26
+
+=== PAGE 81 ===
+Soal 7
+Gunakan induksi matematika untuk membuktikan bahwa n³ – n habis dibagi 3 jika n 
+adalah bilangan bulat positif.
+Jawaban
+Soal 8
+Gunakan induksi matematika untuk membuktikan bahwa 
+Sesi 4 : Method Of Proof (1)
+27
+
+=== PAGE 82 ===
+habis dibagi 57 untuk setiap bilangan bulat non-negatif n.
+Jawaban
+Sesi 4 : Method Of Proof (1)
+28
+
+=== PAGE 83 ===
+Soal Latihan tambahan buat dikerjain di rumah (biar 
+makin jago!)
+ini isinya induksi matematika semua ya. Kenapa induksi semua? karena di kisi-kisi 
+tahun lalu yang keluar itu induksi matematika, jadi harus banyak latihan di sini
+Soal 1
+Buktikan proposisi P(n) bahwa jumlah n bilangan bulat positif pertama adalah
+Sehingga
+Soal 2
+Buktikan proposisi berikut (untuk n > 0):
+Soal 3
+Buktikan
+Sesi 4 : Method Of Proof (1)
+29
+
+=== PAGE 84 ===
+Soal 4
+Buktikan
+Soal 5
+Buktikan
+Soal 6
+Buktikan
+Soal 7
+Buktikan
+Soal 8
+Buktikan
+habis dibagi 5 untuk semua  n ∈ N
+Sesi 4 : Method Of Proof (1)
+30
+
+=== PAGE 85 ===
+Soal 9
+Buktikan
+habis dibagi 3 untuk semua n ∈ N
+Soal 10
+Gunakan identitas
+untuk membuktikan 
+Sesi 4 : Method Of Proof (1)
+31
+
+=== PAGE 86 ===
+Sesi 5 : Fuzzy Sets, Function,
+Number Theory (1)
+Outline
+1. Sets
+2. Set Operations
+3. Functions 🎯
+4. Fuzzy Set 🎯
+5. Number theory (euclidean algorithm untuk mencari FPB/GCD) 🎯
+🎯 : Kisi-kisi UTS Tahun ini
+Sets Operation
+Soal 1
+Jawaban
+Soal 2
+Sesi 5 : Fuzzy Sets, Function, Number Theory (1)
+1
+
+=== PAGE 87 ===
+Find
+Catatan : A\B sama aja kaya A - B (Selisih/Difference)
+Jawaban
+Fuzzy Set
+Soal 1
+Penjelasan :  https://www.youtube.com/watch?v=NGs_X2MnYqo&t=4946s
+Menit 1:01:36
+Fuzzy Set yang diskrit
+Sesi 5 : Fuzzy Sets, Function, Number Theory (1)
+2
+
+=== PAGE 88 ===
+f. | A | 
+g. | B | 
+h. A’ (A komplemen)
+Jawaban
+Sesi 5 : Fuzzy Sets, Function, Number Theory (1)
+3
+
+=== PAGE 89 ===
+Fuzzy Set yang Continuos
+Sesi 5 : Fuzzy Sets, Function, Number Theory (1)
+4
+
+=== PAGE 90 ===
+Soal 1
+Penjelasan :  https://www.youtube.com/watch?v=NGs_X2MnYqo&t=4946s
+Menit 1:22:11
+Jawaban
+Sesi 5 : Fuzzy Sets, Function, Number Theory (1)
+5
+
+=== PAGE 91 ===
+d. apakah Fuzzy set B adalah subset dari fuzzy set A?
+Jawaban
+iya. Karena fuzzy set B selalu dibawah fuzzy set A, sehingga kita bisa
+bilang fuzzy set B itu adalah subset dari fuzzy set A. 
+Sesi 5 : Fuzzy Sets, Function, Number Theory (1)
+6
+
+=== PAGE 92 ===
+Definisi formal subset pada fuzzy set.
+Soal 2
+Penjelasan :  https://www.youtube.com/watch?v=NGs_X2MnYqo&t=4946s
+Menit 1:22:18 .Tidak dibahas detail di youtube responsi HIMTI karena
+konsepnya sama saja seperti soal nomor 1. Aku udah buatkan jawabannya di
+bawah. Kalo masih belum paham boleh PC Lewat LINE Ya.
+Jawaban a
+Sesi 5 : Fuzzy Sets, Function, Number Theory (1)
+7
+
+=== PAGE 93 ===
+Jawaban b
+Sesi 5 : Fuzzy Sets, Function, Number Theory (1)
+8
+
+=== PAGE 94 ===
+Penjelasan detail:
+Jawaban c
+Sesi 5 : Fuzzy Sets, Function, Number Theory (1)
+9
+
+=== PAGE 95 ===
+Function
+Soal 1
+Jawaban
+Sesi 5 : Fuzzy Sets, Function, Number Theory (1)
+10
+
+=== PAGE 96 ===
+Soal 2
+f(x) = x^2. Apakah fungsi tersebut invertible?
+Jawaban
+Tidak. Karena ini bukan fungsi injektif (one-to-one). misal x = (-2) hasilnya
+4. x = 2 hasilnya juga 4
+Soal 3
+Jawaban
+Sesi 5 : Fuzzy Sets, Function, Number Theory (1)
+11
+
+=== PAGE 97 ===
+Sumber : Soal dan Pembahasan - Komposisi dan Invers Fungsi —
+Mathcyber1997
+Soal 4
+Jawaban
+sumber : Soal dan Pembahasan - Komposisi dan Invers Fungsi —
+Mathcyber1997
+Soal 5
+Sesi 5 : Fuzzy Sets, Function, Number Theory (1)
+12
+
+=== PAGE 98 ===
+Misal f’(3x - 2) = 7x + 1. Maka f(x) = …..
+Jawaban
+Soal 6
+Misal f’(2x+1) = 5x + 3. Maka f(x) = ….
+Jawaban
+Floor, ceiling function→ cukup ketahui aja bedanya 
+Number Theory
+Soal 1
+Penjelasan : 
+https://www.youtube.com/watch?v=HNCyX3anEsc
+https://www.youtube.com/watch?v=9KM6bX2rud8
+Carilah GCD/FPB dari 310 dan 710, lalu cari koefisien bezout (identitas
+bezoutnya), dan terakhir carilah LCM/KPKnya. Gunakan methode euclidean
+algorithm!
+Jawaban
+Sesi 5 : Fuzzy Sets, Function, Number Theory (1)
+13
+
+=== PAGE 99 ===
+Soal 2
+Carilah GCD/FPB dari 237 dan 13, lalu cari koefisien bezout (identitas
+bezoutnya), dan terakhir carilah LCM/KPKnya. Gunakan methode euclidean
+algorithm!
+Jawaban
+Sesi 5 : Fuzzy Sets, Function, Number Theory (1)
+14
+
+=== PAGE 100 ===
+Sesi 5 : Fuzzy Sets, Function, Number Theory (1)
+15
+
+=== PAGE 101 ===
+Sesi 6: Binomial, Permutasi,
+Kombinasi (1)
+Outline
+1. Binomial 🎯
+2. Permutasi
+3. Kombinasi
+🎯 : Keluar di UTS tahun ini, menurut kisi-kisi.
+Faktorial
+sebelum masuk ke binomial, kalian harus paham dulu faktorial itu apa
+catatan 0! itu = 1 bukan 0
+1! juga = 1
+contoh soal/ contoh penggunaan faktorial
+Sesi 6: Binomial, Permutasi, Kombinasi (1)
+1
+
+=== PAGE 102 ===
+penjelasan: https://www.youtube.com/watch?v=R5nQR7w_DJw
+Binomial
+Apa itu persamaan binomial?
+Misalnya 
+Kalo kalian liat, ini tuh membentuk sebuah pola, coba perhatiin deh.
+Sesi 6: Binomial, Permutasi, Kombinasi (1)
+2
+
+=== PAGE 103 ===
+Nah pola-pola itu bisa dicari dari yang namanya persamaan binomial
+ini pake kombinasi ya.
+Sesi 6: Binomial, Permutasi, Kombinasi (1)
+3
+
+=== PAGE 104 ===
+Materi : 
+05-Aturan Kombinasi [www.defantri.com].pdf
+Latihan soal:
+06-Latihan 05-Aturan Kombinasi [www.defantri.com].pdf
+Tipe 1
+Contoh soal 1
+Jawaban
+Soal 2
+Sesi 6: Binomial, Permutasi, Kombinasi (1)
+4
+
+=== PAGE 105 ===
+Jawaban
+Catatan : itu harusnya 27x^3 ya. Banyak yang nanya ni. Makasih koreksinya
+Tipe 2
+Soal 3
+Tentukanlah suku ke-4 dari uraian bentuk (x - y)⁵
+Jawaban
+Sesi 6: Binomial, Permutasi, Kombinasi (1)
+5
+
+=== PAGE 106 ===
+Soal 4
+Jawaban
+Soal 5
+Sesi 6: Binomial, Permutasi, Kombinasi (1)
+6
+
+=== PAGE 107 ===
+Jawaban
+Catatan: itu ada kesalahan, 2^4 itu 16 ya bukan 18. Jadi hasil akhirnya salah.
+Tapi caranya udah betul, tinggal dikali ulang aja angkanya 126 kali 16 kali -1
+= -2016x^4y^5
+Soal 6
+Tipe 3
+Soal 7
+Jawaban
+Sesi 6: Binomial, Permutasi, Kombinasi (1)
+7
+
+=== PAGE 108 ===
+Soal 8
+Jawaban
+Soal 9
+Sesi 6: Binomial, Permutasi, Kombinasi (1)
+8
+
+=== PAGE 109 ===
+Jawaban
+Soal 10 (Hard) // konsepnya sama aja sih
+Jawaban
+Tipe 4
+Soal 11 
+Jawaban
+Sesi 6: Binomial, Permutasi, Kombinasi (1)
+9
+
+=== PAGE 110 ===
+Permutasi
+kalo kalian mau belajar, bisa cek video ini. Video dari Channelnya Dosen STEI
+ITB Pak Rinaldi Munir.
+https://www.youtube.com/watch?v=ZmKG7KDu_5g&list=PLyYkJZR4un3
+pMu_kUSlzPQwi49dSRpUbb&index=27
+Tonton dari awal ya, supaya makin paham
+Sesi 6: Binomial, Permutasi, Kombinasi (1)
+10
+
+=== PAGE 111 ===
+Materi tertulis: 
+03-Aturan Permutasi [www.defantri.com].pdf
+Latihan soal: 
+04-Latihan 03-Aturan Permutasi [www.defantri.com].pdf
+Kombinasi
+kalo kalian mau belajar, bisa cek video ini. Video dari Channelnya Dosen STEI
+ITB Pak Rinaldi Munir.
+https://www.youtube.com/watch?v=j2LdFzb9hNw&list=PLyYkJZR4un3p
+Mu_kUSlzPQwi49dSRpUbb&index=28
+Tonton dari awal ya, supaya makin paham
+Sesi 6: Binomial, Permutasi, Kombinasi (1)
+11
+
+=== PAGE 112 ===
+Materi tertulis: 
+05-Aturan Kombinasi [www.defantri.com].pdf
+Latihan soal:
+06-Latihan 05-Aturan Kombinasi [www.defantri.com].pdf
+Sesi 6: Binomial, Permutasi, Kombinasi (1)
+12
+
+=== PAGE 113 ===
+Sesi 7 : Relation (Relasi
+Ekuivalen) (1)
+OUTLINE
+1. Dasar-dasar relasi
+2. Sifat - Sifat Relasi
+3. Kesimpulan sifat - sifat relasi
+4. Relasi Ekuivalen 🎯
+🎯 : Keluar di kisi-kisi UAS tahun lalu. goal hari ini.
+Dasar-Dasar Relasi
+Apa itu relasi?
+Definisi 1
+Misal A dan B adalah sebuah himpunan. Sebuah Relasi Biner dari A ke B
+adalah subset dari A X B
+Relasi yang kita udah kenal dari dulu sejak SMP itu disebut juga relasi Biner.
+Jadi ada hubungan antara 2 objek, yaitu A punya hubungan dengan B. Oleh
+karena itu disebut Biner. Emang relasi bisa 3 objek? Bisa aja, cuma kita belum
+pelajarin sampai situ.
+Maksud dari A X B itu apa? 
+Jadi setiap anggota himpunan relasinya berasal dari perkalian A ke B. Masih ga
+kebayang? Coba liat contoh dibawah ini.
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+1
+
+=== PAGE 114 ===
+Jadi elemen di kiri berasal dari himpunan A. Elemen di Kanan berasal dari
+Himpunan B. 
+Kita biasa pakai Notasi (Cara penulisan) a R b. Berarti (a,b) ∈ R. 
+Kalo kalian menemui notasi 
+Berarti (a,b) ∉ R, maksudnya (a,b) bukan anggota dari relasi R.
+Supaya kebayang, coba liat contoh ini.
+Contoh 1
+Misalkan A adalah himpunan siswa di sekolahmu, dan B adalah himpunan
+mata pelajaran yang ada. Kita definisikan relasi R yang berisi pasangan (a,
+b), di mana a adalah siswa yang terdaftar dalam mata pelajaran b.
+Sebagai contoh, jika Budi dan Siti terdaftar dalam mata pelajaran
+Matematika, maka pasangan (Budi, Matematika) dan (Siti, Matematika)
+termasuk dalam R. Jika Budi juga terdaftar di Fisika, maka pasangan (Budi,
+Fisika) juga termasuk dalam R. Namun, jika Siti tidak terdaftar di Fisika,
+maka pasangan (Siti, Fisika) tidak ada di dalam R.
+Jika seorang siswa tidak terdaftar di mata pelajaran apa pun, maka tidak
+ada pasangan dalam R yang menyertakan siswa tersebut. Demikian juga,
+jika sebuah mata pelajaran tidak ditawarkan, maka tidak ada pasangan
+dalam R yang mencantumkan mata pelajaran tersebut.
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+2
+
+=== PAGE 115 ===
+Contoh 2
+Misalkan A = {0, 1, 2} dan B = {a, b}. Lalu {(0, a), (0, b), (1, a), (2, b)} adalah
+relasi dari A ke B. Ini berarti, misalnya, 0 R a, tetapi 1 R b. Relasi dapat
+direpresentasikan secara grafis, seperti yang ditunjukkan pada Gambar 1,
+menggunakan anak panah untuk merepresentasikan pasangan berurutan.
+Cara lain untuk merepresentasikan relasi ini adalah dengan menggunakan
+tabel, yang juga dilakukan pada Gambar 1. 
+Fungsi Sebagai Relasi
+Sebuah fungsi, bisa juga kita jadikan Relasi. Misalnya f(x) = 2x
+x
+f(x)
+1
+2
+2
+4
+3
+6
+4
+8
+Maka Himpunan relasinya = { (1,2), (2,4), (3,6), (4,8) }
+Relasi pada sebuah himpunan
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+3
+
+=== PAGE 116 ===
+Definisi 2.
+Sebuah relasi pada himpunan A adalah relasi dari A ke A ( A X A)
+Supaya lebih kebayang, kita langsung ke pengaplikasiannya aja di soal ya
+Soal 1
+Misalkan A adalah himpunan {1, 2, 3, 4}. 
+Pasangan berurutan manakah yang ada dalam relasi R = {(a, b) | a membagi b}?
+Jawaban
+Soal 2
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+4
+
+=== PAGE 117 ===
+Perhatikan relasi berikut pada himpunan bilangan bulat:
+Relasi manakah yang memuat masing-masing pasangan (1, 1), (1, 2), (2, 1), (1,
+−1), dan (2, 2)?
+Jawaban
+Catatan:  relasi ini berada pada himpunan tak terhingga.
+Solusi: Pasangan (1, 1) ada di R1, R3, R4, dan R6; (1, 2) ada di R₁ dan R6; (2,
+1) ada di R2, R5, dan R6; (1, -1) ada di R2, R3, dan R6; dan terakhir, (2, 2)
+ada di R1, R3, dan R4.
+Sifat - Sifat Relasi
+Reflexive / Refleksif
+Sebuah relasi R pada sebuah himpunan A disebut refleksif 
+jika (a,a) ∈ R untuk semua elemen a ∈ A 
+Supaya kebayang, langsung ke contoh soal aja
+Soal 1
+Perhatikan relasi berikut pada {1,2,3,4} :
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+5
+
+=== PAGE 118 ===
+Manakah di antara relasi berikut yang bersifat refleksif?
+Jawaban
+Solusi: Relasi R3 dan R5 bersifat refleksif karena keduanya memuat semua
+pasangan yang berbentuk (a, a), yaitu (1, 1), (2, 2), (3, 3), dan (4, 4). Relasi
+lainnya tidak bersifat refleksif karena tidak memuat semua pasangan terurut
+ini. Secara khusus, R1, R2, R4, dan R6 tidak bersifat refleksif karena (3, 3)
+tidak ada dalam relasi ini.
+Soal 2
+Perhatikan relasi berikut pada himpunan bilangan bulat:
+Relasi mana saja yang bersifat refleksif?
+Jawaban
+Solusi: Relasi refleksif dari adalah R1 (karena a ≤ a untuk setiap bilangan
+bulat a), R3, dan R4. Untuk setiap relasi lain dalam contoh ini, mudah untuk
+menemukan pasangan bentuk (a, a) yang tidak ada dalam relasi tersebut.
+Contohnya di R5 (2, 1) 
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+6
+
+=== PAGE 119 ===
+Soal 3
+Apakah relasi “habis membagi” pada himpunan bilangan bulat positif bersifat
+refleksif?
+Jawaban
+Solusi: Karena a | a setiap kali a adalah bilangan bulat positif, relasi
+"membagi" bersifat refleksif. (Perhatikan bahwa jika kita mengganti
+himpunan bilangan bulat positif dengan himpunan semua bilangan bulat,
+relasinya tidak refleksif karena menurut definisi 0 tidak membagi 0.)
+Symetric
+Definisi
+Relasi simetris: Relasi R pada himpunan A disebut simetris jika untuk
+setiap pasangan (a, b) dalam R, maka pasangan (b, a) juga ada di R.
+Artinya, jika a berhubungan dengan b, maka b juga berhubungan
+dengan a.
+Relasi antisimetris: Relasi R pada himpunan A disebut antisimetris jika,
+untuk setiap a dan b dalam A, jika (a, b) dan (b, a) keduanya ada di R,
+maka a harus sama dengan b. Artinya, tidak ada dua elemen berbeda
+yang saling berhubungan secara bolak-balik.
+Definisi dengan menggunakan kuantifier, kita melihat bahwa relasi R pada
+himpunan A adalah simetris jika ∀a∀b((a, b) ∈ R → (b, a) ∈ R). Demikian pula,
+relasi R pada himpunan A adalah antisimetris jika ∀a∀b(((a, b) ∈ R ∧ (b, a) ∈
+R) → (a = b)).
+Soal 1
+Perhatikan relasi berikut pada {1,2,3,4} :
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+7
+
+=== PAGE 120 ===
+Manakah dari relasi di atas yang bersifat symetric dan mana yang bersifat
+antisimetric?
+Jawaban
+Solusi: Relasi R2 dan R3 simetris, karena dalam setiap kasus (b, a) termasuk
+dalam relasi tersebut setiap kali (a, b) termasuk. Untuk R2, satu-satunya hal
+yang perlu diperiksa adalah bahwa (2, 1) dan (1, 2) ada dalam relasi
+tersebut. Untuk R3, perlu diperiksa bahwa (1, 2) dan (2, 1) termasuk dalam
+relasi tersebut, dan (1, 4) dan (4, 1) termasuk dalam relasi tersebut. Kalian
+harus memverifikasi/cek bahwa tidak ada relasi lain yang simetris. Hal ini
+dilakukan dengan menemukan pasangan (a, b) yang ada dalam relasi tetapi
+(b, a) tidak.
+R4, R5, dan R6 semuanya antisimetris. Untuk masing-masing relasi ini tidak
+ada pasangan elemen a dan b dengan a ≠ b sehingga (a, b) dan (b, a)
+keduanya termasuk dalam relasi tersebut. Pembaca harus memverifikasi
+bahwa tidak ada relasi lain yang antisimetris. Ini dilakukan dengan
+menemukan pasangan (a, b) dengan a ≠ b sehingga (a, b) dan (b, a)
+keduanya ada dalam relasi tersebut.
+Soal 2
+Perhatikan relasi berikut pada himpunan bilangan bulat:
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+8
+
+=== PAGE 121 ===
+Manakah dari relasi di atas yang bersifat symetric dan mana yang bersifat
+antisimetric?
+Jawaban
+Solusi: Relasi R3, R4, dan R6 adalah simetris. R3 simetris, karena jika a = b
+atau a = −b, maka b = a atau b = −a. R4 simetris karena a = b menyiratkan
+bahwa b = a. R6 simetris karena a + b ≤ 3 menyiratkan bahwa b + a ≤ 3.
+Kalian harus memverifikasi bahwa tidak ada relasi lain yang simetris.
+Relasi R1, R2, R4, dan R5 bersifat antisimetris. R₁ bersifat antisimetris karena
+ketidaksetaraan a ≤ b dan b ≤ a menyiratkan bahwa a = b. R₂ bersifat
+antisimetris karena tidak mungkin a > b dan b > a. R4 bersifat antisimetris,
+karena dua elemen terkait terhadap R4 jika dan hanya jika keduanya sama.
+R5 bersifat antisimetris karena tidak mungkin a = b + 1 dan b = a + 1. Kalian
+harus memverifikasi bahwa tidak ada relasi lain yang bersifat antisimetris.
+Soal 3
+Apakah relasi “habis membagi” pada himpunan bilangan bulat positif bersifat
+symetric? atau apakah itu antisymetric?
+Jawaban
+Relasi ini tidak simetris karena 1 | 2, tetapi 2 | 1. Namun, relasi ini
+antisimetris. Untuk melihatnya, perhatikan bahwa jika a dan b adalah
+bilangan bulat positif dengan a | b dan b | a, maka otomatis a = b (verifikasi
+ini diserahkan sebagai latihan bagi kalian).
+Soal 4 
+Perhatikan relasi berikut
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+9
+
+=== PAGE 122 ===
+R = { } 
+Apakah Relasi R tersebut bersifat Symetric? apakah bersifat antisymetric?
+Jawaban
+Soal 5
+Perhatikan relasi berikut
+A = { } 
+Apakah Relasi A tersebut bersifat Reflexive?
+Jawaban
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+10
+
+=== PAGE 123 ===
+Transitive
+Suatu relasi pada himpunan A disebut transitif jika setiap (a, b) ∈ R dan (b,
+c) ∈ R, maka (a, c) ∈ R, untuk semua a, b, c ∈ A.
+Definisi Quantifiernya:
+∀a∀b∀c( ( (a,b) ∈ R ∧ (b,c) ∈ R) → (a,c) ∈ R)
+Soal 1
+Perhatikan relasi berikut pada {1,2,3,4} :
+Manakah dari relasi di atas yang bersifat Transitive?
+Jawaban
+Solusi: R4, R5, dan R6 bersifat transitif. Untuk setiap relasi ini, kita dapat
+menunjukkan bahwa relasi tersebut bersifat transitif dengan memverifikasi
+bahwa jika (a, b) dan (b, c) termasuk dalam relasi ini, maka (a, c) juga
+termasuk. Misalnya, R4 bersifat transitif, karena (3, 2) dan (2, 1), (4, 2) dan
+(2, 1), (4, 3) dan (3, 1), dan (4, 3) dan (3, 2) adalah satu-satunya himpunan
+pasangan tersebut, dan (3, 1), (4, 1), dan (4, 2) termasuk dalam R4. Kalian
+harus memverifikasi/mengecek bahwa R5 dan R6 bersifat transitif.
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+11
+
+=== PAGE 124 ===
+R1 tidak transitif karena (3, 4) dan (4, 1) termasuk dalam R1, tetapi (3, 1)
+tidak. R2 tidak transitif karena (2, 1) dan (1, 2) termasuk dalam R2, tetapi (2,
+2) tidak. R3 tidak transitif karena (4, 1) dan (1, 2) termasuk dalam R3, tetapi
+(4, 2) tidak.
+Kesimpulan Sifat - Sifat Relasi
+Equivalence Relation / Relasi Ekuivalen
+Definisi
+Suatu relasi pada himpunan A disebut relasi ekuivalen jika relasi tersebut 
+refleksif, simetris, dan transitif.
+Karena kalian udah tau apa itu refleksif, simetris dan transitif pada bagian di
+atas, harusnya kalian udah langsung bisa ngerjain soal Relasi Ekuivalen.
+Soal 1
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+12
+
+=== PAGE 125 ===
+Misalkan R adalah relasi pada himpunan bilangan bulat / Integer / Z sehingga a
+R b jika dan hanya jika a = b ATAU a = - b.
+Jawaban
+Jawaban (Penjelasan dengan contoh angka supaya lebih kebayang, dari
+chatgpt)
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+13
+
+=== PAGE 126 ===
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+14
+
+=== PAGE 127 ===
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+15
+
+=== PAGE 128 ===
+Soal 2
+Misalkan R adalah relasi pada himpunan bilangan riil  sehingga a R b jika dan
+hanya jika a - b adalah bilangan bulat. Apakah R merupakan relasi ekuivalensi?
+Jawaban
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+16
+
+=== PAGE 129 ===
+Soal 3
+Kongruen Modulo M
+Misalkan m adalah bilangan bulat dengan m > 1. Buktikan bahwa relasi R {(a, b)
+| a = b (mod m)} merupakan relasi ekuivalensi pada himpunan bilangan bulat.
+Jawaban
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+17
+
+=== PAGE 130 ===
+Soal 4
+Dedefinisikan relasi T pada Z (Himpunan integer/bilangan bulat)
+Sebagai berikut : Untuk semua bilangan bulat m dan n,
+Relasi ini disebut kongruen modulo 3.
+a ) Apakah T Refleksif?
+b ) Apakah T simetrik?
+c ) Apakah T Transitive?
+d ) Apakah T merupakan relasi ekuivalen?
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+18
+
+=== PAGE 131 ===
+e ) Tentukan kelas ekuivalennya (Equivalence Class)
+Jawaban
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+19
+
+=== PAGE 132 ===
+d ) karena T refleksif, simetrik, dan transitive maka relasi T merupakan
+relasi yang ekuivalen
+e ) Kelompok Ekuivalensi → yang sifatnya sama / mirip-mirip. Misalkan di
+kongruen modulo ini dibagi berdasarkan sisanya. Kalo kongruen modulo 3
+berarti kan hasilnya bisa aja sisa 0 ATAU sisa 1 ATAU sisa 2
+Soal 5
+A = Himpunan pada bilangan bulat (Integer)
+Dedefinisikan R sebagai berikut ini:
+R pada A x A oleh (a,b) R (c,d) jika a+d = b+c
+Buktikan R adalah relasi yang ekuivalen pada A x A
+Catatan : Ini sebenernya sama persis konsepnya kaya soal di atas. Terus
+maksud A x A ya berarti anggota himpunannya berasal dari hasil cross bilangan
+bulat (integer)
+Jawaban
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+20
+
+=== PAGE 133 ===
+Soal 6
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+21
+
+=== PAGE 134 ===
+X merupakan himpunan pada nonempty subset yaitu {1,2,3}.
+Maka X = { (1), (2), (3), (1,2), (1,3), (2,3), (1,2,3) } 
+Dedefinisikan sebuah relasi R pada X sebagai berikut:
+untuk setiap A dan B di X, A R B ⟺ elemen terkecil di A sama dengan elemen
+terkecil di B.
+Tunjukkan R adalah relasi yang ekuivalen pada X.
+Jawaban
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+22
+
+=== PAGE 135 ===
+Sesi 7 : Relation (Relasi Ekuivalen) (1)
+23
+
+=== PAGE 136 ===
+Sesi 8 : POSET & Hasse
+Diagram (1)
+Credit: Neso Academy untuk sebagian besar materi di notion ini.
+Partial Ordered
+Link video : https://youtu.be/saAkSk_arPA?si=dO-7x_tJ9WEy0WCl
+Intro
+Relasi dapat digunakan untuk mengurutkan 2 buah elemen. 
+Misalnya ada Relasi R = { (a , b) | a lebih dahulu dari b}. R terdiri dari himpunan
+semua kata-kata.
+Misal ada 2 elemen yaitu a = Kapak, b = katak.
+Pada elemen a dengan b yang beda hanya di huruf p dan t saja. huruf p ada di
+depan huruf t dalam alphabet. Oleh karena itu kita bisa menyebutkan relasinya
+(a,b) ∈ R , tidak bisa dibalik (b,a) ∈ R
+Intinya relasi dapat berfungsi untuk mengurutkan 2 buah elemen. 
+Contoh lainnya R = { (a,b) | a < b }. Relasi R terdiri dari himpunan integer.
+Relasi ini dapat digunakan untuk mengurutkan elemen angka. 
+Misalnya (1,2) ∈ R , kita tidak bisa menyebutkan (2,1) ∈ R karena 1 lebih kecil
+dari 2
+Lalu contoh lainnya (3,8) ∈ R , kita tidak dapat menyebutkan (8,3) ∈ R karena 3
+< 8
+Apa itu subset? ⊆
+Sesi 8 : POSET & Hasse Diagram (1)
+1
+
+=== PAGE 137 ===
+Definisi Partial Ordered Set
+Sebuah himpunan S pada relasi R disebut Partial Ordered jika relasi
+tersebut memiliki sifat Refleksif, antisimetrik, dan Transitif
+Pasangan S, R disebut POSET (Partial Ordered Set) yang dilambangkan
+dengan (S,R) atau
+(S, ⪯) yang mana a ⪯ b berarti artinya a berelasi pada b. 
+Kenapa ada bagian partial? maksudnya apa? maksudnya tuh setiap
+elemennya itu ga semuanya berkaitan satu sama lain, jadi cuma sebagian
+aja yang punya sifat refleksif, antisimetrik dan transitif. Ini akan dibahas di
+contoh soal
+Contoh soal 1
+Tunjukkan bahwa relasi R = {(a,b) | a ⊆ b } yang didefinisikan pada power set /
+Himpunan kuasa S = {1,2,3} adalah sebuah relasi yang partial ordered
+Jawaban
+Relasi tersebut partial ordered
+1. reflexivity : a ⊆ a. Ini benar karena a merupakan subset atau himpunan
+bagian dari dirinya sendiri (a)
+Sesi 8 : POSET & Hasse Diagram (1)
+2
+
+=== PAGE 138 ===
+2. antisimetric : a ⊆ b dan b ⊆ a berarti a = b. Ini juga benar. Misalnya 1 ⊆
+1 dan 1 ⊆ 1 berarti 1 = 1
+3. transitivity : a ⊆ b dan b ⊆ c maka a ⊆ c. Ini juga benar.
+Misal a itu {1}, b itu {1,3} dan c itu {1,2,3}
+Contoh soal 2
+Tunjukkan bahwa relasi R = {(a,b) | a membagi b} yang didefinisikan pada
+himpunan S = {1,2,3,4,6} adalah partial order relation.
+Jawaban
+1. Refleksif. a dapat membagi habis a. ini benar
+2. Antisymetric. a dapat membagi habis b dan b dapat membagi habis a.
+berarti a = b. Ini benar, misalnya 1 | 1 dan 1 | 1 berarti 1 = 1.
+3. Transitivity. a dapat membagi b dan b dapat membagi c. Berarti a dapat
+membagi c. Ini benar, karena misalnya a = 1 dan b = 3 dan c = 6. a = 1
+dapat membagi b = 3. Kemudian b = 3 dapat membagi c = 6. Maka a = 1
+dapat membagi c = 6. Ini benar
+Sesi 8 : POSET & Hasse Diagram (1)
+3
+
+=== PAGE 139 ===
+Contoh soal 3
+Buktikan bahwa relasi lebih besar atau sama dengan (≥) merupakan partial
+ordered pada himpunan bilangan bulat.
+Jawaban
+Solusi: Karena a ≥ a untuk setiap bilangan bulat a, ≥ bersifat refleksif. Jika a
+> b dan b > a, maka a = b. Oleh karena itu, ≥ bersifat antisimetris. Terakhir,
+≥ bersifat transitif karena a > b dan b ≥ c menyiratkan bahwa a ≥ c. Oleh
+karena itu, ≥ merupakan partial ordered pada himpunan bilangan bulat dan
+(Z, ≥) merupakan poset.
+Definisi Comparable dan Incomparable
+Comparable : elemen a dan b pada POSET (S, R) disebut comparable jika a
+R b ATAU b R a
+Incomparable : elemen a dan b pada POSET (S, R) disebut incomparable
+jika (a,b) ∉ R ATAU
+(b,a) ∉ R
+Contoh 1
+Pada soal 1, 
+Sesi 8 : POSET & Hasse Diagram (1)
+4
+
+=== PAGE 140 ===
+Tunjukkan bahwa relasi R = {(a,b) | a ⊆ b } yang didefinisikan pada power
+set / Himpunan kuasa S = {1,2,3} adalah sebuah relasi yang partial ordered
+{1,3} ⊄ {2} ATAU {2} ⊄ {1,3}. Oleh karena itu, {1,3} dan {2} adalah
+incomparable
+Di sisi lain, {1} ⊆ {1,3} adalah comparable
+Soal 2
+Dalam poset (Z+, | ), apakah bilangan bulat 3 dan 9 comparable? Apakah
+bilangan bulat 5 dan 7 comparable?
+Jawaban
+Penyelesaian: Bilangan bulat 3 dan 9 comparable, karena 3 | 9. Bilangan
+bulat 5 dan 7 incomparable, karena 5 ∤  7 dan 7 ∤ 5.
+Definisi Totally Ordered Set / Chain
+Jika (S, ≼) adalah poset dan setiap dua elemen dari S comparable, S
+disebut totally ordered set, atau disebut juga linear order atau chain/rantai
+Contoh
+Tunjukkan bahwa (Z,  ≤ )adalah totally ordered set
+Jawaban
+Penjelasan ChatGPT
+Sesi 8 : POSET & Hasse Diagram (1)
+5
+
+=== PAGE 141 ===
+Perbedaanya dengan Partially Ordered Set (POSET), dijelaskan
+menggunakan contoh supaya lebih kebayang
+Sesi 8 : POSET & Hasse Diagram (1)
+6
+
+=== PAGE 142 ===
+Sesi 8 : POSET & Hasse Diagram (1)
+7
+
+=== PAGE 143 ===
+Hasse Diagram
+Link video : https://youtu.be/i8XeVATqeag?si=YfhdIpVTORuNfuMI
+Hasse diagram adalah representasi grafis yang menyederhanakan
+penggambaran partial order sets (POSETs). Kata kuncinya adalah
+penyederhanaan. Jadi kan relasi bisa digambarin dalam banyak bentuk ya,
+salah satunya graph. Nah, Hasse diagram ini menyederhanakan gambar graph
+itu supaya hanya informasi yang penting-penting aja yang digambar. 
+Langkah-langkah menggambar Hasse diagram
+1. Cek apakah relasinya tersebut POSETS ? (Reflexive, Antisymetric dan
+Transitive)
+2. Jika POSETS, Tentukan pasangan elemen-elemen pada relasinya
+3. Setelah pasangan-pasangan elemen sudah dituliskan, gambarkan directed
+graphnya yang melambangkan relasinya dari a ke b. Biasanya digambar
+dari bawah ke atas. Dari angka terendah ke angka terbesar.
+4. Hilangkan self loop
+5. Hilangkan transitivity
+6. Atur Edge / Garisnya sehingga initial vertex ada di bawah terminal vertex
+Supaya kebayang, langsung ke soalnya aja
+Contoh soal 1
+Misalkan kita mempunyai himpunan S = {1, 2, 4, 6, 8} dan Relasi R didefinisikan
+pada himpunan S. R = {(a, b) | a | b} atau R = {(a, b) | a membagi b}.
+Gambarkan Hasse Diagramnya
+Jawaban
+Langkah 1 : Buktikan dulu, apakah relasi tersebut Partial Ordered?
+Kita tahu bahwa (S, R) adalah poset.
+(i) Refleksivitas: a | a.
+( ii) Antisimetri: a | b dan b | a → a = b.
+Sesi 8 : POSET & Hasse Diagram (1)
+8
+
+=== PAGE 144 ===
+(iii) Transitivitas: a | b dan b | c → a | c.
+Ya, Relasi R merupakan Partial Ordered, dan (S, R) adalah POSET.
+Langkah ke 2 : Tentukan dulu pasangan angota-anggotanya. Cari mana
+yang bisa membagi habis
+R = {(1, 1), (2, 2), (4, 4), (6, 6), (8, 8), (1, 2), (1, 4), (1, 6), (1, 8), (2, 4), (2, 6),
+(2, 8), (4,8)}
+Langkah 3 : Gambar directed graph / graf berarahnya dari bawah ke atas.
+Biasanya polanya dari angka terkecil ke angka terbesar dari bawah ke atas.
+Mulai dari gambar reflexivitynya dulu
+Sesi 8 : POSET & Hasse Diagram (1)
+9
+
+=== PAGE 145 ===
+Lanjut ke transitivitynya
+Sekarang kita udah berhasil membuat representasi relasinya dalam bentuk
+graph. 
+Lanjut buat Hasse Diagram (Simplifikasinya)
+Langkah 1: Hilangkan self-loop / reflexivity
+Sesi 8 : POSET & Hasse Diagram (1)
+10
+
+=== PAGE 146 ===
+Jadinya gini.
+Langkah 2 : Hapus Transitivity Edge
+Hapus Self-Loop. Self-loop cukup jelas (udah pasti ada), oleh karena itu dapat kita harus.
+Tanpa kita menggambarkan self-loopnya, orang juga akan tau kalo akan ada self loop di
+setiap titik/vertex karena sifat reflexivity itu. Oleh karena itu, self-loop kita hapus untuk
+menyederhanakan graf.
+Sesi 8 : POSET & Hasse Diagram (1)
+11
+
+=== PAGE 147 ===
+Jadinya gini.
+Jadinya gini Finalnya
+Sama seperti self-loop. Transitivity dapat kita hapus karena tanpa kita gambarkan
+edge/garis transivitynya, orang sudah bisa mengetahui ada garis/edge transitivity di situ.
+Misalnya ada garis dari 1→2 dan 2→ 4. Kita sudah pasti tau akan ada garis 1→4. Nah,
+untuk menyederhanakan gambar (Hasse), yaudah garis 1→4 dapat kita hapus karena
+udah bisa diwakilkan dari garis 1→2 dan 2→4 itu
+Langkah ke-3: Hapus panahnya. Karena asumsi Hasse diagram itu selalu dibuat dari
+bawah ke atas. Panahnya selalu dari bawah ke atas. Jadi, tanpa menunjukkan arahnya,
+orang sudah tau arah panahnya. 
+Sesi 8 : POSET & Hasse Diagram (1)
+12
+
+=== PAGE 148 ===
+Contoh soal 2
+Gambarkan Hasse Diagram yang merepresentasikan Partial Ordering 
+R = {(a,b) | a ≤ b} pada himpunan S = {1,2,3,4}
+Jawaban
+Langkah 1: Apakah POSETS? 
+1 ) Reflexivity : a ≤ a
+2) Asimetric : a ≤ b dan b ≤ a maka a = b
+3) Transitivity: a ≤ b dan b ≤ c maka a ≤ c
+Ya, relasi R ini merupakan partial ordered dan (S,R) adalah POSET.
+Langkah 2: Tentukan pasangan anggota dari relasinya
+R = { (1,1), (2,2), (3,3), (4,4), (1,2), (1,3), (1,4), (2,3), (2,4), (3,4) } 
+Diagram di atas disebut dengan Hasse Diagram yaitu penggambaran dari POSETS
+dengan informasi yang secukupnya.
+Sesi 8 : POSET & Hasse Diagram (1)
+13
+
+=== PAGE 149 ===
+Langkah 3 : Gambarkan directed graph atau representasi graf dari langkah
+2
+Lanjut ke pembuatan Hasse Diagram yaitu penyederhanaan graf dari
+langkah 3
+Langkah 1 : Hilangkan self-loop atau reflexivity
+Sesi 8 : POSET & Hasse Diagram (1)
+14
+
+=== PAGE 150 ===
+Langkah 2 : Hilangkan Transitive Edge
+Langkah 3 : Hilangkah arrownya/arahnya
+Sesi 8 : POSET & Hasse Diagram (1)
+15
+
+=== PAGE 151 ===
+Jadinya begini
+Kalo kalian perhatikan, ini membentuk garis lurus (linear) atau sebuah
+Rantai. Relasi ini merupakan relasi yang spesial karena merupakan totally
+ordered set.
+Trik cepat membuat Hasse Diagram 
+Gunakan trik ini jika elemennya benar-benar banyak. Kalau masih sedikit,
+gunakan cara langkah per langkah aja.
+Sesi 8 : POSET & Hasse Diagram (1)
+16
+
+=== PAGE 152 ===
+LANGKAH - LANGKAH:
+1. Pahami konsep untuk menggambarnya yang langkah per langkah (Konsep
+reflexivity/self loop, transitivity edge)
+2. Tidak perlu gambar reflexivity/self-loop
+3. gambar garisnya seperti biasa. Lalu cek, apakah kita bisa gambar garisnya
+dari vertex atasnya (untuk mencegah transitivity edge)
+4. Kalo misalkan ternyata gak ada relasi yang cocok sama vertexnya, baru
+mundur ke vertex sebelumnya
+Sebenernya langkah - langkah di atas sulit dipahami ya dengan kata-kata.
+Langsung contohin aja supaya paham maksudnya
+Soal 3
+Gambarlah Hasse Diagram untuk “lebih dari atau sama dengan” 
+Relasi pada Himpunan S = {0,1,2,3,4,5}
+S = {0,1,2,3,4,5}
+R = {(a,b) | a ≥ b}
+Sesi 8 : POSET & Hasse Diagram (1)
+17
+
+=== PAGE 153 ===
+Jawaban
+Penjelasan Video : https://youtu.be/ITv_74xUBdk?si=3-cmzjC7_s2NtW0r
+Cara cepat : 
+Cara Prosedural / Step-By-Step / Langkah per langkah
+Sesi 8 : POSET & Hasse Diagram (1)
+18
+
+=== PAGE 154 ===
+Sesi 8 : POSET & Hasse Diagram (1)
+19
+
+=== PAGE 155 ===
+Soal 4
+Gambarlah Hasse Diagram untuk “habis membagi/dapat membagi habis” pada
+himpunan
+S = {2,3,5,10,11,15,25}
+R = {(a,b) | a habis membagi b}
+Jawaban
+Soal 5
+Sesi 8 : POSET & Hasse Diagram (1)
+20
+
+=== PAGE 156 ===
+Draw the Hasse Diagram for inclusion on the set P(S), where S = {a,b,c}
+Translate: Gambarkan Hasse Diagram untuk subset/bagian pada himpunan
+kuasa S
+Jawaban
+Sesi 8 : POSET & Hasse Diagram (1)
+21
+
+=== PAGE 157 ===
+Soal 6
+List pasangan elemen dari gambar Hasse Diagram di bawah ini
+Sesi 8 : POSET & Hasse Diagram (1)
+22
+
+=== PAGE 158 ===
+Jawaban
+Sesi 8 : POSET & Hasse Diagram (1)
+23
+
+=== PAGE 159 ===
+Sesi 8 : POSET & Hasse Diagram (1)
+24
+
+=== PAGE 160 ===
+Sesi 9 : Min & Max Element,
+Upper & Lower Bound (1)
+Minimal & Maximal Element
+Link video : https://youtu.be/PYCO_BqWk_4?si=bB-fV-otOQUJ5Yws
+Credit : Neso Academy (Makasih banyak untuk penjelasan yg sangat gampang)
+Definisi Minimal Element : 
+Misalkan kita punya sebuah POSET (S,R) yang mana S adalah sebuah
+himpunan sembarang dan relasi R adalah partial order relation (relasi yang
+partial ordered) yang didefinisikan pada himpunan S.
+Minimal : 
+sebuah elemen x pada himpunan S disebut elemen minimal apabila TIDAK ADA 
+y ∈ S sehingga y R x
+atau dengan kata lain (y,x) ∉ R dan y ≠ x.
+Supaya paham maksud definisi tersebut, perhatikan contoh soal berikut ini
+Soal 1
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+1
+
+=== PAGE 161 ===
+Tentukan Elemen minimalnya!
+Jawaban
+Soal 2
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+2
+
+=== PAGE 162 ===
+Tentukan elemen minimalnya!
+Jawaban
+Definisi Maximal Element :
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+3
+
+=== PAGE 163 ===
+Misalkan kita punya sebuah POSET (S,R) yang mana S adalah sebuah
+himpunan sembarang dan relasi R adalah partial order relation (relasi yang
+partial ordered) yang didefinisikan pada himpunan S.
+Maximal:
+sebuah elemen x pada himpunan S disebut elemen maksimal apabila 
+TIDAK ADA y ∈ S sehingga x R y
+atau dengan kata lain (x,y) ∉ R dan x ≠ y.
+Contoh 1
+Tentukan elemen maksimal dari Hasse diagram di atas!
+Jawaban
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+4
+
+=== PAGE 164 ===
+Contoh soal 2
+Tentukan elemen maksimal di atas!
+Jawaban
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+5
+
+=== PAGE 165 ===
+Soal 3
+Tentukan elemen minimal dan elemen maksimalnya !
+Jawaban
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+6
+
+=== PAGE 166 ===
+Soal 4
+Tentukan elemen maksimal dan elemen minimal dari Poset di atas! (itu relasinya
+| (habis membagi ya)
+Jawaban
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+7
+
+=== PAGE 167 ===
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+8
+
+=== PAGE 168 ===
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+9
+
+=== PAGE 169 ===
+Least & Greatest Element (Elemen terkecil &
+terbesar)
+Link Video : https://youtu.be/MTGBBNG1g4s?si=E4FvGWc1Hw1GUSvn
+Definisi 
+Misalkan kita punya sebuah POSET (S,R) yang mana S adalah sebuah
+himpunan sembarang dan relasi R adalah partial order relation (relasi yang
+partial ordered) yang didefinisikan pada himpunan S.
+Least element (Minimum Element) / elemen terkecil (elemen minimum)
+Sebuah elemen x∈S disebut least element dari S apabila ∀y∈S, xRy.
+Catatan : least element itu unik jika ada. (Hanya ada 1 least element apabila
+least element itu ada pada sebuah poset)
+Greatest Element (Maximum Element) / Elemen terbesar (Elemen maksimum)
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+10
+
+=== PAGE 170 ===
+Sebuah elemen x∈S disebut greatest element dari S apabila ∀y∈S, xRy.
+Catatan : greatest element itu unik jika ada. (Hanya ada 1 Greatest element
+apabila greatest element itu ada pada sebuah poset)
+Soal 1
+Tentukan apakah poset yang direpresentasikan dalam Hasse diagram ini
+memiliki elemen maksimum dan elemen minimum? kalo pun iya, sebutkan
+vertex elemen minimum dan elemen maksimumnya
+Jawaban
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+11
+
+=== PAGE 171 ===
+Soal 2
+Carilah Elemen terbesar (maksimum) dan elemen terkecil (minimum) dari poset
+({2, 4, 6, 9, 12, 18, 27, 36, 48, 60, 72}, |}
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+12
+
+=== PAGE 172 ===
+Catatan : simbol  |  artinya habis membagi
+Jawaban
+Buatlah diagram Hassenya dulu
+Lower & Upper bound
+Link video : https://youtu.be/DbKZrrXD3C8?si=j9h2Is00eJQDuS5f
+Definisi
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+13
+
+=== PAGE 173 ===
+Misalkan kita punya sebuah Poset (S,R) di mana S adalah himpunan
+sembarang, dan R adalah Relasi yang partial order yang di definisikan pada
+himpunan S
+Lalu, ada juga T ⊂ S. (Berarti T itu merupakan himpunan bagian dari S, atau T
+itu bagian kecil dari S)
+Lower Bound :
+Sebuah elemen x ∈ S adalah lower bound pada himpunan T apabila ∀y∈T
+(x,y) ∈ R.
+Upper bound :
+Sebuah elemen x ∈ S adalah upper bound pada himpunan T apabila
+∀y∈T  (y,x) ∈ R.
+Supaya lebih kebayang definisinya, langsung liat contoh soal ini
+Contoh soal 1
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+14
+
+=== PAGE 174 ===
+Tentukan lower bound dan upper bound pada subsets {a,b,c}, {j,h} dan
+{a,b,c,d} pada poset yang direpresentasikan dengan hasse diagam di atas
+Jawaban
+Contoh soal 2
+Perhatikan Hasse Diagram berikut. Tentukan semua upper bound dari {a,b,c}
+dan semua lower bound dari {f,g,h}
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+15
+
+=== PAGE 175 ===
+Jawaban
+Contoh soal 3
+Carilah semua upper bound dari {2,9} dan lower bound dari {60,72} untuk
+poset ({2, 4, 6, 9, 12, 18, 27, 36, 48, 60, 72}, |)
+Jawaban
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+16
+
+=== PAGE 176 ===
+Least Upper Bound & Greatest Upper Bound
+Link video: https://youtu.be/sgsJAtRLGq4?si=hatqwaxUy8_AHvYT
+Definisi
+Misalkan kita punya sebuah Poset (S,R) di mana S adalah himpunan
+sembarang, dan R adalah Relasi yang partial order yang di definisikan pada
+himpunan S
+Lalu, ada juga T ⊂ S. (Berarti T itu merupakan himpunan bagian dari S, atau T
+itu bagian kecil dari S)
+Least Upper Bound (LUB atau supremum atau Join atau V) : 
+Misalkan U itu adalah himpunan dari seluruh upper bound pada himpunan
+T. Lalu, sebuah elemen x ∈ U disebut least upper bound jika ∀y∈U (x,
+y)∈R.
+Dengan kata lain,
+LUB(T) = minimum {UB(T)}
+Greatest Lower Bound (GLB atau Infimum atau Meet atau ^ ):
+Misalkan L adalah himpunan dari seluruh lower bound himpunan T.
+Kemudian, sebuah elemen x∈L disebut greatest lower bound jika ∀y∈L
+(y,x)∈R.
+Dengan kata lain,
+GLB(T) = maximum {LB(T)}
+Supaya lebih paham definisi tersebut, langsung coba liat contoh soal di bawah
+ini.
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+17
+
+=== PAGE 177 ===
+Soal 1
+Carilah greatest lower bound dan least upper bound dari {b,d,g} jika mereka
+ada pada poset yang digambarkan pada hasse diagram tersebut.
+Jawaban
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+18
+
+=== PAGE 178 ===
+Soal 2
+Carilah least upper bound dari {a,b,c} dan greatest lower bound dari {f,g,h},
+Jika ada.
+Jawaban
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+19
+
+=== PAGE 179 ===
+Soal 3
+Carilah least upper bound dari {2,9} dan greatest lower bound dari {60,72}
+untuk poset ({2, 4, 6, 9, 12, 18, 27, 36, 48, 60, 72}, | )
+Jawaban
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+20
+
+=== PAGE 180 ===
+📌Catatan Penting: 
+Upper bound, cuma punya Least Upper Bound
+Lower bound, cuma punya greatest Upper bound
+Ngafalinnya gampang, Inget aja kebalikan.
+kalo dia paling atas (upper) berarti dia cuma punya least (paling
+sedikit/minimal/kecil)
+Kalo dia paling bawah (lower) berarti dia cuma punya Greatest (paling
+besar/maksimal/besar)
+PENTING SEBELUM MASUK KE LATTICE
+Soal 1
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+21
+
+=== PAGE 181 ===
+Apakah Hasse diagram dari (A, B) tersebut memiliki lower bound? apakah
+memiliki upper bound?
+Jika Lower boundnya ada, lower bound tersebut sifatnya greatest lower bound
+atau least upper bound?
+Jika upper boundnya ada, upper bound tersebut sifatnya greatest upper bound
+atau least upper bound?
+Jawaban
+Lower bound dari (A, B) adalah A, dan A kita sebut greatest lower
+bound, BUKAN least lower bound. Jadi greatest lower boundnya dari
+hasse diagram tersebut ada, tapi least upper boundnya tidak ada.
+Upper bound dari (A, B) adalah B, dan B kita sebut Least upper bound, 
+BUKAN greatest upper bound. Jadi least upper boundnya ada, tapi
+greatest upper boundnya tidak ada. 
+Alasannya? kenapa begitu? karena sifat dari bound adalah mengikat
+maka kita mencari sesuatu yang mengikat (yang paling dekat). Berarti,
+kalo di upper bound, bagian paling dekatnya kan least upper boundnya.
+Sebaliknya, kalo di lower bound, bagian paling dekatnya di bagian
+greatest upper bound.
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+22
+
+=== PAGE 182 ===
+Penjelasan chatgpt
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+23
+
+=== PAGE 183 ===
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+24
+
+=== PAGE 184 ===
+❗Kesimpulan penting : Kalo dia comparable pairs (saling berelasi,
+sudah pasti itu lattice atau dengan kata lain memiliki greatest lower
+bound dan least upper bound) ❗
+Soal 2
+a. apakah pasangan (a,b) memiliki lower bound? Jika lower boundnya ada,
+jenisnya greatest lower bound atau least lower bound? apakah memiliki
+upper bound? Jika upper boundnya ada, jenisnya greatest upper bound
+atau least upper bound?
+b. apakah pasangan (b,d) memiliki lower bound? Jika lower boundnya ada,
+jenisnya greatest lower bound atau least lower bound? apakah memiliki
+upper bound? Jika upper boundnya ada, jenisnya greatest upper bound
+atau least upper bound?
+Jawaban
+konsepnya sama seperti nomor 1
+a. pasangan (A,B) memiliki lower bound yaitu A, sifatnya adalah greatest
+lower bound. Pasangan (A,B) juga memiliki Upper bound yaitu C dan
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+25
+
+=== PAGE 185 ===
+sifatnya least upper bound
+b. Pasangan (B,D) memiliki lower bound yaitu A, sifatnya adalah greatest
+lower bound. Pasangan (B,D) juga memiliki Upper bound yaitu C dan
+sifatnya least upper bound
+📌Kesimpulan: 
+Upper bound, cuma punya Least Upper Bound
+Lower bound, cuma punya greatest Upper bound
+Ngafalinnya gampang, Inget aja kebalikan.
+kalo dia paling atas (upper) berarti dia cuma punya least (paling
+sedikit/minimal/kecil)
+Kalo dia paling bawah (lower) berarti dia cuma punya Greatest (paling
+besar/maksimal/besar)
+Lattice
+Link video: https://youtu.be/3UkC3sXLqhQ?si=4uK73JDwCDTtGokJ
+Definisi
+Sebuah POSET (S, R) disebut lattice jika dan hanya jika meet semilatice dan
+join semilatice
+meet semilatice → ∀x, y ∈ S, GLB (Greatest Lower Bound) ≠ Ø
+join semilatice → ∀x, y ∈ S, LUB (Least Upper Bound) ≠ Ø
+Intinya dia disebut lattice kalo GLB Ada, LUB Ada juga. Inget ya ini pake
+logika DAN berarti kedua syarat harus terpenuhi. GLB harus ada, LUB harus
+ada. Kalo salah satu ada yang kosong, berarti ga Lattice. Ini juga pake
+logika ∀x, y yang berarti untuk semua kemungkinan x dan y. Jadi kalian
+harus cek semua kemungkinan dari pasangan x dan y. Lebih jelasnya bisa
+cek contoh soal/video Nesso Academy.
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+26
+
+=== PAGE 186 ===
+Karena kalian udah paham apa itu greatest lower bound, apa itu least upper
+bound, kita langsung coba latihan soal aja
+Soal 1
+Jawaban
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+27
+
+=== PAGE 187 ===
+Soal 2
+Jawaban
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+28
+
+=== PAGE 188 ===
+Soal 3
+Jawaban
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+29
+
+=== PAGE 189 ===
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+30
+
+=== PAGE 190 ===
+Sesi 9 : Min & Max Element, Upper & Lower Bound (1)
+31
+
+=== PAGE 191 ===
+Sesi 10 : Minimum Spanning Tree, Graph
+Coloring, Finite State Automata, Graph
+Isomorphisms (1)
+Minimum Spanning Tree
+Minimum Spanning Tree adalah suatu permasalahan untuk mencari jarak terpendek dari suatu graf yang
+memiliki bobot. Ada 2 Algoritma yang digunakan untuk mencari Minimum Spanning Tree yaitu Prism’s
+Algorithm dan Kruskal’s Algorithm.
+Langsung ke caranya aja ya
+Prism’s Algorithm
+Link video : https://youtu.be/X_rP6G9Smhw?si=kCGeGPrmwHGzevry
+Langkah-langkah
+1. Mulai dari titik/vertex sembarang, jika vertex awalnya tidak ditentukan dari soal
+2. Tandai dengan lingkaran Edge-edge yang incident/bersebrangan dengan vertex yang kita pilih
+3. Dari Edge-edge yang incident/bersebrangan dengan vertex yang kita pilih, pilih edge dengan bobot terkecil
+4. Kemudian dari vertex berikutnya yang dipilih, tandai lagi edge-edge yang incident dengan vertexnya. Hal
+yang penting : Hapus lingkaran dari edge yang mana akan membentuk loop
+5. Dari Edge yang sudah ditandai tersebut, pilih lagi edge dengan bobot terkecil
+6. Lakukan hal ini terus menerus hingga semua vertex berhasil kita kunjungi
+Mungkin langkah-langkah di atas sulit dipahami, oleh karena itu kita langsung ke contohnya aja
+Contoh 1
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+1
+
+=== PAGE 192 ===
+Jawaban
+Soal 2
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+2
+
+=== PAGE 193 ===
+Jawaban
+Soal 3
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+3
+
+=== PAGE 194 ===
+Jawaban
+Kruskal’s Algorithm
+Link Video : https://youtu.be/SfyrD-ktYew?si=cUzmFtw2kirhC8vd
+Mirip-mirip dengan Prism Algorithm, bedanya kita bebas memilih edge terlepas dari kita sudah
+memilih/mengunjungi vertex mana. Supaya lebih kebayang, langsung ke contohnya aja ya
+Soal 1
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+4
+
+=== PAGE 195 ===
+Jawaban
+Soal 2
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+5
+
+=== PAGE 196 ===
+Jawaban
+Soal 3
+Jawaban
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+6
+
+=== PAGE 197 ===
+Soal Studi Kasus
+Jarak
+Jakarta
+Bekasi
+Bogor
+Banten
+Purwakarta
+Bandung
+Jakarta
+0 km
+45 km
+47 km
+88 km
+79 km
+151 km
+Bekasi
+45 km
+0 km
+50 km
+95 km
+91 km
+136 km
+Bogor
+47 km
+50 km
+0 km
+92 km
+112 km
+145 km
+Banten
+88 km
+95 km
+92 km
+0 km
+170 km
+220 km
+Purwakarta
+79 km
+91 km
+112 km
+170 km
+0 km
+83 km
+Bandung
+151 km
+136 km
+145 km
+220 km
+83 km
+0 km
+Alternatif gambar table
+Sebuah perusahaan penyedia air (PDAM) ingin membuat jalur pipa yang menghubungkan antar kota di atas.
+Pada tabel di atas tersedia data jarak antara dua kota. Karena perusahaan ini ingin mencari untung yang besar
+dan meminimalisir biaya pembuatan jalur pipa, maka perusahaan harus mencari jalur pipa terpendek yang
+menghubungkan pipa antar kota. Sumber mata air berasal dari Waduk Jatiluhur Purwakarta.
+a. Gambarkan graf yang menggambarkan jarak antar kota pada tabel di atas
+b. Hitunglah jarak terpendek pipa yang bisa dibuat untuk menghubungkan antar kota. Berapa panjang pipa
+yang dibutuhkan? (Hint: Gunakan algoritma Prism)
+Jawaban
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+7
+
+=== PAGE 198 ===
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+8
+
+=== PAGE 199 ===
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+9
+
+=== PAGE 200 ===
+Graph Coloring
+Link video : https://youtu.be/Erea1QASjXY?si=1LstOXQr-ncxrR7E
+Intro dulu
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+10
+
+=== PAGE 201 ===
+Kita memiliki peta benua seperti gambar di atas yang terbagi menjadi beberapa negara.
+Negara-negara yang saling bertetangga tidak akur dan karena itu tidak menginginkan warna yang sama pada
+bendera mereka. Pembuat bendera, yang mencoba mengurangi biaya, ingin menggunakan warna sesedikit
+mungkin. Berapa jumlah warna minimum yang dibutuhkan?
+Jawaban
+Nah selain itu, kita bisa jadiin gambar di atas jadi graf aja kaya gini.
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+11
+
+=== PAGE 202 ===
+Gimana udh kebayang? jadi intinya graph coloring itu suatu metode untuk mewarna jalur di antara 2 vertex.
+Kalo misalkan ada 2 vertex yang saling bertetanggaan (kalo dalam konteks contoh di atas tuh 2 negara yang
+saling bertetanggaan) maka warna dari kedua vertex (negara) tersebut tidak boleh sama. Aplikasi dari graph
+coloring ini banyak ya, selain tadi yang ngewarnain bendera dari negara, ngeliat suatu graf itu bipartide atau
+gak, BAHKAN kita juga bisa ngejadwalin sesuatu biar ga bentrok! keren
+Cek apakah suatu graf itu graf yang bipartite?
+Sebelum kita ngecek suatu graf itu bipartite atau gak, kita harus kenalan dulu sama graf bipartite
+Apa itu graf bipartite?
+Graf bipartite itu adalah graf yang bisa kita bagi jadi 2 bagian. Kalo kalian perhatiin vertex yang merah itu
+mereka satu sama lain ga saling berkaitan kan? jadi 1 ga berkaitan ke 2, 2 ga berkaitan ke 3 dan seterusnya.
+Tapi kalo kalian perhatiin lagi, setiap vertex merah itu berkaitan ke vertex biru. Jadi ini tuh ibarat kaya sebuah
+himpunan/ relasi dari A ke B gitu.
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+12
+
+=== PAGE 203 ===
+Nah kita bisa tentuin suatu graf itu bipartite atau gk, dengan cara mewarnai graf tersebut. Jika graf tersebut
+bisa diwarnai dengan cukup 2 warna saja, maka otomatis dia graf yang bipartite. Sebaliknya, jika dia bisa
+diwarnai dengan 1 warna saja atau diwarnai dengan lebih dari 2 warna, maka dia bukan graf yang bipartite.
+Apakah kedua graf ini bipartite?
+Jawaban
+Silakan pelajari dari video ini untuk contoh yang lebih complex (siapa tau nanti diujian disuruh cari tau graf
+tertentu bipartite atau gak)
+https://www.youtube.com/watch?v=HqlUbSA9cEY
+https://www.youtube.com/watch?v=bZBmN7I7GNQ
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+13
+
+=== PAGE 204 ===
+Chromatic Number
+Link Video: https://youtu.be/Erea1QASjXY?si=McLqdGdpgXhH_ur6
+Chromaric number adalah jumlah angka minumum yang diperlukan untuk menggambar graf.
+Ini sering dilambangkan dengan notasi X(G) (bacanya kai)
+Chromatic Number untuk Complete Graph
+Jawaban
+Chromatic Number untuk Cycle
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+14
+
+=== PAGE 205 ===
+Jawaban
+Chromatic Polynomial
+Chromatic polynomial adalah kita menghitung banyaknya cara untuk bisa memberi warna ke graph. Ini berbeda
+dengan chromatic numbers yang artinya butuh berapa banyak warna. 
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+15
+
+=== PAGE 206 ===
+Jawaban
+Latihan Soal Chromatic Polynomial
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+16
+
+=== PAGE 207 ===
+Perhatikan Graf di atas, dengan 6 warna, kita bisa mewarnai graf tersebut dengan berapa banyak cara?
+Jawaban
+Edge coloring
+Di kisi-kisi ga ada, tahun lalu juga ga ada. tapi jaga-jaga aja siapa tau keluar. prinsipnya mirip-mirip Vertex
+Coloring
+https://youtu.be/UN36EXS4w2I?si=e0HdN0FBWsjxPMfm
+Studi Kasus - Graph Coloring 
+Link YTnya : https://youtu.be/q_TpEw1oxnA?si=obDZTMtscod-ye3w
+backup foto table
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+17
+
+=== PAGE 208 ===
+North Central University menawarkan 8 course /mata kuliah selama musim panas. Tabel di atas yang ditandai
+dengan X menandakan bahwa sepasang mata kuliah tersebut memiliki mahasiswa yang sama (Misalnya Putra
+mengambil mata kuliah French dan Math). Karena itu, kita harus menjadwalkan waktu ujian agar setiap mata
+kuliah tidak saling bentrok (Misalnya Waktu ujian Frech dan Math dibuat dalam waktu yang berbeda agar Putra
+bisa mengikuti ujian kedua mata kuliah tersebut). Selain itu, Universitas tersebut hanya memiliki 2 Kelas yang
+memiliki AC, karena sedang musim panas, maka hanya 2 kelas yang dapat digunakan.
+a. Jadwalkan waktu ujian yang efisien untuk setiap mata kuliah. Gunakan hari sesedikit mungkin dan pastikan
+tidak ada mata kuliah yang saling bentrok yang menyebabkan mahasiswa harus mengorbankan salah satu
+mata kuliah.
+Jawaban
+Soal Latihan
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+18
+
+=== PAGE 209 ===
+Jawaban
+Finite State Automata
+Credit : Neso Academy untuk sebagian besar materi ini
+Link Video :
+https://youtu.be/TpIBUeyOuv8?si=tboWhDmAxheWYu5u
+https://youtu.be/Qa6csfkK7_I?si=OPMioalSzAJmviBg
+https://youtu.be/40i4PKpM0cI?si=C4lrPteFxnybrjUh
+https://youtu.be/2KindKcLjos?si=EIiPZd3y-6AJlgh0
+https://youtu.be/_2cKtLkdwnc?si=OTWdteLVHZ3tOkFw
+https://youtu.be/Fpmr1nHqYrw?si=p1LbkDvMds6Zg-8m
+Sangat disarankan untuk menonton semua video di atas, karena mereka saling berkaitan satu sama
+lain dan semua jenis soal dibahas dengan baik di video-video tersebut.
+Prerequisites
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+19
+
+=== PAGE 210 ===
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+20
+
+=== PAGE 211 ===
+Bagian bagian FSA
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+21
+
+=== PAGE 212 ===
+Contoh Soal
+Soal 1
+L1 = Set Of All Strings that start with 0
+Translate : 
+L1 = Sekumpulan string yang dimulai dari 0
+a. Gambarkan Finite State Automatanya yang dapat menerima L1
+b. Buktikan (dengan gambar)
+apakah 001 dapat diterima FSA?
+apakah 101 dapat diterima FSA?
+Jawaban
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+22
+
+=== PAGE 213 ===
+Soal 2
+L2 = Construct a DFA that accepts sets of all strings over {0,1} of length 2.
+Translate:
+Rancanglah DFA yang menerima himpunan dari {0,1} dengan panjang 2
+a. Gambarkan Finite State Automatanya yang dapat menerima L2
+b. Buktikan (dengan gambar)
+apakah 00 dapat diterima FSA?
+apakah 10 dapat diterima FSA?
+apakah 001 dapat diterima FSA?
+apakah 1 dapat diterima FSA?
+Jawaban
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+23
+
+=== PAGE 214 ===
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+24
+
+=== PAGE 215 ===
+Soal 3
+Let us construct a DFA that accepts all strings over {a,b} that does not contain the string aabb  in it
+Translate:
+Rancanglah DFA yang menerima semua string dari himpunan {a,b} yang tidak mengandung string aabb
+Jawaban
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+25
+
+=== PAGE 216 ===
+Soal 4
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+26
+
+=== PAGE 217 ===
+a. Tentukan aturan dari DFA tersebut (DFA tersebut menerima inputan apa saja)
+b. coba input 001, 010, 011, 1101, 1100. Apakah ada kesalahan dalam DFA tersebut? Jika ada lengkapilah
+Jawaban
+Buat Latihan di rumah
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+27
+
+=== PAGE 218 ===
+Jawaban
+Graph Isomorphisms
+https://youtu.be/Ymb2qaVgN58?si=HDO2NUbHMRpIPXGt
+https://youtu.be/Ymb2qaVgN58?si=HDO2NUbHMRpIPXGt
+Sesi 10 : Minimum Spanning Tree, Graph Coloring, Finite State Automata, Graph Isomorphisms (1)
+28

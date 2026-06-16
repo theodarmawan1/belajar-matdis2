@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesi 8: Min/Max Element, Upper/Lower Bound, Lattice — Matematika Diskrit</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script src="../js/theme.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="../index.html" class="navbar__brand">
+      <span class="navbar__brand-icon">∑</span>
+      <span>MatDiskrit</span>
+    </a>
+    <div class="navbar__actions">
+      <button class="navbar__menu-btn" aria-label="Menu">☰</button>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-toggle__knob">🌙</span>
+      </button>
+    </div>
+  </nav>
+  <div class="sidebar-overlay"></div>
+  
+  <div class="layout">
+    <aside class="sidebar">
+      <!-- Session navigation links -->
+      <div class="sidebar__section-title">Navigasi</div>
+      <a href="../index.html" class="sidebar__link"><span class="sidebar__link-icon">🏠</span> Beranda</a>
+      <a href="sesi1.html" class="sidebar__link"><span class="sidebar__link-icon">1</span> Logic</a>
+      <a href="sesi2.html" class="sidebar__link"><span class="sidebar__link-icon">2</span> Quantifier</a>
+      <a href="sesi3.html" class="sidebar__link"><span class="sidebar__link-icon">3</span> Method of Proof</a>
+      <a href="sesi4.html" class="sidebar__link"><span class="sidebar__link-icon">4</span> Fuzzy Sets & Function</a>
+      <a href="sesi5.html" class="sidebar__link"><span class="sidebar__link-icon">5</span> Binomial & Kombinasi</a>
+      <a href="sesi6.html" class="sidebar__link"><span class="sidebar__link-icon">6</span> Relation</a>
+      <a href="sesi7.html" class="sidebar__link"><span class="sidebar__link-icon">7</span> POSET & Hasse</a>
+      <a href="sesi8.html" class="sidebar__link active"><span class="sidebar__link-icon">8</span> Min/Max & Lattice</a>
+      <a href="sesi9.html" class="sidebar__link"><span class="sidebar__link-icon">9</span> MST, Coloring & FSA</a>
+      
+      <div class="sidebar__section-title">Daftar Isi</div>
+      <div class="sidebar__sublinks">
+        <a href="#minimal-maximal" class="sidebar__sublink">Minimal & Maximal Element</a>
+        <a href="#least-greatest" class="sidebar__sublink">Least & Greatest Element</a>
+        <a href="#lower-upper-bound" class="sidebar__sublink">Lower & Upper Bound</a>
+        <a href="#lub-glb" class="sidebar__sublink">LUB & GLB (Supremum & Infimum)</a>
+        <a href="#lattice" class="sidebar__sublink">Lattice</a>
+      </div>
+    </aside>
+    
+    <main class="main-content">
+      <div class="content-wrapper">
+        
+        <!-- Section Header -->
+        <div class="section-header">
+          <span class="section-header__badge">UAS Sesi 8</span>
+          <h1 class="section-header__title">Min/Max, Bounds & Lattice</h1>
+          <p class="section-header__desc">
+            Pada sesi ini, kita akan mempelajari konsep lanjutan dari Himpunan Terurut Sebagian (POSET). 
+            Materi ini mencakup penentuan elemen minimal & maksimal, elemen terkecil (least) & terbesar (greatest), 
+            batas bawah (lower bound) & batas atas (upper bound), supremum (LUB) & infimum (GLB), serta konsep Lattice.
+          </p>
+        </div>
+
+        <!-- Concept Overview Box -->
+        <div class="concept-box">
+          <div class="concept-box__title">Peta Konsep & Istilah Kunci</div>
+          <ul>
+            <li><strong>Minimal Element:</strong> Elemen di dasar diagram Hasse yang tidak memiliki elemen lain di bawahnya.</li>
+            <li><strong>Maximal Element:</strong> Elemen di puncak diagram Hasse yang tidak memiliki elemen lain di atasnya.</li>
+            <li><strong>Least Element (Minimum):</strong> Elemen tunggal di dasar yang harus berelasi ke semua elemen lain.</li>
+            <li><strong>Greatest Element (Maksimum):</strong> Elemen tunggal di puncak yang harus dihubungi oleh semua elemen lain.</li>
+            <li><strong>Lower & Upper Bound:</strong> Batas bawah dan batas atas untuk subset dari poset.</li>
+            <li><strong>GLB & LUB:</strong> Batas bawah terbesar (Infimum) dan batas atas terkecil (Supremum).</li>
+            <li><strong>Lattice:</strong> Poset di mana setiap pasangan elemen memiliki GLB dan LUB unik yang tidak kosong.</li>
+          </ul>
+        </div>
+
+        <!-- SECTION 1: MINIMAL & MAXIMAL ELEMENT -->
+        <section id="minimal-maximal">
+          <h2>1. Minimal & Maximal Element</h2>
+          <p>
+            Dalam sebuah POSET (Partial Ordered Set) $(S, \mathcal{R})$, kita sering kali ingin mengidentifikasi elemen-elemen kunci 
+            yang berada di ujung bawah (dasar) atau ujung atas (puncak) struktur tersebut.
+          </p>
+
+          <div class="callout callout--definition">
+            <h4>Definisi Elemen Minimal</h4>
+            <p>
+              Sebuah elemen $x \in S$ disebut <strong>elemen minimal</strong> apabila tidak ada elemen lain $y \in S$ sehingga $y \mathcal{R} x$ (untuk $y \neq x$).
+              <br>
+              <em>Visualisasi Diagram Hasse:</em> Elemen minimal merupakan titik-titik paling bawah pada diagram Hasse yang tidak memiliki garis mengarah ke bawahnya.
+            </p>
+          </div>
+
+          <div class="callout callout--definition">
+            <h4>Definisi Elemen Maksimal</h4>
+            <p>
+              Sebuah elemen $x \in S$ disebut <strong>elemen maksimal</strong> apabila tidak ada elemen lain $y \in S$ sehingga $x \mathcal{R} y$ (untuk $y \neq x$).
+              <br>
+              <em>Visualisasi Diagram Hasse:</em> Elemen maksimal merupakan titik-titik paling atas pada diagram Hasse yang tidak memiliki garis mengarah ke atasnya.
+            </p>
+          </div>
+
+          <div class="callout callout--info">
+            <p>
+              <strong>💡 Catatan Penting:</strong> Sebuah POSET bisa memiliki lebih dari satu elemen minimal dan lebih dari satu elemen maksimal, tergantung pada strukturnya.
+            </p>
+          </div>
+
+          <!-- Soal 1: Minimal Element -->
+          <div class="exercise" id="soal-min-1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Menentukan Elemen Minimal (Tipe A)</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Tentukan seluruh elemen minimal dari diagram Hasse di bawah ini!</p>
+              <div class="img-container">
+                <img src="../pdf_images/page161_img1.png" alt="Diagram Hasse Soal 1 Elemen Minimal">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Elemen minimal ditandai dengan lingkaran merah pada diagram Hasse berikut:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page161_img2.png" alt="Jawaban Soal 1 Elemen Minimal">
+                    </div>
+                    <p>
+                      <strong>Penjelasan:</strong> Elemen-elemen yang dilingkari merupakan titik paling bawah yang tidak memiliki cabang garis ke bawahnya. Oleh karena itu, tidak ada elemen lain yang mendahului elemen-elemen tersebut.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2: Minimal Element -->
+          <div class="exercise" id="soal-min-2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Menentukan Elemen Minimal (Tipe B)</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Tentukan seluruh elemen minimal dari diagram Hasse berikut!</p>
+              <div class="img-container">
+                <img src="../pdf_images/page162_img1.png" alt="Diagram Hasse Soal 2 Elemen Minimal">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Elemen minimal ditandai dengan lingkaran merah pada diagram Hasse berikut:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page162_img2.png" alt="Jawaban Soal 2 Elemen Minimal">
+                    </div>
+                    <p>
+                      <strong>Penjelasan:</strong> Seperti konsep dasar minimal element, cari semua titik paling bawah yang tidak memiliki koneksi garis ke elemen yang lebih rendah. Titik-titik yang dilingkari merah adalah jawaban dari soal ini.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contoh 1: Maximal Element -->
+          <div class="exercise" id="contoh-max-1">
+            <div class="exercise__header">
+              <span class="exercise__number">3</span>
+              <span class="exercise__title">Menentukan Elemen Maksimal (Tipe A)</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Tentukan seluruh elemen maksimal dari diagram Hasse di bawah ini!</p>
+              <div class="img-container">
+                <img src="../pdf_images/page163_img1.png" alt="Diagram Hasse Contoh 1 Elemen Maksimal">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      <strong>Penjelasan:</strong> Elemen maksimal adalah elemen yang berada di posisi paling atas pada diagram Hasse dan tidak memiliki garis yang mengarah ke atasnya lagi. 
+                      Pada diagram di atas, carilah semua titik puncak yang tidak terhubung ke elemen di atasnya. Titik-titik puncak tersebut merupakan elemen maksimal dari poset.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contoh soal 2: Maximal Element -->
+          <div class="exercise" id="contoh-max-2">
+            <div class="exercise__header">
+              <span class="exercise__number">4</span>
+              <span class="exercise__title">Menentukan Elemen Maksimal (Tipe B)</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Tentukan seluruh elemen maksimal dari diagram Hasse berikut!</p>
+              <div class="img-container">
+                <img src="../pdf_images/page164_img1.png" alt="Diagram Hasse Contoh 2 Elemen Maksimal">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Elemen maksimal ditandai dengan lingkaran merah pada diagram Hasse berikut:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page164_img2.png" alt="Jawaban Contoh 2 Elemen Maksimal">
+                    </div>
+                    <p>
+                      <strong>Penjelasan:</strong> Titik-titik yang dilingkari merah terletak di bagian paling atas diagram Hasse dan tidak memiliki garis yang menghubungkannya ke elemen di atasnya lagi. Oleh karena itu, titik-titik tersebut adalah elemen maksimal.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 3: Minimal & Maximal Element -->
+          <div class="exercise" id="soal-min-max-3">
+            <div class="exercise__header">
+              <span class="exercise__number">5</span>
+              <span class="exercise__title">Menentukan Elemen Minimal & Maksimal Sekaligus</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Tentukan semua elemen minimal dan elemen maksimal dari diagram Hasse di bawah ini!</p>
+              <div class="img-container">
+                <img src="../pdf_images/page165_img1.png" alt="Diagram Hasse Soal 3 Elemen Minimal dan Maksimal">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Elemen minimal dan maksimal ditandai dengan lingkaran berwarna pada diagram Hasse berikut:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page165_img2.png" alt="Jawaban Soal 3 Elemen Minimal dan Maksimal">
+                    </div>
+                    <p>
+                      <strong>Penjelasan:</strong> 
+                      Masing-masing lingkaran mewakili batas terluar poset:
+                      <ul>
+                        <li><strong>Elemen Minimal:</strong> Elemen-elemen paling bawah yang tidak memiliki relasi dari bawah.</li>
+                        <li><strong>Elemen Maksimal:</strong> Elemen-elemen paling atas yang tidak memiliki relasi ke atas lagi.</li>
+                      </ul>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 4: Minimal & Maximal Element Poset Divisibility -->
+          <div class="exercise" id="soal-min-max-4">
+            <div class="exercise__header">
+              <span class="exercise__number">6</span>
+              <span class="exercise__title">Elemen Maksimal & Minimal Poset Matematika $(S, |)$</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Tentukan elemen maksimal dan elemen minimal dari poset $(S, |)$ dengan himpunan:
+                $$S = \{2, 3, 5, 10, 11, 15, 25\}$$
+                di mana relasi $|$ adalah relasi "habis membagi" (divisibility)!
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page166_img1.png" alt="Diagram Hasse Relasi Habis Membagi">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Berikut adalah gambar diagram Hasse dan representasi elemen maksimal/minimalnya:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page166_img2.png" alt="Jawaban Soal 4 Hasse Diagram Detail">
+                    </div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page166_img3.png" alt="Jawaban Soal 4 Penentuan Maksimal/Minimal">
+                    </div>
+                    
+                    <div class="callout callout--success">
+                      <h5>Analisis Langkah Demi Langkah:</h5>
+                      <p><strong>1. Elemen Minimal:</strong> Elemen $x \in S$ yang tidak dapat dibagi habis oleh elemen lain $y \in S$ ($y \neq x$).</p>
+                      <ul>
+                        <li>2 tidak habis dibagi oleh elemen mana pun di $S$.</li>
+                        <li>3 tidak habis dibagi oleh elemen mana pun di $S$.</li>
+                        <li>5 tidak habis dibagi oleh elemen mana pun di $S$.</li>
+                        <li>11 tidak habis dibagi oleh elemen mana pun di $S$.</li>
+                        <li>Sedangkan 10 (habis dibagi 2 dan 5), 15 (habis dibagi 3 dan 5), dan 25 (habis dibagi 5) bukan elemen minimal karena ada elemen di bawahnya.</li>
+                      </ul>
+                      <p>Maka, <strong>Elemen Minimal = $\{2, 3, 5, 11\}$</strong>.</p>
+                      
+                      <p><strong>2. Elemen Maksimal:</strong> Elemen $x \in S$ yang tidak membagi habis elemen lain $y \in S$ ($y \neq x$).</p>
+                      <ul>
+                        <li>10 tidak membagi habis elemen lain di $S$ (kelipatannya tidak ada di $S$).</li>
+                        <li>11 tidak membagi habis elemen lain di $S$.</li>
+                        <li>15 tidak membagi habis elemen lain di $S$.</li>
+                        <li>25 tidak membagi habis elemen lain di $S$.</li>
+                        <li>Sedangkan 2 (membagi 10), 3 (membagi 15), dan 5 (membagi 10, 15, 25) bukan elemen maksimal karena ada elemen di atasnya.</li>
+                      </ul>
+                      <p>Maka, <strong>Elemen Maksimal = $\{10, 11, 15, 25\}$</strong>.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 2: LEAST & GREATEST ELEMENT -->
+        <section id="least-greatest">
+          <h2>2. Least & Greatest Element (Terkecil & Terbesar)</h2>
+          <p>
+            Konsep elemen terkecil dan terbesar berbeda dengan elemen minimal dan maksimal. Elemen minimal/maksimal bisa berjumlah banyak, 
+            namun elemen terkecil/terbesar bersifat <strong>unik (hanya ada maksimal satu jika ada)</strong>.
+          </p>
+
+          <div class="callout callout--definition">
+            <h4>Definisi Least Element (Elemen Terkecil / Minimum)</h4>
+            <p>
+              Sebuah elemen $x \in S$ disebut <strong>least element</strong> dari poset $(S, \mathcal{R})$ apabila:
+              $$\forall y \in S, x \mathcal{R} y$$
+              <em>Sifat:</em> Elemen ini harus berada di paling dasar dan memiliki hubungan relasi langsung/tidak langsung ke <strong>semua</strong> elemen lain dalam poset. Elemen ini bersifat unik (maksimal satu).
+            </p>
+          </div>
+
+          <div class="callout callout--definition">
+            <h4>Definisi Greatest Element (Elemen Terbesar / Maksimum)</h4>
+            <p>
+              Sebuah elemen $x \in S$ disebut <strong>greatest element</strong> dari poset $(S, \mathcal{R})$ apabila:
+              $$\forall y \in S, y \mathcal{R} x$$
+              <em>Sifat:</em> Semua elemen dalam poset harus memiliki hubungan relasi langsung/tidak langsung ke arah elemen terbesar ini. Elemen terbesar berada di puncak diagram Hasse dan bersifat unik (maksimal satu).
+            </p>
+          </div>
+
+          <div class="callout callout--warning">
+            <h4>⚠️ Hubungan Penting:</h4>
+            <ul>
+              <li>Jika sebuah poset memiliki <strong>lebih dari satu elemen minimal</strong>, maka poset tersebut <strong>tidak memiliki least element</strong>.</li>
+              <li>Jika sebuah poset memiliki <strong>lebih dari satu elemen maksimal</strong>, maka poset tersebut <strong>tidak memiliki greatest element</strong>.</li>
+              <li>Least element pasti merupakan elemen minimal, dan greatest element pasti merupakan elemen maksimal. Namun, kebalikannya belum tentu benar!</li>
+            </ul>
+          </div>
+
+          <!-- Soal 1: Maksimum & Minimum Hasse -->
+          <div class="exercise" id="soal-lg-1">
+            <div class="exercise__header">
+              <span class="exercise__number">7</span>
+              <span class="exercise__title">Maksimum & Minimum Element dari Hasse Diagram</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Tentukan apakah poset yang direpresentasikan dalam Hasse diagram di bawah ini memiliki elemen maksimum dan elemen minimum? 
+                Jika ya, sebutkan vertex-nya!
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page170_img1.png" alt="Hasse Diagram Soal 1 Least Greatest">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Berdasarkan analisis diagram Hasse:
+                    </p>
+                    <ul>
+                      <li>
+                        <strong>Elemen Terkecil (Minimum / Least Element):</strong> Tidak ada elemen tunggal di bagian bawah yang menghubungkan ke semua elemen lainnya.
+                      </li>
+                      <li>
+                        <strong>Elemen Terbesar (Maksimum / Greatest Element):</strong> Tidak ada elemen tunggal di puncak yang menerima garis dari semua elemen di bawahnya secara universal.
+                      </li>
+                    </ul>
+                    <p>
+                      <strong>Kesimpulan:</strong> Poset ini tidak memiliki elemen maksimum maupun elemen minimum.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2: Terbesar & Terkecil Poset Divisibility -->
+          <div class="exercise" id="soal-lg-2">
+            <div class="exercise__header">
+              <span class="exercise__number">8</span>
+              <span class="exercise__title">Terbesar & Terkecil pada Poset Pembagian</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Cari elemen terbesar dan elemen terkecil dari poset berikut:
+                $$(\{2, 4, 6, 9, 12, 18, 27, 36, 48, 60, 72\}, |)$$
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page171_img1.png" alt="Langkah 1 Hasse Diagram Soal 2">
+              </div>
+              <div class="img-container">
+                <img src="../pdf_images/page171_img2.png" alt="Langkah 2 Hasse Diagram Soal 2">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Mari kita visualisasikan poset ini menggunakan diagram Hasse terlebih dahulu untuk memudahkan analisis:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page171_img3.png" alt="Diagram Hasse Lengkap">
+                    </div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page172_img1.png" alt="Jawaban Elemen Terkecil">
+                    </div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page172_img2.png" alt="Jawaban Elemen Terbesar">
+                    </div>
+                    
+                    <div class="callout callout--success">
+                      <h5>Penjelasan Logika Matematika:</h5>
+                      <p><strong>1. Elemen Terkecil (Minimum / Least Element):</strong></p>
+                      <ul>
+                        <li>Elemen terkecil $x$ haruslah elemen yang membagi habis seluruh anggota himpunan lainnya.</li>
+                        <li>Elemen-elemen minimal dari poset ini adalah 2 dan 9 (karena tidak ada elemen lain di poset yang membagi 2 atau 9).</li>
+                        <li>Keberadaan dua elemen minimal (2 dan 9) berimplikasi tidak adanya satu elemen minimal unik yang dapat membagi semua elemen lainnya secara bersamaan (2 tidak membagi 9, dan 9 tidak membagi 2).</li>
+                        <li>Oleh karena itu, <strong>elemen terkecil (minimum) tidak ada</strong>.</li>
+                      </ul>
+                      
+                      <p><strong>2. Elemen Terbesar (Greatest / Maksimum):</strong></p>
+                      <ul>
+                        <li>Elemen terbesar $y$ haruslah elemen yang dapat dibagi habis oleh semua anggota himpunan lainnya.</li>
+                        <li>Elemen-elemen maksimal dari poset ini adalah 48, 60, dan 72.</li>
+                        <li>Karena terdapat lebih dari satu elemen maksimal, maka tidak ada elemen terbesar unik yang dapat menampung pembagian dari semua elemen di bawahnya.</li>
+                        <li>Oleh karena itu, <strong>elemen terbesar (maksimum) tidak ada</strong>.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 3: LOWER & UPPER BOUND -->
+        <section id="lower-upper-bound">
+          <h2>3. Lower & Upper Bound</h2>
+          <p>
+            Berbeda dengan minimal/maximal yang mengacu pada seluruh poset, konsep <strong>Bound (Batas)</strong> 
+            didefinisikan berdasarkan suatu <strong>subset (bagian kecil) $T$</strong> dari poset induk $S$.
+          </p>
+
+          <div class="callout callout--definition">
+            <h4>Definisi Lower Bound (Batas Bawah)</h4>
+            <p>
+              Misalkan $(S, \mathcal{R})$ adalah poset dan $T \subseteq S$. 
+              Sebuah elemen $x \in S$ disebut sebagai <strong>lower bound (batas bawah)</strong> dari $T$ jika:
+              $$\forall y \in T, x \mathcal{R} y$$
+              artinya $x$ harus berada di bawah atau terhubung ke seluruh elemen yang ada di dalam subset $T$.
+            </p>
+          </div>
+
+          <div class="callout callout--definition">
+            <h4>Definisi Upper Bound (Batas Atas)</h4>
+            <p>
+              Misalkan $(S, \mathcal{R})$ adalah poset dan $T \subseteq S$. 
+              Sebuah elemen $x \in S$ disebut sebagai <strong>upper bound (batas atas)</strong> dari $T$ jika:
+              $$\forall y \in T, y \mathcal{R} x$$
+              artinya $x$ harus berada di atas atau terhubung dari seluruh elemen yang ada di dalam subset $T$.
+            </p>
+          </div>
+
+          <div class="callout callout--info">
+            <p>
+              <strong>💡 Catatan:</strong> Batas bawah ($x$) dan batas atas ($x$) tidak harus merupakan bagian dari subset $T$, 
+              tetapi ia harus merupakan elemen dari poset induk $S$.
+            </p>
+          </div>
+
+          <!-- Contoh soal 1: LB & UB Subsets -->
+          <div class="exercise" id="contoh-bound-1">
+            <div class="exercise__header">
+              <span class="exercise__number">9</span>
+              <span class="exercise__title">Menentukan LB & UB dari Subset-Subset Hasse Diagram</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Tentukan lower bound (LB) dan upper bound (UB) dari subset-subset berikut pada poset yang direpresentasikan dengan diagram Hasse di bawah:
+              </p>
+              <ul>
+                <li>Subset $T_1 = \{a, b, c\}$</li>
+                <li>Subset $T_2 = \{j, h\}$</li>
+                <li>Subset $T_3 = \{a, b, c, d\}$</li>
+              </ul>
+              <div class="img-container">
+                <img src="../pdf_images/page173_img1.png" alt="Hasse Diagram Contoh Soal 1 Bounds">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Berikut adalah visualisasi penyelesaian untuk batas bawah dan batas atas masing-masing subset:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page174_img1.png" alt="Analisis Bounds Bagian 1">
+                    </div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page174_img2.png" alt="Analisis Bounds Bagian 2">
+                    </div>
+                    <p>
+                      <strong>Metode Analisis:</strong>
+                      Cari elemen di $S$ yang memiliki garis ke semua elemen subset (untuk Upper Bound) atau elemen yang dituju oleh garis dari semua elemen subset (untuk Lower Bound).
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contoh soal 2: UB & LB Soal Lain -->
+          <div class="exercise" id="contoh-bound-2">
+            <div class="exercise__header">
+              <span class="exercise__number">10</span>
+              <span class="exercise__title">Mencari Batas Atas dan Batas Bawah Poset</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Perhatikan Hasse Diagram berikut. Tentukan semua <strong>upper bound</strong> dari $\{a, b, c\}$ 
+                dan semua <strong>lower bound</strong> dari $\{f, g, h\}$!
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page174_img2.png" alt="Diagram Hasse Contoh Soal 2">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Hasil pencarian batas atas dan batas bawah ditunjukkan pada diagram di bawah ini:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page175_img1.png" alt="Jawaban Contoh Soal 2 Bounds">
+                    </div>
+                    <p>
+                      <strong>Analisis UB $\{a, b, c\}$:</strong> Elemen-elemen yang posisinya berada di atas $a, b,$ dan $c$ serta terhubung dengan ketiganya adalah batas atas.
+                      <br>
+                      <strong>Analisis LB $\{f, g, h\}$:</strong> Elemen-elemen yang posisinya berada di bawah $f, g,$ dan $h$ serta terhubung dengan ketiganya adalah batas bawah.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contoh soal 3: UB & LB Poset Matematika -->
+          <div class="exercise" id="contoh-bound-3">
+            <div class="exercise__header">
+              <span class="exercise__number">11</span>
+              <span class="exercise__title">Batas Atas & Bawah Himpunan Pembagian</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Carilah semua <strong>upper bound (UB)</strong> dari $\{2, 9\}$ dan <strong>lower bound (LB)</strong> dari $\{60, 72\}$ 
+                pada poset:
+                $$(\{2, 4, 6, 9, 12, 18, 27, 36, 48, 60, 72\}, |)$$
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page175_img2.png" alt="Analisis Bounds Matematika">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    
+                    <div class="callout callout--success">
+                      <h5>Perhitungan Matematis:</h5>
+                      <p><strong>1. Upper Bound dari $\{2, 9\}$:</strong></p>
+                      <ul>
+                        <li>Elemen $x$ harus habis dibagi oleh 2 dan 9.</li>
+                        <li>Ini berarti $x$ harus kelipatan dari Kelipatan Persekutuan Terkecil (KPK) dari 2 dan 9, yaitu $\text{KPK}(2, 9) = 18$.</li>
+                        <li>Elemen-elemen di poset yang merupakan kelipatan dari 18 adalah: $\{18, 36, 72\}$.</li>
+                        <li>Maka, <strong>UB dari $\{2, 9\} = \{18, 36, 72\}$</strong>.</li>
+                      </ul>
+                      
+                      <p><strong>2. Lower Bound dari $\{60, 72\}$:</strong></p>
+                      <ul>
+                        <li>Elemen $x$ harus membagi habis 60 dan 72.</li>
+                        <li>Ini berarti $x$ harus merupakan pembagi dari Faktor Persekutuan Terbesar (FPB) dari 60 dan 72, yaitu $\text{FPB}(60, 72) = 12$.</li>
+                        <li>Elemen-elemen di poset yang merupakan pembagi dari 12 (membagi habis 12) adalah: $\{2, 4, 6, 12\}$.</li>
+                        <li>Maka, <strong>LB dari $\{60, 72\} = \{2, 4, 6, 12\}$</strong>.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 4: LUB & GLB -->
+        <section id="lub-glb">
+          <h2>4. LUB (Supremum) & GLB (Infimum)</h2>
+          <p>
+            Setelah kita bisa menentukan himpunan dari seluruh batas atas (UB) dan batas bawah (LB) dari suatu subset, kita bisa mencari 
+            elemen ekstrem yang paling mendekati subset tersebut.
+          </p>
+
+          <div class="callout callout--definition">
+            <h4>Least Upper Bound (LUB / Supremum / Join / $\vee$)</h4>
+            <p>
+              LUB dari subset $T$ adalah <strong>elemen terkecil (minimum) dari himpunan batas atas (UB)</strong> milik $T$.
+              $$\text{LUB}(T) = \text{minimum } \{UB(T)\}$$
+              Elemen LUB harus unik. Jika batas atas terkecilnya tidak unik atau tidak ada, maka LUB tidak ada.
+            </p>
+          </div>
+
+          <div class="callout callout--definition">
+            <h4>Greatest Lower Bound (GLB / Infimum / Meet / $\wedge$)</h4>
+            <p>
+              GLB dari subset $T$ adalah <strong>elemen terbesar (maksimum) dari himpunan batas bawah (LB)</strong> milik $T$.
+              $$\text{GLB}(T) = \text{maksimum } \{LB(T)\}$$
+              Elemen GLB harus unik. Jika batas bawah terbesarnya tidak unik atau tidak ada, maka GLB tidak ada.
+            </p>
+          </div>
+
+          <div class="callout callout--info">
+            <h5>💡 Cara Menghafal Cepat (Konsep Kebalikan):</h5>
+            <ul>
+              <li><strong>Upper (Atas)</strong> berpasangan dengan <strong>Least (Terkecil)</strong> $\rightarrow$ LUB (Supremum)</li>
+              <li><strong>Lower (Bawah)</strong> berpasangan dengan <strong>Greatest (Terbesar)</strong> $\rightarrow$ GLB (Infimum)</li>
+            </ul>
+          </div>
+
+          <!-- Soal 1: GLB & LUB {b,d,g} -->
+          <div class="exercise" id="soal-lg-lub-1">
+            <div class="exercise__header">
+              <span class="exercise__number">12</span>
+              <span class="exercise__title">Mencari GLB & LUB dari Subset $\{b, d, g\}$</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Carilah greatest lower bound (GLB) dan least upper bound (LUB) dari subset $\{b, d, g\}$, jika ada, pada poset yang digambarkan berikut!</p>
+              <div class="img-container">
+                <img src="../pdf_images/page177_img1.png" alt="Hasse Diagram Soal 1 GLB LUB">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Hasil analisis pencarian GLB & LUB dapat dilihat pada diagram berikut:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page177_img2.png" alt="Jawaban Soal 1 GLB LUB">
+                    </div>
+                    <p>
+                      <strong>Cara Pengerjaan:</strong>
+                      <br>
+                      1. Cari semua batas atas (UB) dari $\{b, d, g\}$, kemudian cari elemen terkecilnya untuk memperoleh LUB.
+                      <br>
+                      2. Cari semua batas bawah (LB) dari $\{b, d, g\}$, kemudian cari elemen terbesarnya untuk memperoleh GLB.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2: LUB & GLB {a,b,c} & {f,g,h} -->
+          <div class="exercise" id="soal-lg-lub-2">
+            <div class="exercise__header">
+              <span class="exercise__number">13</span>
+              <span class="exercise__title">LUB dari $\{a, b, c\}$ dan GLB dari $\{f, g, h\}$</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Carilah least upper bound (LUB) dari $\{a, b, c\}$ dan greatest lower bound (GLB) dari $\{f, g, h\}$, jika ada!</p>
+              <div class="img-container">
+                <img src="../pdf_images/page178_img1.png" alt="Hasse Diagram Soal 2 GLB LUB">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Hasil analisis pencarian LUB & GLB dapat dilihat pada diagram berikut:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page178_img2.png" alt="Jawaban Soal 2 GLB LUB">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 3: LUB & GLB Poset Matematika -->
+          <div class="exercise" id="soal-lg-lub-3">
+            <div class="exercise__header">
+              <span class="exercise__number">14</span>
+              <span class="exercise__title">LUB & GLB pada Poset Pembagian</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Carilah least upper bound (LUB) dari $\{2, 9\}$ dan greatest lower bound (GLB) dari $\{60, 72\}$ 
+                untuk poset:
+                $$(\{2, 4, 6, 9, 12, 18, 27, 36, 48, 60, 72\}, |)$$
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page179_img1.png" alt="Hasse Diagram Soal 3 GLB LUB">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Penyelesaian secara visual dan matematis:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page179_img2.png" alt="Jawaban LUB dari {2, 9}">
+                    </div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page179_img3.png" alt="Jawaban GLB dari {60, 72}">
+                    </div>
+                    
+                    <div class="callout callout--success">
+                      <h5>Analisis Detail:</h5>
+                      <p><strong>1. LUB dari $\{2, 9\}$:</strong></p>
+                      <ul>
+                        <li>Himpunan batas atas (UB) dari $\{2, 9\}$ adalah $\{18, 36, 72\}$.</li>
+                        <li>LUB adalah nilai terkecil di antara himpunan UB tersebut dalam poset terurut pembagian.</li>
+                        <li>Karena 18 membagi habis 36 dan 72, maka 18 adalah elemen terkecil dari UB tersebut.</li>
+                        <li>Maka, <strong>LUB$(\{2, 9\}) = 18$</strong>.</li>
+                      </ul>
+                      
+                      <p><strong>2. GLB dari $\{60, 72\}$:</strong></p>
+                      <ul>
+                        <li>Himpunan batas bawah (LB) dari $\{60, 72\}$ adalah $\{2, 4, 6, 12\}$.</li>
+                        <li>GLB adalah nilai terbesar di antara himpunan LB tersebut dalam poset terurut pembagian.</li>
+                        <li>Karena 2 membagi 12, 4 membagi 12, dan 6 membagi 12, maka 12 adalah elemen terbesar dari LB tersebut.</li>
+                        <li>Maka, <strong>GLB$(\{60, 72\}) = 12$</strong>.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 4: Comparable Pairs Concept -->
+          <div class="exercise" id="soal-lg-lub-4">
+            <div class="exercise__header">
+              <span class="exercise__number">15</span>
+              <span class="exercise__title">Hubungan Comparable Pairs & Keberadaan Bound</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Bagaimanakah hubungan comparable pairs dengan pencarian bound (LUB & GLB)? 
+                Jelaskan dan buktikan dengan contoh kasus di bawah ini!
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page180_img1.png" alt="Diagram Hasse Hubungan Comparable">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Detail analisis mengenai keberadaan lower bound dan upper bound dari comparable pairs:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page181_img1.png" alt="Analisis Bounds Pasangan Comparable">
+                    </div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page183_img1.png" alt="Penjelasan Mengenai Aturan Comparable">
+                    </div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page184_img1.png" alt="Kesimpulan Lattice dari Comparable Pairs">
+                    </div>
+                    
+                    <div class="callout callout--info">
+                      <h5>Kesimpulan Utama:</h5>
+                      <p>
+                        Jika pasangan elemen merupakan <strong>comparable pairs</strong> (saling berelasi secara langsung), 
+                        maka pasangan tersebut <strong>sudah pasti memiliki GLB dan LUB</strong> (dan dengan kata lain memenuhi kriteria Lattice).
+                      </p>
+                      <p>
+                        Sebagai contoh:
+                        <br>
+                        - Untuk pasangan $(a, b)$ yang comparable di mana $a \prec b$, maka $\text{GLB}(a, b) = a$ (greatest lower bound) dan $\text{LUB}(a, b) = b$ (least upper bound).
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 5: LATTICE -->
+        <section id="lattice">
+          <h2>5. Lattice</h2>
+          <p>
+            Sekarang kita masuk ke konsep puncak dari relasi terurut sebagian, yaitu <strong>Lattice (Kisi)</strong>.
+          </p>
+
+          <div class="callout callout--definition">
+            <h4>Definisi Lattice</h4>
+            <p>
+              Sebuah POSET $(S, \mathcal{R})$ disebut <strong>Lattice</strong> jika dan hanya jika untuk <strong>setiap pasangan elemen</strong> $x, y \in S$, 
+              pasangan tersebut memiliki:
+              <br>
+              1. <strong>Greatest Lower Bound (GLB)</strong> yang tidak kosong dan unik. (Meet Semilattice: $\text{GLB}(x, y) \neq \emptyset$)
+              <br>
+              2. <strong>Least Upper Bound (LUB)</strong> yang tidak kosong dan unik. (Join Semilattice: $\text{LUB}(x, y) \neq \emptyset$)
+            </p>
+          </div>
+
+          <div class="callout callout--warning">
+            <h4>⚠️ Syarat Mutlak Lattice:</h4>
+            <p>
+              Aturan ini menggunakan logika <strong>DAN (AND)</strong> serta kuantor universal <strong>UNTUK SEMUA ($\forall$)</strong>.
+              Artinya, <strong>seluruh pasangan elemen</strong> tanpa terkecuali harus memiliki GLB dan LUB. Jika ada 
+              satu saja pasangan elemen yang tidak memiliki GLB atau tidak memiliki LUB, maka poset tersebut 
+              <strong>bukan Lattice</strong>.
+            </p>
+          </div>
+
+          <!-- Soal 1: Cek Lattice 1 -->
+          <div class="exercise" id="soal-lat-1">
+            <div class="exercise__header">
+              <span class="exercise__number">16</span>
+              <span class="exercise__title">Cek Lattice pada Diagram Hasse (Kasus A)</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Periksa apakah diagram Hasse di bawah ini merupakan sebuah Lattice!</p>
+              <div class="img-container">
+                <img src="../pdf_images/page186_img1.png" alt="Hasse Diagram Uji Lattice A">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Hasil pengujian dan penjelasan dapat dilihat pada gambar di bawah ini:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page186_img2.png" alt="Analisis Jawaban Lattice Soal 1">
+                    </div>
+                    <p>
+                      <strong>Analisis Singkat:</strong>
+                      Periksa apakah semua titik memiliki pasangan yang bertemu di satu titik atas (LUB) dan bertemu di satu titik bawah (GLB).
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2: Cek Lattice 2 -->
+          <div class="exercise" id="soal-lat-2">
+            <div class="exercise__header">
+              <span class="exercise__number">17</span>
+              <span class="exercise__title">Cek Lattice pada Diagram Hasse (Kasus B)</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Periksa apakah diagram Hasse berikut merupakan sebuah Lattice!</p>
+              <div class="img-container">
+                <img src="../pdf_images/page187_img1.png" alt="Hasse Diagram Uji Lattice B">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Hasil pengujian dan penjelasan dapat dilihat pada gambar di bawah ini:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page187_img2.png" alt="Analisis Jawaban Lattice Soal 2">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 3: Cek Lattice 3 (Hard / Multiple steps) -->
+          <div class="exercise" id="soal-lat-3">
+            <div class="exercise__header">
+              <span class="exercise__number">18</span>
+              <span class="exercise__title">Analisis Komprehensif Lattice (Kasus C)</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>Periksa dengan detail apakah diagram Hasse berikut merupakan sebuah Lattice!</p>
+              <div class="img-container">
+                <img src="../pdf_images/page188_img1.png" alt="Hasse Diagram Uji Lattice C - Gbr 1">
+              </div>
+              <div class="img-container">
+                <img src="../pdf_images/page188_img2.png" alt="Hasse Diagram Uji Lattice C - Gbr 2">
+              </div>
+              <div class="img-container">
+                <img src="../pdf_images/page188_img3.png" alt="Hasse Diagram Uji Lattice C - Gbr 3">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Berikut adalah lembar analisis langkah demi langkah untuk membuktikan kriteria Lattice:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page189_img1.png" alt="Analisis Step 1">
+                    </div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page189_img2.png" alt="Analisis Step 2">
+                    </div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page190_img1.png" alt="Analisis Step 3">
+                    </div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page190_img2.png" alt="Analisis Step 4">
+                    </div>
+                    <p>
+                      <strong>Kesimpulan:</strong> 
+                      Dengan memetakan seluruh kombinasi pasangan elemen, kita dapat melihat apakah terdapat pasangan elemen yang melanggar ketentuan (memiliki LUB/GLB kosong atau tidak unik). Jika seluruh pasangan lolos uji, maka poset tersebut sah sebagai Lattice.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page Navigation -->
+        <div class="page-nav">
+          <a href="sesi7.html" class="page-nav__link">
+            <span class="page-nav__label">← Sebelumnya</span>
+            <span class="page-nav__title">POSET & Hasse Diagram</span>
+          </a>
+          <a href="sesi9.html" class="page-nav__link page-nav__link--next">
+            <span class="page-nav__label">Selanjutnya →</span>
+            <span class="page-nav__title">MST, Graph Coloring & FSA</span>
+          </a>
+        </div>
+
+      </div>
+    </main>
+  </div>
+  
+  <button class="back-to-top" aria-label="Kembali ke atas">↑</button>
+  <script src="../js/main.js"></script>
+</body>
+</html>

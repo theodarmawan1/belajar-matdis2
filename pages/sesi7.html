@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesi 7: POSET & Hasse Diagram — Matematika Diskrit</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script src="../js/theme.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="../index.html" class="navbar__brand">
+      <span class="navbar__brand-icon">∑</span>
+      <span>MatDiskrit</span>
+    </a>
+    <div class="navbar__actions">
+      <button class="navbar__menu-btn" aria-label="Menu">☰</button>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-toggle__knob">🌙</span>
+      </button>
+    </div>
+  </nav>
+  <div class="sidebar-overlay"></div>
+  
+  <div class="layout">
+    <aside class="sidebar">
+      <!-- Session navigation links -->
+      <div class="sidebar__section-title">Navigasi</div>
+      <a href="../index.html" class="sidebar__link"><span class="sidebar__link-icon">🏠</span> Beranda</a>
+      <a href="sesi1.html" class="sidebar__link"><span class="sidebar__link-icon">1</span> Logic</a>
+      <a href="sesi2.html" class="sidebar__link"><span class="sidebar__link-icon">2</span> Quantifier</a>
+      <a href="sesi3.html" class="sidebar__link"><span class="sidebar__link-icon">3</span> Method of Proof</a>
+      <a href="sesi4.html" class="sidebar__link"><span class="sidebar__link-icon">4</span> Fuzzy Sets & Function</a>
+      <a href="sesi5.html" class="sidebar__link"><span class="sidebar__link-icon">5</span> Binomial & Kombinasi</a>
+      <a href="sesi6.html" class="sidebar__link"><span class="sidebar__link-icon">6</span> Relation</a>
+      <a href="sesi7.html" class="sidebar__link"><span class="sidebar__link-icon">7</span> POSET & Hasse Diagram</a>
+      <a href="sesi8.html" class="sidebar__link"><span class="sidebar__link-icon">8</span> Min/Max & Lattice</a>
+      <a href="sesi9.html" class="sidebar__link"><span class="sidebar__link-icon">9</span> MST, Coloring & FSA</a>
+      
+      <div class="sidebar__section-title">Daftar Isi</div>
+      <a href="#dasar-poset" class="sidebar__sublink">1. Dasar-dasar POSET</a>
+      <a href="#comparable-incomparable" class="sidebar__sublink">2. Comparable & Incomparable</a>
+      <a href="#totally-ordered" class="sidebar__sublink">3. Totally Ordered Set (Chain)</a>
+      <a href="#hasse-diagram" class="sidebar__sublink">4. Hasse Diagram</a>
+    </aside>
+    
+    <main class="main-content">
+      <div class="content-wrapper">
+        
+        <!-- Section Header -->
+        <div class="section-header">
+          <span class="section-header__badge">UAS Materi</span>
+          <h1 class="section-header__title">Sesi 7: POSET & Hasse Diagram</h1>
+          <p class="section-header__desc">
+            Pelajari konsep Partial Order (Pengurutan Parsial), POSET, Comparable & Incomparable, 
+            Totally Ordered Set (Chain), serta langkah-langkah menggambar dan membaca Hasse Diagram.
+          </p>
+        </div>
+
+        <!-- Section 1 -->
+        <section id="dasar-poset" class="content-section">
+          <h2>1. Dasar-dasar POSET</h2>
+          <p>
+            Secara intuitif, relasi dapat digunakan untuk mengurutkan elemen-elemen dalam suatu himpunan. 
+            Sebagai contoh, kita dapat mengurutkan kata-kata dalam kamus berdasarkan urutan abjad, atau mengurutkan bilangan bulat berdasarkan nilainya.
+          </p>
+          
+          <div class="concept-box">
+            <div class="concept-box__title">💡 Konsep Dasar Pengurutan</div>
+            <p>Mari kita lihat beberapa contoh bagaimana relasi digunakan untuk melakukan pengurutan:</p>
+            <ul>
+              <li>
+                <strong>Contoh 1 (Pengurutan Kata):</strong> Misalkan relasi $R = \{(a, b) \mid a \text{ lebih dahulu dari } b\}$ pada himpunan semua kata. 
+                Jika kita membandingkan kata $a = \text{"Kapak"}$ dan $b = \text{"Katak"}$, satu-satunya perbedaan ada pada huruf keempat ('p' dan 't'). 
+                Karena huruf 'p' berada sebelum 't' dalam alfabet, maka $(a, b) \in R$ (Kapak lebih dahulu dari Katak). Relasi ini searah dan tidak dapat dibalik.
+              </li>
+              <li>
+                <strong>Contoh 2 (Pengurutan Bilangan):</strong> Misalkan relasi $R = \{(a, b) \mid a < b\}$ pada himpunan bilangan bulat $\mathbb{Z}$. 
+                Relasi ini dapat digunakan untuk mengurutkan bilangan. Kita tahu bahwa $(1, 2) \in R$ karena $1 < 2$, tetapi $(2, 1) \notin R$ karena $2 \not< 1$.
+              </li>
+            </ul>
+          </div>
+
+          <div class="callout callout--definition">
+            <span class="callout__icon">📋</span>
+            <div class="callout__body">
+              <h4>Definisi POSET (Partially Ordered Set)</h4>
+              <p>
+                Sebuah himpunan $S$ bersama dengan relasi $R$ pada $S$ disebut <strong>POSET (Partially Ordered Set)</strong> jika relasi tersebut memenuhi tiga sifat berikut:
+              </p>
+              <ol style="margin-left: 20px; list-style-type: decimal;">
+                <li><strong>Refleksif (Reflexive):</strong> Untuk setiap $a \in S$, berlaku $a \preceq a$ (atau $(a, a) \in R$).</li>
+                <li><strong>Antisimetris (Antisymmetric):</strong> Untuk setiap $a, b \in S$, jika $a \dots b$ dan $b \dots a$, maka $a = b$.</li>
+                <li><strong>Transitif (Transitive):</strong> Untuk setiap $a, b, c \in S$, jika $a \dots b$ dan $b \dots c$, maka $a \dots c$.</li>
+              </ol>
+              <p>
+                Pasangan $(S, \preceq)$ melambangkan sebuah poset. Simbol $\preceq$ digunakan secara umum untuk melambangkan relasi partial order (tidak selalu berarti "kurang dari atau sama dengan" biasa).
+              </p>
+            </div>
+          </div>
+
+          <div class="callout callout--info">
+            <span class="callout__icon">ℹ️</span>
+            <div class="callout__body">
+              <strong>Mengapa disebut "Partial" (Parsial/Sebagian)?</strong><br>
+              Kata "partial" digunakan karena pada poset, tidak semua pasangan elemen harus memiliki hubungan relasi. Kita bisa menemukan elemen-elemen yang berdiri sendiri atau tidak dapat dibandingkan satu sama lain.
+            </div>
+          </div>
+
+          <!-- Latihan Soal 1 -->
+          <div class="exercise" id="soal-1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Contoh Soal 1: Buktikan Relasi Subset adalah POSET</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Tunjukkan bahwa relasi subset $R = \{(a, b) \mid a \subseteq b\}$ yang didefinisikan pada himpunan kuasa (power set) $P(S)$ dengan $S = \{1, 2, 3\}$ adalah sebuah <strong>POSET</strong>!
+              </p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Himpunan kuasa $P(S)$ dari $S = \{1, 2, 3\}$ adalah:
+                      $$P(S) = \{\emptyset, \{1\}, \{2\}, \{3\}, \{1, 2\}, \{1, 3\}, \{2, 3\}, \{1, 2, 3\}\}$$
+                      Untuk membuktikan $(P(S), \subseteq)$ adalah POSET, kita harus menunjukkan bahwa relasi $\subseteq$ memenuhi 3 sifat:
+                    </p>
+                    <ol style="margin-left: 20px; list-style-type: decimal;">
+                      <li>
+                        <strong>Refleksif (Reflexivity):</strong><br>
+                        Ambil sebarang himpunan $a \in P(S)$. Pasti berlaku $a \subseteq a$, karena setiap himpunan selalu merupakan subset dari dirinya sendiri. Sifat refleksif terpenuhi.
+                      </li>
+                      <li>
+                        <strong>Antisimetris (Antisymmetry):</strong><br>
+                        Ambil sebarang himpunan $a, b \in P(S)$. Jika $a \subseteq b$ dan $b \subseteq a$, maka sesuai dengan definisi kesamaan himpunan, haruslah $a = b$. Sifat antisimetris terpenuhi.
+                      </li>
+                      <li>
+                        <strong>Transitif (Transitivity):</strong><br>
+                        Ambil sebarang himpunan $a, b, c \in P(S)$. Jika $a \subseteq b$ dan $b \subseteq c$, maka setiap elemen yang ada di $a$ juga ada di $b$, dan setiap elemen di $b$ juga ada di $c$. Maka, semua elemen di $a$ pasti berada di $c$, sehingga $a \subseteq c$. Sifat transitif terpenuhi.
+                      </li>
+                    </ol>
+                    <p style="margin-top: 10px;">
+                      Karena relasi $\subseteq$ pada $P(S)$ bersifat refleksif, antisimetris, dan transitif, maka terbukti bahwa $(P(S), \subseteq)$ merupakan sebuah <strong>POSET</strong>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Latihan Soal 2 -->
+          <div class="exercise" id="soal-2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Contoh Soal 2: Buktikan Relasi Habis Membagi adalah POSET</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Tunjukkan bahwa relasi $R = \{(a, b) \mid a \text{ membagi } b\}$ yang didefinisikan pada himpunan $S = \{1, 2, 3, 4, 6\}$ adalah sebuah <strong>POSET</strong>!
+              </p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Kita uji ketiga sifat poset untuk relasi keterbagian ($a \mid b$) pada himpunan $S$:
+                    </p>
+                    <ol style="margin-left: 20px; list-style-type: decimal;">
+                      <li>
+                        <strong>Refleksif:</strong><br>
+                        Untuk setiap elemen $a \in S$, berlaku $a \mid a$ (setiap bilangan bulat positif membagi habis dirinya sendiri). Contoh: $2 \mid 2$ adalah benar karena $2/2 = 1$. Sifat refleksif terpenuhi.
+                      </li>
+                      <li>
+                        <strong>Antisimetris:</strong><br>
+                        Untuk setiap $a, b \in S$, jika $a \mid b$ dan $b \mid a$, maka $a = b$. Karena semua anggota $S$ adalah bilangan bulat positif, jika $a$ membagi $b$, maka $a \le b$. Begitu juga jika $b$ membagi $a$, maka $b \le a$. Agar keduanya terpenuhi, haruslah $a = b$. Sifat antisimetris terpenuhi.
+                      </li>
+                      <li>
+                        <strong>Transitif:</strong><br>
+                        Untuk setiap $a, b, c \in S$, jika $a \mid b$ dan $b \mid c$, maka $a \mid c$.<br>
+                        <em>Bukti matematis:</em>
+                        <ul>
+                          <li>$a \mid b \implies b = k \cdot a$ untuk suatu bilangan bulat $k$.</li>
+                          <li>$b \mid c \implies c = m \cdot b$ untuk suatu bilangan bulat $m$.</li>
+                        </ul>
+                        Substitusikan $b$ ke persamaan kedua:<br>
+                        $c = m \cdot (k \cdot a) = (m \cdot k) \cdot a$.<br>
+                        Karena $m \cdot k$ adalah bilangan bulat, maka terbukti $a \mid c$. Sifat transitif terpenuhi.
+                      </li>
+                    </ol>
+                    <p style="margin-top: 10px;">
+                      Karena ketiga sifat poset dipenuhi oleh relasi keterbagian pada himpunan $S$, maka $(S, \mid)$ terbukti merupakan sebuah <strong>POSET</strong>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Latihan Soal 3 -->
+          <div class="exercise" id="soal-3">
+            <div class="exercise__header">
+              <span class="exercise__number">3</span>
+              <span class="exercise__title">Contoh Soal 3: Buktikan Relasi Lebih Besar atau Sama Dengan (≥) adalah POSET</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Buktikan bahwa relasi lebih besar atau sama dengan ($\ge$) pada himpunan bilangan bulat $\mathbb{Z}$ adalah sebuah <strong>POSET</strong>!
+              </p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Mari kita buktikan tiga sifat poset untuk relasi $\ge$ pada himpunan bilangan bulat $\mathbb{Z}$:
+                    </p>
+                    <ol style="margin-left: 20px; list-style-type: decimal;">
+                      <li>
+                        <strong>Refleksif:</strong><br>
+                        Untuk setiap bilangan bulat $a \in \mathbb{Z}$, selalu berlaku $a \ge a$. Sifat refleksif terpenuhi.
+                      </li>
+                      <li>
+                        <strong>Antisimetris:</strong><br>
+                        Untuk setiap bilangan bulat $a, b \in \mathbb{Z}$, jika $a \ge b$ dan $b \ge a$, maka satu-satunya kemungkinan secara matematis adalah $a = b$. Sifat antisimetris terpenuhi.
+                      </li>
+                      <li>
+                        <strong>Transitif:</strong><br>
+                        Untuk setiap bilangan bulat $a, b, c \in \mathbb{Z}$, jika $a \ge b$ dan $b \ge c$, maka $a \ge c$. Sifat transitif terpenuhi.
+                      </li>
+                    </ol>
+                    <p style="margin-top: 10px;">
+                      Karena memenuhi sifat refleksif, antisimetris, dan transitif, maka relasi $\ge$ pada himpunan bilangan bulat $\mathbb{Z}$ terbukti merupakan sebuah <strong>POSET</strong>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 2 -->
+        <section id="comparable-incomparable" class="content-section">
+          <h2>2. Comparable & Incomparable</h2>
+          <p>
+            Dalam sebuah poset, tidak semua elemen harus dapat dibandingkan satu sama lain. Dua konsep penting yang membagi hubungan antar elemen dalam poset adalah <strong>Comparable</strong> dan <strong>Incomparable</strong>.
+          </p>
+
+          <div class="callout callout--definition">
+            <span class="callout__icon">⚖️</span>
+            <div class="callout__body">
+              <h4>Definisi Comparable &amp; Incomparable</h4>
+              <p>Misalkan $(S, \preceq)$ adalah sebuah poset. Dua elemen $a$ dan $b$ di dalam $S$ disebut:</p>
+              <ul>
+                <li><strong>Comparable (Dapat Dibandingkan):</strong> Jika berlaku $a \preceq b$ atau $b \preceq a$.</li>
+                <li><strong>Incomparable (Tidak Dapat Dibandingkan):</strong> Jika berlaku $a \not\preceq b$ dan $b \not\preceq a$.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="concept-box">
+            <div class="concept-box__title">🔍 Contoh Penerapan</div>
+            <p>
+              Kembali ke Contoh Soal 1, di mana kita memiliki poset himpunan kuasa $P(S)$ dari $S = \{1, 2, 3\}$ di bawah relasi inklusi $\subseteq$:
+            </p>
+            <ul>
+              <li>
+                Elemen $\{1, 3\}$ dan $\{2\}$ adalah <strong>incomparable</strong> karena $\{1, 3\} \not\subseteq \{2\}$ dan $\{2\} \not\subseteq \{1, 3\}$. Kita tidak dapat membandingkan kedua subset tersebut.
+              </li>
+              <li>
+                Elemen $\{1\}$ dan $\{1, 3\}$ adalah <strong>comparable</strong> karena $\{1\} \subseteq \{1, 3\}$ bernilai benar.
+              </li>
+            </ul>
+            <div class="img-container" style="margin-top: 20px;">
+              <img src="../pdf_images/page140_img1.png" alt="Comparable & Incomparable">
+              <figcaption>Visualisasi hubungan comparable dan incomparable pada subset</figcaption>
+            </div>
+          </div>
+
+          <!-- Latihan Soal 4 -->
+          <div class="exercise" id="soal-4">
+            <div class="exercise__header">
+              <span class="exercise__number">4</span>
+              <span class="exercise__title">Soal 2: Comparable & Incomparable pada Poset Keterbagian</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Pada poset bilangan bulat positif di bawah relasi keterbagian $(\mathbb{Z}^+, \mid)$:
+              </p>
+              <ol style="margin-left: 20px; list-style-type: lower-alpha;">
+                <li>Apakah bilangan bulat 3 dan 9 <em>comparable</em>?</li>
+                <li>Apakah bilangan bulat 5 dan 7 <em>comparable</em>?</li>
+              </ol>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <ol style="margin-left: 20px; list-style-type: decimal;">
+                      <li>
+                        Bilangan bulat 3 dan 9 adalah <strong>comparable</strong> karena berlaku $3 \mid 9$ (3 membagi habis 9).
+                      </li>
+                      <li>
+                        Bilangan bulat 5 dan 7 adalah <strong>incomparable</strong> karena $5 \nmid 7$ (5 tidak membagi habis 7) dan $7 \nmid 5$ (7 tidak membagi habis 5).
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 3 -->
+        <section id="totally-ordered" class="content-section">
+          <h2>3. Totally Ordered Set (Chain)</h2>
+          <p>
+            Ketika sifat "parsial" pada poset hilang, artinya seluruh elemen di dalamnya dapat dibandingkan satu sama lain tanpa terkecuali, kita mendapatkan struktur linear yang disebut rantai (chain).
+          </p>
+
+          <div class="callout callout--definition">
+            <span class="callout__icon">🔗</span>
+            <div class="callout__body">
+              <h4>Definisi Totally Ordered Set (Urutan Total) / Chain</h4>
+              <p>
+                Jika $(S, \preceq)$ adalah sebuah poset di mana <strong>setiap dua elemen</strong> di dalam $S$ bersifat <em>comparable</em>, maka $S$ disebut sebagai <strong>totally ordered set</strong> (atau disebut juga <strong>linear order</strong> atau <strong>chain / rantai</strong>).
+              </p>
+            </div>
+          </div>
+
+          <div class="concept-box">
+            <div class="concept-box__title">⛓️ Perbandingan POSET Biasa vs Chain</div>
+            <ul>
+              <li>
+                <strong>POSET Biasa:</strong> Boleh mengandung elemen-elemen yang <em>incomparable</em> (seperti relasi keterbagian $\mid$ atau subset $\subseteq$). Representasi grafisnya dapat bercabang-cabang dan terpisah.
+              </li>
+              <li>
+                <strong>Chain (Linear Order):</strong> Tidak ada elemen yang <em>incomparable</em>. Semua elemen saling berhubungan secara linear, membentuk satu garis vertikal lurus dari bawah ke atas.
+              </li>
+            </ul>
+            <div class="img-container" style="margin-top: 20px;">
+              <img src="../pdf_images/page141_img1.png" alt="Totally vs Partially Ordered 1">
+              <img src="../pdf_images/page142_img1.png" alt="Totally vs Partially Ordered 2" style="margin-top: 15px;">
+              <figcaption>Perbedaan struktur grafis antara POSET bercabang dan Chain linier</figcaption>
+            </div>
+          </div>
+
+          <!-- Latihan Soal 5 -->
+          <div class="exercise" id="soal-5">
+            <div class="exercise__header">
+              <span class="exercise__number">5</span>
+              <span class="exercise__title">Latihan Soal: Membuktikan Chain pada Poset (Z, ≤)</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Tunjukkan bahwa poset $(\mathbb{Z}, \le)$ (himpunan bilangan bulat dengan relasi kurang dari atau sama dengan) merupakan sebuah <strong>totally ordered set (chain)</strong>!
+              </p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Untuk membuktikan $(\mathbb{Z}, \le)$ merupakan <em>totally ordered set</em>, kita harus memastikan bahwa:
+                    </p>
+                    <ol style="margin-left: 20px; list-style-type: decimal;">
+                      <li>
+                        <strong>$(\mathbb{Z}, \le)$ adalah POSET:</strong><br>
+                        Relasi $\le$ terbukti memenuhi sifat refleksif ($a \le a$), antisimetris (jika $a \le b$ dan $b \le a \implies a=b$), serta transitif (jika $a \le b$ dan $b \le c \implies a \le c$).
+                      </li>
+                      <li>
+                        <strong>Setiap dua elemen bersifat comparable:</strong><br>
+                        Ambil sebarang dua bilangan bulat $a, b \in \mathbb{Z}$. Sesuai hukum trikotomi matematika, pasti berlaku salah satu dari kemungkinan:
+                        $$a < b, \quad a = b, \quad \text{atau} \quad a > b$$
+                        Dalam semua kasus tersebut, kita selalu dapat menyimpulkan bahwa $a \le b$ atau $b \le a$ bernilai benar. 
+                        Oleh karena itu, setiap dua elemen di $\mathbb{Z}$ pasti <em>comparable</em>.
+                      </li>
+                    </ol>
+                    <p style="margin-top: 10px;">
+                      Karena kedua syarat terpenuhi, maka $(\mathbb{Z}, \le)$ terbukti merupakan sebuah <strong>totally ordered set (chain)</strong>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 4 -->
+        <section id="hasse-diagram" class="content-section">
+          <h2>4. Hasse Diagram</h2>
+          <p>
+            Menggambarkan relasi POSET menggunakan directed graph (graf berarah) lengkap seringkali menghasilkan visualisasi yang rumit dan penuh dengan garis redundant (seperti lingkaran self-loop pada setiap verteks dan garis transitif yang bertumpuk). 
+            <strong>Diagram Hasse</strong> adalah penyederhanaan dari directed graph POSET yang hanya mempertahankan hubungan-hubungan penting.
+          </p>
+
+          <div class="concept-box">
+            <div class="concept-box__title">⚙️ Prinsip Penyederhanaan Diagram Hasse</div>
+            <p>Penyederhanaan directed graph menjadi Diagram Hasse didasarkan pada tiga asumsi:</p>
+            <ol style="margin-left: 20px; list-style-type: decimal;">
+              <li><strong>Hilangkan Self-loop:</strong> Karena relasi POSET bersifat refleksif, setiap verteks pasti terhubung dengan dirinya sendiri. Kita tidak perlu menggambarnya karena sifat ini sudah diasumsikan.</li>
+              <li><strong>Hilangkan Garis Transitif (Transitivity Edges):</strong> Jika terdapat relasi $a \preceq b$ dan $b \preceq c$, maka garis langsung dari $a$ ke $c$ dihapus karena hubungan tersebut sudah terwakili oleh rantai $a \to b \to c$.</li>
+              <li><strong>Hilangkan Arah Panah:</strong> Diagram Hasse selalu digambar dengan arah dari <strong>bawah ke atas</strong> (elemen yang lebih kecil secara relasi berada di bawah, dan elemen yang lebih besar berada di atas). Dengan kesepakatan arah ini, anak panah tidak perlu digambar.</li>
+            </ol>
+          </div>
+
+          <div class="callout callout--success">
+            <span class="callout__icon">🪜</span>
+            <div class="callout__body">
+              <h4>Langkah-langkah Menggambar Diagram Hasse:</h4>
+              <ol style="margin-left: 20px; list-style-type: decimal;">
+                <li>Pastikan relasi merupakan POSET.</li>
+                <li>Daftarkan semua pasangan elemen yang ada dalam relasi $R$.</li>
+                <li>Gambahkan graf berarah (directed graph) dengan menyusun verteks dari bawah ke atas (dari yang kecil ke besar).</li>
+                <li>Hilangkan semua self-loop pada setiap verteks.</li>
+                <li>Hilangkan semua garis transitif.</li>
+                <li>Hapus tanda panah pada ujung garis, sehingga tersisa segmen garis penghubung biasa.</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Latihan Soal 6 (Contoh Soal 1 Hasse) -->
+          <div class="exercise" id="soal-6">
+            <div class="exercise__header">
+              <span class="exercise__number">6</span>
+              <span class="exercise__title">Contoh Soal 1: Hasse Diagram S={1,2,4,6,8} dengan R={(a,b)|a|b}</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Gambarkan Hasse Diagram untuk himpunan $S = \{1, 2, 4, 6, 8\}$ dengan relasi $R = \{(a, b) \mid a \text{ membagi } b\}$. Tunjukkan langkah demi langkah pembuatannya!
+              </p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Langkah 1: Cek Sifat POSET</strong></p>
+                    <p>Relasi keterbagian pada bilangan bulat positif terbukti memenuhi sifat refleksif, antisimetris, dan transitif. Maka $(S, \mid)$ adalah POSET.</p>
+                    
+                    <p><strong>Langkah 2: Tentukan Pasangan Anggota Relasi R</strong></p>
+                    <p>
+                      $$R = \{(1, 1), (2, 2), (4, 4), (6, 6), (8, 8), (1, 2), (1, 4), (1, 6), (1, 8), (2, 4), (2, 6), (2, 8), (4, 8)\}$$
+                    </p>
+                    
+                    <p><strong>Langkah 3: Gambar Directed Graph Awal (Dengan Self-loop &amp; Transitivitas)</strong></p>
+                    <p>Pertama, gambarkan relasi refleksif pada setiap verteks:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page144_img1.png" alt="Graf dengan Self-loop">
+                      <figcaption>Langkah menggambar self-loop awal</figcaption>
+                    </div>
+                    <p>Lalu gambarkan semua garis relasi berarah lengkap:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page145_img1.png" alt="Graf dengan Transitivitas">
+                      <figcaption>Graf berarah lengkap dengan semua hubungan keterbagian</figcaption>
+                    </div>
+                    
+                    <p><strong>Langkah 4: Hilangkan Semua Self-Loop</strong></p>
+                    <p>Hapus loop melingkar di setiap titik karena sifat refleksif sudah pasti ada:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page146_img1.png" alt="Graf Tanpa Self-loop">
+                      <figcaption>Visualisasi graf setelah self-loop dihilangkan</figcaption>
+                    </div>
+                    
+                    <p><strong>Langkah 5 &amp; 6: Hilangkan Garis Transitif &amp; Arah Panah (Diagram Hasse Final)</strong></p>
+                    <p>
+                      Hapus garis relasi transitif. Contohnya:
+                    </p>
+                    <ul>
+                      <li>Karena $1 \mid 2$ dan $2 \mid 4$, maka garis transitif $1 \to 4$ dihapus.</li>
+                      <li>Garis transitif $1 \to 8$ dan $2 \to 8$ dihapus karena sudah diwakili jalur rantai $1 \to 2 \to 4 \to 8$.</li>
+                      <li>Garis transitif $1 \to 6$ dihapus karena sudah diwakili jalur rantai $1 \to 2 \to 6$.</li>
+                    </ul>
+                    <p>Setelah itu, hapus tanda panah. Susunan finalnya adalah:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page147_img1.png" alt="Diagram Hasse S={1,2,4,6,8}">
+                      <figcaption>Diagram Hasse Final untuk S = {1, 2, 4, 6, 8}</figcaption>
+                    </div>
+                    <p>
+                      <strong>Analisis Diagram Final:</strong><br>
+                      Angka 1 berada di paling bawah. Dari 1 ditarik garis ke 2. 
+                      Dari 2, diagram bercabang menjadi dua jalur: satu jalur lurus ke 6, dan jalur lainnya ke 4 kemudian ke 8. 
+                      Perhatikan bahwa tidak ada garis yang menghubungkan 6 dan 8 karena $6 \nmid 8$ dan $8 \nmid 6$.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Latihan Soal 7 (Contoh Soal 2 Hasse) -->
+          <div class="exercise" id="soal-7">
+            <div class="exercise__header">
+              <span class="exercise__number">7</span>
+              <span class="exercise__title">Contoh Soal 2: Hasse Diagram S={1,2,3,4} dengan R={(a,b)|a≤b}</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Gambarkan Hasse Diagram yang merepresentasikan Partial Ordering $R = \{(a, b) \mid a \le b\}$ pada himpunan $S = \{1, 2, 3, 4\}$!
+              </p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Langkah 1: Daftarkan Anggota Relasi R</strong></p>
+                    <p>$$R = \{(1, 1), (2, 2), (3, 3), (4, 4), (1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)\}$$</p>
+                    
+                    <p><strong>Langkah 2: Visualisasikan Proses Penyederhanaan</strong></p>
+                    <p>Berikut adalah gambar graf berarah lengkap dengan loop:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page148_img1.png" alt="Graf Awal S={1,2,3,4}">
+                      <figcaption>Graf berarah awal dengan loop dan seluruh relasi</figcaption>
+                    </div>
+                    <p>Proses penghapusan self-loop:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page149_img1.png" alt="Self-loop Dihapus S={1,2,3,4}">
+                      <figcaption>Self-loop dihapus dari graf</figcaption>
+                    </div>
+                    <p>Proses penghapusan garis transitif:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page150_img1.png" alt="Transitif Dihapus S={1,2,3,4}">
+                      <figcaption>Menghilangkan garis transitif (seperti 1 ke 3, 1 ke 4, dan 2 ke 4)</figcaption>
+                    </div>
+                    
+                    <p><strong>Langkah 3: Diagram Hasse Final</strong></p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page151_img1.png" alt="Diagram Hasse Final S={1,2,3,4}">
+                      <figcaption>Diagram Hasse Final berupa Rantai (Chain)</figcaption>
+                    </div>
+                    <p>
+                      <strong>Analisis:</strong><br>
+                      Karena poset ini merupakan <em>totally ordered set</em> (chain), diagram Hasse yang terbentuk berupa satu garis lurus vertikal: $1 - 2 - 3 - 4$. 
+                      Semua elemen terhubung secara linear dari bawah ke atas.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Latihan Soal 8 (Soal 3 Hasse) -->
+          <div class="exercise" id="soal-8">
+            <div class="exercise__header">
+              <span class="exercise__number">8</span>
+              <span class="exercise__title">Soal 3: Hasse Diagram Relasi ≥ pada S={0,1,2,3,4,5}</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Gambarlah Hasse Diagram untuk relasi "lebih besar atau sama dengan" ($\ge$) pada himpunan $S = \{0, 1, 2, 3, 4, 5\}$!
+              </p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Karena relasi yang digunakan adalah $\ge$ (lebih besar atau sama dengan), maka elemen yang secara numerik bernilai lebih besar akan bertindak sebagai elemen yang "lebih besar" dalam poset, sehingga ditempatkan di tingkat yang lebih tinggi.
+                    </p>
+                    
+                    <p><strong>1. Directed Graph Awal:</strong></p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page152_img1.png" alt="Graf Berarah S={0,1,2,3,4,5}">
+                      <figcaption>Graf berarah lengkap untuk relasi $\ge$</figcaption>
+                    </div>
+                    
+                    <p><strong>2. Proses Penghapusan Garis Transitif:</strong></p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page153_img1.png" alt="Penyederhanaan Sifat Transitif">
+                      <figcaption>Menyederhanakan garis dengan sifat transitif</figcaption>
+                    </div>
+                    
+                    <p><strong>3. Diagram Hasse Final:</strong></p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page154_img1.png" alt="Diagram Hasse Final S={0,1,2,3,4,5}">
+                      <figcaption>Diagram Hasse Final untuk relasi $\ge$ pada S = {0, 1, 2, 3, 4, 5}</figcaption>
+                    </div>
+                    <p>
+                      <strong>Analisis Struktur:</strong><br>
+                      Diagram Hasse final berbentuk rantai linear vertikal tunggal: $5 - 4 - 3 - 2 - 1 - 0$. 
+                      Verteks 5 berada di paling atas karena merupakan elemen terbesar, sedangkan 0 berada di paling bawah sebagai elemen terkecil dalam relasi $\ge$.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Latihan Soal 9 (Soal 4 Hasse) -->
+          <div class="exercise" id="soal-9">
+            <div class="exercise__header">
+              <span class="exercise__number">9</span>
+              <span class="exercise__title">Soal 4: Hasse Diagram Keterbagian Kompleks S={2,3,5,10,11,15,25}</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Gambarlah Hasse Diagram untuk relasi "habis membagi" ($a \mid b$) pada himpunan:
+                $$S = \{2, 3, 5, 10, 11, 15, 25\}$$
+              </p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Untuk menggambar Hasse diagram dari relasi keterbagian pada himpunan ini, ikuti analisis berikut:
+                    </p>
+                    <ol style="margin-left: 20px; list-style-type: decimal;">
+                      <li>
+                        <strong>Identifikasi Elemen Minimal (Tingkat Bawah):</strong><br>
+                        Elemen minimal adalah elemen yang tidak dibagi oleh elemen lain di $S$ (selain dirinya sendiri). 
+                        Elemen tersebut adalah <strong>2, 3, 5, dan 11</strong>. Letakkan di tingkat terbawah.
+                      </li>
+                      <li>
+                        <strong>Petakan Hubungan Keterbagian Langsung (Covering):</strong>
+                        <ul>
+                          <li>$2 \mid 10$ dan $5 \mid 10$ $\implies$ Tarik garis dari 2 ke 10, dan dari 5 ke 10.</li>
+                          <li>$3 \mid 15$ dan $5 \mid 15$ $\implies$ Tarik garis dari 3 ke 15, dan dari 5 ke 15.</li>
+                          <li>$5 \mid 25$ $\implies$ Tarik garis dari 5 ke 25.</li>
+                          <li>Angka <strong>11</strong> tidak membagi angka lain dan tidak dibagi angka lain. Maka 11 menjadi <strong>elemen terisolasi</strong>.</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <strong>Tingkat Menengah/Atas:</strong><br>
+                        Elemen 10, 15, dan 25 diletakkan di tingkat atas.
+                      </li>
+                    </ol>
+                    <div class="img-container">
+                      <img src="../pdf_images/page155_img1.png" alt="Diagram Hasse Keterbagian Kompleks">
+                      <figcaption>Diagram Hasse keterbagian untuk S = {2, 3, 5, 10, 11, 15, 25}</figcaption>
+                    </div>
+                    <p>
+                      <strong>Analisis Struktur:</strong><br>
+                      Angka 11 digambar sebagai titik terisolasi di sisi samping tanpa garis penghubung. 
+                      Angka 5 membagi tiga elemen berbeda (10, 15, 25), sehingga memiliki tiga garis cabang naik ke atas. 
+                      Angka 10 menerima garis masuk dari 2 dan 5, sedangkan 15 menerima garis masuk dari 3 dan 5.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Latihan Soal 10 (Soal 5 Hasse) -->
+          <div class="exercise" id="soal-10">
+            <div class="exercise__header">
+              <span class="exercise__number">10</span>
+              <span class="exercise__title">Soal 5: Hasse Diagram Inklusi Himpunan Kuasa P(S) dengan S={a,b,c}</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Gambarkan Hasse Diagram untuk relasi inklusi (subset $\subseteq$) pada himpunan kuasa $P(S)$ dari himpunan $S = \{a, b, c\}$!
+              </p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Himpunan kuasa $P(S)$ memiliki $2^3 = 8$ subset. Kita susun subset-subset tersebut secara vertikal berdasarkan jumlah anggotanya (kardinalitas):
+                    </p>
+                    <ol style="margin-left: 20px; list-style-type: decimal;">
+                      <li><strong>Tingkat 0 (Dasar):</strong> Himpunan kosong $\emptyset$ (0 anggota).</li>
+                      <li><strong>Tingkat 1 (Middle-Bottom):</strong> Himpunan dengan 1 anggota: $\{a\}, \{b\}, \{c\}$.</li>
+                      <li><strong>Tingkat 2 (Middle-Top):</strong> Himpunan dengan 2 anggota: $\{a, b\}, \{a, c\}, \{b, c\}$.</li>
+                      <li><strong>Tingkat 3 (Teratas):</strong> Himpunan semesta $\{a, b, c\}$ (3 anggota).</li>
+                    </ol>
+                    <p style="margin-top: 10px;">
+                      Hubungkan setiap subset dengan garis ke subset di tingkat atasnya jika subset di bawah merupakan bagian (subset langsung) dari yang di atas:
+                    </p>
+                    <ul>
+                      <li>$\emptyset$ terhubung ke $\{a\}, \{b\}, \{c\}$.</li>
+                      <li>$\{a\}$ terhubung ke $\{a, b\}$ dan $\{a, c\}$.</li>
+                      <li>$\{b\}$ terhubung ke $\{a, b\}$ dan $\{b, c\}$.</li>
+                      <li>$\{c\}$ terhubung ke $\{a, c\}$ dan $\{b, c\}$.</li>
+                      <li>$\{a, b\}, \{a, c\}, \{b, c\}$ semuanya terhubung ke $\{a, b, c\}$.</li>
+                    </ul>
+                    <div class="img-container">
+                      <img src="../pdf_images/page156_img1.png" alt="Diagram Hasse Himpunan Kuasa S={a,b,c}">
+                      <figcaption>Diagram Hasse Inklusi Himpunan Kuasa yang membentuk kubus 3D (Boolean Lattice)</figcaption>
+                    </div>
+                    <p>
+                      <strong>Analisis Struktur:</strong><br>
+                      Diagram Hasse ini membentuk struktur visual kubus tiga dimensi. Struktur ini sangat simetris dan merupakan representasi grafis standar dari Latis Boolean berorde 3.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Latihan Soal 11 (Soal 6 Hasse) -->
+          <div class="exercise" id="soal-11">
+            <div class="exercise__header">
+              <span class="exercise__number">11</span>
+              <span class="exercise__title">Soal 6: Membaca Pasangan Elemen dari Diagram Hasse</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Daftarkan (list) semua pasangan terurut dalam relasi $R$ yang direpresentasikan oleh Hasse Diagram berikut!
+              </p>
+              
+              <div class="img-container">
+                <img src="../pdf_images/page157_img1.png" alt="Hasse Diagram Soal 6">
+                <figcaption>Diagram Hasse yang akan dibaca pasangan relasinya</figcaption>
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Untuk mengembalikan Hasse Diagram menjadi daftar pasangan relasi lengkap $R$, kita harus menerapkan kembali sifat <strong>Refleksif</strong> dan <strong>Transitif</strong> dari poset yang sebelumnya dihilangkan.
+                    </p>
+                    
+                    <p><strong>Langkah 1: Sifat Refleksif (Self-relationship)</strong></p>
+                    <p>Setiap elemen berhubungan dengan dirinya sendiri. Tambahkan pasangan $(x, x)$ untuk setiap titik yang ada di diagram.</p>
+                    
+                    <p><strong>Langkah 2: Hubungan Langsung (Covering)</strong></p>
+                    <p>Setiap garis penghubung dari verteks bawah $x$ ke verteks atas $y$ mewakili relasi $(x, y)$.</p>
+                    
+                    <p><strong>Langkah 3: Sifat Transitif (Jalur Naik/Reachability)</strong></p>
+                    <p>Jika kita dapat bergerak dari verteks $x$ naik ke verteks $y$ melalui satu atau beberapa segmen garis (meskipun tidak ada garis langsung), maka $(x, y)$ termasuk dalam relasi $R$.</p>
+                    
+                    <p>Mari kita lihat visualisasi analisis jalurnya pada gambar di bawah ini:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page158_img1.png" alt="Analisis Jalur Soal 6">
+                      <figcaption>Analisis jalur naik untuk menentukan relasi transitif</figcaption>
+                    </div>
+                    
+                    <p>Daftar lengkap pasangan terurut (Ordered Pairs) yang diperoleh:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page159_img1.png" alt="Pasangan Terurut Soal 6">
+                      <figcaption>Daftar pasangan relasi lengkap R yang berhasil dibaca</figcaption>
+                    </div>
+                    
+                    <p>
+                      Dengan menggabungkan seluruh pasangan refleksif, hubungan langsung, dan hubungan transitif (jalur naik), kita mendapatkan seluruh pasangan terurut relasi secara lengkap sebagaimana tertera pada gambar solusi di atas.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page Navigation -->
+        <div class="page-nav">
+          <a href="sesi6.html" class="page-nav__link">
+            <span class="page-nav__label">← Sebelumnya</span>
+            <span class="page-nav__title">Sesi 6: Relation — Relasi Ekuivalen</span>
+          </a>
+          <a href="sesi8.html" class="page-nav__link page-nav__link--next">
+            <span class="page-nav__label">Selanjutnya →</span>
+            <span class="page-nav__title">Sesi 8: Min/Max, Bounds & Lattice</span>
+          </a>
+        </div>
+
+      </div>
+    </main>
+  </div>
+  
+  <button class="back-to-top" aria-label="Kembali ke atas">↑</button>
+  <script src="../js/main.js"></script>
+</body>
+</html>

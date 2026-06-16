@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesi 1 & 2: Logic — Matematika Diskrit</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script src="../js/theme.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="../index.html" class="navbar__brand">
+      <span class="navbar__brand-icon">∑</span>
+      <span>MatDiskrit</span>
+    </a>
+    <div class="navbar__actions">
+      <button class="navbar__menu-btn" aria-label="Menu">☰</button>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-toggle__knob">🌙</span>
+      </button>
+    </div>
+  </nav>
+  <div class="sidebar-overlay"></div>
+  
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar__section-title">Navigasi</div>
+      <a href="../index.html" class="sidebar__link"><span class="sidebar__link-icon">🏠</span> Beranda</a>
+      <a href="sesi1.html" class="sidebar__link active"><span class="sidebar__link-icon">1</span> Logic</a>
+      <a href="sesi2.html" class="sidebar__link"><span class="sidebar__link-icon">2</span> Quantifier</a>
+      <a href="sesi3.html" class="sidebar__link"><span class="sidebar__link-icon">3</span> Method of Proof</a>
+      <a href="sesi4.html" class="sidebar__link"><span class="sidebar__link-icon">4</span> Fuzzy Sets & Function</a>
+      <a href="sesi5.html" class="sidebar__link"><span class="sidebar__link-icon">5</span> Binomial & Kombinasi</a>
+      <a href="sesi6.html" class="sidebar__link"><span class="sidebar__link-icon">6</span> Relation</a>
+      <a href="sesi7.html" class="sidebar__link"><span class="sidebar__link-icon">7</span> POSET & Hasse</a>
+      <a href="sesi8.html" class="sidebar__link"><span class="sidebar__link-icon">8</span> Min/Max & Lattice</a>
+      <a href="sesi9.html" class="sidebar__link"><span class="sidebar__link-icon">9</span> MST, Coloring & FSA</a>
+      
+      <div class="sidebar__section-title">Daftar Isi</div>
+      <div class="sidebar__sublinks">
+        <a href="#logika-dasar" class="sidebar__sublink">1. Logika Dasar</a>
+        <a href="#tabel-kebenaran" class="sidebar__sublink">2. Tabel Kebenaran</a>
+        <a href="#ekuivalensi-logika" class="sidebar__sublink">3. Ekuivalensi Logika</a>
+        <a href="#rules-of-inference" class="sidebar__sublink">4. Rules of Inference</a>
+        <a href="#boolean-logic-gates" class="sidebar__sublink">5. Boolean & Gerbang Logika</a>
+        <a href="#karnaugh-map" class="sidebar__sublink">6. Karnaugh Map (K-Map)</a>
+      </div>
+    </aside>
+    
+    <main class="main-content">
+      <div class="content-wrapper">
+        
+        <!-- Header -->
+        <div class="section-header">
+          <span class="section-header__badge">Sesi 1 & 2</span>
+          <h1>Logic & K-Map</h1>
+          <p class="section-header__desc">
+            Selamat datang di Sesi 1 & 2! Di sini kita akan mempelajari pilar terpenting dalam Matematika Diskrit: <strong>Logika Matematika</strong>, pembuktian ekuivalensi, aljabar Boolean, gerbang logika, hingga penyederhanaan sirkuit menggunakan <strong>Karnaugh Map (K-Map)</strong>.
+          </p>
+        </div>
+
+        <!-- Section 1: Logika Dasar -->
+        <section id="logika-dasar">
+          <h2>1. Logika Dasar</h2>
+          <p>
+            Logika adalah fondasi dari semua penalaran matematika dan komputer. Mari kita mulai dari konsep yang paling dasar, yaitu proposisi.
+          </p>
+
+          <div class="callout callout--definition">
+            <span class="callout__icon">💡</span>
+            <div>
+              <strong>Proposisi (Pernyataan)</strong> adalah suatu kalimat deklaratif yang bernilai <strong>benar (True / T)</strong> atau <strong>salah (False / F)</strong>, tetapi tidak keduanya sekaligus.
+            </div>
+          </div>
+
+          <h3>Contoh Proposisi vs Bukan Proposisi</h3>
+          <ul>
+            <li><strong>"Jakarta terletak di Indonesia"</strong> — <span class="val-true">Proposisi (Benar)</span>.</li>
+            <li><strong>"Bekasi terletak di planet lain (bukan bumi)"</strong> — <span class="val-false">Proposisi (Salah)</span>. Kalimat ini secara faktual salah, namun ia tetap merupakan proposisi karena kita bisa menentukan nilai kebenarannya dengan pasti (yaitu bernilai salah).</li>
+            <li><strong>"Apakah dia jahat?"</strong> — <span class="text-secondary">Bukan Proposisi</span>. Ini adalah kalimat tanya yang tidak bisa dinilai benar atau salahnya secara pasti.</li>
+            <li><strong>"Jurusan CSSE belajar apa saja?"</strong> — <span class="text-secondary">Bukan Proposisi</span>. Sama seperti sebelumnya, ini adalah pertanyaan.</li>
+            <li><strong>"\(5a + 10 = 40\)"</strong> — <span class="text-secondary">Proposisi Terbuka</span>. Kalimat ini bisa benar atau salah tergantung pada nilai \(a\). Sebelum \(a\) ditentukan, kalimat ini belum memiliki nilai kebenaran tetap.</li>
+            <li><strong>"Jarak Jakarta-Bekasi dekat."</strong> — <span class="text-secondary">Bukan Proposisi</span>. Kata "dekat" bersifat subjektif (relatif), tergantung pada persepsi masing-masing orang.</li>
+          </ul>
+
+          <hr>
+
+          <h3>Operasi Logika Fundamental</h3>
+
+          <h4>A. Konjungsi / Logika DAN (AND)</h4>
+          <p>
+            Konjungsi menghubungkan dua proposisi dengan kata hubung <strong>dan</strong>. Simbolnya adalah <strong>\(\land\)</strong> atau dalam aljabar Boolean ditulis sebagai perkalian (<strong>\(\times\)</strong>).
+          </p>
+          <blockquote>
+            <strong>Prinsip:</strong> Kedua syarat harus terpenuhi agar kalimat bernilai BENAR. Jika salah satu saja salah, maka semuanya dianggap salah.
+          </blockquote>
+          <p>
+            <em>Contoh:</em> Ibu Budi berkata, "Untuk boleh main, Budi harus <strong>belajar DAN makan</strong>." Jika Budi sudah belajar tetapi belum makan, ia <strong>tidak boleh main</strong> karena kedua syarat wajib dipenuhi.
+          </p>
+
+          <table class="truth-table">
+            <thead>
+              <tr>
+                <th>\(p\)</th>
+                <th>\(q\)</th>
+                <th>\(p \land q\)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>T</td>
+                <td>T</td>
+                <td class="val-true">T</td>
+              </tr>
+              <tr>
+                <td>T</td>
+                <td>F</td>
+                <td class="val-false">F</td>
+              </tr>
+              <tr>
+                <td>F</td>
+                <td>T</td>
+                <td class="val-false">F</td>
+              </tr>
+              <tr>
+                <td>F</td>
+                <td>F</td>
+                <td class="val-false">F</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>B. Disjungsi / Logika ATAU (OR)</h4>
+          <p>
+            Disjungsi menghubungkan dua proposisi dengan kata hubung <strong>atau</strong>. Simbolnya adalah <strong>\(\lor\)</strong> atau dalam aljabar Boolean ditulis sebagai penjumlahan (<strong>\(+\)</strong>).
+          </p>
+          <blockquote>
+            <strong>Prinsip:</strong> Cukup salah satu pernyataan bernilai benar, maka hasil akhirnya akan bernilai BENAR. Ia hanya bernilai salah jika kedua pernyataan salah.
+          </blockquote>
+          <p>
+            <em>Contoh 1:</em> "Bekasi atau Banjarmasin adalah kota yang terletak di Pulau Jawa." Kalimat ini secara keseluruhan bernilai <strong>benar</strong>, karena pernyataan "Bekasi terletak di Pulau Jawa" adalah benar, meskipun Banjarmasin tidak terletak di Jawa.
+          </p>
+          <p>
+            <em>Contoh 2:</em> "Untuk membuka rekening bank, Anda harus berusia minimal 18 tahun ATAU memiliki surat persetujuan orang tua." Jika Budi memiliki surat persetujuan orang tua meskipun usianya masih 15 tahun, ia <strong>tetap bisa</strong> membuka rekening bank.
+          </p>
+
+          <table class="truth-table">
+            <thead>
+              <tr>
+                <th>\(p\)</th>
+                <th>\(q\)</th>
+                <th>\(p \lor q\)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>T</td>
+                <td>T</td>
+                <td class="val-true">T</td>
+              </tr>
+              <tr>
+                <td>T</td>
+                <td>F</td>
+                <td class="val-true">T</td>
+              </tr>
+              <tr>
+                <td>F</td>
+                <td>T</td>
+                <td class="val-true">T</td>
+              </tr>
+              <tr>
+                <td>F</td>
+                <td>F</td>
+                <td class="val-false">F</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Latihan AND/OR -->
+          <div class="exercise" id="soal-and-or-1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Latihan Konjungsi (AND)</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Perhatikan pernyataan di bawah ini. Manakah pernyataan yang bernilai benar?</p>
+              <div class="img-container">
+                <img src="../pdf_images/page4_img1.png" alt="Pernyataan Latihan Konjungsi">
+              </div>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Hanya pernyataan (i) yang benar.</strong></p>
+                    <p>
+                      <em>Penjelasan:</em> Pada operasi konjungsi (\(\land\)), kedua bagian pernyataan kiri dan kanan harus bernilai benar. 
+                      Pada opsi (i), kedua pernyataan matematika yang diberikan bernilai benar, sehingga hasil konjungsinya benar. Opsi lainnya memiliki setidaknya satu bagian yang salah.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="exercise" id="soal-and-or-2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Latihan Disjungsi (OR)</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Perhatikan pernyataan di bawah ini. Manakah pernyataan yang bernilai benar?</p>
+              <div class="img-container">
+                <img src="../pdf_images/page4_img2.png" alt="Pernyataan Latihan Disjungsi">
+              </div>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Hanya pernyataan terakhir (iv) yang bernilai salah.</strong> Semua pernyataan lainnya (i, ii, iii) benar.</p>
+                    <p>
+                      <em>Penjelasan:</em> Pada operasi disjungsi (\(\lor\)), cukup salah satu bagian bernilai benar agar keseluruhan kalimat bernilai benar. 
+                      Hanya pada pernyataan (iv) kedua proposisi di kiri dan kanan bernilai salah, sehingga hasilnya salah. Untuk pernyataan lainnya, minimal ada satu proposisi yang benar.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h4>C. Exclusive OR (XOR)</h4>
+          <p>
+            XOR bernilai benar jika <strong>salah satu</strong> pernyataan bernilai benar, tetapi <strong>tidak boleh keduanya sekaligus</strong>. Simbolnya adalah <strong>\(\oplus\)</strong>.
+          </p>
+          <p>
+            <em>Contoh:</em> "Untuk memenangkan hadiah utama, Anda harus memilih hadiah A <strong>atau (XOR)</strong> hadiah B, tetapi tidak boleh keduanya." Jika Putri mengambil hadiah A dan juga mengambil hadiah B, Putri melanggar aturan dan dianggap tidak memenangkan hadiah.
+          </p>
+
+          <table class="truth-table">
+            <thead>
+              <tr>
+                <th>\(p\)</th>
+                <th>\(q\)</th>
+                <th>\(p \oplus q\)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>T</td>
+                <td>T</td>
+                <td class="val-false">F</td>
+              </tr>
+              <tr>
+                <td>T</td>
+                <td>F</td>
+                <td class="val-true">T</td>
+              </tr>
+              <tr>
+                <td>F</td>
+                <td>T</td>
+                <td class="val-true">T</td>
+              </tr>
+              <tr>
+                <td>F</td>
+                <td>F</td>
+                <td class="val-false">F</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>D. Negasi / Ingkaran (¬)</h4>
+          <p>
+            Negasi digunakan untuk menyangkal suatu proposisi. Ia membalik nilai kebenaran: pernyataan benar menjadi salah, dan sebaliknya. Simbolnya adalah <strong>\(\neg\)</strong> atau <strong>\(\sim\)</strong>.
+          </p>
+          <p><em>Contoh Kalimat & Negasinya:</em></p>
+          <ul>
+            <li>Pernyataan: "Hari ini cuacanya cerah." &rarr; Negasi: "Hari ini cuacanya <strong>tidak</strong> cerah."</li>
+            <li>Pernyataan: "Dia suka makan buah." &rarr; Negasi: "Dia <strong>tidak</strong> suka makan buah."</li>
+            <li>Pernyataan: "Semua siswa lulus ujian." &rarr; Negasi: "<strong>Tidak semua</strong> siswa lulus ujian." (atau "Ada siswa yang tidak lulus ujian").</li>
+            <li>Pernyataan: "Kucing itu sedang tidur." &rarr; Negasi: "Kucing itu <strong>tidak sedang</strong> tidur."</li>
+          </ul>
+
+          <h4>E. Implikasi / Pernyataan Kondisional (→)</h4>
+          <p>
+            Implikasi menyatakan hubungan sebab-akibat dengan format <strong>"Jika p maka q"</strong>. Proposisi \(p\) disebut hipotesis (anteseden) dan \(q\) disebut konklusi (konsekuen). Simbolnya adalah <strong>\(\rightarrow\)</strong>.
+          </p>
+          <blockquote>
+            <strong>Prinsip Janji:</strong> Implikasi hanya akan bernilai SALAH jika anteseden (\(p\)) bernilai benar tetapi konsekuen (\(q\)) bernilai salah. Dalam situasi lainnya, implikasi selalu benar.
+          </blockquote>
+          <p>
+            <em>Contoh:</em> "Jika hari ini hujan, maka jalanan basah." (\(p \rightarrow q\))
+          </p>
+          <ol>
+            <li><strong>Hujan (T) &rarr; Jalanan Basah (T):</strong> Ini bernilai <span class="val-true">Benar (T)</span> karena sesuai kenyataan.</li>
+            <li><strong>Jalanan basah, tapi apakah pasti karena hujan?</strong> Tidak selalu. Bisa saja ada mobil pemadam menyiram jalanan. Jadi, implikasi bernilai satu arah. Kita tidak bisa menyimpulkan jika jalanan basah maka pasti hujan (\(q \rightarrow p\) belum tentu benar).</li>
+            <li><strong>Gak Hujan (F) &rarr; Jalanan Basah (T):</strong> Tetap bernilai <span class="val-true">Benar (T)</span>. Karena jika tidak hujan dan jalanan basah (misalnya disiram air), janji implikasi "jika hujan" tidak dilanggar.</li>
+            <li><strong>Hujan (T) &rarr; Jalanan Gak Basah (F):</strong> Bernilai <span class="val-false">Salah (F)</span>. Ini seperti mengingkari janji. Katanya kalau hujan, jalanan pasti basah. Tapi kenyataannya hujan dan jalanan kering.</li>
+          </ol>
+
+          <table class="truth-table">
+            <thead>
+              <tr>
+                <th>\(p\)</th>
+                <th>\(q\)</th>
+                <th>\(p \rightarrow q\)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>T</td>
+                <td>T</td>
+                <td class="val-true">T</td>
+              </tr>
+              <tr>
+                <td>T</td>
+                <td>F</td>
+                <td class="val-false">F</td>
+              </tr>
+              <tr>
+                <td>F</td>
+                <td>T</td>
+                <td class="val-true">T</td>
+              </tr>
+              <tr>
+                <td>F</td>
+                <td>F</td>
+                <td class="val-true">T</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>F. Biimplikasi / Biconditional (↔)</h4>
+          <p>
+            Biimplikasi menyatakan hubungan timbal balik dengan format <strong>"p jika dan hanya jika q"</strong>. Simbolnya adalah <strong>\(\leftrightarrow\)</strong> atau <strong>\(\iff\)</strong>.
+          </p>
+          <blockquote>
+            <strong>Prinsip Ekuivalensi:</strong> Biimplikasi hanya akan bernilai BENAR jika kedua proposisi memiliki nilai kebenaran yang sama (keduanya benar atau keduanya salah).
+          </blockquote>
+          <p>
+            <em>Contoh:</em> "Putra lulus ujian <strong>jika dan hanya jika</strong> ia belajar dengan baik."
+          </p>
+          <ul>
+            <li>Jika Putra belajar dengan baik dan lulus, pernyataan bernilai <span class="val-true">Benar (T)</span>.</li>
+            <li>Jika Putra tidak belajar dengan baik dan tidak lulus, pernyataan juga bernilai <span class="val-true">Benar (T)</span>.</li>
+            <li>Jika Putra belajar baik tapi tidak lulus, atau tidak belajar tapi lulus, pernyataan bernilai <span class="val-false">Salah (F)</span>.</li>
+          </ul>
+
+          <table class="truth-table">
+            <thead>
+              <tr>
+                <th>\(p\)</th>
+                <th>\(q\)</th>
+                <th>\(p \leftrightarrow q\)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>T</td>
+                <td>T</td>
+                <td class="val-true">T</td>
+              </tr>
+              <tr>
+                <td>T</td>
+                <td>F</td>
+                <td class="val-false">F</td>
+              </tr>
+              <tr>
+                <td>F</td>
+                <td>T</td>
+                <td class="val-false">F</td>
+              </tr>
+              <tr>
+                <td>F</td>
+                <td>F</td>
+                <td class="val-true">T</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>G. Tautologi & Kontradiksi</h4>
+          <ul>
+            <li><strong>Tautologi:</strong> Pernyataan majemuk yang selalu bernilai benar untuk semua kemungkinan nilai kebenaran proposisi tunggalnya. Contoh: \(p \lor \neg p\) ("Saya pergi ke pesta atau saya tidak pergi").</li>
+            <li><strong>Kontradiksi:</strong> Pernyataan majemuk yang selalu bernilai salah untuk semua kemungkinan nilai kebenaran komponennya. Contoh: \(p \land \neg p\) ("Saya sedang tidur dan saya sedang tidak tidur").</li>
+          </ul>
+        </section>
+
+        <!-- Section 2: Tabel Kebenaran -->
+        <section id="tabel-kebenaran">
+          <h2>2. Tabel Kebenaran (Compound Propositions)</h2>
+          <p>
+            Untuk proposisi majemuk yang kompleks, kita menggunakan tabel kebenaran untuk melacak nilai kebenaran di setiap langkah operasinya. Mari kita pelajari lewat latihan soal berikut.
+          </p>
+
+          <!-- Soal 1 -->
+          <div class="exercise" id="soal-tb-1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Tabel Kebenaran \(\neg(p \land \neg q)\)</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buatlah tabel kebenaran untuk ekspresi proposisi majemuk berikut: <strong>\(\neg(p \land \neg q)\)</strong></p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Cara Pengerjaan</div>
+                    <p>Berikut adalah tabel kebenaran interaktif untuk \(\neg(p \land \neg q)\):</p>
+                    
+                    <table class="truth-table">
+                      <thead>
+                        <tr>
+                          <th>\(p\)</th>
+                          <th>\(q\)</th>
+                          <th>\(\neg q\)</th>
+                          <th>\(p \land \neg q\)</th>
+                          <th>\(\neg(p \land \neg q)\)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>T</td>
+                          <td>T</td>
+                          <td class="val-false">F</td>
+                          <td class="val-false">F</td>
+                          <td class="val-true">T</td>
+                        </tr>
+                        <tr>
+                          <td>T</td>
+                          <td>F</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-false">F</td>
+                        </tr>
+                        <tr>
+                          <td>F</td>
+                          <td>T</td>
+                          <td class="val-false">F</td>
+                          <td class="val-false">F</td>
+                          <td class="val-true">T</td>
+                        </tr>
+                        <tr>
+                          <td>F</td>
+                          <td>F</td>
+                          <td class="val-true">T</td>
+                          <td class="val-false">F</td>
+                          <td class="val-true">T</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <p>Berikut adalah visualisasi pengerjaan dari PDF (Cara 1 & Cara 2):</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page8_img1.png" alt="Jawaban Soal 1 Cara 1">
+                      <figcaption>Cara 1: Evaluasi bertahap menggunakan kolom perantara</figcaption>
+                    </div>
+                    <div class="img-container" style="margin-top: 20px;">
+                      <img src="../pdf_images/page8_img2.png" alt="Jawaban Soal 1 Cara 2">
+                      <figcaption>Cara 2: Evaluasi langsung di bawah operator</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2 -->
+          <div class="exercise" id="soal-tb-2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Tabel Kebenaran \((p \lor \neg q) \rightarrow (p \land q)\)</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buatlah tabel kebenaran untuk proposisi majemuk berikut: <strong>\((p \lor \neg q) \rightarrow (p \land q)\)</strong></p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Cara Pengerjaan</div>
+                    <table class="truth-table">
+                      <thead>
+                        <tr>
+                          <th>\(p\)</th>
+                          <th>\(q\)</th>
+                          <th>\(\neg q\)</th>
+                          <th>\(p \lor \neg q\)</th>
+                          <th>\(p \land q\)</th>
+                          <th>\((p \lor \neg q) \rightarrow (p \land q)\)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>T</td>
+                          <td>T</td>
+                          <td class="val-false">F</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                        </tr>
+                        <tr>
+                          <td>T</td>
+                          <td>F</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-false">F</td>
+                          <td class="val-false">F</td>
+                        </tr>
+                        <tr>
+                          <td>F</td>
+                          <td>T</td>
+                          <td class="val-false">F</td>
+                          <td class="val-false">F</td>
+                          <td class="val-false">F</td>
+                          <td class="val-true">T</td>
+                        </tr>
+                        <tr>
+                          <td>F</td>
+                          <td>F</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-false">F</td>
+                          <td class="val-false">F</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    
+                    <p>Visualisasi pengerjaan dari PDF:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page8_img3.png" alt="Jawaban Soal 2">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 3 -->
+          <div class="exercise" id="soal-tb-3">
+            <div class="exercise__header">
+              <span class="exercise__number">3</span>
+              <span class="exercise__title">Pembuktian Tautologi Transitivitas</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Buatlah tabel kebenaran untuk membuktikan argumen transitif implikasi: 
+                <strong>\([(p \rightarrow q) \land (q \rightarrow r)] \rightarrow (p \rightarrow r)\)</strong> 
+                (Jika \(p\) menyiratkan \(q\), dan \(q\) menyiratkan \(r\), maka \(p\) menyiratkan \(r\)).
+              </p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Cara Pengerjaan</div>
+                    <p>Karena terdapat 3 variabel (\(p, q, r\)), maka tabel kebenaran memiliki \(2^3 = 8\) baris:</p>
+                    
+                    <table class="truth-table">
+                      <thead>
+                        <tr>
+                          <th>\(p\)</th>
+                          <th>\(q\)</th>
+                          <th>\(r\)</th>
+                          <th>\(p \rightarrow q\)</th>
+                          <th>\(q \rightarrow r\)</th>
+                          <th>Konjungsi (\(\land\))</th>
+                          <th>\(p \rightarrow r\)</th>
+                          <th>Hasil Akhir</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>T</td>
+                          <td>T</td>
+                          <td>T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                        </tr>
+                        <tr>
+                          <td>T</td>
+                          <td>T</td>
+                          <td>F</td>
+                          <td class="val-true">T</td>
+                          <td class="val-false">F</td>
+                          <td class="val-false">F</td>
+                          <td class="val-false">F</td>
+                          <td class="val-true">T</td>
+                        </tr>
+                        <tr>
+                          <td>T</td>
+                          <td>F</td>
+                          <td>T</td>
+                          <td class="val-false">F</td>
+                          <td class="val-true">T</td>
+                          <td class="val-false">F</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                        </tr>
+                        <tr>
+                          <td>T</td>
+                          <td>F</td>
+                          <td>F</td>
+                          <td class="val-false">F</td>
+                          <td class="val-true">T</td>
+                          <td class="val-false">F</td>
+                          <td class="val-false">F</td>
+                          <td class="val-true">T</td>
+                        </tr>
+                        <tr>
+                          <td>F</td>
+                          <td>T</td>
+                          <td>T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                        </tr>
+                        <tr>
+                          <td>F</td>
+                          <td>T</td>
+                          <td>F</td>
+                          <td class="val-true">T</td>
+                          <td class="val-false">F</td>
+                          <td class="val-false">F</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                        </tr>
+                        <tr>
+                          <td>F</td>
+                          <td>F</td>
+                          <td>T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                        </tr>
+                        <tr>
+                          <td>F</td>
+                          <td>F</td>
+                          <td>F</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                          <td class="val-true">T</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    
+                    <p>Karena seluruh baris pada kolom hasil akhir bernilai <strong>True</strong>, maka ekspresi ini terbukti merupakan sebuah <strong>Tautologi</strong>.</p>
+                    
+                    <p>Visualisasi tabel kebenaran dari PDF:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page9_img1.png" alt="Tabel Kebenaran Proposisi Tiga Variabel">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 3: Ekuivalensi Logika -->
+        <section id="ekuivalensi-logika">
+          <h2>3. Ekuivalensi Logika (Logical Equivalence Laws)</h2>
+          <p>
+            Dua pernyataan majemuk dikatakan <strong>ekuivalen secara logika</strong> (ditulis \(\equiv\) atau \(\iff\)) jika keduanya memiliki nilai kebenaran yang sama pada seluruh baris tabel kebenarannya. Kita bisa membuktikannya menggunakan tabel kebenaran atau dengan menerapkan hukum-hukum logika.
+          </p>
+
+          <div class="concept-box">
+            <span class="concept-box__title">📖 Tabel Hukum Ekuivalensi Logika</span>
+            <p>Hafalkan dan pahami hukum-hukum aljabar proposisi berikut untuk menyederhanakan ekspresi logika:</p>
+            <div class="img-container">
+              <img src="../pdf_images/page9_img2.png" alt="Hukum Ekuivalensi Logika">
+              <figcaption>Tabel Hukum-Hukum Ekuivalensi Logika Lengkap</figcaption>
+            </div>
+          </div>
+
+          <!-- Soal 1 -->
+          <div class="exercise" id="soal-eq-1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Buktikan \(\neg(p \rightarrow q) \equiv p \land \neg q\)</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buktikan secara aljabar (menggunakan hukum-hukum logika) bahwa <strong>\(\neg(p \rightarrow q)\)</strong> ekuivalen dengan <strong>\(p \land \neg q\)</strong>.</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Langkah Bukti</div>
+                    <p>Langkah-langkah penyederhanaan aljabar logika:</p>
+                    <div class="math-block">
+                      \[
+                      \begin{aligned}
+                      \neg(p \rightarrow q) &\equiv \neg(\neg p \lor q) && \text{(Hukum Implikasi)} \\
+                      &\equiv \neg(\neg p) \land \neg q && \text{(Hukum De Morgan)} \\
+                      &\equiv p \land \neg q && \text{(Hukum Negasi Ganda)}
+                      \end{aligned}
+                      \]
+                    </div>
+                    <p><em>Terbukti!</em></p>
+                    <p>Visualisasi catatan pengerjaan dari PDF:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page10_img2.png" alt="Langkah Pembuktian Soal 1">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2 -->
+          <div class="exercise" id="soal-eq-2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Buktikan \(\neg(p \lor (\neg p \land q)) \equiv \neg p \land \neg q\)</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buktikan secara aljabar bahwa <strong>\(\neg(p \lor (\neg p \land q))\)</strong> ekuivalen secara logis dengan <strong>\(\neg p \land \neg q\)</strong>.</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Langkah Bukti</div>
+                    <p>Langkah-langkah penyederhanaan aljabar logika:</p>
+                    <div class="math-block">
+                      \[
+                      \begin{aligned}
+                      \neg(p \lor (\neg p \land q)) &\equiv \neg p \land \neg(\neg p \land q) && \text{(Hukum De Morgan)} \\
+                      &\equiv \neg p \land (\neg(\neg p) \lor \neg q) && \text{(Hukum De Morgan)} \\
+                      &\equiv \neg p \land (p \lor \neg q) && \text{(Hukum Negasi Ganda)} \\
+                      &\equiv (\neg p \land p) \lor (\neg p \land \neg q) && \text{(Hukum Distributif)} \\
+                      &\equiv \text{False} \lor (\neg p \land \neg q) && \text{(Hukum Kontradiksi)} \\
+                      &\equiv \neg p \land \neg q && \text{(Hukum Identitas)}
+                      \end{aligned}
+                      \]
+                    </div>
+                    <p><em>Terbukti!</em></p>
+                    <p>Visualisasi catatan pengerjaan dari PDF:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page10_img3.png" alt="Langkah Pembuktian Soal 2">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 3 -->
+          <div class="exercise" id="soal-eq-3">
+            <div class="exercise__header">
+              <span class="exercise__number">3</span>
+              <span class="exercise__title">Buktikan \(\neg(p \lor q) \lor (\neg p \land q) \equiv \neg p\)</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buktikan secara aljabar bahwa <strong>\(\neg(p \lor q) \lor (\neg p \land q) \equiv \neg p\)</strong>.</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Langkah Bukti</div>
+                    <p>Langkah-langkah penyederhanaan:</p>
+                    <div class="math-block">
+                      \[
+                      \begin{aligned}
+                      \neg(p \lor q) \lor (\neg p \land q) &\equiv (\neg p \land \neg q) \lor (\neg p \land q) && \text{(Hukum De Morgan)} \\
+                      &\equiv \neg p \land (\neg q \lor q) && \text{(Hukum Distributif)} \\
+                      &\equiv \neg p \land \text{True} && \text{(Hukum Negasi)} \\
+                      &\equiv \neg p && \text{(Hukum Identitas)}
+                      \end{aligned}
+                      \]
+                    </div>
+                    <p><em>Terbukti!</em></p>
+                    <p>Visualisasi catatan pengerjaan dari PDF:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page10_img5.png" alt="Langkah Pembuktian Soal 3">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 4: Rules of Inference -->
+        <section id="rules-of-inference">
+          <h2>4. Rules of Inference (Aturan Inferensi)</h2>
+          <p>
+            Rules of Inference adalah pola argumen logis yang digunakan sebagai langkah penarikan kesimpulan secara valid dari premis-premis yang diberikan.
+          </p>
+
+          <div class="concept-box">
+            <span class="concept-box__title">📖 Tabel Aturan Inferensi</span>
+            <div class="img-container">
+              <img src="../pdf_images/page11_img1.png" alt="Tabel Rules of Inference">
+              <figcaption>Tabel Pola Logika Aturan Inferensi Valid</figcaption>
+            </div>
+          </div>
+
+          <!-- Soal 1 -->
+          <div class="exercise" id="soal-inf-1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Identifikasi Aturan: Pesta Barbekyu</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Tentukan aturan inferensi mana yang digunakan dalam argumen berikut:</p>
+              <blockquote>
+                "Jika hari ini hujan, maka kita tidak akan mengadakan pesta barbekyu hari ini. Jika kita tidak mengadakan pesta barbekyu hari ini, maka kita akan mengadakan pesta barbekyu besok. Oleh karena itu, jika hari ini hujan, maka kita akan mengadakan pesta barbekyu besok."
+              </blockquote>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Aturan inferensi yang digunakan adalah <strong>Hypothetical Syllogism (Silogisme Hipotetis)</strong>.</p>
+                    <p>
+                      <em>Representasi simbolis:</em><br>
+                      Misalkan:<br>
+                      \(p\): Hari ini hujan.<br>
+                      \(q\): Kita tidak mengadakan pesta barbekyu hari ini.<br>
+                      \(r\): Kita mengadakan pesta barbekyu besok.<br>
+                      <br>
+                      Premis 1: \(p \rightarrow q\)<br>
+                      Premis 2: \(q \rightarrow r\)<br>
+                      Kesimpulan: \(p \rightarrow r\)<br>
+                      <br>
+                      Ini persis sesuai dengan rumus Hypothetical Syllogism: \([(p \rightarrow q) \land (q \rightarrow r)] \rightarrow (p \rightarrow r)\).
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2 -->
+          <div class="exercise" id="soal-inf-2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Pembuktian Logis: Berenang & Kano</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buktikan bahwa premis-premis berikut menghasilkan kesimpulan <strong>"Kita akan sampai rumah saat matahari terbenam."</strong></p>
+              <ol>
+                <li>"Cuaca tidak cerah sore ini dan lebih dingin dari kemarin."</li>
+                <li>"Kita akan berenang hanya jika cuaca cerah."</li>
+                <li>"Jika kita tidak berenang, maka kita akan naik kano."</li>
+                <li>"Jika kita naik kano, maka kita akan sampai rumah saat matahari terbenam."</li>
+              </ol>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Cara Pengerjaan</div>
+                    <p><strong>Langkah 1: Definisikan Proposisi Atomik</strong></p>
+                    <ul>
+                      <li>\(p\): Cuaca cerah sore ini.</li>
+                      <li>\(q\): Lebih dingin dari kemarin.</li>
+                      <li>\(r\): Kita akan berenang.</li>
+                      <li>\(s\): Kita akan naik kano.</li>
+                      <li>\(t\): Kita akan sampai rumah saat matahari terbenam.</li>
+                    </ul>
+                    
+                    <p><strong>Langkah 2: Tulis Premis Secara Simbolis</strong></p>
+                    <ol>
+                      <li>\(\neg p \land q\)</li>
+                      <li>\(r \rightarrow p\) (Catatan: "Berenang HANYA JIKA cuaca cerah" berarti jika berenang maka cuaca cerah).</li>
+                      <li>\(\neg r \rightarrow s\)</li>
+                      <li>\(s \rightarrow t\)</li>
+                    </ol>
+
+                    <p><strong>Langkah 3: Lakukan Inferensi Logis</strong></p>
+                    <table class="truth-table" style="font-family: inherit;">
+                      <thead>
+                        <tr>
+                          <th>Langkah</th>
+                          <th>Pernyataan</th>
+                          <th>Alasan</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>\(\neg p \land q\)</td>
+                          <td>Premis 1</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>\(\neg p\)</td>
+                          <td>Simplifikasi dari Langkah 1</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>\(r \rightarrow p\)</td>
+                          <td>Premis 2</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>\(\neg r\)</td>
+                          <td>Modus Tollens dari Langkah 2 & 3</td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>\(\neg r \rightarrow s\)</td>
+                          <td>Premis 3</td>
+                        </tr>
+                        <tr>
+                          <td>6</td>
+                          <td>\(s\)</td>
+                          <td>Modus Ponens dari Langkah 4 & 5</td>
+                        </tr>
+                        <tr>
+                          <td>7</td>
+                          <td>\(s \rightarrow t\)</td>
+                          <td>Premis 4</td>
+                        </tr>
+                        <tr>
+                          <td>8</td>
+                          <td>\(t\)</td>
+                          <td>Modus Ponens dari Langkah 6 & 7</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    
+                    <p>Dengan demikian, kesimpulan \(t\) ("Kita akan sampai rumah saat matahari terbenam") terbukti secara logis!</p>
+                    
+                    <p>Visualisasi catatan pengerjaan dari PDF:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page12_img1.png" alt="Langkah Pembuktian Berenang dan Kano">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 3 -->
+          <div class="exercise" id="soal-inf-3">
+            <div class="exercise__header">
+              <span class="exercise__number">3</span>
+              <span class="exercise__title">Pembuktian Logis: Email & Coding</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buktikan bahwa premis-premis berikut menghasilkan kesimpulan <strong>"Jika saya tidak menyelesaikan coding, maka saya akan bangun dengan perasaan segar."</strong></p>
+              <ol>
+                <li>"Jika Anda mengirimi saya pesan email, maka saya akan menyelesaikan coding."</li>
+                <li>"Jika Anda tidak mengirimi saya pesan email, maka saya akan tidur lebih awal."</li>
+                <li>"Jika saya tidur lebih awal, maka saya akan bangun dengan perasaan segar."</li>
+              </ol>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Cara Pengerjaan</div>
+                    <p><strong>Langkah 1: Definisikan Proposisi</strong></p>
+                    <ul>
+                      <li>\(p\): Anda mengirimi saya email.</li>
+                      <li>\(q\): Saya akan menyelesaikan coding.</li>
+                      <li>\(r\): Saya tidur lebih awal.</li>
+                      <li>\(s\): Saya bangun dengan perasaan segar.</li>
+                    </ul>
+                    
+                    <p><strong>Langkah 2: Tulis Premis</strong></p>
+                    <ol>
+                      <li>\(p \rightarrow q\)</li>
+                      <li>\(\neg p \rightarrow r\)</li>
+                      <li>\(r \rightarrow s\)</li>
+                    </ol>
+                    <p>Kesimpulan yang dicari: \(\neg q \rightarrow s\)</p>
+
+                    <p><strong>Langkah 3: Bukti</strong></p>
+                    <ol>
+                      <li>\(p \rightarrow q \equiv \neg q \rightarrow \neg p\) (Kontraposisi dari Premis 1)</li>
+                      <li>\(\neg p \rightarrow r\) (Premis 2)</li>
+                      <li>\(\neg q \rightarrow r\) (Hypothetical Syllogism dari langkah 1 dan 2)</li>
+                      <li>\(r \rightarrow s\) (Premis 3)</li>
+                      <li>\(\neg q \rightarrow s\) (Hypothetical Syllogism dari langkah 3 dan 4)</li>
+                    </ol>
+                    <p><em>Terbukti!</em></p>
+                    
+                    <p>Visualisasi catatan pengerjaan dari PDF:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page13_img1.png" alt="Langkah Pembuktian Email dan Coding">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 4 -->
+          <div class="exercise" id="soal-inf-4">
+            <div class="exercise__header">
+              <span class="exercise__number">4</span>
+              <span class="exercise__title">Resolution: Jasmine Ski & Bart Hoki</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Gunakan prinsip <strong>Resolution</strong> untuk menunjukkan bahwa premis-premis berikut:</p>
+              <ol>
+                <li>"Jasmine sedang bermain ski atau tidak turun salju."</li>
+                <li>"Sedang turun salju atau Bart sedang bermain hoki."</li>
+              </ol>
+              <p>Menyiratkan kesimpulan: <strong>"Jasmine sedang bermain ski atau Bart sedang bermain hoki."</strong></p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Cara Pengerjaan</div>
+                    <p><strong>Definisi Proposisi:</strong></p>
+                    <ul>
+                      <li>\(p\): Jasmine bermain ski.</li>
+                      <li>\(q\): Turun salju.</li>
+                      <li>\(r\): Bart bermain hoki.</li>
+                    </ul>
+                    <p><strong>Premis Secara Simbolis:</strong></p>
+                    <ol>
+                      <li>\(p \lor \neg q\)</li>
+                      <li>\(q \lor r\)</li>
+                    </ol>
+                    <p><strong>Aturan Resolusi:</strong></p>
+                    <p>Berdasarkan aturan resolusi, jika kita memiliki bentuk \((A \lor B)\) dan \((\neg B \lor C)\), maka kita bisa mengeliminasi \(B\) dan \(\neg B\) untuk menyimpulkan \((A \lor C)\).</p>
+                    <p>
+                      Maka dari: <br>
+                      \(p \lor \neg q\) <br>
+                      \(\neg q \lor p\) (Komutatif) <br>
+                      dan \(q \lor r\) <br>
+                      <br>
+                      Didapatkan resolusi: <strong>\(p \lor r\)</strong> (Jasmine bermain ski atau Bart bermain hoki).
+                    </p>
+                    
+                    <p>Visualisasi catatan pengerjaan dari PDF:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page13_img2.png" alt="Jawaban Soal Resolusi">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 5: Boolean & Gerbang Logika -->
+        <section id="boolean-logic-gates">
+          <h2>5. Aljabar Boolean & Gerbang Logika</h2>
+          <p>
+            Aljabar Boolean memiliki struktur operasi yang identik dengan logika proposisi. Bedanya terletak pada simbolisasi nilai dan operator yang digunakan.
+          </p>
+
+          <div class="callout callout--info">
+            <span class="callout__icon">💡</span>
+            <div>
+              <strong>Pemetaan Proposisi &rarr; Boolean:</strong>
+              <ul>
+                <li>True (Benar) digantikan dengan angka <strong>1</strong>.</li>
+                <li>False (Salah) digantikan dengan angka <strong>0</strong>.</li>
+                <li>Operasi AND (\(\land\)) digantikan dengan perkalian (<strong>\(\times\)</strong> atau <strong>\(\cdot\)</strong>).</li>
+                <li>Operasi OR (\(\lor\)) digantikan dengan penjumlahan (<strong>\(+\)</strong>).</li>
+                <li>Operasi Negasi (\(\neg x\)) digantikan dengan komplemen/bar (<strong>\(\bar{x}\)</strong> atau <strong>\(x'\)</strong>).</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Contoh Soal Pembuktian Boolean -->
+          <div class="exercise" id="soal-bool-proof">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Pembuktian Aljabar Boolean</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buktikan hukum penyerapan dan distributif pada aljabar Boolean menggunakan pembuktian nilai 1 & 0.</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Cara Pengerjaan</div>
+                    <p>Berikut adalah catatan coretan pembuktian dari PDF:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page14_img1.png" alt="Pembuktian Aljabar Boolean 1">
+                    </div>
+                    <div class="img-container" style="margin-top: 15px;">
+                      <img src="../pdf_images/page14_img2.png" alt="Pembuktian Aljabar Boolean 2">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <h3>Sum of Product (SOP) / Bentuk Normal Disjungtif (DNF)</h3>
+          <p>
+            SOP adalah representasi ekspresi Boolean sebagai jumlahan (OR) dari perkalian-perkalian (AND) variabel. Setiap suku perkalian disebut <strong>minterm</strong>, di mana seluruh variabel muncul tepat sekali (baik dalam bentuk normal maupun komplemen).
+          </p>
+
+          <!-- SOP Soal 1 -->
+          <div class="exercise" id="soal-sop-1">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Mencari Fungsi SOP dari Tabel</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Temukan ekspresi Boolean dalam bentuk Sum of Product (SOP) untuk fungsi \(F(x,y,z)\) dan \(G(x,y,z)\) yang nilainya didefinisikan dalam tabel berikut:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page15_img1.png" alt="Tabel Soal SOP">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Cara Pengerjaan</div>
+                    <p><strong>Langkah Pengerjaan:</strong></p>
+                    <p>Untuk menulis ekspansi SOP, kita hanya fokus pada baris tabel di mana output fungsi bernilai <strong>1</strong>. Setiap baris tersebut kita nyatakan sebagai minterm (AND):</p>
+                    <ul>
+                      <li>Jika variabel bernilai 1, tulis tanpa komplemen (contoh: \(x\)).</li>
+                      <li>Jika variabel bernilai 0, tulis dengan komplemen (contoh: \(\bar{x}\) atau \(x'\)).</li>
+                    </ul>
+                    <p>Kemudian kita gabungkan seluruh minterm tersebut dengan operasi penjumlahan (OR).</p>
+                    
+                    <p><strong>Fungsi \(F(x,y,z)\):</strong> bernilai 1 pada baris:</p>
+                    <ul>
+                      <li>\(x=1, y=0, z=1 \rightarrow x \bar{y} z\)</li>
+                      <li>\(x=0, y=1, z=0 \rightarrow \bar{x} y \bar{z}\)</li>
+                    </ul>
+                    <p>Maka SOP \(F(x,y,z) = x \bar{y} z + \bar{x} y \bar{z}\).</p>
+
+                    <p><strong>Fungsi \(G(x,y,z)\):</strong> lakukan analisis yang sama untuk semua baris bernilai 1.</p>
+                    
+                    <p>Berikut adalah lembar jawaban lengkap dari PDF:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page15_img2.png" alt="Jawaban Soal SOP 1">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SOP Soal 2 -->
+          <div class="exercise" id="soal-sop-2">
+            <div class="exercise__header">
+              <span class="exercise__number">3</span>
+              <span class="exercise__title">Ekspansi SOP Ekspresi Aljabar</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Temukan perluasan sum-of-product (SOP) dari fungsi Boolean <strong>\(F(x,y,z) = (x+y)\bar{z}\)</strong>.</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Cara Pengerjaan</div>
+                    <p><strong>Metode Aljabar:</strong></p>
+                    <p>
+                      1. Gunakan hukum distributif untuk mengalikan suku: <br>
+                      \(F(x,y,z) = x\bar{z} + y\bar{z}\) <br>
+                      2. Kalikan setiap suku dengan \((w + \bar{w})\) dari variabel yang hilang agar menjadi minterm lengkap (karena \(w + \bar{w} = 1\)):<br>
+                      - Pada suku \(x\bar{z}\), variabel \(y\) hilang. Kalikan dengan \((y + \bar{y})\): <br>
+                      \(x\bar{z}(y + \bar{y}) = xy\bar{z} + x\bar{y}\bar{z}\)<br>
+                      - Pada suku \(y\bar{z}\), variabel \(x\) hilang. Kalikan dengan \((x + \bar{x})\): <br>
+                      \(y\bar{z}(x + \bar{x}) = xy\bar{z} + \bar{x}y\bar{z}\)<br>
+                      3. Jumlahkan seluruh suku dan buang suku duplikat (menggunakan hukum idempoten):<br>
+                      \(F(x,y,z) = xy\bar{z} + x\bar{y}\bar{z} + \bar{x}y\bar{z}\)
+                    </p>
+                    
+                    <p>Visualisasi penyelesaian dan metode alternatif dari PDF:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page15_img3.png" alt="Langkah SOP Aljabar 1">
+                    </div>
+                    <div class="img-container" style="margin-top: 15px;">
+                      <img src="../pdf_images/page15_img4.png" alt="Langkah SOP Aljabar 2">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <h3>Gerbang Logika (Logic Gates)</h3>
+          <p>
+            Gerbang logika adalah representasi fisik/sirkuit digital dari fungsi logika dasar. Ada 3 gerbang utama:
+          </p>
+          <div class="img-container">
+            <img src="../pdf_images/page16_img1.png" alt="3 Tipe Gerbang Logika Utama">
+            <figcaption>Gerbang NOT (Inverter), OR, dan AND</figcaption>
+          </div>
+
+          <!-- Gates Soal 1 -->
+          <div class="exercise" id="soal-gate-1">
+            <div class="exercise__header">
+              <span class="exercise__number">4</span>
+              <span class="exercise__title">Membuat Gerbang Logika 1</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buatlah rancangan sirkuit gerbang logika untuk fungsi Boolean berikut: <strong>\(F(x,y,z) = x + y\bar{z}\)</strong></p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Rancangan Sirkuit</div>
+                    <p>Untuk membuat sirkuit ini:</p>
+                    <ol>
+                      <li>Masukkan \(z\) ke gerbang NOT (Inverter) untuk menghasilkan \(\bar{z}\).</li>
+                      <li>Masukkan hasil \(\bar{z}\) dan input \(y\) ke gerbang AND untuk menghasilkan perkalian \(y\bar{z}\).</li>
+                      <li>Terakhir, masukkan hasil \(y\bar{z}\) dan input \(x\) ke gerbang OR untuk mendapatkan penjumlahan \(x + y\bar{z}\).</li>
+                    </ol>
+                    <div class="img-container">
+                      <img src="../pdf_images/page16_img2.png" alt="Sirkuit Gerbang Logika Soal 1">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gates Soal 2 -->
+          <div class="exercise" id="soal-gate-2">
+            <div class="exercise__header">
+              <span class="exercise__number">5</span>
+              <span class="exercise__title">Membuat Gerbang Logika 2</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buatlah rancangan sirkuit gerbang logika untuk fungsi Boolean berikut: <strong>\(F(x,y,z) = (x+y)\bar{z}\)</strong></p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Rancangan Sirkuit</div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page16_img3.png" alt="Sirkuit Gerbang Logika Soal 2">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gates Soal 3 -->
+          <div class="exercise" id="soal-gate-3">
+            <div class="exercise__header">
+              <span class="exercise__number">6</span>
+              <span class="exercise__title">Menentukan Output Sirkuit</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Tentukan output ekspresi Boolean dari sirkuit gerbang logika berikut:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page16_img4.png" alt="Sirkuit Logika Ditanyakan Output">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Langkah Analisis</div>
+                    <p>Lakukan pelacakan jalur output dari kiri ke kanan:</p>
+                    <ul>
+                      <li>Jalur atas menghasilkan \(\bar{x}y\) melalui gerbang NOT dan AND.</li>
+                      <li>Jalur bawah menghasilkan \(x\bar{y}\) melalui gerbang NOT dan AND.</li>
+                      <li>Kedua jalur digabungkan ke gerbang OR menghasilkan output akhir: <strong>\(\bar{x}y + x\bar{y}\)</strong> (ini merupakan operasi XOR!).</li>
+                    </ul>
+                    <div class="img-container">
+                      <img src="../pdf_images/page16_img5.png" alt="Jawaban Analisis Sirkuit">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 6: Karnaugh Map -->
+        <section id="karnaugh-map">
+          <h2>6. Karnaugh Map (K-Map)</h2>
+          <p>
+            Karnaugh Map (K-Map) adalah metode grafis yang sangat kuat untuk menyederhanakan ekspresi aljabar Boolean (atau meminimalisasi jumlah gerbang logika dalam sirkuit). 
+          </p>
+
+          <div class="concept-box">
+            <span class="concept-box__title">📝 5 Prinsip Dasar Pengelompokan K-Map</span>
+            <ol>
+              <li><strong>Cover semua area:</strong> Semua kotak bernilai 1 harus masuk ke dalam kelompok (loop).</li>
+              <li><strong>Cover area seluas mungkin:</strong> Buat kelompok sebesar mungkin untuk mendapatkan hasil penyederhanaan paling sederhana.</li>
+              <li><strong>Ukuran kelompok harus \(2^n\):</strong> Jumlah kotak dalam satu kelompok harus bernilai 1, 2, 4, 8, atau 16 kotak. Tidak boleh membuat kelompok berukuran 3, 5, atau 6 kotak.</li>
+              <li><strong>Tumpang tindih (Overlap) diperbolehkan:</strong> Kotak bernilai 1 yang sudah dikelompokkan boleh digunakan lagi untuk membantu mengelompokkan kotak 1 lainnya agar terbentuk kelompok yang lebih besar.</li>
+              <li><strong>Hafalkan polaGray Code:</strong> Urutan baris/kolom harus mengikuti Gray Code (00 &rarr; 01 &rarr; 11 &rarr; 10). Perhatikan lompatan kolom 3 dan 4!</li>
+            </ol>
+          </div>
+
+          <hr>
+
+          <h3>K-Map 2 Variabel</h3>
+          <p>
+            Memiliki \(2^2 = 4\) sel kotak. Penyederhanaan terjadi jika dua kotak bernilai 1 yang bersebelahan digabungkan, sehingga satu variabel saling meniadakan.
+          </p>
+
+          <!-- 2 Var Soal -->
+          <div class="exercise" id="soal-kmap2-1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Penyederhanaan K-Map 2 Variabel</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Carilah minimal sum-of-product dari complete sum-of-product ekspresi Boolean berikut:</p>
+              <p>
+                (a) \(E_1 = xy + xy'\) <br>
+                (b) \(E_2 = xy + x'y + x'y'\) <br>
+                (c) \(E_3 = xy + x'y'\)
+              </p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Cara Analisis</div>
+                    
+                    <p><strong>(a) Analisis \(E_1\):</strong></p>
+                    <p>Kita petakan suku \(xy\) dan \(xy'\) ke peta. Kedua kotak ini bersebelahan secara horizontal. Penggabungan kedua kotak ini mengeliminasi variabel \(y\) (karena \(y\) dan \(y'\) bernilai berlawanan), menyisakan <strong>\(x\)</strong>.</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page17_img1.png" alt="K-Map 2 Var Soal A">
+                      <figcaption>Hasil Minimal: \(E_1 = x\)</figcaption>
+                    </div>
+
+                    <p><strong>(b) Analisis \(E_2\):</strong></p>
+                    <p>Kelompok vertikal mewakili \(y\) (mengeliminasi \(x\)) dan kelompok horizontal mewakili \(x'\) (mengeliminasi \(y\)). Gabungan keduanya menghasilkan minimal sum: <strong>\(x' + y\)</strong>.</p>
+                    <div class="img-container" style="margin-top: 15px;">
+                      <img src="../pdf_images/page17_img2.png" alt="K-Map 2 Var Soal B">
+                      <figcaption>Hasil Minimal: \(E_2 = x' + y\)</figcaption>
+                    </div>
+
+                    <p><strong>(c) Analisis \(E_3\):</strong></p>
+                    <p>Kedua kotak terletak diagonal, tidak bersebelahan secara horizontal maupun vertikal. Tidak ada pengelompokan yang dapat dibentuk. Maka ekspresi minimalnya tetap: <strong>\(xy + x'y'\)</strong>.</p>
+                    <div class="img-container" style="margin-top: 15px;">
+                      <img src="../pdf_images/page18_img1.png" alt="K-Map 2 Var Soal C">
+                      <figcaption>Hasil Minimal: \(E_3 = xy + x'y'\)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <h3>K-Map 3 Variabel</h3>
+          <p>
+            Memiliki \(2^3 = 8\) sel kotak. Bayangkan peta ini seperti tabung silinder yang dapat <strong>dilipat secara horizontal ke samping</strong>, artinya tepi kolom paling kiri (kolom 00) bersebelahan langsung dengan tepi kolom paling kanan (kolom 10).
+          </p>
+
+          <!-- 3 Var Soal 1 -->
+          <div class="exercise" id="soal-kmap3-1">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Mencari Fundamental Product</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Tentukan hasil (fundamental product) \(P\) dari daerah arsiran yang dipresentasikan dengan loop/lingkaran pada K-Map di bawah ini:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page19_img2.png" alt="Soal K-Map 3 Var 1">
+              </div>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page19_img3.png" alt="Jawaban Soal K-Map 3 Var 1">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 Var Soal 2 -->
+          <div class="exercise" id="soal-kmap3-2">
+            <div class="exercise__header">
+              <span class="exercise__number">3</span>
+              <span class="exercise__title">Penyederhanaan K-Map 3 Variabel</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Carilah minimal sum-of-product dari complete sum-of-product ekspresi Boolean di bawah ini:</p>
+              <p>
+                (a) \(E_1 = xy + yz' + x'y'z\) <br>
+                (b) \(E_2 = xy + z\) <br>
+                (c) \(E_3 = xy + y'z' + x'y' = xy + x'z' + x'y'\)
+              </p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Penjelasan Langkah</div>
+                    
+                    <p><strong>(a) Analisis \(E_1\):</strong></p>
+                    <p>Peta memiliki 3 loop utama maksimal yang mencakup daerah arsiran. Menghasilkan penjumlahan minimal: <strong>\(E_1 = xy + yz' + x'y'z\)</strong>.</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page20_img1.png" alt="K-Map 3 Var Soal A">
+                    </div>
+
+                    <p><strong>(b) Analisis \(E_2\):</strong></p>
+                    <p>Kotak berukuran 2x2 (empat sel) terbentuk di tepi silinder yang teridentifikasi, mewakili \(z\). Kotak horizontal lainnya mewakili \(xy\). Hasil minimal: <strong>\(E_2 = xy + z\)</strong>.</p>
+                    <div class="img-container" style="margin-top: 15px;">
+                      <img src="../pdf_images/page20_img2.png" alt="K-Map 3 Var Soal B">
+                    </div>
+
+                    <p><strong>(c) Analisis \(E_3\):</strong></p>
+                    <p>Mempunyai beberapa alternatif pembentukan loop minimal. Salah satunya menghasilkan: <strong>\(E_3 = xy + y'z' + x'y' = xy + x'z' + x'y'\)</strong>.</p>
+                    <div class="img-container" style="margin-top: 15px;">
+                      <img src="../pdf_images/page20_img3.png" alt="K-Map 3 Var Soal C">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 Var Soal 3 & 4 -->
+          <div class="exercise" id="soal-kmap3-3">
+            <div class="exercise__header">
+              <span class="exercise__number">4</span>
+              <span class="exercise__title">Latihan Mandiri 3 Variabel (Soal UTS)</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Carilah minimal sum-of-product untuk beberapa tipe soal latihan 3 variabel berikut:</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban Lembar Latihan</div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page20_img4.png" alt="Jawaban Soal Latihan K-Map 3 Var Soal 3">
+                    </div>
+                    <div class="img-container" style="margin-top: 15px;">
+                      <img src="../pdf_images/page21_img1.png" alt="Jawaban Soal Latihan K-Map 3 Var Soal 4">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <h3>K-Map 4 Variabel</h3>
+          <p>
+            Memiliki \(2^4 = 16\) sel kotak. Pada K-Map 4 variabel, peta dapat <strong>dilipat secara horizontal (ke samping)</strong> sekaligus <strong>secara vertikal (ke atas-bawah)</strong>. 
+          </p>
+          <div class="callout callout--warning">
+            <span class="callout__icon">⚠️</span>
+            <div>
+              <strong>Kombinasi Sudut (Corner Loop):</strong> <br>
+              Keempat kotak di ujung sudut (kiri-atas, kanan-atas, kiri-bawah, kanan-bawah) dianggap saling bersebelahan dan dapat digabungkan menjadi satu grup kelompok berukuran 4 kotak!
+            </div>
+          </div>
+
+          <!-- 4 Var Soal 1 -->
+          <div class="exercise" id="soal-kmap4-1">
+            <div class="exercise__header">
+              <span class="exercise__number">5</span>
+              <span class="exercise__title">Mencari Fundamental Product (4 Var)</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Tentukan hasil (fundamental product) \(P\) dari daerah arsiran yang dipresentasikan dengan loop persegi panjang pada K-Map 4 variabel di bawah ini:</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page21_img5.png" alt="Soal K-Map 4 Var 1">
+                    </div>
+                    <div class="img-container" style="margin-top: 15px;">
+                      <img src="../pdf_images/page21_img6.png" alt="Jawaban K-Map 4 Var 1">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Var Soal 2 -->
+          <div class="exercise" id="soal-kmap4-2">
+            <div class="exercise__header">
+              <span class="exercise__number">6</span>
+              <span class="exercise__title">Penyederhanaan & Rancang Gerbang</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Gunakan K-Map untuk menyederhanakan ekspresi Boolean yang diberikan, kemudian rancang sirkuit gerbang logikanya!</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Sirkuit</div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page22_img1.png" alt="Jawaban Soal 2 Bagian 1">
+                    </div>
+                    <div class="img-container" style="margin-top: 15px;">
+                      <img src="../pdf_images/page22_img2.png" alt="Jawaban Soal 2 Bagian 2">
+                    </div>
+                    <div class="img-container" style="margin-top: 15px;">
+                      <img src="../pdf_images/page22_img3.png" alt="Jawaban Soal 2 Bagian 3">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Var Soal 3 -->
+          <div class="exercise" id="soal-kmap4-3">
+            <div class="exercise__header">
+              <span class="exercise__number">7</span>
+              <span class="exercise__title">Mencari Hasil Arsiran (4 Var)</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Tentukan hasil (fundamental product) \(P\) dari daerah arsiran yang dipresentasikan dengan persegi panjang pada peta Karnaugh di bawah ini:</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page22_img5.png" alt="Soal K-Map 4 Var 3">
+                    </div>
+                    <div class="img-container" style="margin-top: 15px;">
+                      <img src="../pdf_images/page22_img6.png" alt="Jawaban K-Map 4 Var 3">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Var Soal 4 -->
+          <div class="exercise" id="soal-kmap4-4">
+            <div class="exercise__header">
+              <span class="exercise__number">8</span>
+              <span class="exercise__title">Konversi SOP Lengkap & Bentuk Minimal</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Misalkan \(E\) adalah ekspresi Boolean yang diberikan dalam pemetaan Karnaugh di bawah ini:</p>
+              <ol>
+                <li>Tulis \(E\) dalam bentuk jumlah produk lengkapnya (complete sum-of-product).</li>
+                <li>Temukan bentuk minimal (minimal form) untuk \(E\).</li>
+              </ol>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Penjelasan</div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page23_img1.png" alt="Peta Karnaugh Soal 4">
+                    </div>
+                    <div class="img-container" style="margin-top: 15px;">
+                      <img src="../pdf_images/page23_img2.png" alt="Solusi K-Map Soal 4">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Var Soal 5 -->
+          <div class="exercise" id="soal-kmap4-5">
+            <div class="exercise__header">
+              <span class="exercise__number">9</span>
+              <span class="exercise__title">Mencari Minimal Sum E1 & E2</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>Carilah jumlah minimum (minimal-sum) untuk ekspresi Boolean \(E_1\) dan \(E_2\) pada variabel \(x, y, z, t\) yang diberikan dalam pemetaan K-Map berikut:</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Penjelasan Bukti</div>
+                    <p><strong>(a) Analisis \(E_1\):</strong></p>
+                    <p>Hanya \(\bar{y}\) yang muncul di semua delapan kotak persegi panjang dasar maksimal 2x4, dan pasangan kotak bersebelahan yang ditunjuk mewakili \(xzt'\). Karena kedua persegi panjang diperlukan untuk penutup minimal, maka:</p>
+                    <div class="math-block">
+                      \[E_1 = \bar{y} + xzt'\]
+                    </div>
+                    
+                    <p><strong>(b) Analisis \(E_2\):</strong></p>
+                    <p>Keempat kotak sudut membentuk persegi panjang dasar maksimal 2x2 yang mewakili \(\bar{y}\bar{t}\) (atau ditulis sebagai \(yt'\) pada sistem komplemen tertentu). Kotak maksimal 4x1 mewakili \(\bar{x}\bar{y}\), dan dua kotak bersebelahan mewakili \(\bar{y}zt'\). Karena ketiga persegi panjang diperlukan untuk penutup minimal, maka diperoleh bentuk minimalnya.</p>
+                    
+                    <p>Berikut adalah peta soal dan catatan kunci jawaban dari PDF:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page23_img3.png" alt="Peta Soal K-Map 5">
+                    </div>
+                    <div class="img-container" style="margin-top: 15px;">
+                      <img src="../pdf_images/page23_img4.png" alt="Solusi K-Map Soal 5 Bagian 1">
+                    </div>
+                    <div class="img-container" style="margin-top: 15px;">
+                      <img src="../pdf_images/page24_img1.png" alt="Solusi K-Map Soal 5 Bagian 2">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Var Soal 6 -->
+          <div class="exercise" id="soal-kmap4-6">
+            <div class="exercise__header">
+              <span class="exercise__number">10</span>
+              <span class="exercise__title">Penyederhanaan Lanjutan K-Map 4 Variabel</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>Carilah jumlah minimum (minimal-sum) untuk ekspresi Boolean \(E_1\) dan \(E_2\) pada variabel \(x, y, z, t\) yang diberikan oleh pemetaan Karnaugh di bawah ini:</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban & Penjelasan Bukti</div>
+                    <p><strong>(a) Analisis \(E_1\):</strong></p>
+                    <p>Terdapat lima implikan prima yang ditunjuk oleh empat loop dan satu lingkaran putus-putus. Lingkaran putus-putus tidak diperlukan untuk menutupi semua kotak, sedangkan empat loop lainnya wajib. Maka keempat loop tersebut memberikan jumlah minimum untuk \(E_1\).</p>
+                    
+                    <p><strong>(b) Analisis \(E_2\):</strong></p>
+                    <p>Terdapat lima implikan prima yang ditunjuk oleh lima loop (dua di antaranya putus-putus). Hanya satu dari dua loop putus-putus yang diperlukan untuk menutupi kotak \(\bar{x}\bar{y}\bar{z}\bar{t}\), sehingga didapatkan dua buah jumlah minimal alternatif yang valid.</p>
+                    
+                    <p>Berikut adalah catatan kunci jawaban dari PDF:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page24_img3.png" alt="Peta Soal K-Map 6">
+                    </div>
+                    <div class="img-container" style="margin-top: 15px;">
+                      <img src="../pdf_images/page24_img4.png" alt="Solusi K-Map Soal 6 Bagian 1">
+                    </div>
+                    <div class="img-container" style="margin-top: 15px;">
+                      <img src="../pdf_images/page24_img5.png" alt="Solusi K-Map Soal 6 Bagian 2">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Var Soal 7 -->
+          <div class="exercise" id="soal-kmap4-7">
+            <div class="exercise__header">
+              <span class="exercise__number">11</span>
+              <span class="exercise__title">Penyederhanaan K-Map 4 Variabel (Hard)</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>Sederhanakan ekspresi K-Map 4 variabel berikut ini untuk mendapatkan bentuk minimalnya:</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page25_img1.png" alt="Soal K-Map 4 Var 7">
+                    </div>
+                    <div class="img-container" style="margin-top: 15px;">
+                      <img src="../pdf_images/page26_img1.png" alt="Jawaban K-Map 4 Var 7 Bagian 1">
+                    </div>
+                    <div class="img-container" style="margin-top: 15px;">
+                      <img src="../pdf_images/page26_img2.png" alt="Jawaban K-Map 4 Var 7 Bagian 2">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page Navigation -->
+        <div class="page-nav">
+          <span class="page-nav__link page-nav__link--disabled">
+            <!-- First session: no previous link -->
+          </span>
+          <a href="sesi2.html" class="page-nav__link page-nav__link--next">
+            <span class="page-nav__label">Selanjutnya →</span>
+            <span class="page-nav__title">Sesi 2: Quantifier</span>
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <button class="back-to-top" aria-label="Kembali ke atas">↑</button>
+  <script src="../js/main.js"></script>
+</body>
+</html>

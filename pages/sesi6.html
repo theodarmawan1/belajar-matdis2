@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesi 7: Relation (Relasi Ekuivalen) — Matematika Diskrit</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script src="../js/theme.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="../index.html" class="navbar__brand">
+      <span class="navbar__brand-icon">∑</span>
+      <span>MatDiskrit</span>
+    </a>
+    <div class="navbar__actions">
+      <button class="navbar__menu-btn" aria-label="Menu">☰</button>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-toggle__knob">🌙</span>
+      </button>
+    </div>
+  </nav>
+  <div class="sidebar-overlay"></div>
+  
+  <div class="layout">
+    <aside class="sidebar">
+      <!-- Session navigation links -->
+      <div class="sidebar__section-title">Navigasi</div>
+      <a href="../index.html" class="sidebar__link"><span class="sidebar__link-icon">🏠</span> Beranda</a>
+      <a href="sesi1.html" class="sidebar__link"><span class="sidebar__link-icon">1</span> Logic</a>
+      <a href="sesi2.html" class="sidebar__link"><span class="sidebar__link-icon">2</span> Quantifier</a>
+      <a href="sesi3.html" class="sidebar__link"><span class="sidebar__link-icon">3</span> Method of Proof</a>
+      <a href="sesi4.html" class="sidebar__link"><span class="sidebar__link-icon">4</span> Fuzzy Sets & Function</a>
+      <a href="sesi5.html" class="sidebar__link"><span class="sidebar__link-icon">5</span> Binomial & Kombinasi</a>
+      <a href="sesi6.html" class="sidebar__link active"><span class="sidebar__link-icon">6</span> Relation</a>
+      <a href="sesi7.html" class="sidebar__link"><span class="sidebar__link-icon">7</span> POSET & Hasse</a>
+      <a href="sesi8.html" class="sidebar__link"><span class="sidebar__link-icon">8</span> Min/Max & Lattice</a>
+      <a href="sesi9.html" class="sidebar__link"><span class="sidebar__link-icon">9</span> MST, Coloring & FSA</a>
+      
+      <div class="sidebar__section-title">Daftar Isi</div>
+      <div class="sidebar__sublinks">
+        <a href="#dasar-relasi" class="sidebar__sublink">1. Dasar-Dasar Relasi</a>
+        <a href="#sifat-relasi" class="sidebar__sublink">2. Sifat-Sifat Relasi</a>
+        <a href="#relasi-ekuivalen" class="sidebar__sublink">3. Relasi Ekuivalen</a>
+      </div>
+    </aside>
+    
+    <main class="main-content">
+      <div class="content-wrapper">
+        <!-- Section Header -->
+        <div class="section-header">
+          <span class="section-header__badge">Sesi 7</span>
+          <h1 class="section-header__title">Relation (Relasi Ekuivalen)</h1>
+          <p class="section-header__desc">
+            Pelajari konsep relasi biner, sifat-sifat relasi (refleksif, simetris, antisimetris, transitif), hingga pembuktian relasi ekuivalen beserta kelas ekuivalensinya.
+          </p>
+        </div>
+
+        <!-- Section 1: Dasar-Dasar Relasi -->
+        <section id="dasar-relasi">
+          <h2>1. Dasar-Dasar Relasi</h2>
+          <p>
+            Secara intuitif, relasi menyatakan hubungan antara anggota-anggota dari dua himpunan. Relasi yang sering kita temukan sehari-hari, misalnya relasi antara siswa dengan mata pelajaran yang mereka ambil, relasi antara nama orang dengan nomor teleponnya, dan sebagainya.
+          </p>
+
+          <div class="callout callout--definition">
+            <div class="callout__icon">📖</div>
+            <div>
+              <strong>Definisi 1: Relasi Biner</strong><br>
+              Misalkan $A$ dan $B$ adalah himpunan. Sebuah <strong>relasi biner</strong> $R$ dari $A$ ke $B$ adalah subset (himpunan bagian) dari Cartesian product $A \times B$.
+              <br><br>
+              Dengan kata lain, $R \subseteq A \times B$. Hubungan ini menghubungkan elemen-elemen di $A$ dengan elemen-elemen di $B$.
+            </div>
+          </div>
+
+          <h3>Notasi Relasi</h3>
+          <ul>
+            <li>Kita menuliskan $aRb$ jika $(a, b) \in R$, yang berarti "elemen $a$ berelasi dengan elemen $b$ melalui relasi $R$".</li>
+            <li>Sebaliknya, kita menuliskan $a \not{R} b$ jika $(a, b) \notin R$, yang berarti "elemen $a$ tidak berelasi dengan elemen $b$ melalui relasi $R$".</li>
+          </ul>
+
+          <div class="concept-box">
+            <span class="concept-box__title">📌 Contoh 1: Hubungan Siswa & Mata Pelajaran</span>
+            <p>
+              Misalkan $A$ adalah himpunan siswa di sekolahmu, dan $B$ adalah himpunan mata pelajaran yang ditawarkan. Kita definisikan relasi $R$ berisi pasangan $(a, b)$ di mana siswa $a$ terdaftar pada kelas mata pelajaran $b$.
+            </p>
+            <p>
+              Misalkan Budi dan Siti mengambil kelas <em>Matematika Diskrit</em>, dan Budi juga mengambil kelas <em>Fisika</em>. Maka:
+            </p>
+            <ul>
+              <li>$(\text{Budi}, \text{Matematika}) \in R$ &rarr; $\text{Budi } R \text{ Matematika}$</li>
+              <li>$(\text{Siti}, \text{Matematika}) \in R$ &rarr; $\text{Siti } R \text{ Matematika}$</li>
+              <li>$(\text{Budi}, \text{Fisika}) \in R$ &rarr; $\text{Budi } R \text{ Fisika}$</li>
+              <li>$(\text{Siti}, \text{Fisika}) \notin R$ &rarr; $\text{Siti } \not{R} \text{ Fisika}$ (Siti tidak mengambil kelas Fisika)</li>
+            </ul>
+          </div>
+
+          <div class="concept-box">
+            <span class="concept-box__title">📌 Contoh 2: Relasi Himpunan Hingga</span>
+            <p>
+              Misalkan $A = \{0, 1, 2\}$ dan $B = \{a, b\}$. Himpunan $R = \{(0, a), (0, b), (1, a), (2, b)\}$ merupakan relasi dari $A$ ke $B$.
+            </p>
+            <p>
+              Artinya $0 R a$, $0 R b$, $1 R a$, dan $2 R b$. Namun, $1 \not{R} b$ dan $2 \not{R} a$. Relasi ini dapat kita sajikan dalam tabel kebenaran / matriks keanggotaan relasi di bawah ini:
+            </p>
+            <table class="truth-table">
+              <thead>
+                <tr>
+                  <th>A \ B</th>
+                  <th>a</th>
+                  <th>b</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>0</strong></td>
+                  <td class="val-true">✓ (True)</td>
+                  <td class="val-true">✓ (True)</td>
+                </tr>
+                <tr>
+                  <td><strong>1</strong></td>
+                  <td class="val-true">✓ (True)</td>
+                  <td class="val-false">✗ (False)</td>
+                </tr>
+                <tr>
+                  <td><strong>2</strong></td>
+                  <td class="val-false">✗ (False)</td>
+                  <td class="val-true">✓ (True)</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="img-container">
+              <img src="../pdf_images/page115_img1.png" alt="Representasi Relasi Grafis dan Tabel">
+              <figcaption>Visualisasi Relasi menggunakan Diagram Panah dan Tabel (Halaman 115)</figcaption>
+            </div>
+          </div>
+
+          <h3>Fungsi Sebagai Relasi</h3>
+          <p>
+            Ingat kembali bahwa fungsi adalah kasus khusus dari relasi. Sebuah fungsi $f$ dari $A$ ke $B$ menetapkan tepat satu elemen di $B$ untuk setiap elemen di $A$. Kita dapat merepresentasikan fungsi ini sebagai relasi.
+          </p>
+          <div class="callout callout--info">
+            <div class="callout__icon">💡</div>
+            <div>
+              <strong>Contoh:</strong> Misalkan fungsi $f(x) = 2x$ didefinisikan pada domain $A = \{1, 2, 3, 4\}$. Kita dapat mengubah fungsi ini menjadi bentuk himpunan relasi $R$ berisi pasangan berurutan $(x, f(x))$:
+              $$R = \{(1, 2), (2, 4), (3, 6), (4, 8)\}$$
+            </div>
+          </div>
+
+          <div class="callout callout--definition">
+            <div class="callout__icon">📖</div>
+            <div>
+              <strong>Definisi 2: Relasi pada Himpunan A</strong><br>
+              Sebuah <strong>relasi pada himpunan A</strong> adalah relasi dari $A$ ke $A$. Dengan kata lain, relasi tersebut merupakan subset dari $A \times A$.
+            </div>
+          </div>
+
+          <!-- Soal 1 -->
+          <div class="exercise" id="soal-dasar-1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Menentukan Anggota Pasangan Relasi "Membagi"</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Misalkan $A$ adalah himpunan $\{1, 2, 3, 4\}$. Tuliskan semua pasangan berurutan yang ada dalam relasi $R = \{(a, b) \mid a \text{ membagi } b\}$.</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Notasi "$a$ membagi $b$" ditulis $a \mid b$, artinya $b$ habis dibagi oleh $a$ (sisa pembagiannya $0$). Kita tinjau setiap elemen di $A = \{1, 2, 3, 4\}$ sebagai $a$ dan mencari nilai $b$ yang habis dibagi oleh $a$:</p>
+                    <ul>
+                      <li>Untuk $a = 1$: $1$ membagi semua bilangan bulat. Pasangan yang terbentuk: $(1, 1), (1, 2), (1, 3), (1, 4)$.</li>
+                      <li>Untuk $a = 2$: $2$ membagi bilangan genap. Pasangan yang terbentuk: $(2, 2), (2, 4)$.</li>
+                      <li>Untuk $a = 3$: $3$ membagi $3$. Pasangan yang terbentuk: $(3, 3)$.</li>
+                      <li>Untuk $a = 4$: $4$ membagi $4$. Pasangan yang terbentuk: $(4, 4)$.</li>
+                    </ul>
+                    <p>Maka, himpunan relasi lengkapnya adalah:</p>
+                    <p class="math-block">
+                      $$R = \{(1, 1), (1, 2), (1, 3), (1, 4), (2, 2), (2, 4), (3, 3), (4, 4)\}$$
+                    </p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page116_img1.png" alt="Catatan Solusi Soal 1">
+                      <figcaption>Solusi Relasi Membagi (Halaman 116)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2 -->
+          <div class="exercise" id="soal-dasar-2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Memeriksa Keanggotaan Pasangan Relasi pada Bilangan Bulat</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Perhatikan relasi berikut pada himpunan bilangan bulat $\mathbb{Z}$:</p>
+              <ul>
+                <li>$R_1 = \{(a, b) \mid a \le b\}$</li>
+                <li>$R_2 = \{(a, b) \mid a > b\}$</li>
+                <li>$R_3 = \{(a, b) \mid a = b \lor a = -b\}$</li>
+                <li>$R_4 = \{(a, b) \mid a = b\}$</li>
+                <li>$R_5 = \{(a, b) \mid a = b + 1\}$</li>
+                <li>$R_6 = \{(a, b) \mid a + b \le 3\}$</li>
+              </ul>
+              <p>Tentukan relasi mana saja yang memuat masing-masing pasangan berurutan berikut: $(1, 1), (1, 2), (2, 1), (1, -1),$ dan $(2, 2)$.</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Kita uji masing-masing pasangan untuk keenam relasi tersebut:</p>
+                    <ol>
+                      <li>
+                        <strong>Pasangan $(1, 1)$</strong>
+                        <ul>
+                          <li>$R_1$ ($1 \le 1$ &rarr; Benar): $(1,1) \in R_1$</li>
+                          <li>$R_2$ ($1 > 1$ &rarr; Salah): $(1,1) \notin R_2$</li>
+                          <li>$R_3$ ($1 = 1 \lor 1 = -1$ &rarr; Benar): $(1,1) \in R_3$</li>
+                          <li>$R_4$ ($1 = 1$ &rarr; Benar): $(1,1) \in R_4$</li>
+                          <li>$R_5$ ($1 = 1 + 1$ &rarr; Salah): $(1,1) \notin R_5$</li>
+                          <li>$R_6$ ($1 + 1 \le 3$ &rarr; Benar): $(1,1) \in R_6$</li>
+                        </ul>
+                        <em>Hasil: $(1,1)$ termuat di $R_1, R_3, R_4, R_6$.</em>
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>Pasangan $(1, 2)$</strong>
+                        <ul>
+                          <li>$R_1$ ($1 \le 2$ &rarr; Benar): $(1,2) \in R_1$</li>
+                          <li>$R_2$ ($1 > 2$ &rarr; Salah): $(1,2) \notin R_2$</li>
+                          <li>$R_3$ ($1 = 2 \lor 1 = -2$ &rarr; Salah): $(1,2) \notin R_3$</li>
+                          <li>$R_4$ ($1 = 2$ &rarr; Salah): $(1,2) \notin R_4$</li>
+                          <li>$R_5$ ($1 = 2 + 1$ &rarr; Salah): $(1,2) \notin R_5$</li>
+                          <li>$R_6$ ($1 + 2 \le 3$ &rarr; Benar): $(1,2) \in R_6$</li>
+                        </ul>
+                        <em>Hasil: $(1,2)$ termuat di $R_1, R_6$.</em>
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>Pasangan $(2, 1)$</strong>
+                        <ul>
+                          <li>$R_1$ ($2 \le 1$ &rarr; Salah): $(2,1) \notin R_1$</li>
+                          <li>$R_2$ ($2 > 1$ &rarr; Benar): $(2,1) \in R_2$</li>
+                          <li>$R_3$ ($2 = 1 \lor 2 = -1$ &rarr; Salah): $(2,1) \notin R_3$</li>
+                          <li>$R_4$ ($2 = 1$ &rarr; Salah): $(2,1) \notin R_4$</li>
+                          <li>$R_5$ ($2 = 1 + 1$ &rarr; Benar): $(2,1) \in R_5$</li>
+                          <li>$R_6$ ($2 + 1 \le 3$ &rarr; Benar): $(2,1) \in R_6$</li>
+                        </ul>
+                        <em>Hasil: $(2,1)$ termuat di $R_2, R_5, R_6$.</em>
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>Pasangan $(1, -1)$</strong>
+                        <ul>
+                          <li>$R_1$ ($1 \le -1$ &rarr; Salah): $(1,-1) \notin R_1$</li>
+                          <li>$R_2$ ($1 > -1$ &rarr; Benar): $(1,-1) \in R_2$</li>
+                          <li>$R_3$ ($1 = -1 \lor 1 = -(-1)$ &rarr; Benar): $(1,-1) \in R_3$</li>
+                          <li>$R_4$ ($1 = -1$ &rarr; Salah): $(1,-1) \notin R_4$</li>
+                          <li>$R_5$ ($1 = -1 + 1$ &rarr; Salah): $(1,-1) \notin R_5$</li>
+                          <li>$R_6$ ($1 + (-1) \le 3$ &rarr; Benar): $(1,-1) \in R_6$</li>
+                        </ul>
+                        <em>Hasil: $(1,-1)$ termuat di $R_2, R_3, R_6$.</em>
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>Pasangan $(2, 2)$</strong>
+                        <ul>
+                          <li>$R_1$ ($2 \le 2$ &rarr; Benar): $(2,2) \in R_1$</li>
+                          <li>$R_2$ ($2 > 2$ &rarr; Salah): $(2,2) \notin R_2$</li>
+                          <li>$R_3$ ($2 = 2 \lor 2 = -2$ &rarr; Benar): $(2,2) \in R_3$</li>
+                          <li>$R_4$ ($2 = 2$ &rarr; Benar): $(2,2) \in R_4$</li>
+                          <li>$R_5$ ($2 = 2 + 1$ &rarr; Salah): $(2,2) \notin R_5$</li>
+                          <li>$R_6$ ($2 + 2 \le 3$ &rarr; Salah): $(2,2) \notin R_6$</li>
+                        </ul>
+                        <em>Hasil: $(2,2)$ termuat di $R_1, R_3, R_4$.</em>
+                      </li>
+                    </ol>
+
+                    <p>Berikut adalah tabel ringkasan keanggotaan untuk memperjelas pemahaman:</p>
+                    <table class="truth-table">
+                      <thead>
+                        <tr>
+                          <th>Relasi</th>
+                          <th>(1, 1)</th>
+                          <th>(1, 2)</th>
+                          <th>(2, 1)</th>
+                          <th>(1, -1)</th>
+                          <th>(2, 2)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><strong>R₁</strong> (\(a \le b\))</td>
+                          <td class="val-true">✓ (True)</td>
+                          <td class="val-true">✓ (True)</td>
+                          <td class="val-false">✗ (False)</td>
+                          <td class="val-false">✗ (False)</td>
+                          <td class="val-true">✓ (True)</td>
+                        </tr>
+                        <tr>
+                          <td><strong>R₂</strong> (\(a &gt; b\))</td>
+                          <td class="val-false">✗ (False)</td>
+                          <td class="val-false">✗ (False)</td>
+                          <td class="val-true">✓ (True)</td>
+                          <td class="val-true">✓ (True)</td>
+                          <td class="val-false">✗ (False)</td>
+                        </tr>
+                        <tr>
+                          <td><strong>R₃</strong> (\(a = b \lor a = -b\))</td>
+                          <td class="val-true">✓ (True)</td>
+                          <td class="val-false">✗ (False)</td>
+                          <td class="val-false">✗ (False)</td>
+                          <td class="val-true">✓ (True)</td>
+                          <td class="val-true">✓ (True)</td>
+                        </tr>
+                        <tr>
+                          <td><strong>R₄</strong> (\(a = b\))</td>
+                          <td class="val-true">✓ (True)</td>
+                          <td class="val-false">✗ (False)</td>
+                          <td class="val-false">✗ (False)</td>
+                          <td class="val-false">✗ (False)</td>
+                          <td class="val-true">✓ (True)</td>
+                        </tr>
+                        <tr>
+                          <td><strong>R₅</strong> (\(a = b + 1\))</td>
+                          <td class="val-false">✗ (False)</td>
+                          <td class="val-false">✗ (False)</td>
+                          <td class="val-true">✓ (True)</td>
+                          <td class="val-false">✗ (False)</td>
+                          <td class="val-false">✗ (False)</td>
+                        </tr>
+                        <tr>
+                          <td><strong>R₆</strong> (\(a + b \le 3\))</td>
+                          <td class="val-true">✓ (True)</td>
+                          <td class="val-true">✓ (True)</td>
+                          <td class="val-true">✓ (True)</td>
+                          <td class="val-true">✓ (True)</td>
+                          <td class="val-false">✗ (False)</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="img-container">
+                      <img src="../pdf_images/page117_img1.png" alt="Catatan Solusi Soal 2">
+                      <figcaption>Catatan Solusi Keanggotaan Pasangan Relasi (Halaman 117)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 2: Sifat-Sifat Relasi -->
+        <section id="sifat-relasi">
+          <h2>2. Sifat-Sifat Relasi</h2>
+          <p>
+            Sebuah relasi pada himpunan tertentu dapat diklasifikasikan berdasarkan sifat-sifat matematisnya. Tiga sifat utama yang sering dipelajari adalah <strong>Refleksif (Reflexive)</strong>, <strong>Simetris (Symmetric) / Antisimetris (Antisymmetric)</strong>, dan <strong>Transitif (Transitive)</strong>.
+          </p>
+
+          <!-- 2.1 Reflexive -->
+          <h3>Refleksif (Reflexive)</h3>
+          <div class="callout callout--definition">
+            <div class="callout__icon">📖</div>
+            <div>
+              <strong>Definisi: Sifat Refleksif</strong><br>
+              Sebuah relasi $R$ pada himpunan $A$ disebut <strong>refleksif</strong> jika setiap elemen berelasi dengan dirinya sendiri.
+              $$\forall a \in A, (a, a) \in R$$
+              Jika terdapat minimal satu elemen $a \in A$ di mana $(a, a) \notin R$, maka relasi tersebut tidak refleksif.
+            </div>
+          </div>
+
+          <!-- Reflexive Soal 1 -->
+          <div class="exercise" id="soal-refleksif-1">
+            <div class="exercise__header">
+              <span class="exercise__number">3</span>
+              <span class="exercise__title">Memeriksa Sifat Refleksif Relasi pada Himpunan Hingga</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Perhatikan relasi berikut pada himpunan $A = \{1, 2, 3, 4\}$:</p>
+              <ul>
+                <li>$R_1 = \{(1, 1), (1, 2), (2, 1), (2, 2), (3, 4), (4, 1), (4, 4)\}$</li>
+                <li>$R_2 = \{(1, 1), (1, 2), (2, 1)\}$</li>
+                <li>$R_3 = \{(1, 1), (1, 2), (1, 4), (2, 1), (2, 2), (3, 3), (4, 1), (4, 4)\}$</li>
+                <li>$R_4 = \{(2, 1), (3, 1), (3, 2), (4, 1), (4, 2), (4, 3)\}$</li>
+                <li>$R_5 = \{(1, 1), (1, 2), (1, 3), (1, 4), (2, 2), (2, 3), (2, 4), (3, 3), (3, 4), (4, 4)\}$</li>
+                <li>$R_6 = \{(3, 4)\}$</li>
+              </ul>
+              <p>Manakah di antara relasi berikut yang bersifat refleksif?</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Untuk menjadi refleksif, setiap elemen pada himpunan $A = \{1, 2, 3, 4\}$ harus berpasangan dengan dirinya sendiri. Jadi, relasi harus memuat semua pasangan berikut:</p>
+                    <p class="math-block">$$(1, 1), (2, 2), (3, 3), \text{ dan } (4, 4)$$</p>
+                    <p>Mari kita cek relasi-relasi di atas:</p>
+                    <ul>
+                      <li>$R_1$: Tidak memuat $(3, 3)$ &rarr; <strong>Tidak Refleksif</strong>.</li>
+                      <li>$R_2$: Tidak memuat $(2, 2), (3, 3), (4, 4)$ &rarr; <strong>Tidak Refleksif</strong>.</li>
+                      <li>$R_3$: Memuat $(1, 1), (2, 2), (3, 3),$ dan $(4, 4)$ &rarr; <strong>Refleksif</strong>.</li>
+                      <li>$R_4$: Tidak memuat satu pun pasangan $(a, a)$ &rarr; <strong>Tidak Refleksif</strong>.</li>
+                      <li>$R_5$: Memuat $(1, 1), (2, 2), (3, 3),$ dan $(4, 4)$ &rarr; <strong>Refleksif</strong>.</li>
+                      <li>$R_6$: Hanya memuat $(3, 4)$ &rarr; <strong>Tidak Refleksif</strong>.</li>
+                    </ul>
+                    <p>Jadi, relasi yang bersifat refleksif adalah <strong>$R_3$ dan $R_5$</strong>.</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page118_img1.png" alt="Catatan Solusi Refleksif Soal 1">
+                      <figcaption>Visualisasi Solusi Refleksif Himpunan Hingga (Halaman 118)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reflexive Soal 2 -->
+          <div class="exercise" id="soal-refleksif-2">
+            <div class="exercise__header">
+              <span class="exercise__number">4</span>
+              <span class="exercise__title">Memeriksa Sifat Refleksif Relasi pada Bilangan Bulat</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Perhatikan relasi pada himpunan bilangan bulat $\mathbb{Z}$ yang telah kita definisikan pada Soal 2 sebelumnya:</p>
+              <ul>
+                <li>$R_1 = \{(a, b) \mid a \le b\}$</li>
+                <li>$R_2 = \{(a, b) \mid a > b\}$</li>
+                <li>$R_3 = \{(a, b) \mid a = b \lor a = -b\}$</li>
+                <li>$R_4 = \{(a, b) \mid a = b\}$</li>
+                <li>$R_5 = \{(a, b) \mid a = b + 1\}$</li>
+                <li>$R_6 = \{(a, b) \mid a + b \le 3\}$</li>
+              </ul>
+              <p>Manakah relasi yang bersifat refleksif?</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Kita uji syarat refleksif $(a, a) \in R$ untuk setiap bilangan bulat $a$:</p>
+                    <ul>
+                      <li><strong>$R_1$ ($a \le b$):</strong> Karena $a \le a$ selalu bernilai benar untuk setiap bilangan bulat $a$, maka $R_1$ bersifat <strong>Refleksif</strong>.</li>
+                      <li><strong>$R_2$ ($a > b$):</strong> Karena $a > a$ bernilai salah (tidak mungkin sebuah bilangan lebih besar dari dirinya sendiri), maka $R_2$ <strong>Tidak Refleksif</strong>.</li>
+                      <li><strong>$R_3$ ($a = b \lor a = -b$):</strong> Substitusi $b = a$ menghasilkan $a = a \lor a = -a$. Karena bagian $a = a$ selalu benar, maka $R_3$ bersifat <strong>Refleksif</strong>.</li>
+                      <li><strong>$R_4$ ($a = b$):</strong> Substitusi $b = a$ menghasilkan $a = a$ yang selalu benar, maka $R_4$ bersifat <strong>Refleksif</strong>.</li>
+                      <li><strong>$R_5$ ($a = b + 1$):</strong> Substitusi $b = a$ menghasilkan $a = a + 1$ yang selalu bernilai salah (karena $0 \ne 1$). Contoh penyangkal: $(2, 2) \notin R_5$. Maka $R_5$ <strong>Tidak Refleksif</strong>.</li>
+                      <li><strong>$R_6$ ($a + b \le 3$):</strong> Substitusi $b = a$ menghasilkan $2a \le 3$. Ini bernilai salah jika kita pilih bilangan bulat yang besar, misalnya $a = 2$, maka $2(2) = 4 \not\le 3$. Jadi $(2, 2) \notin R_6$. Maka $R_6$ <strong>Tidak Refleksif</strong>.</li>
+                    </ul>
+                    <p>Jadi, relasi yang bersifat refleksif adalah <strong>$R_1$, $R_3$, dan $R_4$</strong>.</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page118_img2.png" alt="Catatan Solusi Refleksif Soal 2">
+                      <figcaption>Visualisasi Solusi Refleksif Bilangan Bulat (Halaman 118)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reflexive Soal 3 -->
+          <div class="exercise" id="soal-refleksif-3">
+            <div class="exercise__header">
+              <span class="exercise__number">5</span>
+              <span class="exercise__title">Memeriksa Sifat Refleksif pada Relasi "Habis Membagi"</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Apakah relasi "habis membagi" ($a \mid b$) pada himpunan bilangan bulat positif $\mathbb{Z}^+$ bersifat refleksif? Bagaimana jika didefinisikan pada himpunan semua bilangan bulat $\mathbb{Z}$?</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <ol>
+                      <li>
+                        <strong>Pada bilangan bulat positif $\mathbb{Z}^+$:</strong>
+                        <p>Untuk setiap bilangan bulat positif $a$, kita tahu bahwa $a$ selalu habis membagi dirinya sendiri (yaitu $a \mid a$, karena $a = 1 \cdot a$). Oleh karena itu, relasi ini bersifat <strong>Refleksif</strong>.</p>
+                      </li>
+                      <li>
+                        <strong>Pada seluruh bilangan bulat $\mathbb{Z}$:</strong>
+                        <p>Relasi tidak lagi bersifat refleksif! Mengapa? Karena terdapat bilangan bulat $0 \in \mathbb{Z}$. Berdasarkan definisi matematika, $0$ tidak membagi $0$ (pembagian dengan nol menghasilkan nilai yang tidak terdefinisi). Karena $(0, 0) \notin R$, maka relasi pada $\mathbb{Z}$ <strong>Tidak Refleksif</strong>.</p>
+                      </li>
+                    </ol>
+                    <div class="img-container">
+                      <img src="../pdf_images/page119_img1.png" alt="Catatan Solusi Refleksif Soal 3">
+                      <figcaption>Penjelasan Sifat Refleksif Relasi Membagi (Halaman 119)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 2.2 Symmetric & Antisymmetric -->
+          <h3>Simetris (Symmetric) & Antisimetris (Antisymmetric)</h3>
+          <div class="callout callout--definition">
+            <div class="callout__icon">📖</div>
+            <div>
+              <strong>Definisi: Sifat Simetris & Antisimetris</strong>
+              <br><br>
+              <strong>1. Simetris:</strong> Sebuah relasi $R$ pada himpunan $A$ disebut <strong>simetris</strong> jika untuk setiap pasangan $(a, b) \in R$, maka pasangan kebalikannya $(b, a)$ juga harus ada di $R$.
+              $$\forall a \forall b ((a, b) \in R \implies (b, a) \in R)$$
+              <br>
+              <strong>2. Antisimetris:</strong> Sebuah relasi $R$ pada himpunan $A$ disebut <strong>antisimetris</strong> jika, untuk setiap $a$ dan $b$ di $A$, jika $(a, b)$ dan $(b, a)$ keduanya ada di $R$, maka $a$ harus sama dengan $b$.
+              $$\forall a \forall b (((a, b) \in R \land (b, a) \in R) \implies a = b)$$
+              <em>Catatan: Sifat ini berarti jika $a \ne b$, tidak boleh ada hubungan dua arah (timbal balik) antara $a$ dan $b$. Hubungan timbal balik hanya diperbolehkan pada elemen yang sama $(a, a)$.</em>
+            </div>
+          </div>
+
+          <!-- Sym/Antisym Soal 1 -->
+          <div class="exercise" id="soal-sym-1">
+            <div class="exercise__header">
+              <span class="exercise__number">6</span>
+              <span class="exercise__title">Memeriksa Simetris & Antisimetris pada Himpunan Hingga</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Perhatikan kembali relasi-relasi pada himpunan $A = \{1, 2, 3, 4\}$ berikut:</p>
+              <ul>
+                <li>$R_1 = \{(1, 1), (1, 2), (2, 1), (2, 2), (3, 4), (4, 1), (4, 4)\}$</li>
+                <li>$R_2 = \{(1, 1), (1, 2), (2, 1)\}$</li>
+                <li>$R_3 = \{(1, 1), (1, 2), (1, 4), (2, 1), (2, 2), (3, 3), (4, 1), (4, 4)\}$</li>
+                <li>$R_4 = \{(2, 1), (3, 1), (3, 2), (4, 1), (4, 2), (4, 3)\}$</li>
+                <li>$R_5 = \{(1, 1), (1, 2), (1, 3), (1, 4), (2, 2), (2, 3), (2, 4), (3, 3), (3, 4), (4, 4)\}$</li>
+                <li>$R_6 = \{(3, 4)\}$</li>
+              </ul>
+              <p>Manakah relasi yang bersifat simetris? Dan manakah yang bersifat antisimetris?</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <h4>1. Analisis Sifat Simetris</h4>
+                    <ul>
+                      <li>$R_1$: Ada $(3, 4) \in R_1$ tapi $(4, 3) \notin R_1$ &rarr; <strong>Tidak Simetris</strong>.</li>
+                      <li>$R_2$: Ada $(1, 2)$ dan kebalikannya $(2, 1)$ ada di relasi &rarr; <strong>Simetris</strong>.</li>
+                      <li>$R_3$: Semua pasangan memiliki kebalikannya: $(1, 2) \leftrightarrow (2, 1)$ dan $(1, 4) \leftrightarrow (4, 1)$ &rarr; <strong>Simetris</strong>.</li>
+                      <li>$R_4$: Ada $(2, 1) \in R_4$ tapi $(1, 2) \notin R_4$ &rarr; <strong>Tidak Simetris</strong>.</li>
+                      <li>$R_5$: Ada $(1, 2) \in R_5$ tapi $(2, 1) \notin R_5$ &rarr; <strong>Tidak Simetris</strong>.</li>
+                      <li>$R_6$: Ada $(3, 4) \in R_6$ tapi $(4, 3) \notin R_6$ &rarr; <strong>Tidak Simetris</strong>.</li>
+                    </ul>
+
+                    <h4>2. Analisis Sifat Antisimetris</h4>
+                    <ul>
+                      <li>$R_1$: Ada $(1, 2) \in R_1$ dan $(2, 1) \in R_1$, namun $1 \ne 2$ &rarr; <strong>Tidak Antisimetris</strong>.</li>
+                      <li>$R_2$: Ada $(1, 2) \in R_2$ dan $(2, 1) \in R_2$, namun $1 \ne 2$ &rarr; <strong>Tidak Antisimetris</strong>.</li>
+                      <li>$R_3$: Ada $(1, 2) \in R_3$ dan $(2, 1) \in R_3$, namun $1 \ne 2$ &rarr; <strong>Tidak Antisimetris</strong>.</li>
+                      <li>$R_4$: Tidak ada pasangan timbal balik untuk elemen yang berbeda (hanya satu arah) &rarr; <strong>Antisimetris</strong>.</li>
+                      <li>$R_5$: Hanya memiliki relasi satu arah untuk elemen yang berbeda (misalnya ada $(1, 2)$ tapi tidak ada $(2, 1)$) &rarr; <strong>Antisimetris</strong>.</li>
+                      <li>$R_6$: Hanya ada satu pasangan $(3, 4)$, dan tidak ada $(4, 3)$ &rarr; <strong>Antisimetris</strong>.</li>
+                    </ul>
+
+                    <p><strong>Kesimpulan:</strong></p>
+                    <ul>
+                      <li>Relasi yang simetris: <strong>$R_2$ dan $R_3$</strong>.</li>
+                      <li>Relasi yang antisimetris: <strong>$R_4$, $R_5$, dan $R_6$</strong>.</li>
+                    </ul>
+                    <div class="img-container">
+                      <img src="../pdf_images/page120_img1.png" alt="Catatan Solusi Soal 1 Simetris">
+                      <figcaption>Solusi Simetris &amp; Antisimetris Himpunan Hingga (Halaman 120)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sym/Antisym Soal 2 -->
+          <div class="exercise" id="soal-sym-2">
+            <div class="exercise__header">
+              <span class="exercise__number">7</span>
+              <span class="exercise__title">Memeriksa Simetris & Antisimetris pada Bilangan Bulat</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Perhatikan relasi pada himpunan bilangan bulat $\mathbb{Z}$ berikut:</p>
+              <ul>
+                <li>$R_1 = \{(a, b) \mid a \le b\}$</li>
+                <li>$R_2 = \{(a, b) \mid a > b\}$</li>
+                <li>$R_3 = \{(a, b) \mid a = b \lor a = -b\}$</li>
+                <li>$R_4 = \{(a, b) \mid a = b\}$</li>
+                <li>$R_5 = \{(a, b) \mid a = b + 1\}$</li>
+                <li>$R_6 = \{(a, b) \mid a + b \le 3\}$</li>
+              </ul>
+              <p>Manakah relasi yang bersifat simetris? Dan manakah yang bersifat antisimetris?</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <h4>1. Analisis Sifat Simetris</h4>
+                    <ul>
+                      <li><strong>$R_1$ ($a \le b$):</strong> Jika $a \le b$, tidak selalu berlaku $b \le a$. Contoh: $(1, 2) \in R_1$, tapi $(2, 1) \notin R_1$. <strong>(Tidak Simetris)</strong>.</li>
+                      <li><strong>$R_2$ ($a > b$):</strong> Jika $a > b$, tidak mungkin $b > a$. Contoh: $(2, 1) \in R_2$ tapi $(1, 2) \notin R_2$. <strong>(Tidak Simetris)</strong>.</li>
+                      <li><strong>$R_3$ ($a = \pm b$):</strong> Jika $a = \pm b$, maka pasti berlaku $b = \pm a$. Jadi jika $(a, b) \in R_3$, maka $(b, a) \in R_3$. <strong>(Simetris)</strong>.</li>
+                      <li><strong>$R_4$ ($a = b$):</strong> Jika $a = b$, maka pasti $b = a$. <strong>(Simetris)</strong>.</li>
+                      <li><strong>$R_5$ ($a = b + 1$):</strong> Jika $a = b + 1$, maka $b = a - 1 \ne a + 1$. Contoh: $(2, 1) \in R_5$ tapi $(1, 2) \notin R_5$. <strong>(Tidak Simetris)</strong>.</li>
+                      <li><strong>$R_6$ ($a + b \le 3$):</strong> Karena penjumlahan bersifat komutatif ($a + b = b + a$), maka jika $a + b \le 3$ otomatis $b + a \le 3$. Jadi jika $(a, b) \in R_6$ maka $(b, a) \in R_6$. <strong>(Simetris)</strong>.</li>
+                    </ul>
+
+                    <h4>2. Analisis Sifat Antisimetris</h4>
+                    <ul>
+                      <li><strong>$R_1$ ($a \le b$):</strong> Jika $a \le b$ dan $b \le a$, secara aljabar pasti berlaku $a = b$. <strong>(Antisimetris)</strong>.</li>
+                      <li><strong>$R_2$ ($a > b$):</strong> Di sini premis $(a,b) \in R_2 \land (b,a) \in R_2$ tidak pernah bisa terjadi (kontradiksi), sehingga pernyataan implikasinya bernilai <strong>True</strong> secara vacuous. <strong>(Antisimetris)</strong>.</li>
+                      <li><strong>$R_3$ ($a = \pm b$):</strong> Jika $(1, -1) \in R_3$ dan $(-1, 1) \in R_3$, namun $1 \ne -1$. <strong>(Tidak Antisimetris)</strong>.</li>
+                      <li><strong>$R_4$ ($a = b$):</strong> Relasi ini hanya menghubungkan elemen yang sama. Jadi jika $(a, b) \in R_4$ dan $(b, a) \in R_4$, otomatis $a = b$. <strong>(Antisimetris)</strong>.</li>
+                      <li><strong>$R_5$ ($a = b + 1$):</strong> Premis $a = b + 1 \land b = a + 1$ tidak pernah bisa dipenuhi (karena jika disubstitusi menjadi $a = a + 2$, yang mustahil). Maka secara vacuous bernilai <strong>True</strong>. <strong>(Antisimetris)</strong>.</li>
+                      <li><strong>$R_6$ ($a + b \le 3$):</strong> Kita bisa menemukan $(1, 2) \in R_6$ ($1+2=3 \le 3$) dan $(2, 1) \in R_6$ ($2+1=3 \le 3$), tetapi $1 \ne 2$. <strong>(Tidak Antisimetris)</strong>.</li>
+                    </ul>
+
+                    <p><strong>Kesimpulan:</strong></p>
+                    <ul>
+                      <li>Relasi yang simetris: <strong>$R_3$, $R_4$, dan $R_6$</strong>.</li>
+                      <li>Relasi yang antisimetris: <strong>$R_1$, $R_2$, $R_4$, dan $R_5$</strong>.</li>
+                    </ul>
+                    <div class="img-container">
+                      <img src="../pdf_images/page121_img1.png" alt="Catatan Solusi Soal 2 Simetris">
+                      <figcaption>Solusi Simetris &amp; Antisimetris Bilangan Bulat (Halaman 121)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sym/Antisym Soal 3 -->
+          <div class="exercise" id="soal-sym-3">
+            <div class="exercise__header">
+              <span class="exercise__number">8</span>
+              <span class="exercise__title">Memeriksa Sifat Relasi "Habis Membagi"</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Apakah relasi "habis membagi" ($a \mid b$) pada himpunan bilangan bulat positif $\mathbb{Z}^+$ bersifat simetris? Apakah bersifat antisimetris?</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <ul>
+                      <li>
+                        <strong>Simetris?</strong><br>
+                        Relasi ini <strong>Tidak Simetris</strong>. Contoh pembanding: $1 \mid 2$ (Benar), namun $2 \mid 1$ (Salah). Jadi $(1, 2) \in R$ tetapi $(2, 1) \notin R$.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>Antisimetris?</strong><br>
+                        Relasi ini bersifat <strong>Antisimetris</strong>. 
+                        <br>
+                        <em>Bukti:</em> Misalkan $a$ dan $b$ adalah bilangan bulat positif sedemikian rupa sehingga $a \mid b$ dan $b \mid a$. 
+                        <ul>
+                          <li>$a \mid b \implies b = k \cdot a$ untuk suatu bilangan bulat positif $k$.</li>
+                          <li>$b \mid a \implies a = m \cdot b$ untuk suatu bilangan bulat positif $m$.</li>
+                          <li>Substitusi nilai $b$: $a = m \cdot (k \cdot a) \implies a = (m \cdot k) \cdot a$.</li>
+                          <li>Karena $a > 0$, kita bagi kedua ruas dengan $a$, sehingga diperoleh $1 = m \cdot k$.</li>
+                          <li>Karena $m$ dan $k$ adalah bilangan bulat positif, satu-satunya cara perkalian menghasilkan $1$ adalah jika $m = 1$ dan $k = 1$.</li>
+                          <li>Substitusi kembali nilai $k=1$ ke persamaan $b = k \cdot a$, kita peroleh $b = 1 \cdot a \implies b = a$.</li>
+                        </ul>
+                        Karena $a \mid b \land b \mid a \implies a = b$, maka terbukti relasi ini bersifat antisimetris.
+                      </li>
+                    </ul>
+                    <div class="img-container">
+                      <img src="../pdf_images/page122_img1.png" alt="Catatan Solusi Soal 3 Relasi Membagi">
+                      <figcaption>Solusi Simetris &amp; Antisimetris Relasi Membagi (Halaman 122)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 4 (Vacuous cases) -->
+          <div class="exercise" id="soal-vacuous-1">
+            <div class="exercise__header">
+              <span class="exercise__number">9</span>
+              <span class="exercise__title">Memeriksa Sifat Simetris & Antisimetris pada Relasi Kosong</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>Perhatikan relasi kosong $R = \{\}$ pada himpunan tidak kosong $A \ne \{\}$. Apakah relasi kosong tersebut bersifat simetris? Apakah bersifat antisimetris?</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Mari kita uji kedua definisi tersebut:</p>
+                    <ol>
+                      <li>
+                        <strong>Uji Simetris:</strong><br>
+                        Definisi simetris: $\forall a \forall b ((a, b) \in R \implies (b, a) \in R)$.
+                        <br>
+                        Karena $R = \{\}$ (tidak memiliki elemen sama sekali), maka pernyataan $(a, b) \in R$ selalu bernilai <strong>Salah (False)</strong>.
+                        <br>
+                        Dalam tabel kebenaran logika matematika, sebuah implikasi $P \implies Q$ akan selalu bernilai <strong>Benar (True)</strong> jika premis $P$ bernilai Salah (ini disebut kebenaran yang kosong atau <em>vacuously true</em>).
+                        <br>
+                        Oleh karena itu, relasi kosong $R$ bersifat <strong>Simetris</strong>.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>Uji Antisimetris:</strong><br>
+                        Definisi antisimetris: $\forall a \forall b (((a, b) \in R \land (b, a) \in R) \implies a = b)$.
+                        <br>
+                        Sama seperti kasus di atas, karena relasi $R$ kosong, maka premis $((a, b) \in R \land (b, a) \in R)$ selalu bernilai <strong>Salah (False)</strong>.
+                        <br>
+                        Implikasi dengan premis yang bernilai Salah akan menghasilkan nilai <strong>Benar (True)</strong> secara vacuous.
+                        <br>
+                        Oleh karena itu, relasi kosong $R$ juga bersifat <strong>Antisimetris</strong>.
+                      </li>
+                    </ol>
+                    <p><strong>Kesimpulan:</strong> Relasi kosong $R = \{\}$ pada himpunan tidak kosong adalah relasi yang unik karena bersifat <strong>simetris sekaligus antisimetris</strong>!</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page122_img2.png" alt="Catatan Solusi Kasus Relasi Kosong">
+                      <figcaption>Penjelasan Sifat Simetris &amp; Antisimetris Relasi Kosong (Halaman 122)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 5 (Empty Set) -->
+          <div class="exercise" id="soal-vacuous-2">
+            <div class="exercise__header">
+              <span class="exercise__number">10</span>
+              <span class="exercise__title">Memeriksa Sifat Refleksif pada Himpunan Kosong</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>Misalkan himpunan $A = \{\}$ (himpunan kosong). Apakah relasi $R = \{\}$ pada himpunan kosong tersebut bersifat refleksif?</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Mari kita kembali ke definisi refleksif: </p>
+                    <p class="math-block">$$\forall a \in A, (a, a) \in R$$</p>
+                    <p>Kita ingin memeriksa apakah untuk semua elemen $a$ di $A$, berlaku $(a, a) \in R$.</p>
+                    <p>Karena $A = \{\}$ tidak memiliki elemen sama sekali, maka tidak ada elemen $a \in A$ yang dapat membuktikan bahwa $(a, a) \notin R$ (tidak ada <em>counterexample</em>).</p>
+                    <p>Secara matematika logika, pernyataan universal $\forall a \in \emptyset, P(a)$ selalu bernilai <strong>Benar (True)</strong> karena tidak ada elemen di domain kosong yang membuat pernyataan itu salah. Hal ini disebut <em>vacuously true</em>.</p>
+                    <p>Jadi, relasi kosong $R = \{\}$ pada himpunan kosong $A = \{\}$ adalah relasi yang bersifat <strong>Refleksif</strong>.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 2.3 Transitif -->
+          <h3>Transitif (Transitive)</h3>
+          <div class="callout callout--definition">
+            <div class="callout__icon">📖</div>
+            <div>
+              <strong>Definisi: Sifat Transitif</strong><br>
+              Sebuah relasi $R$ pada himpunan $A$ disebut <strong>transitif</strong> jika setiap kali elemen $a$ berhubungan dengan $b$, dan $b$ berhubungan dengan $c$, maka $a$ harus berhubungan langsung dengan $c$.
+              $$\forall a \forall b \forall c (((a, b) \in R \land (b, c) \in R) \implies (a, c) \in R)$$
+            </div>
+          </div>
+
+          <!-- Transitive Soal 1 -->
+          <div class="exercise" id="soal-transitif-1">
+            <div class="exercise__header">
+              <span class="exercise__number">11</span>
+              <span class="exercise__title">Memeriksa Sifat Transitif pada Himpunan Hingga</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Perhatikan kembali relasi-relasi pada himpunan $A = \{1, 2, 3, 4\}$ berikut:</p>
+              <ul>
+                <li>$R_1 = \{(1, 1), (1, 2), (2, 1), (2, 2), (3, 4), (4, 1), (4, 4)\}$</li>
+                <li>$R_2 = \{(1, 1), (1, 2), (2, 1)\}$</li>
+                <li>$R_3 = \{(1, 1), (1, 2), (1, 4), (2, 1), (2, 2), (3, 3), (4, 1), (4, 4)\}$</li>
+                <li>$R_4 = \{(2, 1), (3, 1), (3, 2), (4, 1), (4, 2), (4, 3)\}$</li>
+                <li>$R_5 = \{(1, 1), (1, 2), (1, 3), (1, 4), (2, 2), (2, 3), (2, 4), (3, 3), (3, 4), (4, 4)\}$</li>
+                <li>$R_6 = \{(3, 4)\}$</li>
+              </ul>
+              <p>Manakah relasi yang bersifat transitif? Berikan analisis/verifikasi lengkapnya.</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Mari kita tinjau satu per satu dengan mencari <em>counterexample</em> (kasus yang melanggar sifat transitif) jika ada:</p>
+                    
+                    <ul>
+                      <li>
+                        <strong>$R_1$: Tidak Transitif.</strong><br>
+                        Kita punya pasangan $(3, 4) \in R_1$ dan $(4, 1) \in R_1$. Agar transitif, harus ada pasangan $(3, 1)$ di $R_1$. Namun, $(3, 1) \notin R_1$.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>$R_2$: Tidak Transitif.</strong><br>
+                        Kita punya pasangan $(2, 1) \in R_2$ dan $(1, 2) \in R_2$. Agar transitif, harus ada pasangan $(2, 2)$ di $R_2$. Namun, $(2, 2) \notin R_2$.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>$R_3$: Tidak Transitif.</strong><br>
+                        Kita punya pasangan $(4, 1) \in R_3$ dan $(1, 2) \in R_3$. Agar transitif, harus ada pasangan $(4, 2)$ di $R_3$. Namun, $(4, 2) \notin R_3$.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>$R_4$: Transitif.</strong><br>
+                        Kita dapat melakukan verifikasi pasangan berantai yang ada:
+                        <ul>
+                          <li>$(3, 2)$ dan $(2, 1) \implies (3, 1)$ &rarr; Ada di $R_4$.</li>
+                          <li>$(4, 2)$ dan $(2, 1) \implies (4, 1)$ &rarr; Ada di $R_4$.</li>
+                          <li>$(4, 3)$ dan $(3, 1) \implies (4, 1)$ &rarr; Ada di $R_4$.</li>
+                          <li>$(4, 3)$ dan $(3, 2) \implies (4, 2)$ &rarr; Ada di $R_4$.</li>
+                        </ul>
+                        Karena semua relasi berantai dipenuhi, maka $R_4$ bersifat transitif.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>$R_5$: Transitif.</strong><br>
+                        Relasi ini adalah relasi $\le$ (kurang dari sama dengan) pada himpunan $\{1, 2, 3, 4\}$. Secara matematis, jika $a \le b$ dan $b \le c$, maka pasti $a \le c$. Maka $R_5$ bersifat transitif.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>$R_6$: Transitif.</strong><br>
+                        Relasi $R_6 = \{(3, 4)\}$ hanya berisi satu buah elemen. Kita tidak dapat menemukan dua pasangan berantai $(a, b)$ dan $(b, c)$ dengan $a \ne b$ dan $b \ne c$. Karena tidak ada rantai yang dapat diuji, maka implikasi definisi transitif bernilai <strong>True</strong> secara vacuous. Maka $R_6$ bersifat transitif.
+                      </li>
+                    </ul>
+
+                    <p><strong>Kesimpulan:</strong> Relasi yang bersifat transitif adalah <strong>$R_4$, $R_5$, dan $R_6$</strong>.</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page123_img1.png" alt="Catatan Solusi Transitif Soal 1 Halaman 123">
+                      <img src="../pdf_images/page123_img2.png" alt="Catatan Solusi Transitif Halaman 123 Bagian 2">
+                      <img src="../pdf_images/page124_img1.png" alt="Catatan Solusi Transitif Halaman 124 Bagian 1">
+                      <figcaption>Langkah-langkah Verifikasi Sifat Transitif Relasi (Halaman 123-124)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ringkasan Sifat-sifat Relasi -->
+          <h3>Ringkasan Sifat-Sifat Relasi</h3>
+          <p>Berikut adalah tabel ringkasan sifat refleksif, simetris, antisimetris, dan transitif untuk mempermudah mengingat:</p>
+          <div class="img-container">
+            <img src="../pdf_images/page124_img2.png" alt="Tabel Ringkasan Sifat Relasi">
+            <figcaption>Tabel Ringkasan Sifat-Sifat Relasi (Halaman 124)</figcaption>
+          </div>
+        </section>
+
+        <!-- Section 3: Equivalence Relation -->
+        <section id="relasi-ekuivalen">
+          <h2>3. Equivalence Relation / Relasi Ekuivalen</h2>
+          
+          <div class="callout callout--definition">
+            <div class="callout__icon">📖</div>
+            <div>
+              <strong>Definisi: Relasi Ekuivalen</strong><br>
+              Sebuah relasi $R$ pada himpunan $A$ disebut sebagai <strong>relasi ekuivalen</strong> jika dan hanya jika relasi tersebut memenuhi tiga sifat berikut sekaligus:
+              <ol>
+                <li><strong>Refleksif:</strong> $\forall a \in A, (a, a) \in R$</li>
+                <li><strong>Simetris:</strong> $\forall a \forall b ((a, b) \in R \implies (b, a) \in R)$</li>
+                <li><strong>Transitif:</strong> $\forall a \forall b \forall c (((a, b) \in R \land (b, c) \in R) \implies (a, c) \in R)$</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Modulo & Equivalence Classes Concept -->
+          <p>
+            Relasi ekuivalen sangat penting dalam matematika karena relasi ini membagi (mempartisi) himpunan asal menjadi kelompok-kelompok yang saling lepas. Kelompok ini disebut dengan <strong>Kelas Ekuivalen (Equivalence Classes)</strong>.
+          </p>
+
+          <!-- Soal Ekuivalen 1 -->
+          <div class="exercise" id="soal-ek-1">
+            <div class="exercise__header">
+              <span class="exercise__number">12</span>
+              <span class="exercise__title">Membuktikan Relasi Ekuivalen a = b atau a = -b</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Misalkan $R$ adalah relasi pada himpunan bilangan bulat $\mathbb{Z}$ sedemikian rupa sehingga $aRb$ jika dan hanya jika $a = b$ atau $a = -b$. Buktikan bahwa $R$ merupakan relasi ekuivalen!</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Kita harus membuktikan ketiga sifat dari relasi ekuivalen untuk relasi $aRb \iff a = b \lor a = -b$:</p>
+                    
+                    <ol>
+                      <li>
+                        <strong>Pembuktian Refleksif:</strong><br>
+                        Kita harus menunjukkan bahwa $aRa$ benar untuk setiap $a \in \mathbb{Z}$.
+                        <br>
+                        Substitusi $b = a$ ke dalam syarat relasi: diperoleh $a = a$ atau $a = -a$. Karena pernyataan $a = a$ selalu bernilai <strong>Benar</strong> untuk semua bilangan bulat, maka secara keseluruhan syarat dipenuhi.
+                        <br>
+                        Contoh: $3 = 3$ (Benar), maka $3R3$. Jadi, relasi bersifat refleksif.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>Pembuktian Simetris:</strong><br>
+                        Kita harus menunjukkan bahwa jika $aRb$, maka $bRa$ juga benar.
+                        <br>
+                        Asumsikan $aRb$ benar. Berdasarkan definisi relasi, kita tahu bahwa $a = b$ atau $a = -b$.
+                        <ul>
+                          <li>Jika $a = b$, maka secara aljabar $b = a$.</li>
+                          <li>Jika $a = -b$, maka kita kali kedua ruas dengan $-1$ sehingga diperoleh $b = -a$.</li>
+                        </ul>
+                        Dalam kedua kasus, diperoleh $b = a$ atau $b = -a$. Ini merupakan definisi dari $bRa$.
+                        <br>
+                        Contoh: Karena $3 = -(-3)$, maka $3R(-3)$ bernilai benar, dan kebalikannya $-3 = -(3)$, sehingga $-3R3$ juga benar. Jadi, relasi bersifat simetris.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>Pembuktian Transitif:</strong><br>
+                        Kita harus menunjukkan bahwa jika $aRb$ dan $bRc$, maka $aRc$.
+                        <br>
+                        Asumsikan $aRb$ dan $bRc$ benar. Maka:
+                        <ul>
+                          <li>$aRb \implies a = b$ atau $a = -b$ (atau dapat ditulis $a = \pm b$).</li>
+                          <li>$bRc \implies b = c$ atau $b = -c$ (atau dapat ditulis $b = \pm c$).</li>
+                        </ul>
+                        Kita substitusi nilai $b$ ke dalam persamaan $a$:
+                        <p class="math-block">$$a = \pm b = \pm (\pm c) = \pm c$$</p>
+                        Dari aljabar, kita tahu bahwa tanda $\pm (\pm c)$ akan menghasilkan $+c$ atau $-c$. Jadi $a = c$ atau $a = -c$, yang merupakan definisi dari $aRc$.
+                        <br>
+                        Contoh: Jika $3R(-3)$ dan $-3R3$, maka $3R3$ (Benar). Jadi, relasi bersifat transitif.
+                      </li>
+                    </ol>
+                    <p>Karena relasi $R$ terbukti refleksif, simetris, dan transitif, maka $R$ adalah <strong>relasi ekuivalen</strong>.</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page125_img1.png" alt="Solusi Tulisan Tangan Sesi 7 Hal 125">
+                      <img src="../pdf_images/page126_img1.png" alt="Solusi Tulisan Tangan Sesi 7 Hal 126">
+                      <img src="../pdf_images/page127_img1.png" alt="Solusi Tulisan Tangan Sesi 7 Hal 127">
+                      <figcaption>Pembuktian Tulisan Tangan Relasi Ekuivalen (Halaman 125-127)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal Ekuivalen 2 -->
+          <div class="exercise" id="soal-ek-2">
+            <div class="exercise__header">
+              <span class="exercise__number">13</span>
+              <span class="exercise__title">Membuktikan Relasi a - b adalah Bilangan Bulat</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Misalkan $R$ adalah relasi pada himpunan bilangan riil $\mathbb{R}$ sedemikian rupa sehingga $aRb$ jika dan hanya jika $a - b$ adalah bilangan bulat (selisihnya $\in \mathbb{Z}$). Buktikan bahwa $R$ merupakan relasi ekuivalen!</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Mari kita uji ketiga syarat relasi ekuivalen:</p>
+                    <ol>
+                      <li>
+                        <strong>Refleksif:</strong><br>
+                        Untuk setiap bilangan riil $a$, kita hitung selisihnya dengan dirinya sendiri:
+                        <p class="math-block">$$a - a = 0$$</p>
+                        Karena $0$ adalah bilangan bulat ($0 \in \mathbb{Z}$), maka $(a, a) \in R$ bernilai benar untuk semua $a \in \mathbb{R}$. Jadi, $R$ refleksif.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>Simetris:</strong><br>
+                        Asumsikan $(a, b) \in R$. Ini berarti $a - b = k$ di mana $k$ adalah bilangan bulat ($k \in \mathbb{Z}$).
+                        <br>
+                        Kita hitung selisih kebalikannya:
+                        <p class="math-block">$$b - a = -(a - b) = -k$$</p>
+                        Because $k$ adalah bilangan bulat, maka $-k$ juga merupakan bilangan bulat (negatif dari bilangan bulat tetap bulat). Maka $(b, a) \in R$ benar. Jadi, $R$ simetris.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>Transitif:</strong><br>
+                        Asumsikan $(a, b) \in R$ dan $(b, c) \in R$. Ini berarti:
+                        <ul>
+                          <li>$a - b = k$ untuk suatu $k \in \mathbb{Z}$</li>
+                          <li>$b - c = m$ untuk suatu $m \in \mathbb{Z}$</li>
+                        </ul>
+                        Kita ingin menunjukkan $a - c$ juga merupakan bilangan bulat. Kita jumlahkan kedua persamaan di atas:
+                        <p class="math-block">$$(a - b) + (b - c) = k + m \implies a - c = k + m$$</p>
+                        Karena $k$ dan $m$ adalah bilangan bulat, maka jumlah mereka $k + m$ juga pasti merupakan bilangan bulat. Maka $(a, c) \in R$ benar. Jadi, $R$ transitif.
+                      </li>
+                    </ol>
+                    <p>Karena $R$ refleksif, simetris, dan transitif, maka terbukti bahwa $R$ adalah <strong>relasi ekuivalen</strong>.</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page128_img1.png" alt="Solusi Halaman 128">
+                      <figcaption>Solusi Relasi Selisih Bilangan Bulat (Halaman 128)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal Ekuivalen 3 -->
+          <div class="exercise" id="soal-ek-3">
+            <div class="exercise__header">
+              <span class="exercise__number">14</span>
+              <span class="exercise__title">Pembuktian Kongruen Modulo m</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Misalkan $m$ adalah bilangan bulat dengan $m > 1$. Buktikan bahwa relasi kongruen modulo $m$ yang didefinisikan sebagai $R = \{(a, b) \mid a \equiv b \pmod m\}$ merupakan relasi ekuivalen pada himpunan bilangan bulat $\mathbb{Z}$.</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Ingat kembali arti dari $a \equiv b \pmod m$. Notasi ini berarti $a - b$ habis dibagi oleh $m$, atau terdapat bilangan bulat $k$ sedemikian rupa sehingga $a - b = k \cdot m$ (ditulis $m \mid (a - b)$).</p>
+                    
+                    <ol>
+                      <li>
+                        <strong>Refleksif:</strong><br>
+                        Untuk setiap bilangan bulat $a$, kita hitung $a - a = 0$.
+                        <br>
+                        Karena $0 = 0 \cdot m$ (habis dibagi $m$), maka $a \equiv a \pmod m$ bernilai benar. Jadi, relasi ini refleksif.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>Simetris:</strong><br>
+                        Misalkan $a \equiv b \pmod m$. Maka $a - b = k \cdot m$ untuk suatu bilangan bulat $k$.
+                        <br>
+                        Kita kalikan dengan $-1$ di kedua ruas:
+                        <p class="math-block">$$b - a = -(a - b) = - (k \cdot m) = (-k) \cdot m$$</p>
+                        Karena $k$ adalah bilangan bulat, maka $-k$ juga bilangan bulat. Ini berarti $b - a$ habis dibagi oleh $m$, sehingga $b \equiv a \pmod m$. Jadi, relasi ini simetris.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>Transitif:</strong><br>
+                        Misalkan $a \equiv b \pmod m$ dan $b \equiv c \pmod m$. Maka:
+                        <ul>
+                          <li>$a - b = k \cdot m$ untuk suatu $k \in \mathbb{Z}$</li>
+                          <li>$b - c = j \cdot m$ untuk suatu $j \in \mathbb{Z}$</li>
+                        </ul>
+                        Kita jumlahkan kedua persamaan tersebut:
+                        <p class="math-block">$$(a - b) + (b - c) = k \cdot m + j \cdot m \implies a - c = (k + j) \cdot m$$</p>
+                        Karena $k + j$ adalah penjumlahan bilangan bulat yang menghasilkan bilangan bulat baru, maka $a - c$ habis dibagi $m$. Sehingga $a \equiv c \pmod m$. Jadi, relasi ini transitif.
+                      </li>
+                    </ol>
+                    <p>Karena memenuhi ketiga sifat di atas, terbukti bahwa relasi kongruen modulo $m$ adalah <strong>relasi ekuivalen</strong>.</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page129_img1.png" alt="Solusi Halaman 129">
+                      <figcaption>Solusi Relasi Kongruen Modulo m (Halaman 129)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal Ekuivalen 4 -->
+          <div class="exercise" id="soal-ek-4">
+            <div class="exercise__header">
+              <span class="exercise__number">15</span>
+              <span class="exercise__title">Kongruen Modulo 3 dan Kelas Ekuivalensinya</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>Didefinisikan relasi $T$ pada himpunan bilangan bulat $\mathbb{Z}$ sebagai berikut: Untuk semua bilangan bulat $m$ dan $n$, $m T n \iff 3 \mid (m - n)$. Relasi ini disebut kongruen modulo 3.</p>
+              <ol type="a">
+                <li>Apakah $T$ refleksif?</li>
+                <li>Apakah $T$ simetris?</li>
+                <li>Apakah $T$ transitif?</li>
+                <li>Apakah $T$ merupakan relasi ekuivalen?</li>
+                <li>Tentukan kelas ekuivalennya (equivalence classes) dari relasi $T$ ini!</li>
+              </ol>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Mari kita selesaikan sub-soal ini secara berurutan:</p>
+                    <ul>
+                      <li>
+                        <strong>a) Refleksif:</strong><br>
+                        Ya, karena untuk setiap $m \in \mathbb{Z}$, berlaku $m - m = 0$. Kita tahu $0$ habis dibagi oleh $3$ (karena $0 = 0 \times 3$). Jadi $3 \mid (m - m)$ bernilai benar, sehingga $m T m$.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>b) Simetris:</strong><br>
+                        Ya, karena jika $m T n$, maka $3 \mid (m - n)$. Ini berarti $m - n = 3k$ untuk suatu bilangan bulat $k$.
+                        <br>
+                        Maka $n - m = -(m - n) = -3k = 3(-k)$. Karena $-k$ tetap merupakan bilangan bulat, maka $3 \mid (n - m)$, sehingga $n T m$.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>c) Transitif:</strong><br>
+                        Ya, karena jika $m T n$ dan $n T p$, maka $3 \mid (m - n)$ dan $3 \mid (n - p)$.
+                        <br>
+                        Artinya $m - n = 3k$ dan $n - p = 3j$ untuk $k, j \in \mathbb{Z}$.
+                        <br>
+                        Jika kita jumlahkan: $(m - n) + (n - p) = 3k + 3j \implies m - p = 3(k + j)$.
+                        <br>
+                        Karena $k+j$ adalah bilangan bulat, maka $3 \mid (m - p)$, sehingga $m T p$.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>d) Relasi Ekuivalen:</strong><br>
+                        Karena sifat refleksif, simetris, dan transitif semuanya terpenuhi, maka relasi $T$ terbukti merupakan <strong>relasi ekuivalen</strong>.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>e) Kelas Ekuivalen (Equivalence Classes):</strong><br>
+                        Kelas ekuivalen mengelompokkan bilangan bulat berdasarkan sisa hasil baginya oleh $3$. Ketika suatu bilangan bulat dibagi dengan $3$, sisa yang mungkin terbentuk hanya ada tiga, yaitu $0, 1, \text{ atau } 2$. Maka, kelas ekuivalennya dibagi menjadi 3 kelas:
+                        <br><br>
+                        <ul>
+                          <li>
+                            <strong>Kelas $[0]$ (sisa 0):</strong> Himpunan semua bilangan bulat yang habis dibagi 3.
+                            <br>
+                            $[0] = \{..., -6, -3, 0, 3, 6, ...\} = \{3k \mid k \in \mathbb{Z}\}$
+                          </li>
+                          <li style="margin-top: 5px;">
+                            <strong>Kelas $[1]$ (sisa 1):</strong> Himpunan semua bilangan bulat yang jika dibagi 3 menyisakan 1.
+                            <br>
+                            $[1] = \{..., -5, -2, 1, 4, 7, ...\} = \{3k + 1 \mid k \in \mathbb{Z}\}$
+                          </li>
+                          <li style="margin-top: 5px;">
+                            <strong>Kelas $[2]$ (sisa 2):</strong> Himpunan semua bilangan bulat yang jika dibagi 3 menyisakan 2.
+                            <br>
+                            $[2] = \{..., -4, -1, 2, 5, 8, ...\} = \{3k + 2 \mid k \in \mathbb{Z}\}$
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <div class="img-container">
+                      <img src="../pdf_images/page130_img1.png" alt="Catatan Modulo 3 Hal 130">
+                      <img src="../pdf_images/page130_img2.png" alt="Catatan Modulo 3 Hal 130 Bagian 2">
+                      <img src="../pdf_images/page131_img1.png" alt="Catatan Modulo 3 Hal 131">
+                      <img src="../pdf_images/page132_img1.png" alt="Catatan Modulo 3 Hal 132">
+                      <figcaption>Langkah Detail Pembuktian Modulo 3 &amp; Kelas Ekuivalensinya (Halaman 130-132)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal Ekuivalen 5 -->
+          <div class="exercise" id="soal-ek-5">
+            <div class="exercise__header">
+              <span class="exercise__number">16</span>
+              <span class="exercise__title">Membuktikan Relasi Ekuivalen pada Himpunan Cartesian AxA</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>Misalkan $A = \mathbb{Z}$ (himpunan bilangan bulat). Didefinisikan relasi $R$ pada $A \times A$ dengan aturan:</p>
+              <p class="math-block">$$(a, b) R (c, d) \iff a + d = b + c$$</p>
+              <p>Buktikan bahwa $R$ merupakan relasi ekuivalen pada $A \times A$!</p>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Karena relasi ini bekerja pada pasangan berurutan (anggota himpunannya berupa koordinat $(x, y)$), mari kita buktikan ketiga sifatnya:</p>
+                    
+                    <ol>
+                      <li>
+                        <strong>Refleksif:</strong><br>
+                        Kita harus menunjukkan bahwa $(a, b) R (a, b)$ untuk setiap $(a, b) \in A \times A$.
+                        <br>
+                        Berdasarkan definisi relasi, syaratnya adalah:
+                        <p class="math-block">$$a + b = b + a$$</p>
+                        Karena penjumlahan bilangan bulat bersifat komutatif ($a+b$ selalu sama dengan $b+a$), pernyataan ini bernilai <strong>Benar</strong>. Jadi, $R$ bersifat refleksif.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>Simetris:</strong><br>
+                        Asumsikan $(a, b) R (c, d)$ benar, yang berarti $a + d = b + c$.
+                        <br>
+                        Kita ingin menunjukkan bahwa $(c, d) R (a, b)$ juga benar, yaitu syaratnya: $c + b = d + a$.
+                        <br>
+                        Dari asumsi kita punya $a + d = b + c$. Kita balik posisinya secara aljabar (menggunakan sifat komutatif penjumlahan):
+                        <p class="math-block">$$b + c = a + d \implies c + b = d + a$$</p>
+                        Ini persis merupakan syarat untuk $(c, d) R (a, b)$. Jadi, $R$ bersifat simetris.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>Transitif:</strong><br>
+                        Asumsikan $(a, b) R (c, d)$ dan $(c, d) R (e, f)$ benar. Maka berlaku dua persamaan:
+                        <ol type="i">
+                          <li>$a + d = b + c$</li>
+                          <li>$c + f = d + e$</li>
+                        </ol>
+                        Kita ingin membuktikan $(a, b) R (e, f)$ benar, yang berarti syaratnya: $a + f = b + e$.
+                        <br>
+                        Mari kita jumlahkan kedua persamaan (i) dan (ii) di atas:
+                        <p class="math-block">$$(a + d) + (c + f) = (b + c) + (d + e)$$</p>
+                        <p class="math-block">$$a + d + c + f = b + c + d + e$$</p>
+                        Perhatikan bahwa variabel $c$ dan $d$ muncul di kedua ruas persamaan. Kita kurangi kedua ruas dengan $c$ dan $d$:
+                        <p class="math-block">$$a + f = b + e$$</p>
+                        Persamaan ini adalah syarat tepat untuk $(a, b) R (e, f)$. Jadi, $R$ bersifat transitif.
+                      </li>
+                    </ol>
+                    <p>Karena $R$ terbukti refleksif, simetris, dan transitif, maka $R$ adalah <strong>relasi ekuivalen</strong> pada $A \times A$. (Relasi ini sebenarnya mendefinisikan pembentukan bilangan rasional/pecahan jika kita menggunakan perkalian).</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page133_img1.png" alt="Solusi Halaman 133">
+                      <figcaption>Solusi Relasi pada Cartesian Product (Halaman 133)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal Ekuivalen 6 -->
+          <div class="exercise" id="soal-ek-6">
+            <div class="exercise__header">
+              <span class="exercise__number">17</span>
+              <span class="exercise__title">Membuktikan Relasi Nilai Terkecil (Min) Subset</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>Misalkan $X$ adalah himpunan semua subset non-kosong dari $\{1, 2, 3\}$. Kita definisikan relasi $R$ pada $X$ sebagai berikut: Untuk setiap $A, B \in X$, $A R B \iff$ elemen terkecil di $A$ sama dengan elemen terkecil di $B$ ($\min(A) = \min(B)$).</p>
+              <ol type="a">
+                <li>Tuliskan semua elemen dari himpunan $X$!</li>
+                <li>Tunjukkan bahwa $R$ adalah relasi ekuivalen pada $X$!</li>
+                <li>Tentukan semua kelas ekuivalen dari relasi $R$ ini!</li>
+              </ol>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <ol type="a">
+                      <li>
+                        <strong>Elemen Himpunan $X$:</strong><br>
+                        Himpunan $X$ berisi semua subset non-kosong dari $\{1, 2, 3\}$. Kita daftarkan semua anggotanya:
+                        <p class="math-block">$$X = \{\{1\}, \{2\}, \{3\}, \{1, 2\}, \{1, 3\}, \{2, 3\}, \{1, 2, 3\}\}$$</p>
+                        Total terdapat $2^3 - 1 = 7$ elemen.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>Pembuktian Relasi Ekuivalen:</strong><br>
+                        Kita tunjukkan pemenuhan tiga sifat relasi:
+                        <ul>
+                          <li><strong>Refleksif:</strong> Untuk setiap subset $A \in X$, jelas berlaku $\min(A) = \min(A)$ (elemen terkecil di himpunan $A$ sama dengan dirinya sendiri). Jadi $A R A$ benar.</li>
+                          <li><strong>Simetris:</strong> Jika $A R B$, berarti $\min(A) = \min(B)$. Secara aljabar ini menyiratkan $\min(B) = \min(A)$, sehingga $B R A$ benar.</li>
+                          <li><strong>Transitif:</strong> Jika $A R B$ dan $B R C$, berarti $\min(A) = \min(B)$ dan $\min(B) = \min(C)$. Maka diperoleh $\min(A) = \min(C)$, sehingga $A R C$ benar.</li>
+                        </ul>
+                        Karena ketiga sifat terpenuhi, maka $R$ adalah relasi ekuivalen.
+                      </li>
+                      <li style="margin-top: 10px;">
+                        <strong>Kelas Ekuivalen:</strong><br>
+                        Kita kelompokkan elemen-elemen di $X$ berdasarkan nilai elemen terkecilnya ($\min$):
+                        <ul>
+                          <li>
+                            <strong>Kelas untuk elemen terkecil $1$ (diwakili oleh $[\{1\}]$):</strong>
+                            <br>
+                            Semua subset yang memiliki angka terkecil $1$.
+                            <br>
+                            $[\{1\}] = \{\{1\}, \{1, 2\}, \{1, 3\}, \{1, 2, 3\}\}$
+                          </li>
+                          <li style="margin-top: 5px;">
+                            <strong>Kelas untuk elemen terkecil $2$ (diwakili oleh $[\{2\}]$):</strong>
+                            <br>
+                            Semua subset yang memiliki angka terkecil $2$ (tidak boleh mengandung $1$).
+                            <br>
+                            $[\{2\}] = \{\{2\}, \{2, 3\}\}$
+                          </li>
+                          <li style="margin-top: 5px;">
+                            <strong>Kelas untuk elemen terkecil $3$ (diwakili oleh $[\{3\}]$):</strong>
+                            <br>
+                            Semua subset yang memiliki angka terkecil $3$ (tidak boleh mengandung $1$ maupun $2$).
+                            <br>
+                            $[\{3\}] = \{\{3\}\}$
+                          </li>
+                        </ul>
+                      </li>
+                    </ol>
+                    <div class="img-container">
+                      <img src="../pdf_images/page134_img1.png" alt="Solusi Halaman 134">
+                      <img src="../pdf_images/page135_img1.png" alt="Solusi Halaman 135">
+                      <figcaption>Solusi Relasi Nilai Terkecil (Min) Subset (Halaman 134-135)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page Navigation -->
+        <div class="page-nav">
+          <a href="sesi5.html" class="page-nav__link">
+            <span class="page-nav__label">← Sebelumnya</span>
+            <span class="page-nav__title">Binomial, Permutasi, Kombinasi</span>
+          </a>
+          <a href="sesi7.html" class="page-nav__link page-nav__link--next">
+            <span class="page-nav__label">Selanjutnya →</span>
+            <span class="page-nav__title">POSET & Hasse Diagram</span>
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <button class="back-to-top" aria-label="Kembali ke atas">↑</button>
+  <script src="../js/main.js"></script>
+</body>
+</html>

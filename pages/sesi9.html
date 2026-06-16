@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesi 9: MST, Graph Coloring & FSA — Matematika Diskrit</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script src="../js/theme.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="../index.html" class="navbar__brand">
+      <span class="navbar__brand-icon">∑</span>
+      <span>MatDiskrit</span>
+    </a>
+    <div class="navbar__actions">
+      <button class="navbar__menu-btn" aria-label="Menu">☰</button>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-toggle__knob">🌙</span>
+      </button>
+    </div>
+  </nav>
+  <div class="sidebar-overlay"></div>
+  
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar__section-title">Navigasi</div>
+      <a href="../index.html" class="sidebar__link"><span class="sidebar__link-icon">🏠</span> Beranda</a>
+      <a href="sesi1.html" class="sidebar__link"><span class="sidebar__link-icon">1</span> Logic</a>
+      <a href="sesi2.html" class="sidebar__link"><span class="sidebar__link-icon">2</span> Quantifier</a>
+      <a href="sesi3.html" class="sidebar__link"><span class="sidebar__link-icon">3</span> Method of Proof</a>
+      <a href="sesi4.html" class="sidebar__link"><span class="sidebar__link-icon">4</span> Fuzzy Sets & Function</a>
+      <a href="sesi5.html" class="sidebar__link"><span class="sidebar__link-icon">5</span> Binomial & Kombinasi</a>
+      <a href="sesi6.html" class="sidebar__link"><span class="sidebar__link-icon">6</span> Relation</a>
+      <a href="sesi7.html" class="sidebar__link"><span class="sidebar__link-icon">7</span> POSET & Hasse</a>
+      <a href="sesi8.html" class="sidebar__link"><span class="sidebar__link-icon">8</span> Min/Max & Lattice</a>
+      <a href="sesi9.html" class="sidebar__link active"><span class="sidebar__link-icon">9</span> MST, Coloring & FSA</a>
+      
+      <!-- Sublinks for Scroll Spy TOC -->
+      <div class="sidebar__sublinks">
+        <a href="#mst" class="sidebar__sublink">1. Minimum Spanning Tree</a>
+        <a href="#graph-coloring" class="sidebar__sublink">2. Graph Coloring</a>
+        <a href="#fsa" class="sidebar__sublink">3. Finite State Automata</a>
+        <a href="#isomorphism" class="sidebar__sublink">4. Graph Isomorphisms</a>
+      </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="content-wrapper">
+        
+        <!-- Section Header -->
+        <header class="section-header">
+          <span class="section-header__badge">Sesi 9 (UAS)</span>
+          <h1 class="hero__title" style="margin-left: 0; text-align: left; font-size: 2.5rem;">Minimum Spanning Tree, Graph Coloring & FSA</h1>
+          <p class="section-header__desc">
+            Sesi terakhir ini membahas empat topik penting dalam Teori Graf dan Teori Automata: pencarian Pohon Rentang Minimum (Minimum Spanning Tree) dengan Algoritma Prim dan Kruskal, konsep Pewarnaan Graf (Graph Coloring) termasuk bilangan kromatik dan polinomial kromatik, perancangan Finite State Automata (DFA), serta konsep Isomorfisma Graf.
+          </p>
+        </header>
+
+        <!-- 1. Minimum Spanning Tree -->
+        <section id="mst" class="scroll-section">
+          <h2>1. Minimum Spanning Tree (MST)</h2>
+          <p>
+            Sebelum masuk ke algoritmanya, mari kita pahami definisinya terlebih dahulu. 
+            Sebuah <strong>Spanning Tree (Pohon Rentang)</strong> adalah subgraf dari graf terhubung $G$ yang berupa pohon (tidak memiliki sirkuit/loop) dan menghubungkan seluruh vertex (titik) di graf tersebut. 
+            Jika graf tersebut memiliki bobot pada setiap sisinya (weighted graph), maka <strong>Minimum Spanning Tree (MST)</strong> adalah spanning tree yang memiliki <strong>total bobot sisi paling minimal</strong>.
+          </p>
+          <p>
+            Terdapat dua algoritma terkenal untuk mencari MST, yaitu <strong>Algoritma Prim</strong> dan <strong>Algoritma Kruskal</strong>.
+          </p>
+
+          <div class="concept-box">
+            <div class="concept-box__title">🌲 Algoritma Prim vs Algoritma Kruskal</div>
+            <ul>
+              <li><strong>Algoritma Prim (Vertex-centric)</strong>: Kita memilih vertex sebagai pijakan dasar. Pohon tumbuh secara bertahap dari satu titik awal, selalu memilih sisi incident dengan bobot terkecil yang menghubungkan pohon ke vertex yang belum dikunjungi.</li>
+              <li><strong>Algoritma Kruskal (Edge-centric)</strong>: Kita mengabaikan letak vertex di awal. Kita langsung mengurutkan seluruh sisi berdasarkan bobotnya, lalu memilih sisi satu per satu dari yang terkecil, dengan syarat sisi yang dipilih tidak membentuk sirkuit (loop) dengan sisi-sisi yang sudah terpilih sebelumnya.</li>
+            </ul>
+          </div>
+
+          <h3>Algoritma Prim</h3>
+          <p>Langkah-langkah pengerjaan dengan Algoritma Prim:</p>
+          <ol>
+            <li>Pilih satu vertex awal secara acak (atau sesuai ketentuan soal).</li>
+            <li>Tandai atau cari sisi-sisi (edges) yang terhubung (incident) dengan vertex yang sudah dikunjungi.</li>
+            <li>Dari sisi-sisi tersebut, pilih sisi yang memiliki <strong>bobot terkecil</strong> dan hubungkan ke vertex baru (pastikan tidak membentuk loop/sirkuit).</li>
+            <li>Ulangi langkah 2 dan 3 hingga seluruh vertex berhasil dikunjungi. Jika graf memiliki $n$ vertex, maka akan terpilih tepat $n-1$ sisi.</li>
+          </ol>
+
+          <!-- Contoh 1: Prim -->
+          <div class="exercise" id="soal-prim1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Contoh Soal Prim 1</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Tentukan Minimum Spanning Tree (MST) dari graf berikut dengan menggunakan <strong>Algoritma Prim</strong>:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page192_img1.png" alt="Graf Contoh 1 Prim">
+                <figcaption>Gambar: Graf berbobot awal dengan vertex a, b, c, d, e</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Mari kita selesaikan langkah demi langkah dimulai dari vertex <strong>$a$</strong>:</p>
+                    <table class="truth-table">
+                      <thead>
+                        <tr>
+                          <th>Pilihan Ke-</th>
+                          <th>Sisi (Edge) Terpilih</th>
+                          <th>Bobot (Cost)</th>
+                          <th>Vertex Terkunjungi</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>\(ad\)</td>
+                          <td class="val-true">1</td>
+                          <td>\(\{a, d\}\)</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>\(dc\)</td>
+                          <td class="val-true">1</td>
+                          <td>\(\{a, d, c\}\)</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>\(ce\)</td>
+                          <td class="val-true">1</td>
+                          <td>\(\{a, d, c, e\}\)</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>\(cb\)</td>
+                          <td class="val-true">1</td>
+                          <td>\(\{a, d, c, e, b\}\)</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p><strong>Catatan:</strong></p>
+                    <ul>
+                      <li>Pada langkah 3, sisi yang incident dengan vertex terpilh adalah \(ae(3)\), \(de(3)\), \(ce(1)\), \(cb(1)\). Kita memilih \(ce(1)\) (atau \(cb(1)\), keduanya bernilai minimal).</li>
+                      <li>Seluruh 5 vertex sudah terhubung oleh 4 sisi tanpa membentuk loop.</li>
+                    </ul>
+                    <p>Total bobot minimum pipa/kabel yang dibutuhkan adalah <strong>\(1 + 1 + 1 + 1 = 4\)</strong>.</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page192_img2.png" alt="Solusi Contoh 1 Prim">
+                      <figcaption>Gambar: Hasil visualisasi Spanning Tree (kanan) dengan total bobot 4</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2: Prim -->
+          <div class="exercise" id="soal-prim2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Latihan Soal Prim 2</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Carilah MST menggunakan <strong>Algoritma Prim</strong> untuk graf berbobot di bawah ini:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page193_img1.png" alt="Graf Soal 2 Prim">
+                <figcaption>Gambar: Graf berbobot dengan 6 vertex (a, b, c, d, e, z)</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__content">
+                    <div class="answer-toggle__inner">
+                      <div class="answer-toggle__label">✅ Jawaban</div>
+                      <p>Berikut adalah tabel langkah pemilihan sisi dengan Algoritma Prim dimulai dari vertex <strong>$a$</strong>:</p>
+                      <table class="truth-table">
+                        <thead>
+                          <tr>
+                            <th>Pilihan Ke-</th>
+                            <th>Sisi (Edge) Terpilih</th>
+                            <th>Bobot (Cost)</th>
+                            <th>Vertex Terkunjungi</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>\(ab\)</td>
+                            <td class="val-true">2</td>
+                            <td>\(\{a, b\}\)</td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>\(be\)</td>
+                            <td class="val-true">2</td>
+                            <td>\(\{a, b, e\}\)</td>
+                          </tr>
+                          <tr>
+                            <td>3</td>
+                            <td>\(ed\)</td>
+                            <td class="val-true">1</td>
+                            <td>\(\{a, b, e, d\}\)</td>
+                          </tr>
+                          <tr>
+                            <td>4</td>
+                            <td>\(dz\)</td>
+                            <td class="val-true">2</td>
+                            <td>\(\{a, b, e, d, z\}\)</td>
+                          </tr>
+                          <tr>
+                            <td>5</td>
+                            <td>\(ac\)</td>
+                            <td class="val-true">3</td>
+                            <td>\(\{a, b, e, d, z, c\}\)</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <p><strong>Penjelasan Detail:</strong></p>
+                      <ul>
+                        <li>Setelah langkah 4, vertex terhubung adalah \(\{a, b, e, d, z\}\). Sisi yang incident adalah \(ac(3)\) dan \(ce(5)\). Kita pilih \(ac\) yang berbobot 3 karena lebih kecil. Sisi \(ce\) tidak boleh dipilih di langkah berikutnya karena akan membentuk loop/sirkuit \(a-b-e-c-a\).</li>
+                      </ul>
+                      <p>Total bobot MST = <strong>\(2 + 2 + 1 + 2 + 3 = 10\)</strong>.</p>
+                      <div class="img-container">
+                        <img src="../pdf_images/page193_img2.png" alt="Solusi Soal 2 Prim">
+                        <figcaption>Gambar: Solusi graf MST dan tabel pencatatan pilihan</figcaption>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 3: Prim -->
+          <div class="exercise" id="soal-prim3">
+            <div class="exercise__header">
+              <span class="exercise__number">3</span>
+              <span class="exercise__title">Latihan Soal Prim 3</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Tentukan MST dari graf berikut dengan menggunakan <strong>Algoritma Prim</strong>:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page193_img3.png" alt="Graf Soal 3 Prim">
+                <figcaption>Gambar: Graf berbobot dengan 7 vertex (a, b, c, d, e, f, g)</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Mari lakukan pencarian MST menggunakan Algoritma Prim dimulai dari vertex <strong>$d$</strong>:</p>
+                    <table class="truth-table">
+                      <thead>
+                        <tr>
+                          <th>Pilihan Ke-</th>
+                          <th>Sisi (Edge) Terpilih</th>
+                          <th>Bobot (Cost)</th>
+                          <th>Vertex Terkunjungi</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>\(dc\)</td>
+                          <td class="val-true">3</td>
+                          <td>\(\{d, c\}\)</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>\(dg\)</td>
+                          <td class="val-true">4</td>
+                          <td>\(\{d, c, g\}\)</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>\(ed\)</td>
+                          <td class="val-true">4</td>
+                          <td>\(\{d, c, g, e\}\)</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>\(eb\)</td>
+                          <td class="val-true">6</td>
+                          <td>\(\{d, c, g, e, b\}\)</td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>\(ef\)</td>
+                          <td class="val-true">10</td>
+                          <td>\(\{d, c, g, e, b, f\}\)</td>
+                        </tr>
+                        <tr>
+                          <td>6</td>
+                          <td>\(af\)</td>
+                          <td class="val-true">12</td>
+                          <td>\(\{d, c, g, e, b, f, a\}\)</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p><strong>Catatan:</strong></p>
+                    <ul>
+                      <li>Sisi \(bd(7)\) diabaikan karena jika dipilih akan membentuk sirkuit tertutup \(d-e-b-d\).</li>
+                      <li>Sisi \(cg(6)\) diabaikan karena menghubungkan vertex yang keduanya sudah dikunjungi, yang akan membentuk sirkuit \(d-c-g-d\).</li>
+                    </ul>
+                    <p>Total bobot MST = <strong>\(3 + 4 + 4 + 6 + 10 + 12 = 39\)</strong>.</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page194_img2.png" alt="Solusi Soal 3 Prim">
+                      <figcaption>Gambar: Solusi pohon merentang minimum dan coretan langkahnya</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <h3>Algoritma Kruskal</h3>
+          <p>Langkah-langkah pengerjaan dengan Algoritma Kruskal:</p>
+          <ol>
+            <li>Urutkan (sort) seluruh sisi graf dari bobot terkecil hingga terbesar.</li>
+            <li>Pilih sisi dengan bobot terkecil pertama.</li>
+            <li>Pilih sisi berikutnya dari daftar urutan. Periksa apakah sisi tersebut membentuk sirkuit (loop) jika digabungkan dengan sisi yang sudah dipilih sebelumnya. Jika YA, abaikan sisi tersebut. Jika TIDAK, pilih sisi tersebut.</li>
+            <li>Ulangi langkah 3 hingga terpilih sebanyak $n-1$ sisi.</li>
+          </ol>
+
+          <!-- Soal 1: Kruskal -->
+          <div class="exercise" id="soal-kruskal1">
+            <div class="exercise__header">
+              <span class="exercise__number">4</span>
+              <span class="exercise__title">Latihan Soal Kruskal 1</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Carilah MST dari graf berikut dengan menggunakan <strong>Algoritma Kruskal</strong>:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page195_img1.png" alt="Graf Soal 1 Kruskal">
+                <figcaption>Gambar: Graf berbobot 5 vertex</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Urutkan semua sisi berdasarkan bobotnya:</p>
+                    <ul>
+                      <li>\(ad (1)\), \(cb (1)\), \(ce (1)\), \(dc (1)\), \(ae (3)\), \(be (3)\), \(de (3)\), \(ab (5)\)</li>
+                    </ul>
+                    <p>Mari kita pilih sisi-sisi tersebut secara berurutan:</p>
+                    <table class="truth-table">
+                      <thead>
+                        <tr>
+                          <th>Pilihan Ke-</th>
+                          <th>Sisi (Edge)</th>
+                          <th>Bobot</th>
+                          <th>Status</th>
+                          <th>Alasan</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>\(ad\)</td>
+                          <td class="val-true">1</td>
+                          <td>Terpilih</td>
+                          <td>Bobot terkecil pertama</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>\(cb\)</td>
+                          <td class="val-true">1</td>
+                          <td>Terpilih</td>
+                          <td>Bobot terkecil kedua, tidak membentuk loop</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>\(ce\)</td>
+                          <td class="val-true">1</td>
+                          <td>Terpilih</td>
+                          <td>Bobot terkecil ketiga, tidak membentuk loop</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>\(dc\)</td>
+                          <td class="val-true">1</td>
+                          <td>Terpilih</td>
+                          <td>Bobot terkecil keempat, tidak membentuk loop</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p>Karena kita sudah mendapatkan 4 sisi (\(n-1\)) untuk graf dengan 5 vertex, pencarian dihentikan.</p>
+                    <p>Total bobot MST = <strong>\(1 + 1 + 1 + 1 = 4\)</strong>.</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page195_img2.png" alt="Solusi Soal 1 Kruskal">
+                      <figcaption>Gambar: Solusi Kruskal dengan urutan sisi berbobot 1</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2: Kruskal -->
+          <div class="exercise" id="soal-kruskal2">
+            <div class="exercise__header">
+              <span class="exercise__number">5</span>
+              <span class="exercise__title">Latihan Soal Kruskal 2</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Carilah MST dari graf berikut dengan menggunakan <strong>Algoritma Kruskal</strong>:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page196_img1.png" alt="Graf Soal 2 Kruskal">
+                <figcaption>Gambar: Graf berbobot 6 vertex</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Daftar sisi yang diurutkan berdasarkan bobotnya:</p>
+                    <ul>
+                      <li>\(de(1)\), \(ab(2)\), \(be(2)\), \(dz(2)\), \(ac(3)\), \(ez(4)\), \(bd(5)\), \(ce(5)\)</li>
+                    </ul>
+                    <p>Mari kita pilih secara berurutan:</p>
+                    <table class="truth-table">
+                      <thead>
+                        <tr>
+                          <th>Langkah</th>
+                          <th>Sisi</th>
+                          <th>Bobot</th>
+                          <th>Status</th>
+                          <th>Keterangan</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>\(de\)</td>
+                          <td class="val-true">1</td>
+                          <td>Terpilih</td>
+                          <td>Bobot 1</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>\(dz\)</td>
+                          <td class="val-true">2</td>
+                          <td>Terpilih</td>
+                          <td>Bobot 2</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>\(ab\)</td>
+                          <td class="val-true">2</td>
+                          <td>Terpilih</td>
+                          <td>Bobot 2</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>\(be\)</td>
+                          <td class="val-true">2</td>
+                          <td>Terpilih</td>
+                          <td>Bobot 2</td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>\(ac\)</td>
+                          <td class="val-true">3</td>
+                          <td>Terpilih</td>
+                          <td>Bobot 3</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p>Jumlah sisi terpilih = 5 (untuk 6 vertex), maka proses selesai. Sisi lainnya seperti \(ez(4)\) diabaikan karena akan membentuk loop \(d-e-z-d\).</p>
+                    <p>Total bobot MST = <strong>\(1 + 2 + 2 + 2 + 3 = 10\)</strong>.</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page196_img2.png" alt="Solusi Soal 2 Kruskal">
+                      <figcaption>Gambar: Solusi Kruskal dan tabel pengerjaan</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 3: Kruskal -->
+          <div class="exercise" id="soal-kruskal3">
+            <div class="exercise__header">
+              <span class="exercise__number">6</span>
+              <span class="exercise__title">Latihan Soal Kruskal 3</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Carilah MST dari graf berikut dengan menggunakan <strong>Algoritma Kruskal</strong>:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page196_img3.png" alt="Graf Soal 3 Kruskal">
+                <figcaption>Gambar: Graf berbobot 7 vertex</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Urutan sisi berdasarkan bobot:</p>
+                    <ul>
+                      <li>\(dc(3)\), \(dg(4)\), \(ed(4)\), \(eb(6)\), \(bd(7)\), \(ef(10)\), \(bc(11)\), \(af(12)\), \(ab(15)\), \(fg(20)\)</li>
+                    </ul>
+                    <p>Mari kita pilih sisi-sisi tersebut:</p>
+                    <table class="truth-table">
+                      <thead>
+                        <tr>
+                          <th>Pilihan Ke-</th>
+                          <th>Sisi</th>
+                          <th>Bobot</th>
+                          <th>Status</th>
+                          <th>Keterangan</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>\(dc\)</td>
+                          <td class="val-true">3</td>
+                          <td>Terpilih</td>
+                          <td>Sisi berbobot terkecil</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>\(dg\)</td>
+                          <td class="val-true">4</td>
+                          <td>Terpilih</td>
+                          <td>Tidak membentuk loop</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>\(de\)</td>
+                          <td class="val-true">4</td>
+                          <td>Terpilih</td>
+                          <td>Tidak membentuk loop</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>\(eb\)</td>
+                          <td class="val-true">6</td>
+                          <td>Terpilih</td>
+                          <td>Tidak membentuk loop</td>
+                        </tr>
+                        <tr>
+                          <td>-</td>
+                          <td>\(bd\)</td>
+                          <td class="val-false">7</td>
+                          <td>Diabaikan</td>
+                          <td>Membentuk loop \(b-e-d-b\)</td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>\(ef\)</td>
+                          <td class="val-true">10</td>
+                          <td>Terpilih</td>
+                          <td>Tidak membentuk loop</td>
+                        </tr>
+                        <tr>
+                          <td>-</td>
+                          <td>\(bc\)</td>
+                          <td class="val-false">11</td>
+                          <td>Diabaikan</td>
+                          <td>Membentuk loop</td>
+                        </tr>
+                        <tr>
+                          <td>6</td>
+                          <td>\(af\)</td>
+                          <td class="val-true">12</td>
+                          <td>Terpilih</td>
+                          <td>Tidak membentuk loop</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p>Total bobot MST = <strong>\(3 + 4 + 4 + 6 + 10 + 12 = 39\)</strong>.</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page197_img1.png" alt="Solusi Soal 3 Kruskal">
+                      <figcaption>Gambar: Solusi Kruskal dengan 6 sisi terpilih bernilai 39</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <h3>Studi Kasus: Jaringan Pipa Air PDAM</h3>
+          <p>
+            Sebuah perusahaan penyedia air (PDAM) ingin membuat jalur pipa yang menghubungkan antar kota di bawah ini. Sumber mata air berasal dari <strong>Waduk Jatiluhur Purwakarta</strong>. Perusahaan ingin mencari total jalur pipa terpendek agar meminimalisir biaya pembuatan pipa.
+          </p>
+
+          <div class="img-container">
+            <img src="../pdf_images/page197_img2.png" alt="Tabel Jarak Antar Kota">
+            <figcaption>Gambar: Tabel Jarak Antar Kota (Jakarta, Bekasi, Bogor, Banten, Purwakarta, Bandung)</figcaption>
+          </div>
+
+          <!-- Tabel Jarak Representasi HTML -->
+          <p>Berikut adalah tabel jarak antar kota dalam bentuk data numerik:</p>
+          <div style="overflow-x: auto;">
+            <table class="truth-table">
+              <thead>
+                <tr>
+                  <th>Jarak (km)</th>
+                  <th>Jakarta</th>
+                  <th>Bekasi</th>
+                  <th>Bogor</th>
+                  <th>Banten</th>
+                  <th>Purwakarta</th>
+                  <th>Bandung</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Jakarta</th>
+                  <td>0</td>
+                  <td class="val-true">45</td>
+                  <td class="val-true">47</td>
+                  <td class="val-true">88</td>
+                  <td class="val-true">79</td>
+                  <td>151</td>
+                </tr>
+                <tr>
+                  <th>Bekasi</th>
+                  <td class="val-true">45</td>
+                  <td>0</td>
+                  <td>50</td>
+                  <td>95</td>
+                  <td>91</td>
+                  <td>136</td>
+                </tr>
+                <tr>
+                  <th>Bogor</th>
+                  <td class="val-true">47</td>
+                  <td>50</td>
+                  <td>0</td>
+                  <td>92</td>
+                  <td>112</td>
+                  <td>145</td>
+                </tr>
+                <tr>
+                  <th>Banten</th>
+                  <td class="val-true">88</td>
+                  <td>95</td>
+                  <td>92</td>
+                  <td>0</td>
+                  <td>170</td>
+                  <td>220</td>
+                </tr>
+                <tr>
+                  <th>Purwakarta</th>
+                  <td class="val-true">79</td>
+                  <td>91</td>
+                  <td>112</td>
+                  <td>170</td>
+                  <td>0</td>
+                  <td class="val-true">83</td>
+                </tr>
+                <tr>
+                  <th>Bandung</th>
+                  <td>151</td>
+                  <td>136</td>
+                  <td>145</td>
+                  <td>220</td>
+                  <td class="val-true">83</td>
+                  <td>0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="exercise" id="soal-pdam">
+            <div class="exercise__header">
+              <span class="exercise__number">7</span>
+              <span class="exercise__title">Studi Kasus PDAM</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                <strong>Soal:</strong>
+                <br>a. Gambarkan graf yang merepresentasikan jarak antar kota pada tabel di atas.
+                <br>b. Hitunglah jarak terpendek pipa yang bisa dibuat untuk menghubungkan semua kota dengan <strong>Waduk Jatiluhur Purwakarta</strong> sebagai pusat air. Berapa panjang pipa minimum yang dibutuhkan? (Gunakan Algoritma Prim).
+              </p>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>a. Representasi Graf Jaringan:</strong></p>
+                    <p>Graf digambarkan dengan 6 titik kota dan sisi berbobot jarak antar kota seperti pada lembar penyelesaian di bawah.</p>
+                    <p><strong>b. Langkah Algoritma Prim dimulai dari Purwakarta (Pur):</strong></p>
+                    <table class="truth-table">
+                      <thead>
+                        <tr>
+                          <th>Pilihan</th>
+                          <th>Kota Terhubung</th>
+                          <th>Pipa Ditunjuk</th>
+                          <th>Jarak (km)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>Purwakarta (Pur)</td>
+                          <td>Purwakarta - Jakarta</td>
+                          <td class="val-true">79</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Pur, Jakarta (Jak)</td>
+                          <td>Jakarta - Bekasi</td>
+                          <td class="val-true">45</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Pur, Jak, Bekasi (Bek)</td>
+                          <td>Jakarta - Bogor</td>
+                          <td class="val-true">47</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Pur, Jak, Bek, Bogor (Bog)</td>
+                          <td>Purwakarta - Bandung</td>
+                          <td class="val-true">83</td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>Pur, Jak, Bek, Bog, Bandung (Bdg)</td>
+                          <td>Jakarta - Banten</td>
+                          <td class="val-true">88</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p><strong>Total Panjang Pipa Minimum:</strong></p>
+                    \[\text{Total Jarak} = 79 + 45 + 47 + 83 + 88 = 342 \text{ km}\]
+                    <div class="img-container">
+                      <img src="../pdf_images/page198_img1.png" alt="Solusi Studi Kasus PDAM">
+                      <figcaption>Gambar: Lembar solusi digital untuk jaringan pipa air</figcaption>
+                    </div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page199_img1.png" alt="Whiteboard Solusi PDAM">
+                      <figcaption>Gambar: Whiteboard coretan tangan pengerjaan Prim PDAM</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr>
+
+        <!-- 2. Graph Coloring -->
+        <section id="graph-coloring" class="scroll-section">
+          <h2>2. Graph Coloring (Pewarnaan Graf)</h2>
+          <p>
+            <strong>Pewarnaan Graf (Graph Coloring)</strong> adalah proses pemberian warna pada elemen-elemen graf (dalam hal ini vertex) sedemikian rupa sehingga tidak ada dua vertex yang bertetangga (bersebelahan langsung) memiliki warna yang sama. 
+            Tujuan utamanya biasanya adalah meminimalkan jumlah warna yang digunakan.
+          </p>
+
+          <div class="concept-box">
+            <div class="concept-box__title">🗺️ Analogi Peta Wilayah</div>
+            <p>
+              Masalah ini berawal dari pewarnaan peta negara/benua. Negara-negara yang bertetangga tidak boleh menggunakan warna bendera/peta yang sama agar batas wilayahnya terlihat jelas. 
+              Peta ini dapat ditransformasikan menjadi graf dengan cara: setiap wilayah menjadi <strong>vertex</strong>, dan batas wilayah yang bersebelahan menjadi <strong>edge</strong>.
+            </p>
+            <div class="carousel">
+              <div class="img-container">
+                <img src="../pdf_images/page200_img2.png" alt="Peta Benua Kosong">
+                <figcaption>Gambar 1: Peta benua dengan wilayah A, B, C, D, E</figcaption>
+              </div>
+              <!-- slide -->
+              <div class="img-container">
+                <img src="../pdf_images/page201_img1.png" alt="Peta Benua Berwarna">
+                <figcaption>Gambar 2: Pewarnaan peta dengan 4 warna (A/D: Oranye, B: Hijau, C: Biru, E: Ungu)</figcaption>
+              </div>
+              <!-- slide -->
+              <div class="img-container">
+                <img src="../pdf_images/page202_img1.png" alt="Graf Representasi Peta">
+                <figcaption>Gambar 3: Dual Graph representasi peta (vertex mewakili wilayah)</figcaption>
+              </div>
+            </div>
+          </div>
+
+          <h3>Graf Bipartite (Bipartite Graph)</h3>
+          <p>
+            Sebuah graf disebut <strong>Bipartite</strong> jika himpunan vertex-nya dapat dibagi menjadi dua himpunan independen $V_1$ and $V_2$ sehingga setiap edge menghubungkan titik di $V_1$ dengan titik di $V_2$. 
+            Cara termudah menguji apakah sebuah graf bipartite adalah dengan mewarnainya. Jika graf tersebut <strong>cukup diwarnai dengan 2 warna saja</strong>, maka graf tersebut adalah bipartite.
+          </p>
+          <div class="img-container">
+            <img src="../pdf_images/page203_img1.png" alt="Ilustrasi Graf Bipartite">
+            <figcaption>Gambar: Ilustrasi Graf Bipartite yang terbagi menjadi dua set vertex</figcaption>
+          </div>
+
+          <!-- Soal: Bipartite -->
+          <div class="exercise" id="soal-bipartite">
+            <div class="exercise__header">
+              <span class="exercise__number">8</span>
+              <span class="exercise__title">Cek Apakah Graf Bipartite?</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Periksalah apakah kedua graf di bawah ini merupakan graf bipartite:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page203_img2.png" alt="Soal Cek Bipartite">
+                <figcaption>Gambar: Graf Hexagon C_6 (kiri) dan Graf Segitiga C_3 (kanan)</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>1. Graf Hexagon ($C_6$):</strong></p>
+                    <p>
+                      Dapat diwarnai dengan cukup <strong>2 warna</strong> (Kuning dan Hijau) secara selang-seling: 
+                      \(a(\text{Kuning}) \rightarrow b(\text{Hijau}) \rightarrow c(\text{Kuning}) \rightarrow d(\text{Hijau}) \rightarrow e(\text{Kuning}) \rightarrow f(\text{Hijau})\).
+                      Karena cukup dengan 2 warna, graf ini <strong>Bipartite</strong>. Kita bisa mengelompokkan vertex menjadi:
+                      <br>\(V_1 = \{a, c, e\}\) dan \(V_2 = \{b, d, f\}\).
+                    </p>
+                    <p><strong>2. Graf Segitiga ($C_3$):</strong></p>
+                    <p>
+                      Setiap vertex terhubung satu sama lain. Jika \(a\) diberi warna Kuning dan \(b\) diberi warna Biru, maka \(c\) yang bertetangga dengan keduanya harus diberi warna ketiga (Hijau).
+                      Karena butuh <strong>3 warna</strong>, graf ini <strong>Bukan Bipartite</strong>.
+                    </p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page203_img3.png" alt="Solusi Bipartite">
+                      <figcaption>Gambar: Visualisasi pewarnaan graf C_6 dan C_3 serta pemisahan himpunan bipartite</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <h3>Chromatic Number $\chi(G)$</h3>
+          <p>
+            <strong>Chromatic Number (Bilangan Kromatik)</strong>, dinotasikan dengan $\chi(G)$ (dibaca <em>kai</em>), adalah jumlah warna minimum yang diperlukan untuk mewarnai graf $G$ sedemikian rupa sehingga tidak ada dua vertex bersebelahan yang sewarna.
+          </p>
+
+          <div class="callout callout--definition">
+            <div class="callout__icon">📘</div>
+            <div class="callout__content">
+              <strong>Chromatic Number untuk Graf Khusus:</strong>
+              <ul>
+                <li><strong>Complete Graph ($K_n$)</strong>: Karena setiap vertex terhubung dengan seluruh vertex lainnya, maka kita membutuhkan warna yang berbeda untuk setiap vertex.
+                  \[\chi(K_n) = n\]
+                </li>
+                <li><strong>Cycle Graph ($C_n$)</strong>: 
+                  \[\chi(C_n) = \begin{cases} 2 & \text{jika } n \text{ genap} \\ 3 & \text{jika } n \text{ ganjil} \end{cases}\]
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="carousel">
+            <div class="img-container">
+              <img src="../pdf_images/page204_img1.png" alt="Complete Graph Uncolored">
+              <figcaption>Gambar: Graf Lengkap K_2, K_3, K_4 sebelum diwarnai</figcaption>
+            </div>
+            <!-- slide -->
+            <div class="img-container">
+              <img src="../pdf_images/page204_img2.png" alt="Complete Graph Colored">
+              <figcaption>Gambar: Pewarnaan K_2 (2 warna), K_3 (3 warna), K_4 (4 warna)</figcaption>
+            </div>
+            <!-- slide -->
+            <div class="img-container">
+              <img src="../pdf_images/page205_img1.png" alt="Cycle Graph Uncolored">
+              <figcaption>Gambar: Graf Siklus C_3, C_4, C_5, C_6 sebelum diwarnai</figcaption>
+            </div>
+            <!-- slide -->
+            <div class="img-container">
+              <img src="../pdf_images/page205_img2.png" alt="Cycle Graph Colored">
+              <figcaption>Gambar: Hasil pewarnaan C_3 (3), C_4 (2), C_5 (3), C_6 (2)</figcaption>
+            </div>
+          </div>
+
+          <hr>
+
+          <h3>Chromatic Polynomial $P(G, k)$</h3>
+          <p>
+            <strong>Chromatic Polynomial (Polinomial Kromatik)</strong>, dinotasikan dengan $P(G, k)$ atau $P(G, \lambda)$, adalah fungsi polinomial yang menghitung banyaknya cara mewarnai graf $G$ dengan menggunakan maksimal $k$ warna yang tersedia.
+          </p>
+          <p>
+            Sebagai contoh, pada graf peta wilayah dual sebelumnya (yang terdiri dari 5 titik $A, B, C, D, E$):
+          </p>
+          <div class="img-container">
+            <img src="../pdf_images/page206_img1.png" alt="Teori Polinomial Kromatik">
+            <figcaption>Gambar: Graf 5 titik A, B, C, D, E</figcaption>
+          </div>
+          <p>
+            Jika kita mewarnai secara berurutan:
+          </p>
+          <ol>
+            <li>Titik \(A\) dapat menggunakan \(\lambda\) warna.</li>
+            <li>Titik \(B\) bertetangga dengan \(A\), maka dapat menggunakan \(\lambda - 1\) warna.</li>
+            <li>Titik \(C\) bertetangga dengan \(A\) dan \(B\), maka dapat menggunakan \(\lambda - 2\) warna.</li>
+            <li>Titik \(D\) bertetangga dengan \(C\) saja, maka dapat menggunakan \(\lambda - 1\) warna.</li>
+            <li>Titik \(E\) bertetangga dengan \(B, C, D\). Dengan asumsi warna ketiganya berbeda, \(E\) dapat menggunakan \(\lambda - 3\) warna.</li>
+          </ol>
+          <p>
+            Maka rumus polinomial kromatiknya adalah:
+            \[P(G, \lambda) = \lambda(\lambda-1)(\lambda-2)(\lambda-1)(\lambda-3)\]
+            Jika kita menggunakan 5 warna (\(\lambda = 5\)), jumlah caranya adalah:
+            \[P(G, 5) = 5 \times 4 \times 3 \times 4 \times 2 = 480 \text{ cara}\]
+          </p>
+          <div class="img-container">
+            <img src="../pdf_images/page206_img2.png" alt="Solusi Polinomial Kromatik">
+            <figcaption>Gambar: Lembar penjelasan dan hasil perhitungan dengan 5 warna</figcaption>
+          </div>
+
+          <!-- Soal Latihan Chromatic Polynomial -->
+          <div class="exercise" id="soal-chromatic-poly">
+            <div class="exercise__header">
+              <span class="exercise__number">9</span>
+              <span class="exercise__title">Latihan Chromatic Polynomial</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Carilah Chromatic Polynomial $P(G, \lambda)$ untuk graf di bawah ini, lalu hitunglah berapa banyak cara mewarnai graf tersebut dengan menggunakan <strong>6 warna</strong>:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page207_img1.png" alt="Soal Chromatic Polynomial">
+                <figcaption>Gambar: Graf segiempat dengan satu diagonal (a, b, c, d)</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Mari kita tentukan pilihan warna untuk setiap vertex secara bertahap:</p>
+                    <ul>
+                      <li>Vertex \(a\) diberi warna pertama: memiliki <strong>\(\lambda\)</strong> pilihan warna.</li>
+                      <li>Vertex \(b\) terhubung ke \(a\): memiliki <strong>\(\lambda - 1\)</strong> pilihan warna.</li>
+                      <li>Vertex \(c\) terhubung ke \(b\): memiliki <strong>\(\lambda - 2\)</strong> pilihan warna (karena warnanya tidak boleh sama dengan \(b\) dan diasumsikan berbeda dari \(a\)).</li>
+                      <li>Vertex \(d\) terhubung ke \(a\), \(b\), dan \(c\): karena harus berbeda dari ketiga warna titik tetangganya tersebut, maka memiliki <strong>\(\lambda - 3\)</strong> pilihan warna.</li>
+                    </ul>
+                    <p>Sehingga rumus polinomialnya adalah:</p>
+                    \[P(G, \lambda) = \lambda(\lambda - 1)(\lambda - 2)(\lambda - 3)\]
+                    <p>Jika kita menggunakan <strong>6 warna</strong> (\(\lambda = 6\)):</p>
+                    \[P(G, 6) = 6 \times 5 \times 4 \times 3 = 360 \text{ cara}\]
+                    <div class="img-container">
+                      <img src="../pdf_images/page207_img2.png" alt="Jawaban Soal Chromatic Polynomial">
+                      <figcaption>Gambar: Lembar solusi rumus polinomial kromatik</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <h3>Studi Kasus 1: Penjadwalan Ujian Kuliah</h3>
+          <p>
+            North Central University menawarkan 8 mata kuliah selama musim panas. 
+            Tabel di bawah ini menandakan (dengan tanda X) bahwa sepasang mata kuliah memiliki mahasiswa yang sama, sehingga jadwal ujiannya tidak boleh bentrok. 
+            Universitas hanya memiliki 2 kelas ber-AC yang dapat digunakan selama musim panas.
+          </p>
+
+          <div class="img-container">
+            <img src="../pdf_images/page208_img2.png" alt="Tabel Konflik Jadwal Ujian">
+            <figcaption>Gambar: Tabel Konflik Matkul (French, Math, History, Philosophy, English, Italian, Spanish, Chemistry)</figcaption>
+          </div>
+
+          <div class="exercise" id="soal-exam">
+            <div class="exercise__header">
+              <span class="exercise__number">10</span>
+              <span class="exercise__title">Studi Kasus Penjadwalan Ujian</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                <strong>Soal:</strong>
+                <br>Jadwalkan waktu ujian yang efisien untuk setiap mata kuliah. Gunakan hari/slot waktu sesedikit mungkin dan pastikan tidak ada jadwal mahasiswa yang bentrok.
+              </p>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Masalah ini dimodelkan ke dalam <strong>Pewarnaan Graf</strong>. 
+                      Setiap mata kuliah menjadi <strong>vertex</strong> dan setiap bentrok (X) menjadi <strong>edge</strong>. 
+                      Kita mencari bilangan kromatik \(\chi(G)\) untuk mengetahui jumlah hari minimum.
+                    </p>
+                    <p>
+                      Berdasarkan graf bentrok yang terbentuk, didapatkan \(\chi(G) = 4\). Artinya, kita membutuhkan minimal <strong>4 slot waktu (hari)</strong> agar ujian tidak bentrok.
+                    </p>
+                    <p><strong>Pembagian Slot Waktu Ujian:</strong></p>
+                    <ul>
+                      <li><strong>Slot Waktu 1 (Biru):</strong> French (F), History (H)</li>
+                      <li><strong>Slot Waktu 2 (Hijau):</strong> Philosophy (P), Italian (I)</li>
+                      <li><strong>Slot Waktu 3 (Oranye):</strong> Chemistry (C), Math (M)</li>
+                      <li><strong>Slot Waktu 4 (Ungu):</strong> English (E), Spanish (S)</li>
+                    </ul>
+                    <div class="img-container">
+                      <img src="../pdf_images/page208_img3.png" alt="Solusi Studi Kasus Penjadwalan">
+                      <figcaption>Gambar: Graf bentrok jadwal ujian (kanan) dan solusi slot waktu (kiri)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Studi Kasus 2: Fish Tank -->
+          <div class="exercise" id="soal-fish">
+            <div class="exercise__header">
+              <span class="exercise__number">11</span>
+              <span class="exercise__title">Latihan Soal Penampungan Ikan Hias</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Seorang hobiis memiliki 6 jenis ikan hias: Alphas (A), Betas (B), Certas (C), Deltas (D), Epsas (E), dan Fetas (F). 
+                Karena alasan kecocokan air dan predator, beberapa ikan tidak boleh dicampur dalam satu akuarium. 
+                Berikut adalah tabel ketidakcocokan ikan:
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page209_img1.png" alt="Tabel Konflik Ikan">
+                <figcaption>Gambar: Tabel ketidakcocokan jenis ikan</figcaption>
+              </div>
+              <p><strong>Soal:</strong> Berapakah jumlah akuarium minimum yang dibutuhkan untuk menampung seluruh ikan tersebut?</p>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Buatlah graf dengan ikan sebagai vertex dan ketidakcocokan sebagai edge. 
+                      Lalu carilah bilangan kromatiknya dengan mewarnai graf tersebut.
+                    </p>
+                    <p>
+                      Didapatkan bilangan kromatik \(\chi = 3\), yang berarti kita membutuhkan minimal <strong>3 Akuarium</strong>.
+                    </p>
+                    <p><strong>Pembagian Akuarium:</strong></p>
+                    <ul>
+                      <li><strong>Akuarium 1 (Biru):</strong> Ikan A, E</li>
+                      <li><strong>Akuarium 2 (Hijau):</strong> Ikan B, D</li>
+                      <li><strong>Akuarium 3 (Oranye):</strong> Ikan C, F</li>
+                    </ul>
+                    <div class="img-container">
+                      <img src="../pdf_images/page209_img2.png" alt="Solusi Fish Tank">
+                      <figcaption>Gambar: Graf pewarnaan ketidakcocokan ikan dan solusinya</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr>
+
+        <!-- 3. Finite State Automata -->
+        <section id="fsa" class="scroll-section">
+          <h2>3. Finite State Automata (FSA)</h2>
+          <p>
+            <strong>Finite State Automata (FSA)</strong> atau sering juga disebut Finite State Machine adalah model matematika dari sistem yang memiliki input dan output berupa keputusan (diterima/ditolak) berdasarkan keadaan/status (state) yang terbatas.
+          </p>
+
+          <div class="concept-box">
+            <div class="concept-box__title">⚙️ Komponen Deterministic Finite Automata (DFA)</div>
+            <p>DFA secara matematis didefinisikan sebagai 5-tuple $(Q, \Sigma, q_0, F, \delta)$ di mana:</p>
+            <ul>
+              <li><strong>$Q$</strong>: Himpunan berhingga dari semua keadaan (states).</li>
+              <li><strong>$\Sigma$</strong>: Himpunan simbol input (alphabet).</li>
+              <li><strong>$q_0$</strong>: State awal (initial/start state), di mana $q_0 \in Q$.</li>
+              <li><strong>$F$</strong>: Himpunan state akhir (final/accept states), di mana $F \subseteq Q$ (digambarkan dengan lingkaran ganda).</li>
+              <li><strong>$\delta$</strong>: Fungsi transisi yang memetakan keadaan dan input ke keadaan berikutnya ($\delta: Q \times \Sigma \rightarrow Q$).</li>
+            </ul>
+          </div>
+          <div class="img-container">
+            <img src="../pdf_images/page211_img2.png" alt="Komponen DFA">
+            <figcaption>Gambar: Komponen DFA dan contoh graf transisi</figcaption>
+          </div>
+          <div class="img-container">
+            <img src="../pdf_images/page212_img1.png" alt="Tabel Transisi DFA">
+            <figcaption>Gambar: Representasi fungsi transisi menggunakan tabel transisi</figcaption>
+          </div>
+
+          <!-- Soal 1: FSA -->
+          <div class="exercise" id="soal-fsa1">
+            <div class="exercise__header">
+              <span class="exercise__number">12</span>
+              <span class="exercise__title">DFA String Diawali '0'</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Rancanglah sebuah DFA yang menerima semua string biner yang <strong>diawali dengan angka 0</strong>.
+                <br>Ujilah apakah string <strong>001</strong> diterima dan <strong>101</strong> ditolak oleh DFA tersebut!
+              </p>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Desain DFA:</strong></p>
+                    <ul>
+                      <li>State A (Start). Jika input \(0\), masuk ke B (Final State). Jika input \(1\), masuk ke C (Dead/Trap State).</li>
+                      <li>State B (Final). Jika input \(0\) atau \(1\), tetap berada di B (self-loop).</li>
+                      <li>State C (Dead State). Jika input \(0\) atau \(1\), tetap berada di C (self-loop).</li>
+                    </ul>
+                    <p><strong>Pengujian String:</strong></p>
+                    <ul>
+                      <li><strong>String 001</strong>: \(A \dots \xrightarrow{0} B \xrightarrow{0} B \xrightarrow{1} B\) (Berakhir di B yang merupakan final state, maka <strong>DITERIMA</strong>).</li>
+                      <li><strong>String 101</strong>: \(A \xrightarrow{1} C \xrightarrow{0} C \xrightarrow{1} C\) (Berakhir di C yang bukan final state, maka <strong>DITOLAK</strong>).</li>
+                    </ul>
+                    <div class="img-container">
+                      <img src="../pdf_images/page212_img2.png" alt="Desain DFA Diawali 0">
+                      <figcaption>Gambar: Sketsa desain DFA dan pembuktian runutannya</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2: FSA -->
+          <div class="exercise" id="soal-fsa2">
+            <div class="exercise__header">
+              <span class="exercise__number">13</span>
+              <span class="exercise__title">DFA String Panjang Tepat 2</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Rancanglah sebuah DFA yang menerima semua string biner dengan <strong>panjang tepat 2</strong> (\(L = \{00, 01, 10, 11\}\)).
+                <br>Ujilah input: <strong>00, 10, 001, 1</strong>.
+              </p>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Desain DFA:</strong></p>
+                    <ul>
+                      <li>\(A \xrightarrow{0,1} B \xrightarrow{0,1} C\) (C adalah Final State).</li>
+                      <li>Dari C, jika ada input tambahan \(0,1\), masuk ke D (Dead/Trap State) dengan self-loop \(0,1\).</li>
+                    </ul>
+                    <p><strong>Hasil Pengujian:</strong></p>
+                    <ul>
+                      <li>\(00\): \(A \xrightarrow{0} B \xrightarrow{0} C\) (Berakhir di C $\rightarrow$ <strong>Diterima</strong>).</li>
+                      <li>\(10\): \(A \xrightarrow{1} B \xrightarrow{0} C\) (Berakhir di C $\rightarrow$ <strong>Diterima</strong>).</li>
+                      <li>\(001\): \(A \xrightarrow{0} B \xrightarrow{0} C \xrightarrow{1} D\) (Berakhir di D $\rightarrow$ <strong>Ditolak</strong>).</li>
+                      <li>\(1\): \(A \xrightarrow{1} B\) (Berakhir di B $\rightarrow$ <strong>Ditolak</strong>).</li>
+                    </ul>
+                    <div class="img-container">
+                      <img src="../pdf_images/page214_img1.png" alt="Desain DFA Panjang Tepat 2">
+                      <figcaption>Gambar: Langkah-langkah transisi DFA dan hasil ujinya</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 3: FSA -->
+          <div class="exercise" id="soal-fsa3">
+            <div class="exercise__header">
+              <span class="exercise__number">14</span>
+              <span class="exercise__title">DFA Tidak Mengandung Substring 'aabb'</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Rancanglah sebuah DFA yang menerima semua string dari himpunan \(\{a,b\}\) yang <strong>tidak mengandung</strong> substring <strong>aabb</strong>.
+              </p>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Metode Penyelesaian (State Flipping):</strong></p>
+                    <p>
+                      Lebih mudah jika kita mendesain DFA yang menerima string yang <strong>mengandung aabb</strong> terlebih dahulu, kemudian membalik status seluruh state (final state diubah menjadi non-final, dan sebaliknya).
+                    </p>
+                    <p><strong>Langkah 1: Membuat DFA yang menerima 'aabb'</strong></p>
+                    <ul>
+                      <li>Jalur sukses: \(A \xrightarrow{a} B \xrightarrow{a} C \xrightarrow{b} D \xrightarrow{b} E\) (E adalah final state).</li>
+                      <li>Transisi penyeimbang:
+                        <br>- Di A: jika input \(b\) tetap di A.
+                        <br>- Di B: jika input \(b\) kembali ke A.
+                        <br>- Di C: jika input \(a\) tetap di C.
+                        <br>- Di D: jika input \(a\) kembali ke B.
+                        <br>- Di E: self-loop untuk input \(a,b\).
+                      </li>
+                    </ul>
+                    <p><strong>Langkah 2: Membalik Status State (Flip States)</strong></p>
+                    <p>
+                      Ubah state A, B, C, dan D menjadi <strong>Final States</strong> (lingkaran ganda), sedangkan E diubah menjadi <strong>Non-final State</strong> (lingkaran tunggal). Transisi antar-state tetap sama persis.
+                    </p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page215_img2.png" alt="Desain DFA Tidak Mengandung aabb">
+                      <figcaption>Gambar: Proses pembuatan DFA 'aabb' (atas) dan hasil pembalikannya (bawah)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 4: FSA -->
+          <div class="exercise" id="soal-fsa4">
+            <div class="exercise__header">
+              <span class="exercise__number">15</span>
+              <span class="exercise__title">Analisis DFA dan Kelengkapan Fungsi Transisi</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Perhatikan gambar DFA awal berikut:
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page217_img1.png" alt="DFA Awal Soal 4">
+                <figcaption>Gambar: Graf DFA awal yang belum lengkap</figcaption>
+              </div>
+              <p>
+                <strong>Soal:</strong>
+                <br>a. Tentukan aturan bahasa dari DFA tersebut (DFA menerima string apa saja?).
+                <br>b. Uji input berikut: <strong>001, 010, 011, 1101, 1100</strong>. Lengkapilah DFA tersebut dengan menambahkan dead state agar memenuhi kaidah DFA lengkap.
+              </p>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>a. Aturan Bahasa DFA:</strong></p>
+                    <p>
+                      DFA ini menerima bahasa:
+                      <br>\[L = \{\text{string } 01 \text{ ATAU string yang terdiri dari sekurang-kurangnya satu buah } '1' \text{ diikuti oleh satu buah } '0'\}\]
+                      Contoh string yang diterima: \(01\), \(10\), \(110\), \(1110\), dsb.
+                    </p>
+                    <p><strong>b. Kelengkapan DFA dengan Dead State X:</strong></p>
+                    <p>
+                      DFA yang baik harus mendefinisikan transisi untuk setiap simbol input di setiap state. Kita menambahkan <strong>Dead State X</strong> untuk menampung transisi mati:
+                    </p>
+                    <ul>
+                      <li>Dari C jika mendapat input \(0\) pergi ke X.</li>
+                      <li>Dari D dan E jika mendapat input \(0\) atau \(1\) pergi ke X.</li>
+                    </ul>
+                    <p><strong>Tracing Uji Input pada DFA Lengkap:</strong></p>
+                    <ul>
+                      <li>\(001\): \(A \xrightarrow{0} C \xrightarrow{0} X \xrightarrow{1} X\) $\rightarrow$ <strong>Ditolak</strong>.</li>
+                      <li>\(010\): \(A \xrightarrow{0} C \xrightarrow{1} E \xrightarrow{0} X\) $\rightarrow$ <strong>Ditolak</strong>.</li>
+                      <li>\(011\): \(A \xrightarrow{0} C \xrightarrow{1} E \xrightarrow{1} X\) $\rightarrow$ <strong>Ditolak</strong>.</li>
+                      <li>\(1101\): \(A \xrightarrow{1} B \xrightarrow{1} B \xrightarrow{0} D \xrightarrow{1} X\) $\rightarrow$ <strong>Ditolak</strong>.</li>
+                      <li>\(1100\): \(A \xrightarrow{1} B \xrightarrow{1} B \xrightarrow{0} D \xrightarrow{0} X\) $\rightarrow$ <strong>Ditolak</strong>.</li>
+                    </ul>
+                    <div class="img-container">
+                      <img src="../pdf_images/page217_img2.png" alt="DFA Lengkap Soal 4">
+                      <figcaption>Gambar: Graf DFA lengkap dengan penambahan Dead State X (warna hijau)</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Latihan Mandiri Rosen -->
+          <div class="exercise" id="soal-fsa-homework">
+            <div class="exercise__header">
+              <span class="exercise__number">16</span>
+              <span class="exercise__title">Latihan Mandiri Pembuatan DFA</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Rancanglah DFA untuk mengenali bahasa-bahasa biner berikut:
+                <br><strong>(a)</strong> Himpunan string yang diawali oleh dua buah 0 (\(00\)).
+                <br><strong>(b)</strong> Himpunan string yang mengandung substring dua buah 0 berurutan.
+                <br><strong>(c)</strong> Himpunan string yang TIDAK mengandung substring dua buah 0 berurutan.
+                <br><strong>(d)</strong> Himpunan string yang diakhiri oleh dua buah 0 (\(00\)).
+                <br><strong>(e)</strong> Himpunan string yang memiliki sekurang-kurangnya dua buah angka 0.
+              </p>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>Berikut adalah rancangan diagram transisi DFA untuk kelima bahasa di atas:</p>
+                    <div class="img-container">
+                      <img src="../pdf_images/page218_img1.png" alt="Kunci Jawaban DFA Rosen">
+                      <figcaption>Gambar: Diagram transisi DFA untuk soal (a), (b), (c), (d), dan (e)</figcaption>
+                    </div>
+                    <p><strong>Ringkasan Analisis Diagram:</strong></p>
+                    <ul>
+                      <li><strong>(a)</strong>: Jika input pertama/kedua adalah 1, langsung diarahkan ke dead state \(s_3\). Sukses jika melewati \(s_0 \xrightarrow{0} s_1 \xrightarrow{0} s_2\) (final state).</li>
+                      <li><strong>(b)</strong>: Setelah menemukan \(00\) di state \(s_2\), input apa pun setelahnya akan tetap berada di \(s_2\) (self-loop).</li>
+                      <li><strong>(c)</strong>: Flipped version dari (b). State \(s_0\) dan \(s_1\) adalah final state. Jika terjadi \(00\), sistem berpindah ke dead state \(s_2\).</li>
+                      <li><strong>(d)</strong>: State akhir \(s_2\) hanya dicapai setelah mendeteksi \(00\). Jika setelahnya ada input 1, sistem kembali ke \(s_0\). Jika ada input 0, tetap di \(s_2\).</li>
+                      <li><strong>(e)</strong>: Kita menghitung kemunculan angka 0. State \(s_1\) merepresentasikan penemuan satu angka 0, dan \(s_2\) merepresentasikan penemuan sekurang-kurangnya dua angka 0 (final state).</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr>
+
+        <!-- 4. Graph Isomorphisms -->
+        <section id="isomorphism" class="scroll-section">
+          <h2>4. Graph Isomorphisms (Isomorfisma Graf)</h2>
+          <div class="concept-box">
+            <div class="concept-box__title">🤝 Definisi Isomorfik</div>
+            <p>
+              Dua graf $G_1 = (V_1, E_1)$ dan $G_2 = (V_2, E_2)$ dikatakan <strong>isomorfik (isomorphic)</strong> jika terdapat korespondensi satu-ke-satu (fungsi bijektif) $f$ dari $V_1$ ke $V_2$ yang menjaga hubungan ketetanggaan. 
+              Artinya, jika vertex $u$ bertetangga dengan $v$ di graf $G_1$, maka $f(u)$ harus bertetangga dengan $f(v)$ di graf $G_2$.
+            </p>
+            <p>
+              Secara sederhana, dua graf yang isomorfik memiliki <strong>struktur matematis yang identik sama</strong>, meskipun nama vertex-nya berbeda dan digambarkan dengan bentuk visual yang sangat berlainan.
+            </p>
+          </div>
+
+          <h3>Syarat Perlu (Graph Invariant)</h3>
+          <p>
+            Sebelum membuktikan dua graf isomorfik, kita harus memeriksa beberapa syarat mutlak (jika salah satu tidak terpenuhi, maka graf dijamin <strong>tidak isomorfik</strong>):
+          </p>
+          <ol>
+            <li>Jumlah vertex (titik) kedua graf sama (\(|V_1| = |V_2|\)).</li>
+            <li>Jumlah edge (sisi) kedua graf sama (\(|E_1| = |E_2|\)).</li>
+            <li>Derajat sequence (degree sequence) kedua graf sama (distribusi nilai derajat setiap vertex harus sama).</li>
+          </ol>
+
+          <h3>Contoh Isomorfisma Graf</h3>
+          <p>
+            Perhatikan dua graf berikut. Keduanya terlihat sangat berbeda secara visual, tetapi sebenarnya keduanya <strong>isomorfik</strong> (keduanya merepresentasikan graf siklus dengan 4 vertex, $C_4$):
+          </p>
+
+          <!-- Mermaid Diagram Isomorfik -->
+          <div class="math-block" style="background: var(--bg-concept); padding: 1.5rem; border-radius: var(--border-radius); border-left: 4px solid var(--accent-color);">
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2rem;">
+              <div>
+                <strong style="display: block; text-align: center; margin-bottom: 0.5rem;">Graf G1 (Bentuk Persegi)</strong>
+                <pre class="mermaid" style="background: transparent; border: none; padding: 0;">
+                graph TD
+                  1(1) --- 2(2)
+                  2 --- 3(3)
+                  3 --- 4(4)
+                  4 --- 1
+                </pre>
+              </div>
+              <div>
+                <strong style="display: block; text-align: center; margin-bottom: 0.5rem;">Graf G2 (Bentuk Silang / Bipartite)</strong>
+                <pre class="mermaid" style="background: transparent; border: none; padding: 0;">
+                graph TD
+                  A(A) --- C(C)
+                  A --- D(D)
+                  B(B) --- C
+                  B --- D
+                </pre>
+              </div>
+            </div>
+          </div>
+
+          <p><strong>Bukti Isomorfik:</strong></p>
+          <ul>
+            <li>Jumlah vertex sama-sama 4.</li>
+            <li>Jumlah edge sama-sama 4.</li>
+            <li>Semua vertex memiliki derajat 2.</li>
+            <li>Fungsi pemetaan bijektif yang menjaga ketetanggaan:
+              <br>\(f(1) = A\)
+              <br>\(f(2) = C\)
+              <br>\(f(3) = B\)
+              <br>\(f(4) = D\)
+            </li>
+          </ul>
+          <p>
+            Mari kita periksa sisinya:
+            <br>- Sisi \(\{1,2\}\) di G1 dipetakan menjadi \(\{f(1), f(2)\} = \{A, C\}\) (ada di G2).
+            <br>- Sisi \(\{2,3\}\) di G1 dipetakan menjadi \(\{f(2), f(3)\} = \{C, B\}\) (ada di G2).
+            <br>- Sisi \(\{3,4\}\) di G1 dipetakan menjadi \(\{f(3), f(4)\} = \{B, D\}\) (ada di G2).
+            <br>- Sisi \(\{4,1\}\) di G1 dipetakan menjadi \(\{f(4), f(1)\} = \{D, A\}\) (ada di G2).
+          </p>
+          <p>
+            Karena terdapat fungsi bijektif yang mempertahankan hubungan ketetanggaan ini, terbukti bahwa <strong>G1 isomorfik dengan G2</strong>.
+          </p>
+        </section>
+
+        <!-- Page Navigation -->
+        <div class="page-nav">
+          <a href="sesi8.html" class="page-nav__link">
+            <span class="page-nav__label">← Sebelumnya</span>
+            <span class="page-nav__title">Sesi 8: Min/Max, Bounds & Lattice</span>
+          </a>
+          <a href="../index.html" class="page-nav__link page-nav__link--next">
+            <span class="page-nav__label">Selesai →</span>
+            <span class="page-nav__title">Kembali ke Beranda</span>
+          </a>
+        </div>
+
+      </div>
+    </main>
+  </div>
+  
+  <button class="back-to-top" aria-label="Kembali ke atas">↑</button>
+  <script src="../js/main.js"></script>
+  <!-- Include Mermaid for Isomorphism Diagrams -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left: '$$', right: '$$', display: true},
+          {left: '$', right: '$', display: false},
+          {left: '\\(', right: '\\)', display: false},
+          {left: '\\[', right: '\\]', display: true}
+        ],
+        throwOnError : false
+      });
+    });
+  </script>
+</body>
+</html>

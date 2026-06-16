@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesi 3: Metode Pembuktian (Method of Proof) — Matematika Diskrit</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script src="../js/theme.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="../index.html" class="navbar__brand">
+      <span class="navbar__brand-icon">∑</span>
+      <span>MatDiskrit</span>
+    </a>
+    <div class="navbar__actions">
+      <button class="navbar__menu-btn" aria-label="Menu">☰</button>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-toggle__knob">🌙</span>
+      </button>
+    </div>
+  </nav>
+  <div class="sidebar-overlay"></div>
+  
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar__section-title">Navigasi</div>
+      <a href="../index.html" class="sidebar__link"><span class="sidebar__link-icon">🏠</span> Beranda</a>
+      <a href="sesi1.html" class="sidebar__link"><span class="sidebar__link-icon">1</span> Logic</a>
+      <a href="sesi2.html" class="sidebar__link"><span class="sidebar__link-icon">2</span> Quantifier</a>
+      <a href="sesi3.html" class="sidebar__link active"><span class="sidebar__link-icon">3</span> Method of Proof</a>
+      
+      <!-- Sublinks for Scroll Spy TOC -->
+      <div class="sidebar__sublinks">
+        <a href="#direct-proof" class="sidebar__sublink">1. Direct Proof</a>
+        <a href="#contraposition" class="sidebar__sublink">2a. Contraposition</a>
+        <a href="#contradiction" class="sidebar__sublink">2b. Contradiction</a>
+        <a href="#counterexample" class="sidebar__sublink">3. Counterexample</a>
+        <a href="#induction" class="sidebar__sublink">4. Math Induction</a>
+        <a href="#latihan-tambahan" class="sidebar__sublink">5. Latihan Tambahan</a>
+      </div>
+      
+      <a href="sesi4.html" class="sidebar__link"><span class="sidebar__link-icon">4</span> Fuzzy Sets & Function</a>
+      <a href="sesi5.html" class="sidebar__link"><span class="sidebar__link-icon">5</span> Binomial & Kombinasi</a>
+      <a href="sesi6.html" class="sidebar__link"><span class="sidebar__link-icon">6</span> Relation</a>
+      <a href="sesi7.html" class="sidebar__link"><span class="sidebar__link-icon">7</span> POSET & Hasse</a>
+      <a href="sesi8.html" class="sidebar__link"><span class="sidebar__link-icon">8</span> Min/Max & Lattice</a>
+      <a href="sesi9.html" class="sidebar__link"><span class="sidebar__link-icon">9</span> MST, Coloring & FSA</a>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="content-wrapper">
+        
+        <!-- Section Header -->
+        <div class="section-header" id="intro">
+          <span class="section-header__badge">Sesi 3 (UTS)</span>
+          <h1 class="section-header__title">Metode Pembuktian (Method of Proof)</h1>
+          <p class="section-header__desc">
+            Bagaimana cara membuktikan kebenaran suatu teorema matematika secara valid? Sesi ini membahas berbagai teknik pembuktian formal: Pembuktian Langsung (Direct Proof), Pembuktian Tidak Langsung (Indirect Proof) melalui Kontraposisi & Kontradiksi, Contoh Penyangkal (Counterexample), serta prinsip dasar dan contoh penerapan Induksi Matematika (Mathematical Induction).
+          </p>
+        </div>
+
+        <!-- 1. Direct Proof -->
+        <section id="direct-proof" class="scroll-section content-section">
+          <h2>1. Pembuktian Langsung (Direct Proof)</h2>
+          <p>
+            <strong>Pembuktian Langsung (Direct Proof)</strong> adalah metode pembuktian yang paling mendasar. Untuk membuktikan implikasi berbentuk \(P \implies Q\), kita mulai dengan mengasumsikan bahwa hipotesis \(P\) bernilai <strong>benar</strong>. Berdasarkan asumsi tersebut, kita menggunakan definisi matematis, aksioma, teorema yang sudah terbukti sebelumnya, dan aturan inferensi untuk menunjukkan secara logis bahwa konklusi \(Q\) juga bernilai <strong>benar</strong>.
+          </p>
+          
+          <div class="callout callout--info">
+            <div class="callout__icon">💡</div>
+            <div>
+              <strong>Langkah Dasar Direct Proof:</strong>
+              <ol>
+                <li>Asumsikan \(P\) benar.</li>
+                <li>Gunakan definisi, sifat aritmatika, atau rumus yang relevan dengan variabel di \(P\).</li>
+                <li>Lakukan manipulasi aljabar atau penalaran logis untuk menghasilkan bentuk \(Q\).</li>
+                <li>Simpulkan bahwa \(Q\) benar.</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="callout callout--definition">
+            <div class="callout__icon">📘</div>
+            <div>
+              <span class="concept-box__title" style="margin-bottom: 5px; display: block;">Definisi 1: Bilangan Bulat Genap & Ganjil</span>
+              <ul>
+                <li>Bilangan bulat \(n\) disebut <strong>genap</strong> jika terdapat bilangan bulat \(k\) sedemikian rupa sehingga:
+                  \[n = 2k\]
+                </li>
+                <li>Bilangan bulat \(n\) disebut <strong>ganjil</strong> jika terdapat bilangan bulat \(k\) sedemikian rupa sehingga:
+                  \[n = 2k + 1\]
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Soal 1.1 -->
+          <div class="exercise" id="direct-ex1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Buktikan: Jika \(n\) ganjil, maka \(n^2\) ganjil</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Buktikan secara langsung bahwa untuk setiap bilangan bulat \(n\), jika \(n\) adalah bilangan ganjil, maka kuadratnya \(n^2\) juga merupakan bilangan ganjil!
+              </p>
+              
+              <div class="img-container">
+                <img src="../pdf_images/page57_img1.png" alt="Solusi Tulisan Tangan Soal 1 Direct Proof">
+                <figcaption>Visualisasi pembuktian kuadrat bilangan ganjil dari catatan kuliah.</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Pembuktian Langsung:</strong></p>
+                    <ol>
+                      <li>Misalkan \(P\) adalah pernyataan "\(n\) ganjil" dan \(Q\) adalah "\(n^2\) ganjil". Kita asumsikan \(P\) benar.</li>
+                      <li>Karena \(n\) ganjil, maka berdasarkan <strong>Definisi 1</strong>, terdapat bilangan bulat \(k\) sedemikian rupa sehingga:
+                        \[n = 2k + 1\]
+                      </li>
+                      <li>Kita kuadratkan kedua sisi untuk mencari nilai \(n^2\):
+                        \[n^2 = (2k + 1)^2\]
+                        \[n^2 = 4k^2 + 4k + 1\]
+                      </li>
+                      <li>Faktorkan angka 2 dari dua suku pertama:
+                        \[n^2 = 2(2k^2 + 2k) + 1\]
+                      </li>
+                      <li>Misalkan \(m = 2k^2 + 2k\). Karena \(k\) adalah bilangan bulat, maka perkalian dan penjumlahan bilangan bulat (\(2k^2\) dan \(2k\)) juga akan menghasilkan bilangan bulat. Jadi, \(m\) adalah bilangan bulat (\(m \in \mathbb{Z}\)).</li>
+                      <li>Maka persamaan dapat ditulis menjadi:
+                        \[n^2 = 2m + 1\]
+                      </li>
+                      <li>Berdasarkan <strong>Definisi 1</strong>, ekspresi di atas merupakan bentuk bilangan ganjil.</li>
+                    </ol>
+                    <p>
+                      Karena dari asumsi \(n\) ganjil kita berhasil membuktikan secara aljabar bahwa \(n^2\) ganjil, maka teorema terbukti benar. \(\blacksquare\)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 1.2 -->
+          <div class="exercise" id="direct-ex2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Buktikan: Perkalian Kuadrat Sempurna</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Buktikan secara langsung bahwa jika \(m\) dan \(n\) keduanya adalah bilangan kuadrat sempurna (perfect square), maka hasil kalinya \(mn\) juga merupakan bilangan kuadrat sempurna!
+              </p>
+              
+              <div class="img-container">
+                <img src="../pdf_images/page58_img1.png" alt="Solusi Tulisan Tangan Soal 2 Direct Proof">
+                <figcaption>Visualisasi pembuktian perkalian kuadrat sempurna.</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Definisi Kuadrat Sempurna:</strong> Suatu bilangan bulat \(x\) adalah kuadrat sempurna jika terdapat bilangan bulat \(y\) sedemikian rupa sehingga \(x = y^2\).</p>
+                    <p><strong>Pembuktian Langsung:</strong></p>
+                    <ol>
+                      <li>Asumsikan hipotesis benar: \(m\) dan \(n\) adalah kuadrat sempurna.</li>
+                      <li>Berdasarkan definisi kuadrat sempurna, terdapat bilangan bulat \(s\) dan \(t\) sedemikian rupa sehingga:
+                        \[m = s^2 \quad \text{dan} \quad n = t^2\]
+                      </li>
+                      <li>Sekarang, mari kita tinjau hasil kali \(mn\):
+                        \[mn = s^2 \cdot t^2\]
+                      </li>
+                      <li>Menggunakan hukum eksponen (sifat asosiatif perpangkatan), kita dapat menggabungkan kuadrat tersebut:
+                        \[mn = (s \cdot t)^2\]
+                      </li>
+                      <li>Misalkan \(u = s \cdot t\). Karena \(s\) dan \(t\) keduanya adalah bilangan bulat, maka hasil kalinya (\(s \cdot t\)) juga harus merupakan bilangan bulat. Jadi, \(u \in \mathbb{Z}\).</li>
+                      <li>Kita substitusikan \(u\) ke persamaan:
+                        \[mn = u^2\]
+                      </li>
+                      <li>Karena \(mn\) dapat dinyatakan dalam bentuk \(u^2\) di mana \(u\) adalah bilangan bulat, maka berdasarkan definisi, \(mn\) adalah kuadrat sempurna.</li>
+                    </ol>
+                    <p>
+                      Dengan demikian, terbukti secara langsung bahwa hasil kali dua kuadrat sempurna adalah kuadrat sempurna. \(\blacksquare\)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2a. Proof by Contraposition -->
+        <section id="contraposition" class="scroll-section content-section">
+          <h2>2a. Pembuktian dengan Kontraposisi (Proof by Contraposition)</h2>
+          <p>
+            Ketika kita mencoba membuktikan \(P \implies Q\) secara langsung, terkadang kita menemui jalan buntu karena hipotesis \(P\) tidak memberikan struktur aljabar yang cukup kuat untuk diarahkan ke \(Q\). Dalam situasi ini, kita dapat menggunakan <strong>Pembuktian Tidak Langsung (Indirect Proof)</strong>.
+          </p>
+          <p>
+            Metode tidak langsung pertama adalah <strong>Kontraposisi (Contraposition)</strong>. Metode ini memanfaatkan fakta logika bahwa implikasi \(P \implies Q\) secara ekuivalen logis sama dengan kontraposisinya, yaitu \(\neg Q \implies \neg P\). 
+          </p>
+          
+          <div class="concept-box">
+            <div class="concept-box__title">📌 Tabel Kebenaran Kontraposisi</div>
+            <p>Perhatikan bahwa kolom \(P \implies Q\) dan \(\neg Q \implies \neg P\) memiliki nilai kebenaran yang persis sama pada setiap baris:</p>
+            <table class="truth-table">
+              <thead>
+                <tr>
+                  <th>\(P\)</th>
+                  <th>\(Q\)</th>
+                  <th>\(\neg P\)</th>
+                  <th>\(\neg Q\)</th>
+                  <th>\(P \implies Q\)</th>
+                  <th>\(\neg Q \implies \neg P\)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="val-true">T</td>
+                  <td class="val-true">T</td>
+                  <td class="val-false">F</td>
+                  <td class="val-false">F</td>
+                  <td class="val-true">T</td>
+                  <td class="val-true">T</td>
+                </tr>
+                <tr>
+                  <td class="val-true">T</td>
+                  <td class="val-false">F</td>
+                  <td class="val-false">F</td>
+                  <td class="val-true">T</td>
+                  <td class="val-false">F</td>
+                  <td class="val-false">F</td>
+                </tr>
+                <tr>
+                  <td class="val-false">F</td>
+                  <td class="val-true">T</td>
+                  <td class="val-true">T</td>
+                  <td class="val-false">F</td>
+                  <td class="val-true">T</td>
+                  <td class="val-true">T</td>
+                </tr>
+                <tr>
+                  <td class="val-false">F</td>
+                  <td class="val-false">F</td>
+                  <td class="val-true">T</td>
+                  <td class="val-true">T</td>
+                  <td class="val-true">T</td>
+                  <td class="val-true">T</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout callout--success">
+            <div class="callout__icon">💬</div>
+            <div>
+              <strong>Analogi Sederhana:</strong>
+              <br>
+              Pernyataan: <em>"Jika hari hujan, maka jalanan basah."</em>
+              <br>
+              Kontraposisi: <em>"Jika jalanan tidak basah, maka hari tidak hujan."</em>
+              <br>
+              Kedua kalimat di atas memiliki arti logis yang sama. Jika kita bisa membuktikan kalimat kedua benar, otomatis kalimat pertama juga benar!
+            </div>
+          </div>
+
+          <!-- Soal 2a.1 -->
+          <div class="exercise" id="contra-ex1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Buktikan: Jika \(3n+2\) ganjil, maka \(n\) ganjil</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Buktikan bahwa untuk setiap bilangan bulat \(n\), jika \(3n + 2\) adalah bilangan ganjil, maka \(n\) adalah bilangan ganjil!
+              </p>
+
+              <div class="callout callout--warning">
+                <div class="callout__icon">⚠️</div>
+                <div>
+                  <strong>Kenapa Pembuktian Langsung Sulit?</strong>
+                  <br>
+                  Jika kita menggunakan <em>direct proof</em>, kita mengasumsikan \(3n+2\) ganjil, yaitu \(3n+2 = 2k+1\). 
+                  Maka \(3n = 2k-1 \implies n = \frac{2k-1}{3}\). Dari bentuk pecahan ini, sangat sulit untuk membuktikan secara formal bahwa \(n\) bernilai ganjil (\(2m+1\)) tanpa berurusan dengan pembagian pecahan yang rumit. Oleh karena itu, kontraposisi adalah pilihan terbaik!
+                </div>
+              </div>
+              
+              <div class="img-container">
+                <img src="../pdf_images/page61_img1.png" alt="Solusi Kontraposisi Soal 1">
+                <figcaption>Langkah kontraposisi: mengasumsikan n genap untuk membuktikan 3n+2 genap.</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Pembuktian dengan Kontraposisi:</strong></p>
+                    <ol>
+                      <li>Misalkan:
+                        <ul>
+                          <li>\(P\): "\(3n+2\) adalah bilangan ganjil"</li>
+                          <li>\(Q\): "\(n\) adalah bilangan ganjil"</li>
+                        </ul>
+                      </li>
+                      <li>Kontraposisinya adalah \(\neg Q \implies \neg P\):
+                        <ul>
+                          <li>\(\neg Q\): "\(n\) adalah bilangan genap"</li>
+                          <li>\(\neg P\): "\(3n+2\) adalah bilangan genap"</li>
+                        </ul>
+                      </li>
+                      <li>Asumsikan \(\neg Q\) benar, yaitu \(n\) adalah bilangan genap. Sesuai <strong>Definisi 1</strong>, terdapat bilangan bulat \(k\) sehingga:
+                        \[n = 2k\]
+                      </li>
+                      <li>Substitusikan nilai \(n = 2k\) ke dalam bentuk \(3n + 2\):
+                        \[3n + 2 = 3(2k) + 2\]
+                        \[3n + 2 = 6k + 2\]
+                      </li>
+                      <li>Faktorkan angka 2 pada persamaan tersebut:
+                        \[3n + 2 = 2(3k + 1)\]
+                      </li>
+                      <li>Misalkan \(m = 3k + 1\). Karena \(k\) bilangan bulat, maka \(m\) juga bilangan bulat. Kita peroleh:
+                        \[3n + 2 = 2m\]
+                      </li>
+                      <li>Karena \(3n+2\) dapat dinyatakan sebagai \(2m\) dengan \(m\) bilangan bulat, maka berdasarkan definisi, \(3n+2\) adalah bilangan genap (\(\neg P\) terbukti benar).</li>
+                    </ol>
+                    <p>
+                      Karena kontraposisi \(\neg Q \implies \neg P\) bernilai benar, maka secara ekuivalen logis pernyataan asal \(P \implies Q\) juga bernilai benar. \(\blacksquare\)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2a.2 -->
+          <div class="exercise" id="contra-ex2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Buktikan: Jika \(n=ab\), maka \(a \le \sqrt{n}\) atau \(b \le \sqrt{n}\)</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Misalkan \(n\), \(a\), dan \(b\) adalah bilangan bulat positif. Buktikan bahwa jika \(n = ab\), maka \(a \le \sqrt{n}\) atau \(b \le \sqrt{n}\)!
+              </p>
+              
+              <div class="img-container">
+                <img src="../pdf_images/page62_img1.png" alt="Solusi Kontraposisi Soal 2">
+                <figcaption>Pembuktian kontraposisi menggunakan negasi dari (a &le; &radic;n atau b &le; &radic;n).</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Pembuktian dengan Kontraposisi:</strong></p>
+                    <ol>
+                      <li>Misalkan:
+                        <ul>
+                          <li>\(P\): "\(n = ab\)"</li>
+                          <li>\(Q\): "\(a \le \sqrt{n}\)"</li>
+                          <li>\(R\): "\(b \le \sqrt{n}\)"</li>
+                        </ul>
+                        Format soal adalah \(P \implies (Q \lor R)\).
+                      </li>
+                      <li>Kontraposisinya adalah \(\neg(Q \lor R) \implies \neg P\).
+                        <br>
+                        Berdasarkan hukum De Morgan, negasi dari disjungsi adalah:
+                        \[\neg(Q \lor R) \equiv \neg Q \land \neg R\]
+                        Maka kontraposisinya berbunyi:
+                        <strong>"Jika \(a > \sqrt{n}\) dan \(b > \sqrt{n}\), maka \(ab \neq n\)."</strong>
+                      </li>
+                      <li>Asumsikan hipotesis kontraposisi benar, yaitu:
+                        \[a > \sqrt{n} \quad \text{dan} \quad b > \sqrt{n}\]
+                      </li>
+                      <li>Karena \(a\), \(b\), dan \(\sqrt{n}\) semuanya bernilai positif, kita dapat mengalikan kedua pertidaksamaan tersebut secara langsung:
+                        \[a \cdot b > \sqrt{n} \cdot \sqrt{n}\]
+                        \[ab > n\]
+                      </li>
+                      <li>Karena \(ab > n\), maka secara logis \(ab \neq n\) (\(\neg P\) bernilai benar).</li>
+                    </ol>
+                    <p>
+                      Karena kontraposisi terbukti benar, maka implikasi awal "jika \(n = ab\), maka \(a \le \sqrt{n}\) atau \(b \le \sqrt{n}\)" juga terbukti benar. \(\blacksquare\)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pembuktian Khusus: Vacuous & Trivial -->
+          <div class="concept-box">
+            <div class="concept-box__title">📌 Kasus Khusus Implikasi: Vacuous & Trivial Proof</div>
+            <p>
+              Mengingat kembali tabel kebenaran implikasi \(P \implies Q\), implikasi otomatis bernilai <strong>Benar (True)</strong> jika:
+            </p>
+            <ul>
+              <li><strong>Vacuous Proof (Bukti Kosong)</strong>: Hipotesis \(P\) bernilai <strong>Salah (False)</strong>.</li>
+              <li><strong>Trivial Proof (Bukti Trivial)</strong>: Konklusi \(Q\) bernilai <strong>Benar (True)</strong>.</li>
+            </ul>
+          </div>
+
+          <!-- Soal 2a.3 -->
+          <div class="exercise" id="vacuous-ex1">
+            <div class="exercise__header">
+              <span class="exercise__number">3</span>
+              <span class="exercise__title">Vacuous Proof: Buktikan \(P(0)\) untuk \(P(n)\): "Jika \(n > 1\), maka \(n^2 > n\)"</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Tunjukkan kebenaran proposisi \(P(0)\), di mana \(P(n)\) adalah pernyataan: <em>"Jika \(n > 1\), maka \(n^2 > n\)"</em> dengan domain bilangan bulat!
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Pembuktian secara Vacuous:</strong></p>
+                    <ol>
+                      <li>Proposisi \(P(0)\) dapat dinyatakan sebagai:
+                        <br>
+                        "Jika \(0 > 1\), maka \(0^2 > 0\)"
+                      </li>
+                      <li>Tinjau hipotesis \(P\), yaitu "\(0 > 1\)". Ini adalah pernyataan yang bernilai <strong>Salah (False)</strong>.</li>
+                      <li>Karena hipotesis bernilai <strong>Salah</strong>, maka implikasi \(P \implies Q\) secara otomatis bernilai <strong>Benar (True)</strong> berdasarkan aturan logika proposisional, tidak peduli apakah konklusi \(Q\) ("\(0^2 > 0\)") bernilai benar atau salah.</li>
+                    </ol>
+                    <p>Jadi, \(P(0)\) terbukti benar secara <strong>vacuous</strong>. \(\blacksquare\)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2a.4 -->
+          <div class="exercise" id="vacuous-ex2">
+            <div class="exercise__header">
+              <span class="exercise__number">4</span>
+              <span class="exercise__title">Vacuous Proof: Kuadrat sempurna antara 10 dan 15</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Buktikan pernyataan berikut: "Jika \(n\) adalah bilangan kuadrat sempurna di antara 10 dan 15 (\(10 \le n \le 15\)), maka \(n\) adalah bilangan kubik sempurna!"
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Pembuktian secara Vacuous:</strong></p>
+                    <ol>
+                      <li>Domain bilangan bulat yang berada di antara 10 dan 15 adalah \(\{10, 11, 12, 13, 14, 15\}\).</li>
+                      <li>Mari kita uji apakah ada anggota himpunan tersebut yang merupakan kuadrat sempurna. Kuadrat sempurna terdekat adalah \(9 = 3^2\) dan \(16 = 4^2\). Tidak ada bilangan kuadrat sempurna di rentang tersebut.</li>
+                      <li>Karena tidak ada bilangan bulat yang memenuhi syarat hipotesis, maka hipotesis " \(n\) adalah kuadrat sempurna di antara 10 dan 15" selalu bernilai <strong>Salah (False)</strong>.</li>
+                      <li>Dalam logika formal, implikasi dengan hipotesis bernilai Salah otomatis bernilai <strong>Benar (True)</strong>.</li>
+                    </ol>
+                    <p>Jadi, pernyataan tersebut terbukti benar secara <strong>vacuous</strong>. \(\blacksquare\)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2a.5 -->
+          <div class="exercise" id="trivial-ex1">
+            <div class="exercise__header">
+              <span class="exercise__number">5</span>
+              <span class="exercise__title">Trivial Proof: Buktikan \(P(0)\) untuk \(P(n)\): "Jika \(a > b\), maka \(a^n \ge b^n\)"</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Misalkan \(a\) dan \(b\) adalah bilangan riil positif. Buktikan proposisi \(P(0)\), di mana \(P(n)\) menyatakan: <em>"Jika \(a > b\), maka \(a^n \ge b^n\)"</em>!
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Pembuktian secara Trivial:</strong></p>
+                    <ol>
+                      <li>Proposisi \(P(0)\) berbunyi:
+                        <br>
+                        "Jika \(a > b\), maka \(a^0 \ge b^0\)"
+                      </li>
+                      <li>Tinjau konklusi \(Q\), yaitu "\(a^0 \ge b^0\)". Karena \(a\) dan \(b\) adalah bilangan riil positif, maka \(a^0 = 1\) dan \(b^0 = 1\).</li>
+                      <li>Pernyataan konklusi menjadi:
+                        \[1 \ge 1\]
+                        yang bernilai <strong>Benar (True)</strong>.
+                      </li>
+                      <li>Karena konklusi \(Q\) bernilai <strong>Benar</strong>, maka berdasarkan hukum implikasi, seluruh implikasi \(P \implies Q\) secara otomatis bernilai <strong>Benar (True)</strong>, terlepas dari apakah hipotesis \(P\) ("\(a > b\)") benar atau salah.</li>
+                    </ol>
+                    <p>Jadi, \(P(0)\) terbukti benar secara <strong>trivial</strong>. \(\blacksquare\)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2b. Proof by Contradiction -->
+        <section id="contradiction" class="scroll-section content-section">
+          <h2>2b. Pembuktian dengan Kontradiksi (Proof by Contradiction)</h2>
+          <p>
+            Metode tidak langsung kedua yang sangat kuat adalah <strong>Kontradiksi (Contradiction)</strong>. Untuk membuktikan bahwa suatu pernyataan \(P\) adalah benar, kita mulai dengan mengasumsikan sebaliknya, yaitu <strong>pernyataan \(P\) salah (atau \(\neg P\) benar)</strong>. 
+          </p>
+          <p>
+            Dari asumsi \(\neg P\) tersebut, kita melakukan langkah logis sampai menemukan suatu hal yang tidak masuk akal atau bertentangan dengan hukum matematika yang sudah pasti benar, berbentuk \(r \land \neg r\) (disebut <strong>kontradiksi</strong>). Karena asumsi \(\neg P\) mengantarkan kita pada kontradiksi, maka asumsi tersebut pasti salah, sehingga pernyataan semula \(P\) haruslah <strong>benar</strong>.
+          </p>
+
+          <div class="callout callout--warning">
+            <div class="callout__icon">💡</div>
+            <div>
+              <strong>Analogi Sederhana Kontradiksi:</strong>
+              <br>
+              Seorang ibu menasihati anaknya: <em>"Jangan main hujan-hujanan, nanti kamu sakit!"</em>
+              <br>
+              Si anak ingin menyangkal dan membuktikan ibunya salah. Dia berasumsi: <em>"Saya main hujan-hujanan dan saya tidak akan sakit."</em> 
+              <br>
+              Dia pergi bermain hujan-hujanan. Keesokan harinya, dia bersin-bersin dan badannya demam (dia sakit). Ini merupakan kontradiksi dengan asumsinya semula. Berarti asumsi si anak salah, yang berarti nasihat ibunya benar!
+            </div>
+          </div>
+
+          <!-- Soal 2b.1 -->
+          <div class="exercise" id="contra-soal1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Buktikan: Jika \(3n+2\) ganjil, maka \(n\) ganjil (by Contradiction)</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Buktikan dengan metode kontradiksi bahwa jika \(3n + 2\) adalah bilangan bulat ganjil, maka \(n\) adalah bilangan bulat ganjil!
+              </p>
+              
+              <div class="img-container">
+                <img src="../pdf_images/page65_img1.png" alt="Solusi Kontradiksi Soal 1">
+                <figcaption>Langkah kontradiksi: asumsikan 3n+2 ganjil DAN n genap, lalu cari kontradiksinya.</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Pembuktian dengan Kontradiksi:</strong></p>
+                    <ol>
+                      <li>Kita ingin membuktikan \(P \implies Q\).
+                        <br>
+                        Mari kita asumsikan implikasi ini salah. Negasi dari implikasi adalah:
+                        \[\neg(P \implies Q) \equiv P \land \neg Q\]
+                        Jadi, kita asumsikan:
+                        <ul>
+                          <li>\(3n+2\) adalah bilangan ganjil (hipotesis benar)</li>
+                          <li>\(n\) adalah bilangan genap (negasi konklusi benar)</li>
+                        </ul>
+                      </li>
+                      <li>Karena \(n\) adalah bilangan genap, maka berdasarkan definisi, terdapat bilangan bulat \(k\) sehingga:
+                        \[n = 2k\]
+                      </li>
+                      <li>Substitusikan \(n = 2k\) ke dalam ekspresi \(3n+2\):
+                        \[3n + 2 = 3(2k) + 2 = 6k + 2\]
+                        \[3n + 2 = 2(3k + 1)\]
+                      </li>
+                      <li>Misalkan \(m = 3k + 1\). Karena \(k \in \mathbb{Z}\), maka \(m \in \mathbb{Z}\). Kita dapatkan:
+                        \[3n + 2 = 2m\]
+                        Ini berarti \(3n+2\) adalah bilangan genap.
+                      </li>
+                      <li>Di sini kita menemukan kontradiksi! Hasil pengerjaan menyatakan \(3n+2\) genap, padahal di langkah awal kita mengasumsikan \(3n+2\) ganjil. Suatu bilangan tidak bisa sekaligus bernilai genap dan ganjil (\(r \land \neg r\)).</li>
+                      <li>Karena asumsi kita menghasilkan kontradiksi, maka asumsi bahwa konklusi salah adalah keliru.</li>
+                    </ol>
+                    <p>Jadi, haruslah \(n\) ganjil. Pernyataan terbukti benar. \(\blacksquare\)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout callout--definition">
+            <div class="callout__icon">📘</div>
+            <div>
+              <span class="concept-box__title" style="margin-bottom: 5px; display: block;">Definisi 2: Bilangan Rasional & Irasional</span>
+              <ul>
+                <li>Bilangan riil \(r\) disebut <strong>rasional</strong> jika dapat dinyatakan dalam bentuk pecahan:
+                  \[r = \frac{p}{q}\]
+                  di mana \(p\) dan \(q\) adalah bilangan bulat dengan \(q \neq 0\), serta pembagi persekutuan terbesar \(\text{gcd}(p, q) = 1\) (yaitu pecahan berada dalam bentuk paling sederhana).
+                </li>
+                <li>Bilangan riil yang tidak dapat dinyatakan dalam bentuk tersebut dinamakan <strong>irasional</strong>.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Soal 2b.2 -->
+          <div class="exercise" id="contra-soal2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Buktikan: \(\sqrt{2}\) adalah bilangan irasional</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Buktikan secara formal menggunakan metode kontradiksi bahwa \(\sqrt{2}\) merupakan bilangan irasional!
+              </p>
+              
+              <div class="img-container">
+                <img src="../pdf_images/page69_img1.png" alt="Famous Proof akar 2 irasional">
+                <figcaption>Pembuktian terkenal (famous proof) akar 2 irasional menggunakan kontradiksi FPB (gcd).</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Pembuktian dengan Kontradiksi:</strong></p>
+                    <ol>
+                      <li>Asumsikan negasi dari pernyataan tersebut benar, yaitu:
+                        <strong>"\(\sqrt{2}\) adalah bilangan rasional."</strong>
+                      </li>
+                      <li>Berdasarkan <strong>Definisi 2</strong>, kita dapat menuliskan \(\sqrt{2}\) sebagai:
+                        \[\sqrt{2} = \frac{p}{q}\]
+                        di mana \(p, q \in \mathbb{Z}\), \(q \neq 0\), dan \(\text{gcd}(p, q) = 1\) (pecahan paling sederhana).
+                      </li>
+                      <li>Kuadratkan kedua sisi persamaan:
+                        \[2 = \frac{p^2}{q^2}\]
+                        \[p^2 = 2q^2\]
+                      </li>
+                      <li>Karena \(p^2\) adalah kelipatan 2, maka \(p^2\) adalah bilangan genap. Berdasarkan teorema dasar bilangan bulat, jika kuadrat dari suatu bilangan bulat adalah genap, maka bilangan bulat itu sendiri juga genap. Jadi, \(p\) adalah bilangan genap.</li>
+                      <li>Karena \(p\) genap, berdasarkan definisi terdapat bilangan bulat \(k\) sehingga:
+                        \[p = 2k\]
+                      </li>
+                      <li>Substitusikan \(p = 2k\) kembali ke persamaan \(p^2 = 2q^2\):
+                        \[(2k)^2 = 2q^2\]
+                        \[4k^2 = 2q^2\]
+                        Bagi kedua sisi dengan 2:
+                        \[q^2 = 2k^2\]
+                      </li>
+                      <li>Karena \(q^2\) adalah kelipatan 2, maka \(q^2\) adalah bilangan genap, yang berimplikasi bahwa \(q\) juga merupakan bilangan genap.</li>
+                      <li>Dari poin 4 dan 7, kita menyimpulkan bahwa baik \(p\) maupun \(q\) adalah bilangan genap. Ini berarti keduanya memiliki faktor persekutuan minimal 2. Akibatnya:
+                        \[\text{gcd}(p, q) \ge 2\]
+                      </li>
+                      <li>Hal ini berkontradiksi langsung dengan asumsi awal kita di poin 2 bahwa \(\text{gcd}(p, q) = 1\) (pecahan sudah paling sederhana).</li>
+                      <li>Karena pengasumsian bahwa \(\sqrt{2}\) rasional menghasilkan kontradiksi, maka asumsi tersebut salah.</li>
+                    </ol>
+                    <p>Jadi, terbukti secara hukum kontradiksi bahwa \(\sqrt{2}\) adalah bilangan irasional. \(\blacksquare\)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Counterexample -->
+        <section id="counterexample" class="scroll-section content-section">
+          <h2>3. Contoh Penyangkal (Counterexample)</h2>
+          <p>
+            Ketika kita ingin membuktikan bahwa suatu pernyataan kuantifikasi universal bernilai <strong>salah</strong>, kita tidak perlu menunjukkan kesalahan untuk seluruh elemen. Kita cukup memberikan <strong>satu contoh kasus</strong> di mana pernyataan tersebut gagal/bernilai salah. Kasus penyangkal tunggal ini dinamakan <strong>Counterexample</strong>.
+          </p>
+          <p>
+            Secara formal, membuktikan bahwa pernyataan \(\forall x P(x)\) salah adalah setara dengan membuktikan bahwa negasinya bernilai benar:
+            \[\neg \forall x P(x) \equiv \exists x \neg P(x)\]
+          </p>
+
+          <!-- Soal 3.1 -->
+          <div class="exercise" id="counter-ex1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Buktikan atau Sangkal: Jumlah Kuadrat Dua Bilangan Bulat</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Buktikan atau sangkal pernyataan berikut: <em>"Setiap bilangan bulat positif dapat dituliskan sebagai hasil penjumlahan dari kuadrat dua bilangan bulat!"</em>
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Penyangkalan dengan Counterexample:</strong></p>
+                    <ol>
+                      <li>Pernyataan mengklaim bahwa untuk setiap bilangan bulat positif \(n\), terdapat bilangan bulat \(a\) dan \(b\) sehingga:
+                        \[n = a^2 + b^2\]
+                      </li>
+                      <li>Pernyataan ini <strong>salah</strong>. Kita dapat menyangkalnya dengan menunjukkan satu bilangan bulat positif \(n\) yang tidak memenuhi sifat tersebut.</li>
+                      <li>Pilih **\(n = 3\)** sebagai counterexample.</li>
+                      <li>Mari kita daftarkan semua kuadrat bilangan bulat yang nilainya lebih kecil atau sama dengan 3:
+                        <ul>
+                          <li>\(0^2 = 0\)</li>
+                          <li>\(1^2 = 1\)</li>
+                          <li>\(2^2 = 4\) (sudah melebihi 3)</li>
+                        </ul>
+                        Jadi, angka kuadrat bulat yang bisa digunakan hanyalah 0 dan 1.
+                      </li>
+                      <li>Sekarang, mari uji semua kemungkinan penjumlahan dua kuadrat dari himpunan \(\{0, 1\}\):
+                        <ul>
+                          <li>\(0 + 0 = 0\)</li>
+                          <li>\(0 + 1 = 1\)</li>
+                          <li>\(1 + 1 = 2\)</li>
+                        </ul>
+                      </li>
+                      <li>Terlihat jelas tidak ada penjumlahan kuadrat dua bilangan bulat yang menghasilkan angka 3.</li>
+                    </ol>
+                    <p>Karena kita berhasil menemukan counterexample (yaitu angka 3), maka pernyataan universal tersebut terbukti <strong>salah/disangkal</strong>. \(\blacksquare\)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Mathematical Induction -->
+        <section id="induction" class="scroll-section content-section">
+          <h2>4. Induksi Matematika (Mathematical Induction) <span class="section-header__badge">Penting! ⭐</span></h2>
+          <p>
+            <strong>Induksi Matematika (Mathematical Induction)</strong> adalah teknik pembuktian yang sangat penting untuk membuktikan pernyataan matematika \(P(n)\) yang berlaku untuk semua bilangan bulat positif \(n\) (atau bilangan bulat non-negatif mulai dari nilai tertentu).
+          </p>
+          <p>
+            Induksi matematika mirip dengan efek domino yang berjatuhan: jika kita menjatuhkan domino pertama, dan setiap domino yang jatuh pasti menjatuhkan domino berikutnya, maka semua domino dalam barisan tersebut pasti akan jatuh.
+          </p>
+          
+          <div class="callout callout--info">
+            <div class="callout__icon">📋</div>
+            <div>
+              <strong>Langkah-Langkah Induksi Matematika:</strong>
+              <ol>
+                <li><strong>Basis Step (Langkah Basis):</strong> Tunjukkan bahwa pernyataan \(P(n)\) bernilai benar untuk kasus awal (biasanya \(n = 1\) atau \(n = 0\)).</li>
+                <li><strong>Inductive Step (Langkah Induksi):</strong>
+                  <ul>
+                    <li>Asumsikan bahwa pernyataan \(P(k)\) bernilai benar untuk suatu bilangan bulat \(k \ge \text{awal}\). Asumsi ini dinamakan <strong>Hipotesis Induksi (Inductive Hypothesis)</strong>.</li>
+                    <li>Buktikan bahwa berdasarkan asumsi tersebut, pernyataan \(P(k+1)\) juga harus bernilai benar.</li>
+                  </ul>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- 4a. Rumus Penjumlahan -->
+          <h3 id="ind-sum">4a. Rumus Penjumlahan</h3>
+          
+          <!-- Soal 4.1 -->
+          <div class="exercise" id="ind-ex1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Buktikan: 1 + 2 + 3 + ... + n = n(n+1)/2</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Buktikan dengan induksi matematika bahwa untuk setiap bilangan bulat positif \(n \ge 1\):
+                \[1 + 2 + 3 + \dots + n = \frac{n(n+1)}{2}\]
+              </p>
+              
+              <div class="img-container">
+                <img src="../pdf_images/page71_img1.png" alt="Langkah Awal Induksi Penjumlahan">
+                <img src="../pdf_images/page72_img1.png" alt="Langkah Induksi Penjumlahan">
+                <figcaption>Langkah basis n=1 dan pembuktian langkah induksi untuk deret aritmatika.</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Pembuktian dengan Induksi:</strong></p>
+                    <p>Misalkan \(P(n)\) adalah pernyataan \(1 + 2 + \dots + n = \frac{n(n+1)}{2}\).</p>
+                    
+                    <p><strong>1. Basis Step:</strong></p>
+                    <ul>
+                      <li>Untuk \(n = 1\):
+                        <br>Sisi Kiri (LHS) = 1
+                        <br>Sisi Kanan (RHS) = \(\frac{1(1+1)}{2} = \frac{2}{2} = 1\)
+                      </li>
+                      <li>Karena LHS = RHS, maka \(P(1)\) bernilai <strong>Benar</strong>.</li>
+                    </ul>
+                    
+                    <p><strong>2. Inductive Step:</strong></p>
+                    <ul>
+                      <li>Asumsikan \(P(k)\) benar untuk suatu bilangan bulat \(k \ge 1\). Yaitu:
+                        \[1 + 2 + 3 + \dots + k = \frac{k(k+1)}{2} \quad \text{(Hipotesis Induksi)}\]
+                      </li>
+                      <li>Kita harus membuktikan bahwa \(P(k+1)\) juga benar, yaitu:
+                        \[1 + 2 + 3 + \dots + k + (k+1) = \frac{(k+1)((k+1)+1)}{2} = \frac{(k+1)(k+2)}{2}\]
+                      </li>
+                      <li>Mari olah sisi kiri dari \(P(k+1)\):
+                        \[\underbrace{1 + 2 + 3 + \dots + k}_{\text{substitusi hipotesis}} + (k+1)\]
+                        \[= \frac{k(k+1)}{2} + (k+1)\]
+                      </li>
+                      <li>Samakan penyebut untuk menjumlahkan kedua suku:
+                        \[= \frac{k(k+1)}{2} + \frac{2(k+1)}{2}\]
+                        \[= \frac{k(k+1) + 2(k+1)}{2}\]
+                      </li>
+                      <li>Faktorkan keluar bentuk \((k+1)\):
+                        \[= \frac{(k+1)(k+2)}{2}\]
+                      </li>
+                      <li>Hasil akhir ini sama persis dengan sisi kanan dari \(P(k+1)\).</li>
+                    </ul>
+                    <p>Karena Basis Step dan Inductive Step telah terbukti, maka berdasarkan prinsip induksi matematika, rumus tersebut benar untuk semua \(n \ge 1\). \(\blacksquare\)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 4.2 -->
+          <div class="exercise" id="ind-ex2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Buktikan: 1 + 2 + 2^2 + ... + 2^n = 2^(n+1) - 1</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Buktikan menggunakan induksi matematika bahwa untuk semua bilangan bulat non-negatif \(n \ge 0\):
+                \[1 + 2 + 2^2 + \dots + 2^n = 2^{n+1} - 1\]
+              </p>
+              
+              <div class="img-container">
+                <img src="../pdf_images/page73_img1.png" alt="Basis n=0 deret geometri">
+                <img src="../pdf_images/page73_img2.png" alt="Langkah Induksi deret geometri">
+                <figcaption>Pembuktian induksi untuk jumlah deret pangkat 2.</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Pembuktian dengan Induksi:</strong></p>
+                    <p>Misalkan \(P(n)\) adalah pernyataan \(1 + 2 + 2^2 + \dots + 2^n = 2^{n+1} - 1\).</p>
+                    
+                    <p><strong>1. Basis Step:</strong></p>
+                    <ul>
+                      <li>Karena domainnya adalah bilangan non-negatif (\(n \ge 0\)), maka kasus terkecil dimulai dari \(n = 0\).
+                        <br>LHS = \(2^0 = 1\)
+                        <br>RHS = \(2^{0+1} - 1 = 2^1 - 1 = 1\)
+                      </li>
+                      <li>Karena LHS = RHS, maka \(P(0)\) bernilai <strong>Benar</strong>.</li>
+                    </ul>
+                    
+                    <p><strong>2. Inductive Step:</strong></p>
+                    <ul>
+                      <li>Asumsikan \(P(k)\) benar untuk suatu bilangan bulat \(k \ge 0\), yaitu:
+                        \[1 + 2 + 2^2 + \dots + 2^k = 2^{k+1} - 1 \quad \text{(Hipotesis Induksi)}\]
+                      </li>
+                      <li>Kita harus membuktikan bahwa \(P(k+1)\) benar, yaitu:
+                        \[1 + 2 + 2^2 + \dots + 2^k + 2^{k+1} = 2^{k+2} - 1\]
+                      </li>
+                      <li>Tulis sisi kiri dari \(P(k+1)\) dan gunakan hipotesis induksi:
+                        \[\left( 1 + 2 + 2^2 + \dots + 2^k \right) + 2^{k+1}\]
+                        \[= \left( 2^{k+1} - 1 \right) + 2^{k+1}\]
+                      </li>
+                      <li>Kelompokkan suku berpangkat sama:
+                        \[= 2^{k+1} + 2^{k+1} - 1\]
+                        \[= 2 \cdot (2^{k+1}) - 1\]
+                        \[= 2^{k+2} - 1\]
+                      </li>
+                      <li>Hasil ini sama dengan sisi kanan dari \(P(k+1)\).</li>
+                    </ul>
+                    <p>Dengan demikian, rumus tersebut terbukti benar untuk semua bilangan bulat non-negatif \(n \ge 0\). \(\blacksquare\)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4b. Deret Geometri -->
+          <h3 id="ind-geo">4b. Deret Geometri</h3>
+          
+          <!-- Soal 4.3 -->
+          <div class="exercise" id="ind-ex3">
+            <div class="exercise__header">
+              <span class="exercise__number">3</span>
+              <span class="exercise__title">Buktikan Rumus Jumlah Deret Geometri</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Buktikan dengan induksi matematika bahwa rumus penjumlahan deret geometri untuk \(r \neq 1\) adalah:
+                \[\sum_{j=0}^{n} ar^j = a + ar + ar^2 + \dots + ar^n = \frac{ar^{n+1}-a}{r-1}\]
+              </p>
+              
+              <div class="img-container">
+                <img src="../pdf_images/page74_img1.png" alt="Teorema Deret Geometri">
+                <img src="../pdf_images/page75_img1.png" alt="Langkah Bukti Deret Geometri">
+                <figcaption>Visualisasi pengerjaan pembuktian deret geometri secara induktif.</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Pembuktian dengan Induksi:</strong></p>
+                    <p>Misalkan \(P(n)\) adalah rumus \(\sum_{j=0}^{n} ar^j = \frac{ar^{n+1}-a}{r-1}\).</p>
+                    
+                    <p><strong>1. Basis Step:</strong></p>
+                    <ul>
+                      <li>Untuk \(n = 0\):
+                        <br>LHS = \(ar^0 = a\)
+                        <br>RHS = \(\frac{ar^{0+1}-a}{r-1} = \frac{ar-a}{r-1} = \frac{a(r-1)}{r-1} = a\)
+                      </li>
+                      <li>LHS = RHS, maka \(P(0)\) bernilai <strong>Benar</strong>.</li>
+                    </ul>
+                    
+                    <p><strong>2. Inductive Step:</strong></p>
+                    <ul>
+                      <li>Asumsikan \(P(k)\) benar untuk \(k \ge 0\), yaitu:
+                        \[\sum_{j=0}^{k} ar^j = \frac{ar^{k+1}-a}{r-1} \quad \text{(Hipotesis Induksi)}\]
+                      </li>
+                      <li>Kita harus membuktikan \(P(k+1)\) benar, yaitu:
+                        \[\sum_{j=0}^{k+1} ar^j = \frac{ar^{k+2}-a}{r-1}\]
+                      </li>
+                      <li>Olah sisi kiri \(P(k+1)\):
+                        \[\sum_{j=0}^{k+1} ar^j = \left( \sum_{j=0}^{k} ar^j \right) + ar^{k+1}\]
+                      </li>
+                      <li>Gunakan hipotesis induksi untuk mengganti bagian penjumlahan dalam kurung:
+                        \[= \frac{ar^{k+1}-a}{r-1} + ar^{k+1}\]
+                      </li>
+                      <li>Samakan penyebut dengan mengalikan suku kedua dengan \(\frac{r-1}{r-1}\):
+                        \[= \frac{ar^{k+1}-a + ar^{k+1}(r-1)}{r-1}\]
+                        \[= \frac{ar^{k+1}-a + ar^{k+2}-ar^{k+1}}{r-1}\]
+                      </li>
+                      <li>Hilangkan suku \(ar^{k+1}\) dan \(-ar^{k+1}\):
+                        \[= \frac{ar^{k+2}-a}{r-1}\]
+                      </li>
+                    </ul>
+                    <p>LHS = RHS, langkah induksi terbukti! Rumus terbukti benar untuk semua bilangan bulat non-negatif \(n \ge 0\). \(\blacksquare\)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4c. Pertidaksamaan -->
+          <h3 id="ind-ineq">4c. Pertidaksamaan</h3>
+          
+          <!-- Soal 4.4 -->
+          <div class="exercise" id="ind-ex4">
+            <div class="exercise__header">
+              <span class="exercise__number">4</span>
+              <span class="exercise__title">Buktikan: n < 2^n</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Buktikan menggunakan induksi matematika bahwa pertidaksamaan berikut bernilai benar untuk semua bilangan bulat positif \(n \ge 1\):
+                \[n < 2^n\]
+              </p>
+              
+              <div class="img-container">
+                <img src="../pdf_images/page76_img1.png" alt="Teorema Pertidaksamaan">
+                <img src="../pdf_images/page77_img1.png" alt="Langkah Bukti Pertidaksamaan n kurang dari 2 pangkat n">
+                <figcaption>Visualisasi langkah pembuktian pertidaksamaan n &lt; 2^n.</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Pembuktian dengan Induksi:</strong></p>
+                    <p>Misalkan \(P(n)\) menyatakan pertidaksamaan \(n < 2^n\).</p>
+                    
+                    <p><strong>1. Basis Step:</strong></p>
+                    <ul>
+                      <li>Untuk \(n = 1\):
+                        <br>LHS = 1
+                        <br>RHS = \(2^1 = 2\)
+                      </li>
+                      <li>Karena \(1 < 2\), maka \(P(1)\) bernilai <strong>Benar</strong>.</li>
+                    </ul>
+                    
+                    <p><strong>2. Inductive Step:</strong></p>
+                    <ul>
+                      <li>Asumsikan \(P(k)\) benar untuk suatu bilangan bulat positif \(k \ge 1\), yaitu:
+                        \[k < 2^k \quad \text{(Hipotesis Induksi)}\]
+                      </li>
+                      <li>Kita harus membuktikan \(P(k+1)\) benar, yaitu:
+                        \[k+1 < 2^{k+1}\]
+                      </li>
+                      <li>Mulai dari hipotesis induksi:
+                        \[k < 2^k\]
+                        Tambahkan angka 1 di kedua sisi pertidaksamaan:
+                        \[k+1 < 2^k + 1\]
+                      </li>
+                      <li>Kita ketahui bahwa untuk semua bilangan bulat \(k \ge 1\), nilai \(1 \le 2^k\) adalah benar. Maka:
+                        \[2^k + 1 \le 2^k + 2^k\]
+                      </li>
+                      <li>Jumlahkan kedua suku eksponensial di sisi kanan:
+                        \[2^k + 2^k = 2 \cdot 2^k = 2^{k+1}\]
+                      </li>
+                      <li>Berdasarkan sifat transitif pertidaksamaan (\(A < B\) dan \(B \le C \implies A < C\)):
+                        \[k+1 < 2^k + 1 \le 2^{k+1}\]
+                        \[k+1 < 2^{k+1}\]
+                      </li>
+                    </ul>
+                    <p>Langkah induktif berhasil dibuktikan. Maka pertidaksamaan \(n < 2^n\) terbukti benar untuk semua \(n \ge 1\). \(\blacksquare\)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 4.5 -->
+          <div class="exercise" id="ind-ex5">
+            <div class="exercise__header">
+              <span class="exercise__number">5</span>
+              <span class="exercise__title">Buktikan: 2^n < n! untuk n &ge; 4</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Buktikan secara induksi bahwa pertidaksamaan berikut bernilai benar untuk semua bilangan bulat positif \(n \ge 4\):
+                \[2^n < n!\]
+              </p>
+              
+              <div class="img-container">
+                <img src="../pdf_images/page78_img1.png" alt="Langkah Bukti pertidaksamaan faktorial">
+                <figcaption>Pembuktian pertidaksamaan dengan faktorial dimulai dari basis n=4.</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Pembuktian dengan Induksi:</strong></p>
+                    <p>Misalkan \(P(n)\) menyatakan pertidaksamaan \(2^n < n!\).</p>
+                    
+                    <p><strong>1. Basis Step:</strong></p>
+                    <ul>
+                      <li>Karena pertidaksamaan disyaratkan untuk \(n \ge 4\), kita menguji kasus terkecil \(n = 4\):
+                        <br>LHS = \(2^4 = 16\)
+                        <br>RHS = \(4! = 4 \times 3 \times 2 \times 1 = 24\)
+                      </li>
+                      <li>Karena \(16 < 24\), maka \(P(4)\) bernilai <strong>Benar</strong>.</li>
+                    </ul>
+                    
+                    <p><strong>2. Inductive Step:</strong></p>
+                    <ul>
+                      <li>Asumsikan \(P(k)\) benar untuk bilangan bulat \(k \ge 4\), yaitu:
+                        \[2^k < k! \quad \text{(Hipotesis Induksi)}\]
+                      </li>
+                      <li>Kita ingin membuktikan \(P(k+1)\) benar, yaitu:
+                        \[2^{k+1} < (k+1)!\]
+                      </li>
+                      <li>Kalikan hipotesis induksi dengan angka 2 di kedua sisi:
+                        \[2 \cdot 2^k < 2 \cdot k!\]
+                        \[2^{k+1} < 2 \cdot k!\]
+                      </li>
+                      <li>Karena \(k \ge 4\), maka angka 2 pastilah lebih kecil dari \(k+1\) (\(2 < k+1\)). Sehingga:
+                        \[2 \cdot k! < (k+1) \cdot k!\]
+                      </li>
+                      <li>Berdasarkan definisi faktorial, \((k+1) \cdot k! = (k+1)!\). Maka kita peroleh:
+                        \[2^{k+1} < 2 \cdot k! < (k+1)!\]
+                        \[2^{k+1} < (k+1)!\]
+                      </li>
+                    </ul>
+                    <p>Langkah induksi terbukti. Pertidaksamaan benar untuk semua bilangan bulat positif \(n \ge 4\). \(\blacksquare\)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 4.6 -->
+          <div class="exercise" id="ind-ex6">
+            <div class="exercise__header">
+              <span class="exercise__number">6</span>
+              <span class="exercise__title">Buktikan: Pertidaksamaan Bilangan Harmonik (Hard)</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Bilangan Harmonik \(H_j\) didefinisikan sebagai:
+                \[H_j = 1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{j}\]
+                Buktikan menggunakan induksi matematika bahwa untuk semua bilangan bulat positif \(n \ge 1\):
+                \[H_{2^n} \ge 1 + \frac{n}{2}\]
+              </p>
+              
+              <div class="img-container">
+                <img src="../pdf_images/page79_img1.png" alt="Pengenalan Bilangan Harmonik">
+                <img src="../pdf_images/page79_img2.png" alt="Basis n=1 Harmonik">
+                <img src="../pdf_images/page80_img1.png" alt="Langkah Bukti Harmonik">
+                <figcaption>Pembuktian bertahap untuk pertidaksamaan bilangan Harmonik yang melibatkan penjumlahan taksiran bawah.</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Pembuktian dengan Induksi:</strong></p>
+                    <p>Misalkan \(P(n)\) adalah pertidaksamaan \(H_{2^n} \ge 1 + \frac{n}{2}\).</p>
+                    
+                    <p><strong>1. Basis Step:</strong></p>
+                    <ul>
+                      <li>Untuk \(n = 1\):
+                        <br>LHS = \(H_{2^1} = H_2 = 1 + \frac{1}{2}\)
+                        <br>RHS = \(1 + \frac{1}{2}\)
+                      </li>
+                      <li>Karena \(1 + \frac{1}{2} \ge 1 + \frac{1}{2}\), maka \(P(1)\) bernilai <strong>Benar</strong>.</li>
+                    </ul>
+                    
+                    <p><strong>2. Inductive Step:</strong></p>
+                    <ul>
+                      <li>Asumsikan \(P(k)\) benar untuk bilangan bulat \(k \ge 1\), yaitu:
+                        \[H_{2^k} \ge 1 + \frac{k}{2} \quad \text{(Hipotesis Induksi)}\]
+                      </li>
+                      <li>Kita harus membuktikan bahwa \(P(k+1)\) benar, yaitu:
+                        \[H_{2^{k+1}} \ge 1 + \frac{k+1}{2}\]
+                      </li>
+                      <li>Mari kita tulis ekspresi untuk \(H_{2^{k+1}}\):
+                        \[H_{2^{k+1}} = 1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{2^k} + \frac{1}{2^k + 1} + \dots + \frac{1}{2^{k+1}}\]
+                        \[H_{2^{k+1}} = H_{2^k} + \sum_{i=2^k+1}^{2^{k+1}} \frac{1}{i}\]
+                      </li>
+                      <li>Tinjau deret penjumlahan \(\sum_{i=2^k+1}^{2^{k+1}} \frac{1}{i}\). Deret ini memiliki:
+                        \[2^{k+1} - 2^k = 2^k \cdot 2 - 2^k = 2^k \text{ buah suku}\]
+                        Suku terkecil dari deret ini adalah suku terakhir, yaitu \(\frac{1}{2^{k+1}}\).
+                      </li>
+                      <li>Jika kita ganti setiap suku di deret tersebut dengan suku terkecilnya, nilainya akan menjadi lebih kecil atau sama:
+                        \[\sum_{i=2^k+1}^{2^{k+1}} \frac{1}{i} \ge \underbrace{\frac{1}{2^{k+1}} + \frac{1}{2^{k+1}} + \dots + \frac{1}{2^{k+1}}}_{2^k \text{ suku}}\]
+                        \[\sum_{i=2^k+1}^{2^{k+1}} \frac{1}{i} \ge 2^k \cdot \frac{1}{2^{k+1}} = 2^k \cdot \frac{1}{2 \cdot 2^k} = \frac{1}{2}\]
+                      </li>
+                      <li>Sekarang substitusikan taksiran bawah ini beserta hipotesis induksi ke persamaan \(H_{2^{k+1}}\):
+                        \[H_{2^{k+1}} \ge H_{2^k} + \frac{1}{2}\]
+                        \[H_{2^{k+1}} \ge \left( 1 + \frac{k}{2} \right) + \frac{1}{2}\]
+                        \[H_{2^{k+1}} \ge 1 + \frac{k+1}{2}\]
+                      </li>
+                    </ul>
+                    <p>Langkah induksi berhasil dibuktikan, sehingga pertidaksamaan benar untuk semua \(n \ge 1\). \(\blacksquare\)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4d. Habis Membagi -->
+          <h3 id="ind-div">4d. Habis Membagi</h3>
+          
+          <!-- Soal 4.7 -->
+          <div class="exercise" id="ind-ex7">
+            <div class="exercise__header">
+              <span class="exercise__number">7</span>
+              <span class="exercise__title">Buktikan: n^3 - n habis dibagi 3</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Buktikan secara induksi bahwa untuk setiap bilangan bulat positif \(n \ge 1\), bentuk aljabar berikut habis dibagi oleh 3:
+                \[n^3 - n\]
+              </p>
+              
+              <div class="img-container">
+                <img src="../pdf_images/page81_img1.png" alt="Langkah Bukti keterbagian n pangkat 3 kurang n">
+                <figcaption>Pembuktian keterbagian menggunakan substitusi hipotesis dan ekspansi binomial sederhana.</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Pembuktian dengan Induksi:</strong></p>
+                    <p>Misalkan \(P(n)\) adalah pernyataan "\(n^3 - n\) habis dibagi 3".</p>
+                    
+                    <p><strong>1. Basis Step:</strong></p>
+                    <ul>
+                      <li>Untuk \(n = 1\):
+                        \[1^3 - 1 = 0\]
+                        Karena 0 habis dibagi oleh 3 (\(0 = 3 \times 0\)), maka \(P(1)\) bernilai <strong>Benar</strong>.
+                      </li>
+                    </ul>
+                    
+                    <p><strong>2. Inductive Step:</strong></p>
+                    <ul>
+                      <li>Asumsikan \(P(k)\) benar untuk bilangan bulat \(k \ge 1\), artinya \(k^3 - k\) habis dibagi 3.
+                        <br>Dapat ditulis:
+                        \[k^3 - k = 3m \quad \text{untuk suatu } m \in \mathbb{Z} \quad \text{(Hipotesis Induksi)}\]
+                      </li>
+                      <li>Kita harus membuktikan bahwa \(P(k+1)\) benar, yaitu \((k+1)^3 - (k+1)\) juga habis dibagi 3.</li>
+                      <li>Mari ekspansi dan olah bentuk \((k+1)^3 - (k+1)\):
+                        \[(k+1)^3 - (k+1) = (k^3 + 3k^2 + 3k + 1) - (k + 1)\]
+                        Kelompokkan suku-suku agar memuat hipotesis induksi:
+                        \[= (k^3 - k) + 3k^2 + 3k + 1 - 1\]
+                        \[= (k^3 - k) + 3(k^2 + k)\]
+                      </li>
+                      <li>Substitusikan \(k^3 - k = 3m\) ke dalam persamaan:
+                        \[= 3m + 3(k^2 + k)\]
+                        Faktorkan angka 3:
+                        \[= 3(m + k^2 + k)\]
+                      </li>
+                      <li>Karena \(m, k \in \mathbb{Z}\), maka nilai \((m + k^2 + k)\) juga merupakan bilangan bulat.</li>
+                      <li>Karena seluruh ekspresi merupakan perkalian angka 3 dengan bilangan bulat lainnya, maka terbukti bahwa \((k+1)^3 - (k+1)\) habis dibagi 3.</li>
+                    </ul>
+                    <p>Dengan demikian, berdasarkan prinsip induksi, \(n^3 - n\) habis dibagi 3 untuk semua \(n \ge 1\). \(\blacksquare\)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 4.8 -->
+          <div class="exercise" id="ind-ex8">
+            <div class="exercise__header">
+              <span class="exercise__number">8</span>
+              <span class="exercise__title">Buktikan: 7^(n+2) + 8^(2n+1) habis dibagi 57</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                Buktikan menggunakan induksi matematika bahwa untuk setiap bilangan bulat non-negatif \(n \ge 0\), ekspresi berikut habis dibagi 57:
+                \[7^{n+2} + 8^{2n+1}\]
+              </p>
+              
+              <div class="img-container">
+                <img src="../pdf_images/page82_img1.png" alt="Soal Keterbagian 57">
+                <img src="../pdf_images/page82_img2.png" alt="Langkah Bukti keterbagian 57">
+                <figcaption>Pembuktian keterbagian 57 yang melibatkan manipulasi koefisien berpangkat.</figcaption>
+              </div>
+
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Pembuktian dengan Induksi:</strong></p>
+                    <p>Misalkan \(P(n)\) menyatakan "\(7^{n+2} + 8^{2n+1}\) habis dibagi 57".</p>
+                    
+                    <p><strong>1. Basis Step:</strong></p>
+                    <ul>
+                      <li>Untuk \(n = 0\):
+                        \[7^{0+2} + 8^{0+1} = 7^2 + 8^1 = 49 + 8 = 57\]
+                        Karena 57 habis dibagi 57, maka \(P(0)\) bernilai <strong>Benar</strong>.
+                      </li>
+                    </ul>
+                    
+                    <p><strong>2. Inductive Step:</strong></p>
+                    <ul>
+                      <li>Asumsikan \(P(k)\) benar untuk \(k \ge 0\), yaitu \(7^{k+2} + 8^{2k+1}\) habis dibagi 57.
+                        <br>Dapat ditulis:
+                        \[7^{k+2} + 8^{2k+1} = 57m \quad \text{untuk suatu } m \in \mathbb{Z} \quad \text{(Hipotesis Induksi)}\]
+                      </li>
+                      <li>Kita harus membuktikan \(P(k+1)\) benar, yaitu \(7^{(k+1)+2} + 8^{2(k+1)+1} = 7^{k+3} + 8^{2k+3}\) habis dibagi 57.</li>
+                      <li>Mari olah ekspresi untuk \(P(k+1)\):
+                        \[7^{k+3} + 8^{2k+3} = 7^1 \cdot 7^{k+2} + 8^2 \cdot 8^{2k+1}\]
+                        \[= 7 \cdot 7^{k+2} + 64 \cdot 8^{2k+1}\]
+                      </li>
+                      <li>Kita pecah angka 64 menjadi penjumlahan yang mengandung koefisien 7 agar dapat dikelompokkan dengan suku pertama:
+                        \[= 7 \cdot 7^{k+2} + (7 + 57) \cdot 8^{2k+1}\]
+                        \[= 7 \cdot 7^{k+2} + 7 \cdot 8^{2k+1} + 57 \cdot 8^{2k+1}\]
+                        \[= 7(7^{k+2} + 8^{2k+1}) + 57 \cdot 8^{2k+1}\]
+                      </li>
+                      <li>Substitusikan hipotesis induksi (\(7^{k+2} + 8^{2k+1} = 57m\)):
+                        \[= 7(57m) + 57 \cdot 8^{2k+1}\]
+                        \[= 57(7m + 8^{2k+1})\]
+                      </li>
+                      <li>Karena \(m, k \in \mathbb{Z}\) dan \(k \ge 0\), maka \((7m + 8^{2k+1})\) adalah bilangan bulat.</li>
+                      <li>Karena ekspresi akhir berbentuk \(57 \times \text{bilangan bulat}\), maka terbukti habis dibagi 57.</li>
+                    </ul>
+                    <p>Langkah induksi berhasil dibuktikan, sehingga ekspresi habis dibagi 57 untuk semua \(n \ge 0\). \(\blacksquare\)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Latihan Tambahan -->
+        <section id="latihan-tambahan" class="scroll-section content-section">
+          <h2>5. Soal Latihan Tambahan (10 Soal Induksi)</h2>
+          <p>
+            Berikut adalah kumpulan 10 soal latihan induksi matematika beserta langkah dan solusi detail berdasarkan visualisasi grafis catatan perkuliahan.
+          </p>
+
+          <!-- Latihan 1 -->
+          <div class="exercise" id="lat-1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Deret Aritmatika 1 + 2 + ... + n = n(n+1)/2</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buktikan dengan induksi matematika rumus penjumlahan bilangan bulat positif pertama:
+                \[1 + 2 + 3 + \dots + n = \frac{1}{2} n(n + 1)\]
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page83_img2.png" alt="Solusi Soal Latihan 1">
+                <figcaption>Solusi pembuktian deret aritmatika dasar.</figcaption>
+              </div>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Langkah Pembuktian:</strong></p>
+                    <ul>
+                      <li><strong>Basis Step (n = 1):</strong> LHS = 1, RHS = \(\frac{1}{2}(1)(2) = 1\). Benar.</li>
+                      <li><strong>Inductive Step:</strong> Asumsikan benar untuk \(n=k\): \(1+2+\dots+k = \frac{k(k+1)}{2}\).
+                        <br>Untuk \(n=k+1\):
+                        \[1+2+\dots+k+(k+1) = \frac{k(k+1)}{2} + (k+1) = (k+1)\left(\frac{k}{2} + 1\right) = \frac{(k+1)(k+2)}{2}\]
+                        Sesuai dengan RHS kasus \(k+1\). Terbukti.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Latihan 2 -->
+          <div class="exercise" id="lat-2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Deret Geometri 1 + 2 + 2^2 + ... + 2^n = 2^(n+1) - 1</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buktikan dengan induksi matematika deret pangkat 2 berikut untuk \(n \ge 0\):
+                \[1 + 2 + 2^2 + 2^3 + \dots + 2^n = 2^{n+1} - 1\]
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page83_img3.png" alt="Solusi Soal Latihan 2">
+                <figcaption>Solusi pembuktian deret pangkat 2.</figcaption>
+              </div>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Langkah Pembuktian:</strong></p>
+                    <ul>
+                      <li><strong>Basis Step (n = 0):</strong> LHS = \(2^0 = 1\), RHS = \(2^1 - 1 = 1\). Benar.</li>
+                      <li><strong>Inductive Step:</strong> Asumsikan benar untuk \(n=k\): \(\sum_{i=0}^k 2^i = 2^{k+1} - 1\).
+                        <br>Untuk \(n=k+1\):
+                        \[\sum_{i=0}^{k+1} 2^i = (2^{k+1} - 1) + 2^{k+1} = 2 \cdot 2^{k+1} - 1 = 2^{k+2} - 1\]
+                        Sesuai dengan RHS kasus \(k+1\). Terbukti.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Latihan 3 -->
+          <div class="exercise" id="lat-3">
+            <div class="exercise__header">
+              <span class="exercise__number">3</span>
+              <span class="exercise__title">Deret Bilangan Genap 2 + 4 + ... + 2n = n(n + 1)</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buktikan dengan induksi matematika rumus penjumlahan bilangan genap positif pertama:
+                \[2 + 4 + 6 + \dots + 2n = n(n + 1)\]
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page83_img4.png" alt="Solusi Soal Latihan 3">
+                <figcaption>Solusi pembuktian jumlah bilangan genap.</figcaption>
+              </div>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Langkah Pembuktian:</strong></p>
+                    <ul>
+                      <li><strong>Basis Step (n = 1):</strong> LHS = \(2(1) = 2\), RHS = \(1(1+1) = 2\). Benar.</li>
+                      <li><strong>Inductive Step:</strong> Asumsikan benar untuk \(n=k\): \(2 + 4 + \dots + 2k = k(k+1)\).
+                        <br>Untuk \(n=k+1\):
+                        \[2+4+\dots+2k + 2(k+1) = k(k+1) + 2(k+1) = (k+1)(k+2)\]
+                        Sesuai dengan RHS kasus \(k+1\). Terbukti.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Latihan 4 -->
+          <div class="exercise" id="lat-4">
+            <div class="exercise__header">
+              <span class="exercise__number">4</span>
+              <span class="exercise__title">Deret Aritmatika Selisih Tiga 1 + 4 + 7 + ... = n(3n - 1)/2</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buktikan rumus deret aritmatika dengan beda 3 berikut:
+                \[1 + 4 + 7 + \dots + (3n - 2) = \frac{n(3n - 1)}{2}\]
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page84_img1.png" alt="Solusi Soal Latihan 4">
+                <figcaption>Solusi pembuktian deret aritmatika selisih 3.</figcaption>
+              </div>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Langkah Pembuktian:</strong></p>
+                    <ul>
+                      <li><strong>Basis Step (n = 1):</strong> LHS = \(3(1)-2 = 1\), RHS = \(\frac{1(3(1)-1)}{2} = \frac{2}{2} = 1\). Benar.</li>
+                      <li><strong>Inductive Step:</strong> Asumsikan benar untuk \(n=k\): \(1+4+\dots+(3k-2) = \frac{k(3k-1)}{2}\).
+                        <br>Untuk \(n=k+1\) (sukunya adalah \(3(k+1)-2 = 3k+1\)):
+                        \[\text{LHS} = \frac{k(3k-1)}{2} + (3k+1) = \frac{3k^2 - k + 6k + 2}{2} = \frac{3k^2 + 5k + 2}{2}\]
+                        \[\text{Faktorkan pembilang: } 3k^2 + 5k + 2 = (k+1)(3k+2)\]
+                        \[\text{LHS} = \frac{(k+1)(3(k+1)-1)}{2}\]
+                        Sesuai dengan RHS kasus \(k+1\). Terbukti.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Latihan 5 -->
+          <div class="exercise" id="lat-5">
+            <div class="exercise__header">
+              <span class="exercise__number">5</span>
+              <span class="exercise__title">Jumlah Kuadrat Bilangan 1^2 + 2^2 + ... + n^2 = n(n+1)(2n+1)/6</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buktikan rumus penjumlahan kuadrat bilangan bulat positif pertama:
+                \[1^2 + 2^2 + 3^2 + \dots + n^2 = \frac{n(n + 1)(2n + 1)}{6}\]
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page84_img2.png" alt="Solusi Soal Latihan 5">
+                <figcaption>Solusi pembuktian rumus jumlah kuadrat.</figcaption>
+              </div>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Langkah Pembuktian:</strong></p>
+                    <ul>
+                      <li><strong>Basis Step (n = 1):</strong> LHS = \(1^2 = 1\), RHS = \(\frac{1(2)(3)}{6} = 1\). Benar.</li>
+                      <li><strong>Inductive Step:</strong> Asumsikan benar untuk \(n=k\): \(\sum_{i=1}^k i^2 = \frac{k(k+1)(2k+1)}{6}\).
+                        <br>Untuk \(n=k+1\):
+                        \[\text{LHS} = \frac{k(k+1)(2k+1)}{6} + (k+1)^2 = (k+1)\left[\frac{k(2k+1) + 6(k+1)}{6}\right]\]
+                        \[= (k+1)\left[\frac{2k^2 + 7k + 6}{6}\right] = \frac{(k+1)(k+2)(2k+3)}{6}\]
+                        Sesuai dengan RHS kasus \(k+1\) karena \((2(k+1)+1) = 2k+3\). Terbukti.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Latihan 6 -->
+          <div class="exercise" id="lat-6">
+            <div class="exercise__header">
+              <span class="exercise__number">6</span>
+              <span class="exercise__title">Deret Teleskopik Pecahan (Selisih 2)</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buktikan rumus deret teleskopik berikut:
+                \[\frac{1}{1 \cdot 3} + \frac{1}{3 \cdot 5} + \frac{1}{5 \cdot 7} + \dots + \frac{1}{(2n - 1)(2n + 1)} = \frac{n}{2n + 1}\]
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page84_img3.png" alt="Solusi Soal Latihan 6">
+                <figcaption>Solusi pembuktian deret teleskopik dengan beda 2.</figcaption>
+              </div>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Langkah Pembuktian:</strong></p>
+                    <ul>
+                      <li><strong>Basis Step (n = 1):</strong> LHS = \(\frac{1}{1 \cdot 3} = \frac{1}{3}\), RHS = \(\frac{1}{2(1)+1} = \frac{1}{3}\). Benar.</li>
+                      <li><strong>Inductive Step:</strong> Asumsikan benar untuk \(n=k\): \(\text{LHS}_k = \frac{k}{2k+1}\).
+                        <br>Untuk \(n=k+1\) (suku tambahannya adalah \(\frac{1}{(2k+1)(2k+3)}\)):
+                        \[\text{LHS} = \frac{k}{2k+1} + \frac{1}{(2k+1)(2k+3)} = \frac{k(2k+3) + 1}{(2k+1)(2k+3)}\]
+                        \[= \frac{2k^2 + 3k + 1}{(2k+1)(2k+3)} = \frac{(2k+1)(k+1)}{(2k+1)(2k+3)} = \frac{k+1}{2k+3}\]
+                        Sesuai dengan RHS kasus \(k+1\) karena \((2(k+1)+1) = 2k+3\). Terbukti.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Latihan 7 -->
+          <div class="exercise" id="lat-7">
+            <div class="exercise__header">
+              <span class="exercise__number">7</span>
+              <span class="exercise__title">Deret Teleskopik Pecahan (Selisih 4)</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buktikan rumus deret teleskopik berikut:
+                \[\frac{1}{1 \cdot 5} + \frac{1}{5 \cdot 9} + \frac{1}{9 \cdot 13} + \dots + \frac{1}{(4n - 3)(4n + 1)} = \frac{n}{4n + 1}\]
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page84_img4.png" alt="Solusi Soal Latihan 7">
+                <figcaption>Solusi pembuktian deret teleskopik dengan beda 4.</figcaption>
+              </div>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Langkah Pembuktian:</strong></p>
+                    <ul>
+                      <li><strong>Basis Step (n = 1):</strong> LHS = \(\frac{1}{1 \cdot 5} = \frac{1}{5}\), RHS = \(\frac{1}{4(1)+1} = \frac{1}{5}\). Benar.</li>
+                      <li><strong>Inductive Step:</strong> Asumsikan benar untuk \(n=k\): \(\text{LHS}_k = \frac{k}{4k+1}\).
+                        <br>Untuk \(n=k+1\) (suku tambahannya adalah \(\frac{1}{(4k+1)(4k+5)}\)):
+                        \[\text{LHS} = \frac{k}{4k+1} + \frac{1}{(4k+1)(4k+5)} = \frac{k(4k+5) + 1}{(4k+1)(4k+5)}\]
+                        \[= \frac{4k^2 + 5k + 1}{(4k+1)(4k+5)} = \frac{(4k+1)(k+1)}{(4k+1)(4k+5)} = \frac{k+1}{4k+5}\]
+                        Sesuai dengan RHS kasus \(k+1\) karena \((4(k+1)+1) = 4k+5\). Terbukti.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Latihan 8 -->
+          <div class="exercise" id="lat-8">
+            <div class="exercise__header">
+              <span class="exercise__number">8</span>
+              <span class="exercise__title">Buktikan Keterbagian: 7^n - 2^n habis dibagi 5</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buktikan menggunakan induksi matematika bahwa untuk semua bilangan bulat positif \(n \in \mathbb{N}\):
+                \[7^n - 2^n \text{ habis dibagi oleh } 5\]
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page84_img5.png" alt="Solusi Soal Latihan 8">
+                <figcaption>Solusi pembuktian keterbagian 7^n - 2^n.</figcaption>
+              </div>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Langkah Pembuktian:</strong></p>
+                    <ul>
+                      <li><strong>Basis Step (n = 1):</strong> \(7^1 - 2^1 = 5\), yang habis dibagi 5. Benar.</li>
+                      <li><strong>Inductive Step:</strong> Asumsikan benar untuk \(n=k\): \(7^k - 2^k = 5m\) (\(m \in \mathbb{Z}\)).
+                        <br>Untuk \(n=k+1\):
+                        \[7^{k+1} - 2^{k+1} = 7 \cdot 7^k - 2 \cdot 2^k = 7 \cdot 7^k - 2 \cdot 7^k + 2 \cdot 7^k - 2 \cdot 2^k\]
+                        \[= 5 \cdot 7^k + 2(7^k - 2^k)\]
+                        Substitusikan hipotesis induksi:
+                        \[= 5 \cdot 7^k + 2(5m) = 5(7^k + 2m)\]
+                        Karena \((7^k + 2m)\) bulat, maka terbukti habis dibagi 5.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Latihan 9 -->
+          <div class="exercise" id="lat-9">
+            <div class="exercise__header">
+              <span class="exercise__number">9</span>
+              <span class="exercise__title">Buktikan Keterbagian: n^3 - 4n + 6 habis dibagi 3</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Buktikan menggunakan induksi matematika bahwa untuk semua bilangan bulat positif \(n \in \mathbb{N}\):
+                \[n^3 - 4n + 6 \text{ habis dibagi oleh } 3\]
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page85_img1.png" alt="Solusi Soal Latihan 9">
+                <figcaption>Solusi pembuktian keterbagian ekspresi polinomial.</figcaption>
+              </div>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Langkah Pembuktian:</strong></p>
+                    <ul>
+                      <li><strong>Basis Step (n = 1):</strong> \(1^3 - 4(1) + 6 = 3\), yang habis dibagi 3. Benar.</li>
+                      <li><strong>Inductive Step:</strong> Asumsikan benar untuk \(n=k\): \(k^3 - 4k + 6 = 3m\).
+                        <br>Untuk \(n=k+1\):
+                        \[(k+1)^3 - 4(k+1) + 6 = (k^3 + 3k^2 + 3k + 1) - 4k - 4 + 6\]
+                        \[= (k^3 - 4k + 6) + 3k^2 + 3k - 3\]
+                        Substitusikan hipotesis induksi:
+                        \[= 3m + 3(k^2 + k - 1) = 3(m + k^2 + k - 1)\]
+                        Terbukti habis dibagi 3 karena koefisien terluar adalah 3.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Latihan 10 -->
+          <div class="exercise" id="lat-10">
+            <div class="exercise__header">
+              <span class="exercise__number">10</span>
+              <span class="exercise__title">Buktikan Identitas Penjumlahan Pangkat Tiga</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>Gunakan identitas \(1 + 2 + 3 + \dots + n = \frac{n(n + 1)}{2}\) untuk membuktikan bahwa:
+                \[1^3 + 2^3 + 3^3 + \dots + n^3 = (1 + 2 + 3 + \dots + n)^2 = \left[ \frac{n(n+1)}{2} \right]^2\]
+              </p>
+              <div class="img-container">
+                <img src="../pdf_images/page85_img2.png" alt="Soal Latihan 10 Identitas Pangkat 3">
+                <img src="../pdf_images/page85_img3.png" alt="Solusi Soal Latihan 10">
+                <figcaption>Pembuktian lengkap identitas pangkat tiga menggunakan induksi matematika.</figcaption>
+              </div>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Langkah Pembuktian:</strong></p>
+                    <ul>
+                      <li><strong>Basis Step (n = 1):</strong> LHS = \(1^3 = 1\), RHS = \(\left[\frac{1(2)}{2}\right]^2 = 1\). Benar.</li>
+                      <li><strong>Inductive Step:</strong> Asumsikan benar untuk \(n=k\): \(\sum_{i=1}^k i^3 = \left[\frac{k(k+1)}{2}\right]^2\).
+                        <br>Untuk \(n=k+1\):
+                        \[\text{LHS} = \left[\frac{k(k+1)}{2}\right]^2 + (k+1)^3 = \frac{k^2(k+1)^2}{4} + (k+1)^3\]
+                        Faktorkan \((k+1)^2\):
+                        \[= (k+1)^2 \left[ \frac{k^2}{4} + (k+1) \right] = (k+1)^2 \left[ \frac{k^2 + 4k + 4}{4} \right]\]
+                        \[= (k+1)^2 \frac{(k+2)^2}{4} = \left[ \frac{(k+1)(k+2)}{2} \right]^2\]
+                        Sesuai dengan RHS kasus \(k+1\). Terbukti.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page Navigation -->
+        <div class="page-nav">
+          <a href="sesi2.html" class="page-nav__link">
+            <span class="page-nav__label">← Sebelumnya</span>
+            <span class="page-nav__title">Kuantifikator (Quantifiers)</span>
+          </a>
+          <a href="sesi4.html" class="page-nav__link page-nav__link--next">
+            <span class="page-nav__label">Selanjutnya →</span>
+            <span class="page-nav__title">Fuzzy Sets, Function & Number Theory</span>
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <button class="back-to-top" aria-label="Kembali ke atas">↑</button>
+  <script src="../js/main.js"></script>
+</body>
+</html>

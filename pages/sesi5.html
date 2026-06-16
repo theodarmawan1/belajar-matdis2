@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesi 5: Binomial, Permutasi, & Kombinasi — Matematika Diskrit</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script src="../js/theme.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="../index.html" class="navbar__brand">
+      <span class="navbar__brand-icon">∑</span>
+      <span>MatDiskrit</span>
+    </a>
+    <div class="navbar__actions">
+      <button class="navbar__menu-btn" aria-label="Menu">☰</button>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-toggle__knob">🌙</span>
+      </button>
+    </div>
+  </nav>
+  <div class="sidebar-overlay"></div>
+  
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar__section-title">Navigasi</div>
+      <a href="../index.html" class="sidebar__link"><span class="sidebar__link-icon">🏠</span> Beranda</a>
+      <a href="sesi1.html" class="sidebar__link"><span class="sidebar__link-icon">1</span> Logic</a>
+      <a href="sesi2.html" class="sidebar__link"><span class="sidebar__link-icon">2</span> Quantifier</a>
+      <a href="sesi3.html" class="sidebar__link"><span class="sidebar__link-icon">3</span> Method of Proof</a>
+      <a href="sesi4.html" class="sidebar__link"><span class="sidebar__link-icon">4</span> Fuzzy Sets & Function</a>
+      <a href="sesi5.html" class="sidebar__link active"><span class="sidebar__link-icon">5</span> Binomial & Kombinasi</a>
+      <a href="sesi6.html" class="sidebar__link"><span class="sidebar__link-icon">6</span> Relation</a>
+      <a href="sesi7.html" class="sidebar__link"><span class="sidebar__link-icon">7</span> POSET & Hasse</a>
+      <a href="sesi8.html" class="sidebar__link"><span class="sidebar__link-icon">8</span> Min/Max & Lattice</a>
+      <a href="sesi9.html" class="sidebar__link"><span class="sidebar__link-icon">9</span> MST, Coloring & FSA</a>
+      
+      <div class="sidebar__section-title">Daftar Isi</div>
+      <div class="sidebar__sublinks">
+        <a href="#faktorial" class="sidebar__sublink">1. Faktorial</a>
+        <a href="#binomial" class="sidebar__sublink">2. Teorema Binomial</a>
+        <a href="#tipe-1" class="sidebar__sublink">&nbsp;&nbsp;• Tipe 1: Uraian Lengkap</a>
+        <a href="#tipe-2" class="sidebar__sublink">&nbsp;&nbsp;• Tipe 2: Mencari Suku ke-n</a>
+        <a href="#tipe-3" class="sidebar__sublink">&nbsp;&nbsp;• Tipe 3: Koefisien</a>
+        <a href="#tipe-4" class="sidebar__sublink">&nbsp;&nbsp;• Tipe 4: Jumlah Koefisien</a>
+        <a href="#permutasi" class="sidebar__sublink">3. Permutasi</a>
+        <a href="#kombinasi" class="sidebar__sublink">4. Kombinasi</a>
+      </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="content-wrapper">
+        
+        <!-- Section Header -->
+        <header class="section-header">
+          <span class="section-header__badge">Sesi 6 (UTS)</span>
+          <h1 class="hero__title" style="margin-bottom: 0.2em;">Binomial, Permutasi & Kombinasi</h1>
+          <p class="section-header__desc">
+            Pelajari konsep-konsep dasar pencacahan: faktorial, teorema binomial beserta variasi tipe soalnya (Uraian Lengkap, Mencari Suku ke-n, Koefisien, dan Jumlah Koefisien), serta dasar permutasi dan kombinasi.
+          </p>
+        </header>
+
+        <!-- 1. FAKTORIAL -->
+        <section id="faktorial" class="card" style="margin-bottom: 2em;">
+          <h2 style="margin-top: 0; border-bottom: none; padding-bottom: 0;">1. Faktorial</h2>
+          <p>
+            Sebelum melangkah lebih jauh ke dalam kombinatorika dan Teorema Binomial, kita perlu memahami konsep dasar **Faktorial**. Faktorial digunakan untuk menghitung banyaknya cara menyusun objek.
+          </p>
+          
+          <div class="callout callout--definition">
+            <span class="callout__icon">📐</span>
+            <div>
+              <strong class="callout__title">Definisi Faktorial</strong>
+              <p style="margin-bottom: 0;">
+                Untuk setiap bilangan bulat positif \(n\), faktorial dari \(n\) (ditulis sebagai \(n!\)) didefinisikan sebagai hasil perkalian semua bilangan bulat positif dari \(1\) hingga \(n\):
+                \[ n! = n \times (n-1) \times (n-2) \times \dots \times 2 \times 1 \]
+              </p>
+            </div>
+          </div>
+
+          <div class="callout callout--info">
+            <span class="callout__icon">📌</span>
+            <div>
+              <strong class="callout__title">Catatan Penting</strong>
+              <ul style="margin-bottom: 0; padding-left: 1.2em;">
+                <li>\(0! = 1\) (Didefinisikan secara khusus agar rumus kombinasi dan permutasi tetap konsisten)</li>
+                <li>\(1! = 1\)</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Contoh Penggunaan Faktorial</h3>
+          <p>
+            Berikut adalah penjelasan visual dan contoh operasi matematika yang menggunakan faktorial sebagaimana dimuat dalam modul kuliah:
+          </p>
+          
+          <div class="img-container">
+            <img src="../pdf_images/page101_img1.png" alt="Pengenalan Faktorial">
+            <figcaption>Gambar 1.1: Definisi dan contoh dasar faktorial pada halaman 101 PDF.</figcaption>
+          </div>
+
+          <div class="img-container">
+            <img src="../pdf_images/page102_img1.png" alt="Contoh Faktorial">
+            <figcaption>Gambar 1.2: Penjelasan lanjutan faktorial pada halaman 102 PDF.</figcaption>
+          </div>
+        </section>
+
+        <!-- 2. BINOMIAL -->
+        <section id="binomial" class="card" style="margin-bottom: 2em;">
+          <h2 style="margin-top: 0; border-bottom: none; padding-bottom: 0;">2. Binomial (Teorema Binomial)</h2>
+          <p>
+            **Teorema Binomial** adalah formula matematika yang digunakan untuk menjabarkan atau mengekspansikan bentuk perpangkatan aljabar binomial seperti \((x+y)^n\).
+          </p>
+
+          <h3>Pola Ekspansi Perpangkatan</h3>
+          <p>
+            Perhatikan pola ekspansi aljabar berikut saat pangkatnya bertambah:
+          </p>
+          <ul style="padding-left: 1.5em; margin-bottom: 1em;">
+            <li>\((x+y)^0 = 1\)</li>
+            <li>\((x+y)^1 = x + y\)</li>
+            <li>\((x+y)^2 = x^2 + 2xy + y^2\)</li>
+            <li>\((x+y)^3 = x^3 + 3x^2y + 3xy^2 + y^3\)</li>
+            <li>\((x+y)^4 = x^4 + 4x^3y + 6x^2y^2 + 4xy^3 + y^4\)</li>
+          </ul>
+          
+          <p>
+            Koefisien-koefisien di atas membentuk pola segitiga yang dikenal sebagai **Segitiga Pascal**. Koefisien pada baris ke-\(n\) dapat dicari secara langsung menggunakan kombinasi.
+          </p>
+
+          <div class="callout callout--definition">
+            <span class="callout__icon">🧬</span>
+            <div>
+              <strong class="callout__title">Formula Teorema Binomial</strong>
+              <p style="margin-bottom: 0;">
+                Secara umum, ekspansi bentuk \((x+y)^n\) dirumuskan sebagai:
+                \[ (x+y)^n = \sum_{k=0}^{n} C(n,k) \cdot x^{n-k} \cdot y^k \]
+                di mana koefisien binomial menggunakan kombinasi:
+                \[ C(n,k) = \binom{n}{k} = \frac{n!}{k!(n-k)!} \]
+              </p>
+            </div>
+          </div>
+
+          <div class="img-container">
+            <img src="../pdf_images/page102_img2.png" alt="Pola Persamaan Binomial">
+            <figcaption>Gambar 2.1: Pola pembentukan persamaan binomial dari PDF.</figcaption>
+          </div>
+
+          <div class="img-container">
+            <img src="../pdf_images/page102_img3.png" alt="Teorema Binomial Detail">
+            <figcaption>Gambar 2.2: Rumus umum kombinasi dalam Teorema Binomial dari PDF.</figcaption>
+          </div>
+
+          <div class="img-container">
+            <img src="../pdf_images/page103_img1.png" alt="Ekspansi Binomial">
+            <figcaption>Gambar 2.3: Visualisasi detail dari rumus aljabar binomial.</figcaption>
+          </div>
+
+          <div class="img-container">
+            <img src="../pdf_images/page103_img2.png" alt="Koefisien Binomial">
+            <figcaption>Gambar 2.4: Contoh visualisasi ekspansi aljabar dan kombinasinya.</figcaption>
+          </div>
+
+          <hr>
+
+          <!-- TIPE 1 -->
+          <h3 id="tipe-1" style="color: var(--accent-primary); border-bottom: 1px solid var(--border-color); padding-bottom: 0.3em;">Tipe 1: Uraian Lengkap</h3>
+          <p>
+            Pada tipe soal ini, Anda diminta menjabarkan secara lengkap bentuk aljabar binomial pangkat \(n\).
+          </p>
+
+          <!-- Soal 1 -->
+          <div class="exercise" id="soal-1">
+            <div class="exercise__header">
+              <span class="exercise__number">1</span>
+              <span class="exercise__title">Uraian Lengkap \((x+y)^5\)</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Uraikan secara lengkap bentuk aljabar berikut menggunakan Teorema Binomial:</p>
+              <div class="math-block">
+                \[(x + y)^5\]
+              </div>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Gunakan rumus ekspansi binomial untuk \(n = 5\). Suku-sukunya terbentuk dari \(\sum_{k=0}^{5} C(5,k) x^{5-k} y^k\).
+                    </p>
+                    <div class="math-block">
+                      \[ (x+y)^5 = C(5,0)x^5 + C(5,1)x^4y + C(5,2)x^3y^2 + C(5,3)x^2y^3 + C(5,4)xy^4 + C(5,5)y^5 \]
+                    </div>
+                    <p>Substitusikan nilai koefisien kombinasi: \(1, 5, 10, 10, 5, 1\):</p>
+                    <div class="math-block">
+                      \[ (x+y)^5 = x^5 + 5x^4y + 10x^3y^2 + 10x^2y^3 + 5xy^4 + y^5 \]
+                    </div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page104_img1.png" alt="Jawaban Soal 1">
+                      <figcaption>Gambar Solusi 1: Langkah detail dari PDF asli.</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 2 -->
+          <div class="exercise" id="soal-2">
+            <div class="exercise__header">
+              <span class="exercise__number">2</span>
+              <span class="exercise__title">Uraian Lengkap dengan Koefisien Numerik</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Uraikan secara lengkap ekspansi binomial yang diberikan pada lembar soal berikut:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page104_img2.png" alt="Soal 2">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page105_img1.png" alt="Jawaban Soal 2">
+                      <figcaption>Gambar Solusi 2: Langkah aljabar lengkap.</figcaption>
+                    </div>
+                    
+                    <div class="callout callout--warning">
+                      <span class="callout__icon">⚠️</span>
+                      <div>
+                        <strong class="callout__title">Koreksi Materi</strong>
+                        <p style="margin-bottom: 0;">
+                          Perhatikan catatan penting: Pada proses perhitungan perkalian pangkat di PDF asli, terdapat kesalahan ketik. Suku yang benar seharusnya mengandung nilai <strong>\(27x^3\)</strong>. Pastikan Anda melakukan verifikasi perkalian pangkat dengan teliti.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- TIPE 2 -->
+          <h3 id="tipe-2" style="color: var(--accent-primary); border-bottom: 1px solid var(--border-color); padding-bottom: 0.3em;">Tipe 2: Mencari Suku ke-n</h3>
+          <p>
+            Tipe soal ini meminta Anda mencari suku tertentu (misalnya suku ke-\(4\) atau suku ke-\(6\)) tanpa perlu menguraikan seluruh bentuk perpangkatan secara lengkap.
+          </p>
+          <div class="callout callout--info">
+            <span class="callout__icon">💡</span>
+            <div>
+              <strong class="callout__title">Rumus Suku ke-(r+1)</strong>
+              <p style="margin-bottom: 0;">
+                Suku ke-\((r+1)\) dari ekspansi \((a+b)^n\) dirumuskan sebagai:
+                \[ T_{r+1} = C(n, r) \cdot a^{n-r} \cdot b^r \]
+                Jika diminta mencari <strong>suku ke-\(k\)</strong>, maka nilai \(r\) yang digunakan adalah:
+                \[ r = k - 1 \]
+              </p>
+            </div>
+          </div>
+
+          <!-- Soal 3 -->
+          <div class="exercise" id="soal-3">
+            <div class="exercise__header">
+              <span class="exercise__number">3</span>
+              <span class="exercise__title">Suku ke-4 dari \((x - y)^5\)</span>
+              <span class="exercise__difficulty exercise__difficulty--easy">Easy</span>
+            </div>
+            <div class="exercise__body">
+              <p>Tentukanlah suku ke-4 dari uraian bentuk aljabar berikut:</p>
+              <div class="math-block">
+                \[(x - y)^5\]
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p><strong>Langkah-langkah Penyelesaian:</strong></p>
+                    <ul style="padding-left: 1.5em; margin-bottom: 1em;">
+                      <li>Binomial: \((a + b)^n \Rightarrow (x - y)^5\), maka \(a = x\), \(b = -y\), dan \(n = 5\).</li>
+                      <li>Ditanyakan suku ke-4, maka \(r+1 = 4 \Rightarrow r = 3\).</li>
+                      <li>Masukkan ke rumus suku:
+                        \[ T_4 = C(5, 3) \cdot (x)^{5-3} \cdot (-y)^3 \]
+                      </li>
+                      <li>Hitung nilai kombinasi \(C(5,3)\):
+                        \[ C(5,3) = \frac{5!}{3! \cdot 2!} = 10 \]
+                      </li>
+                      <li>Sederhanakan hasilnya:
+                        \[ T_4 = 10 \cdot x^2 \cdot (-y^3) = -10x^2y^3 \]
+                      </li>
+                    </ul>
+                    <div class="img-container">
+                      <img src="../pdf_images/page105_img2.png" alt="Soal 3 PDF">
+                    </div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page106_img1.png" alt="Jawaban Soal 3 PDF">
+                      <figcaption>Gambar Solusi 3: Pembuktian aljabar suku ke-4 dari PDF.</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 4 -->
+          <div class="exercise" id="soal-4">
+            <div class="exercise__header">
+              <span class="exercise__number">4</span>
+              <span class="exercise__title">Mencari Suku Spesifik</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Tentukan suku tertentu dari ekspansi binomial sesuai dengan materi di bawah ini:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page106_img2.png" alt="Soal dan Jawaban 4">
+                <figcaption>Gambar 2.5: Penjelasan soal dan solusi dari PDF.</figcaption>
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p>
+                      Sesuai dengan penjabaran Gambar 2.5, pencarian suku spesifik dilakukan dengan menentukan terlebih dahulu nilai pangkat \(r\) dari suku kedua binomial agar sesuai dengan variabel yang diinginkan, kemudian menerapkan rumus suku umum \(T_{r+1}\).
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 5 -->
+          <div class="exercise" id="soal-5">
+            <div class="exercise__header">
+              <span class="exercise__number">5</span>
+              <span class="exercise__title">Suku Spesifik dengan Koreksi Konstanta</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Tentukan suku spesifik aljabar yang ditunjukkan pada materi kuliah berikut:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page106_img3.png" alt="Soal 5">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page107_img1.png" alt="Jawaban Soal 5">
+                      <figcaption>Gambar Solusi 5: Pengerjaan aljabar asli dari PDF.</figcaption>
+                    </div>
+
+                    <div class="callout callout--warning">
+                      <span class="callout__icon">⚠️</span>
+                      <div>
+                        <strong class="callout__title">PENTING: Koreksi Hasil Akhir</strong>
+                        <p style="margin-bottom: 0;">
+                          Di dalam pengerjaan lembar asli (Gambar Solusi 5), terdapat kesalahan fatal pada operasi perpangkatan:
+                          \[ 2^4 = 18 \quad (\text{Salah, seharusnya } 2^4 = 16) \]
+                          Akibatnya hasil perkalian akhirnya salah. Nilai yang benar adalah:
+                          \[ 126 \times 16 \times (-1) = -2016 \]
+                          Sehingga suku yang benar adalah <strong>\(-2016x^4y^5\)</strong>.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 6 -->
+          <div class="exercise" id="soal-6">
+            <div class="exercise__header">
+              <span class="exercise__number">6</span>
+              <span class="exercise__title">Latihan Mandiri Suku ke-n</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>
+                <strong>Soal Latihan Mandiri:</strong> Terapkan konsep pencarian suku ke-\(n\) menggunakan formula umum \((r+1)\) di atas untuk menyelesaikan tipe soal ini secara mandiri guna menguji pemahaman Anda.
+              </p>
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Petunjuk <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">💡 Petunjuk</div>
+                    <p style="margin-bottom: 0;">
+                      Identifikasi variabel pertama sebagai \(a\) dan variabel kedua beserta tandanya (+/-) sebagai \(b\). Tentukan nilai \(n\) dari pangkat luar, lalu hitung suku yang ditanyakan dengan menetapkan \(r = \text{nomor suku} - 1\).
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- TIPE 3 -->
+          <h3 id="tipe-3" style="color: var(--accent-primary); border-bottom: 1px solid var(--border-color); padding-bottom: 0.3em;">Tipe 3: Koefisien</h3>
+          <p>
+            Tipe soal ini meminta Anda mencari **hanya koefisien angka** dari variabel tertentu dalam hasil ekspansi binomial.
+          </p>
+
+          <!-- Soal 7 -->
+          <div class="exercise" id="soal-7">
+            <div class="exercise__header">
+              <span class="exercise__number">7</span>
+              <span class="exercise__title">Koefisien Variabel Tertentu</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Tentukan koefisien dari suku aljabar yang diberikan pada lembar soal berikut:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page107_img2.png" alt="Soal 7">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page107_img3.png" alt="Jawaban Soal 7 Part 1">
+                    </div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page107_img4.png" alt="Jawaban Soal 7 Part 2">
+                      <figcaption>Gambar Solusi 7: Langkah pencarian nilai koefisien.</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 8 -->
+          <div class="exercise" id="soal-8">
+            <div class="exercise__header">
+              <span class="exercise__number">8</span>
+              <span class="exercise__title">Mencari Koefisien Suku</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Hitung koefisien untuk suku spesifik berdasarkan soal di bawah ini:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page108_img1.png" alt="Soal dan Jawaban 8">
+                <figcaption>Gambar 2.6: Soal dan solusi koefisien dari PDF.</figcaption>
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <p style="margin-bottom: 0;">
+                      Sesuai dengan solusi pada Gambar 2.6, kita tentukan nilai kombinasi indeks \(r\) terlebih dahulu agar pangkat variabel di akhir sama dengan variabel yang dicari koefisiennya.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 9 -->
+          <div class="exercise" id="soal-9">
+            <div class="exercise__header">
+              <span class="exercise__number">9</span>
+              <span class="exercise__title">Koefisien dengan Pangkat Pecahan / Kompleks</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>Tentukan koefisien variabel dari soal di bawah ini:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page108_img2.png" alt="Soal 9">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page108_img3.png" alt="Jawaban Soal 9">
+                      <figcaption>Gambar Solusi 9: Perhitungan koefisien pangkat kompleks.</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soal 10 -->
+          <div class="exercise" id="soal-10">
+            <div class="exercise__header">
+              <span class="exercise__number">10</span>
+              <span class="exercise__title">Koefisien Tingkat Lanjut (Suku Banyak / Pecahan)</span>
+              <span class="exercise__difficulty exercise__difficulty--hard">Hard</span>
+            </div>
+            <div class="exercise__body">
+              <p>Selesaikan soal mencari koefisien pada kasus berikut:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page109_img1.png" alt="Soal 10">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page109_img2.png" alt="Jawaban Soal 10">
+                      <figcaption>Gambar Solusi 10: Analisis pencarian pangkat variabel aljabar.</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- TIPE 4 -->
+          <h3 id="tipe-4" style="color: var(--accent-primary); border-bottom: 1px solid var(--border-color); padding-bottom: 0.3em;">Tipe 4: Jumlah Koefisien</h3>
+          <p>
+            Tipe soal ini menanyakan **jumlah dari semua koefisien** hasil ekspansi aljabar. Anda tidak perlu menjabarkannya satu per satu.
+          </p>
+          <div class="callout callout--success">
+            <span class="callout__icon">⚡</span>
+            <div>
+              <strong class="callout__title">Trik Super Cepat</strong>
+              <p style="margin-bottom: 0;">
+                Untuk mencari jumlah koefisien dari ekspansi \((ax + by)^n\), Anda cukup mengganti/mensubstitusi semua variabel dengan nilai <strong>\(1\)</strong> (yaitu \(x = 1\) dan \(y = 1\)).
+              </p>
+            </div>
+          </div>
+
+          <!-- Soal 11 -->
+          <div class="exercise" id="soal-11">
+            <div class="exercise__header">
+              <span class="exercise__number">11</span>
+              <span class="exercise__title">Jumlah Koefisien Ekspansi</span>
+              <span class="exercise__difficulty exercise__difficulty--medium">Medium</span>
+            </div>
+            <div class="exercise__body">
+              <p>Hitunglah jumlah koefisien dari ekspansi binomial berikut:</p>
+              <div class="img-container">
+                <img src="../pdf_images/page109_img3.png" alt="Soal 11">
+              </div>
+              
+              <div class="answer-toggle">
+                <button class="answer-toggle__btn">
+                  Lihat Jawaban <span class="arrow">▼</span>
+                </button>
+                <div class="answer-toggle__content">
+                  <div class="answer-toggle__inner">
+                    <div class="answer-toggle__label">✅ Jawaban</div>
+                    <div class="img-container">
+                      <img src="../pdf_images/page109_img4.png" alt="Jawaban Soal 11">
+                      <figcaption>Gambar Solusi 11: Pembuktian trik cepat substitusi variabel = 1.</figcaption>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. PERMUTASI -->
+        <section id="permutasi" class="card" style="margin-bottom: 2em;">
+          <h2 style="margin-top: 0; border-bottom: none; padding-bottom: 0;">3. Permutasi</h2>
+          <p>
+            **Permutasi** adalah cara menyusun sekumpulan objek ke dalam suatu urutan tertentu dengan **sangat memperhatikan urutannya** (Urutan berpengaruh, di mana susunan \(AB \neq BA\)).
+          </p>
+
+          <div class="callout callout--definition">
+            <span class="callout__icon">🔢</span>
+            <div>
+              <strong class="callout__title">Rumus Permutasi</strong>
+              <p style="margin-bottom: 0;">
+                Banyaknya permutasi dari \(n\) objek yang diambil sebanyak \(r\) objek dirumuskan dengan:
+                \[ P(n,r) = \frac{n!}{(n-r)!} \]
+                di mana \(r \le n\).
+              </p>
+            </div>
+          </div>
+
+          <h3>Video Pembelajaran Permutasi</h3>
+          <p>
+            Untuk penjelasan konsep permutasi secara mendalam, Anda dapat menonton video dari Dosen STEI ITB, Pak Rinaldi Munir:
+          </p>
+          <a href="https://www.youtube.com/watch?v=ZmKG7KDu_5g" target="_blank" class="btn btn--secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+            🎥 Tonton Aturan Permutasi di YouTube
+          </a>
+
+          <div class="callout callout--info" style="margin-top: 1.5em;">
+            <span class="callout__icon">📂</span>
+            <div>
+              <strong class="callout__title">Dokumen Pendukung (Defantri)</strong>
+              <ul style="margin-bottom: 0; padding-left: 1.2em;">
+                <li>Materi Tertulis: <a href="#">03-Aturan Permutasi [www.defantri.com].pdf</a></li>
+                <li>Latihan Soal Mandiri: <a href="#">04-Latihan 03-Aturan Permutasi [www.defantri.com].pdf</a></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. KOMBINASI -->
+        <section id="kombinasi" class="card" style="margin-bottom: 2em;">
+          <h2 style="margin-top: 0; border-bottom: none; padding-bottom: 0;">4. Kombinasi</h2>
+          <p>
+            **Kombinasi** adalah proses pemilihan objek dari suatu kumpulan **tanpa memperhatikan urutannya** (Urutan tidak berpengaruh, di mana susunan \(AB = BA\)).
+          </p>
+
+          <div class="callout callout--definition">
+            <span class="callout__icon">📋</span>
+            <div>
+              <strong class="callout__title">Rumus Kombinasi</strong>
+              <p style="margin-bottom: 0;">
+                Banyaknya kombinasi dari \(n\) objek yang diambil sebanyak \(r\) objek didefinisikan sebagai:
+                \[ C(n,r) = \binom{n}{r} = \frac{n!}{r!(n-r)!} \]
+              </p>
+            </div>
+          </div>
+
+          <h3>Perbedaan Permutasi vs Kombinasi</h3>
+          <p>
+            Membedakan permutasi dan kombinasi sangatlah krusial dalam menyelesaikan soal-soal matematika diskrit:
+          </p>
+          
+          <table class="truth-table">
+            <thead>
+              <tr>
+                <th>Karakteristik</th>
+                <th>Permutasi</th>
+                <th>Kombinasi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Urutan</strong></td>
+                <td><span class="val-true">Diperhatikan (\(AB \neq BA\))</span></td>
+                <td><span class="val-false">Diabaikan (\(AB = BA\))</span></td>
+              </tr>
+              <tr>
+                <td><strong>Konsep Utama</strong></td>
+                <td>Pengaturan / Penyusunan (Arrangement)</td>
+                <td>Pemilihan / Pengambilan (Selection)</td>
+              </tr>
+              <tr>
+                <td><strong>Kata Kunci Soal</strong></td>
+                <td>Menyusun pengurus (Ketua-Wakil), nomor antrean, urutan posisi duduk</td>
+                <td>Memilih anggota delegasi, mengambil kelereng, berjabat tangan</td>
+              </tr>
+              <tr>
+                <td><strong>Rumus</strong></td>
+                <td>\(P(n,r) = \frac{n!}{(n-r)!}\)</td>
+                <td>\(C(n,r) = \frac{n!}{r!(n-r)!}\)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Video Pembelajaran Kombinasi</h3>
+          <p>
+            Berikut adalah pembahasan mendalam mengenai aturan kombinasi oleh Pak Rinaldi Munir (STEI ITB):
+          </p>
+          <a href="https://www.youtube.com/watch?v=j2LdFzb9hNw" target="_blank" class="btn btn--secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+            🎥 Tonton Aturan Kombinasi di YouTube
+          </a>
+
+          <div class="callout callout--info" style="margin-top: 1.5em;">
+            <span class="callout__icon">📂</span>
+            <div>
+              <strong class="callout__title">Dokumen Pendukung (Defantri)</strong>
+              <ul style="margin-bottom: 0; padding-left: 1.2em;">
+                <li>Materi Tertulis: <a href="#">05-Aturan Kombinasi [www.defantri.com].pdf</a></li>
+                <li>Latihan Soal Mandiri: <a href="#">06-Latihan 05-Aturan Kombinasi [www.defantri.com].pdf</a></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page Navigation -->
+        <div class="page-nav">
+          <a href="sesi4.html" class="page-nav__link">
+            <span class="page-nav__label">← Sebelumnya</span>
+            <span class="page-nav__title">Fuzzy Sets, Function & Number Theory</span>
+          </a>
+          <a href="sesi6.html" class="page-nav__link page-nav__link--next">
+            <span class="page-nav__label">Selanjutnya →</span>
+            <span class="page-nav__title">Relation — Relasi Ekuivalen</span>
+          </a>
+        </div>
+
+      </div>
+    </main>
+  </div>
+  
+  <button class="back-to-top" aria-label="Kembali ke atas">↑</button>
+  <script src="../js/main.js"></script>
+</body>
+</html>
