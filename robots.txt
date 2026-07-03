@@ -1,0 +1,3 @@
+# Block indexing of this site for all search engines
+User-agent: *
+Disallow: /
