@@ -6,17 +6,8 @@ export default async function middleware(request) {
   const url = new URL(request.url);
   const path = url.pathname;
 
-  // 1. Handle GET /login - rewrite internally to /login.html so the user sees the page
-  if (path === '/login' && request.method === 'GET') {
-    return new Response(null, {
-      headers: {
-        'x-middleware-rewrite': new URL('/login.html', request.url).toString(),
-      },
-    });
-  }
-
-  // 2. Handle POST /login - process the login form submission
-  if ((path === '/login' || path === '/login.html') && request.method === 'POST') {
+  // 1. Handle POST /login-submit - process the login form submission
+  if (path === '/login-submit' && request.method === 'POST') {
     try {
       const formData = await request.formData();
       const username = formData.get('username');
@@ -24,6 +15,17 @@ export default async function middleware(request) {
 
       const expectedUser = process.env.AUTH_USER;
       const expectedPass = process.env.AUTH_PASS;
+
+      // Safety check: if env vars are not configured yet, show a clear configuration error
+      if (!expectedUser || !expectedPass) {
+        console.error('AUTH_USER or AUTH_PASS environment variables are not set.');
+        return new Response(null, {
+          status: 302,
+          headers: {
+            'Location': new URL('/login.html?error=config', request.url).toString(),
+          },
+        });
+      }
 
       if (username === expectedUser && password === expectedPass) {
         // Correct credentials -> set HttpOnly cookie and redirect to root (/)
@@ -40,7 +42,7 @@ export default async function middleware(request) {
         return new Response(null, {
           status: 302,
           headers: {
-            'Location': new URL('/login?error=invalid', request.url).toString(),
+            'Location': new URL('/login.html?error=invalid', request.url).toString(),
           },
         });
       }
@@ -49,14 +51,13 @@ export default async function middleware(request) {
       return new Response(null, {
         status: 302,
         headers: {
-          'Location': new URL('/login?error=error', request.url).toString(),
+          'Location': new URL('/login.html?error=error', request.url).toString(),
         },
       });
     }
   }
 
-  // 3. For all other routes, check if they have a valid cookie session
-  // Parse cookies
+  // 2. For all other routes, check if they have a valid cookie session
   const cookieHeader = request.headers.get('cookie') || '';
   const cookies = {};
   cookieHeader.split(';').forEach(c => {
@@ -65,9 +66,11 @@ export default async function middleware(request) {
   });
 
   const authSession = cookies['auth_session'];
-  const expectedSession = btoa(process.env.AUTH_USER + ':' + process.env.AUTH_PASS);
+  const expectedSession = (process.env.AUTH_USER && process.env.AUTH_PASS)
+    ? btoa(process.env.AUTH_USER + ':' + process.env.AUTH_PASS)
+    : null;
 
-  if (authSession && authSession === expectedSession) {
+  if (authSession && expectedSession && authSession === expectedSession) {
     // Authenticated successfully -> pass-through to static files
     return new Response(null, {
       headers: {
@@ -76,11 +79,11 @@ export default async function middleware(request) {
     });
   }
 
-  // Not authenticated -> Redirect (302) to /login
+  // Not authenticated -> Redirect (302) to /login.html
   return new Response(null, {
     status: 302,
     headers: {
-      'Location': new URL('/login', request.url).toString(),
+      'Location': new URL('/login.html', request.url).toString(),
     },
   });
 }
@@ -95,7 +98,7 @@ export const config = {
      * - favicon.ico (favicon)
      * - robots.txt (robots file)
      * - notion-page_merged.pdf (main PDF file)
-     * - login.html (allow accessing login page)
+     * - login.html (allow accessing login page directly)
      */
     '/((?!css|js|pdf_images|favicon\\.ico|robots\\.txt|notion-page_merged\\.pdf|login\\.html).*)',
   ],

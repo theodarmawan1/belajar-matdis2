@@ -236,10 +236,10 @@
         <svg viewBox="0 0 24 24">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
         </svg>
-        <span>Username atau password salah!</span>
+        <span id="errorText">Username atau password salah!</span>
       </div>
 
-      <form class="form" action="/login" method="POST">
+      <form class="form" action="/login-submit" method="POST">
         <div class="form-group">
           <label class="label" for="username">Username</label>
           <div class="input-wrapper">
@@ -262,8 +262,20 @@
   <script>
     // Check for error in query string
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('error')) {
-      document.getElementById('errorMsg').style.display = 'flex';
+    const errorType = urlParams.get('error');
+    if (errorType) {
+      const errorMsgContainer = document.getElementById('errorMsg');
+      const errorText = document.getElementById('errorText');
+      
+      if (errorType === 'config') {
+        errorText.innerText = 'Variabel AUTH_USER / AUTH_PASS belum diset di Vercel!';
+      } else if (errorType === 'invalid') {
+        errorText.innerText = 'Username atau password salah!';
+      } else {
+        errorText.innerText = 'Terjadi kesalahan sistem, silakan coba lagi.';
+      }
+      
+      errorMsgContainer.style.display = 'flex';
     }
   </script>
 </body>
