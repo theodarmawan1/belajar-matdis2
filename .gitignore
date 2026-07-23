@@ -1,8 +1,0 @@
-# Ignore PDF files (source files, not program code)
-*.pdf
-
-# Ignore extracted raw text files
-pdf_text_full.txt
-
-# Ignore extracted images directory
-pdf_images/
